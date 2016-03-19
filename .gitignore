@@ -1,6 +1,9 @@
-/.python-environments/*
-/ac-comphist.dat
-/auto-save-list/*
-/elpa/*
-/session*
-/tramp
+.python-environments/*
+ac-comphist.dat
+auto-save-list/*
+elpa/*
+session*
+tramp
+recentf
+sync-files/*
+local/*

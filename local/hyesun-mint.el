@@ -6,7 +6,6 @@
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defconst droptox-dir "~/Dropbox")
-(defconst package-list-file (concat local-dir "/package-list"))
 
 ;; (set-frame-position (selected-frame) 80 40)
 (set-frame-width (selected-frame) 140)

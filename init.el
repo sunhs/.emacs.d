@@ -126,6 +126,7 @@
 (defconst elpa-dir "~/.emacs.d/elpa")
 (defconst nonelpa-dir "~/.emacs.d/nonelpa")
 (defconst local-dir "~/.emacs.d/local")
+(defconst package-list-file (concat local-dir "/package-list"))
 (add-to-list 'load-path elpa-dir)
 (add-to-list 'load-path nonelpa-dir)
 (add-to-list 'load-path local-dir)
@@ -189,7 +190,7 @@
 (setq package-list (read-package-list-from-file package-list-file))
 (dolist (p package-list)
   (unless (package-installed-p p)
-	(package-install package)))
+	(package-install p)))
 
 (defun save-package-list ()
   (save-package-list-to-file package-list-file))
