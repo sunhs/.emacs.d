@@ -185,7 +185,6 @@
 (package-initialize)
 
 (load "utils")
-(load "local-config-loader")
 
 (setq package-list (read-package-list-from-file package-list-file))
 (dolist (p package-list)
@@ -195,6 +194,8 @@
 (defun save-package-list ()
   (save-package-list-to-file package-list-file))
 (add-hook 'kill-emacs-hook 'save-package-list)
+
+(load "local-config-loader")
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; indent-guide

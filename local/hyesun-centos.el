@@ -5,11 +5,9 @@
                (file-writable-p buffer-file-name))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-(defconst droptox-dir "~/Dropbox")
-
 ;; (set-frame-position (selected-frame) 80 40)
-(set-frame-width (selected-frame) 140)
-(set-frame-height (selected-frame) 40)
+;; (set-frame-width (selected-frame) 140)
+;; (set-frame-height (selected-frame) 40)
 
 ;; highlight current line
 (call-or-add-to-frame-hook
@@ -21,7 +19,7 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; markdown preview mode
 (require 'markdown-preview-mode)
-(setq markdown-preview-style "file:///home/edward/.emacs.d/nonelpa/GitHub.css")
+(setq markdown-preview-style "file:///home/haisheng/.emacs.d/nonelpa/GitHub.css")
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; org-mode
@@ -39,10 +37,10 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; flycheck
-(require 'flycheck)
-(add-hook 'python-mode-hook 'flycheck-mode)
-(setq flycheck-python-flake8-executable "/usr/bin/pyflakes")
-(setq flycheck-check-syntax-automatically '(save))
+;; (require 'flycheck)
+;; (add-hook 'python-mode-hook 'flycheck-mode)
+;; (setq flycheck-python-flake8-executable "/usr/bin/pyflakes")
+;; (setq flycheck-check-syntax-automatically '(save))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; auto-complete
