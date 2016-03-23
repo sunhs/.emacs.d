@@ -134,6 +134,10 @@
 ;; alias UTF-8 as utf-8
 (define-coding-system-alias 'UTF-8 'utf-8)
 
+(setq scroll-step 1)
+(setq scroll-margin 10)
+(setq scroll-conservatively 10000)
+
 ;; making buffers with the same name distinguishable
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
