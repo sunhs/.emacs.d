@@ -52,7 +52,7 @@
 ;; flycheck
 (require 'flycheck)
 (add-hook 'python-mode-hook 'flycheck-mode)
-(setq flycheck-python-flake8-executable "/usr/local/bin/pyflakes")
+(setq flycheck-python-flake8-executable "/usr/local/bin/pylint")
 (setq flycheck-check-syntax-automatically '(save))
 
 ;; --------------------------------------------------------------------------------------------------------------
