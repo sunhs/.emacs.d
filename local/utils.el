@@ -1,5 +1,12 @@
+(defun sort-package-list ()
+  (setq package-activated-list
+		(sort package-activated-list
+			  (lambda (a b)
+				(string< (symbol-name a) (symbol-name b))))))
+
 (defun save-package-list-to-file (file)
   (with-temp-buffer
+	(sort-package-list)
 	(insert (prin1-to-string package-activated-list))
 	(when (file-writable-p file)
 	  (write-region (point-min)
