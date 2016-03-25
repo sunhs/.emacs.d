@@ -8,8 +8,8 @@
 (defconst droptox-dir "~/Dropbox")
 
 ;; (set-frame-position (selected-frame) 80 40)
-(set-frame-width (selected-frame) 140)
-(set-frame-height (selected-frame) 40)
+;; (set-frame-width (selected-frame) 140)
+;; (set-frame-height (selected-frame) 40)
 
 ;; highlight current line
 (call-or-add-to-frame-hook
