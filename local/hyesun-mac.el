@@ -100,16 +100,13 @@
 
 (call-or-add-to-frame-hook
  (lambda ()
-   (when (display-graphic-p)
-     ;; use help
-     (setq ac-use-quick-help t)
-     ;; use pos-tip
-     (require 'pos-tip)
-     (setq ac-quick-help-prefer-pos-tip t)
-     ;; display help after 1s
-     (setq ac-quick-help-delay 1))
-   (unless (display-graphic-p)
-	 (setq ac-use-quick-help nil))))
+   ;; use help
+   (setq ac-use-quick-help t)
+   ;; use pos-tip
+   (require 'pos-tip)
+   (setq ac-quick-help-prefer-pos-tip t)
+   ;; display help after 1s
+   (setq ac-quick-help-delay 1)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 (require 'geiser)

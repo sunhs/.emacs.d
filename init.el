@@ -190,8 +190,7 @@
 
 (load "utils")
 
-(setq package-list (read-package-list-from-file package-list-file))
-(dolist (p package-list)
+(dolist (p (read-package-list-from-file package-list-file))
   (unless (package-installed-p p)
 	(package-install p)))
 
