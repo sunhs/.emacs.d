@@ -13,10 +13,7 @@
 
 ;; highlight current line
 (call-or-add-to-frame-hook
- (lambda ()
-   (if (display-graphic-p)
-	   (global-hl-line-mode 1)
-	 (global-hl-line-mode 0))))
+ (global-hl-line-mode 1)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; markdown preview mode
