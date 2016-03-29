@@ -12,8 +12,7 @@
 ;; (set-frame-height (selected-frame) 40)
 
 ;; highlight current line
-(call-or-add-to-frame-hook
- (global-hl-line-mode 1)
+(global-hl-line-mode 1)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; markdown preview mode
