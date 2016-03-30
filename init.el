@@ -13,9 +13,6 @@
 (global-set-key (kbd "C-c ;") 'comment-region)
 (global-set-key (kbd "C-c /") 'uncomment-region)
 (global-set-key (kbd "C-c C-f") 'load-file)
-(global-set-key (kbd "C-c C-x C-f") 'ivy-recentf)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c C-x s") 'replace-string)
 ;; (define-key (current-global-map) [remap newline] 'newline-and-indent)
 
@@ -218,6 +215,8 @@
 ;; undo-tree
 (require 'undo-tree)
 (global-undo-tree-mode)
+(global-set-key (kbd "C-.") 'undo-tree-undo)
+(global-set-key (kbd "C-,") 'undo-tree-redo)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; recentf
@@ -269,6 +268,7 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; ivy-mode
 (ivy-mode 1)
+(global-set-key (kbd "C-c C-x C-f") 'ivy-recentf)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; jedi

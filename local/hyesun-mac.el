@@ -24,6 +24,8 @@
 (define-key org-mode-map (kbd "C-c l") 'org-store-link)
 (define-key org-mode-map (kbd "C-c i") 'org-iswitchb)
 (define-key org-mode-map (kbd "C-j") 'backward-char)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
 
 ;; export options
 (setq org-export-with-toc nil)
