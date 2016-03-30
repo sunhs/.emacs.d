@@ -215,8 +215,8 @@
 ;; undo-tree
 (require 'undo-tree)
 (global-undo-tree-mode)
-(global-set-key (kbd "C-.") 'undo-tree-undo)
-(global-set-key (kbd "C-,") 'undo-tree-redo)
+(global-set-key (kbd "M-.") 'undo-tree-undo)
+(global-set-key (kbd "M-,") 'undo-tree-redo)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; recentf
