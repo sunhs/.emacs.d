@@ -38,8 +38,10 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; flycheck
 (require 'flycheck)
-(add-hook 'python-mode-hook 'flycheck-mode)
-(setq flycheck-python-flake8-executable "/usr/bin/pyflakes")
+(defun my-py-flycheck-config ()
+  (flycheck-mode)
+  (flycheck-select-checker 'python-pylint))
+(add-hook 'python-mode-hook 'my-py-flycheck-config)
 (setq flycheck-check-syntax-automatically '(save))
 
 ;; --------------------------------------------------------------------------------------------------------------
