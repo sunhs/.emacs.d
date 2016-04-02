@@ -269,11 +269,3 @@
 ;; ivy-mode
 (ivy-mode 1)
 (global-set-key (kbd "C-c C-x C-f") 'ivy-recentf)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; jedi
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
-(eval-after-load "jedi"
-  '(progn
-     (define-key jedi-mode-map (kbd "C-c C-x <tab>") 'jedi:complete)))

@@ -110,3 +110,11 @@
 (if (display-graphic-p)
 	(load-theme 'tsdh-dark t)
   (load-theme 'zsh t))
+
+;; --------------------------------------------------------------------------------------------------------------
+;; jedi
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+(eval-after-load "jedi"
+  '(progn
+     (define-key jedi-mode-map (kbd "C-c C-x <tab>") 'jedi:complete)))

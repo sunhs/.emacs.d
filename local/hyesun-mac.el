@@ -125,3 +125,11 @@
 ;; (color-theme-initialize)
 (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 (load-theme 'tsdh-dark t)
+
+;; --------------------------------------------------------------------------------------------------------------
+;; jedi
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+(eval-after-load "jedi"
+  '(progn
+     (define-key jedi-mode-map (kbd "C-c C-x <tab>") 'jedi:complete)))
