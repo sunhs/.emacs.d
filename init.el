@@ -22,6 +22,12 @@
   (message (buffer-file-name)))
 (global-set-key (kbd "C-c C-x f") 'show-file-path)
 
+(defun show-buffer-name ()
+  "show the buffer name"
+  (interactive)
+  (message (buffer-name)))
+(global-set-key (kbd "C-c C-x b") 'show-buffer-name)
+
 (defun select-line ()
   (interactive)
   (move-beginning-of-line 1)
@@ -147,6 +153,9 @@
 
 ;; disable menu-bar
 (menu-bar-mode -1)
+
+;; do not show mode line
+(setq-default mode-line-format nil)
 
 ;; display line numbers
 (require 'linum)
