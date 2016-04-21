@@ -11,21 +11,22 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; markdown preview mode
-(require 'markdown-preview-mode)
 (setq markdown-preview-style "file:///Users/edward/.emacs.d/nonelpa/GitHub.css")
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; org-mode
-(require 'org)
-;; (add-hook 'org-mode-hook 'turn-on-font-lock)
+(add-hook 'org-mode-hook 'turn-on-font-lock)
 (add-hook 'org-mode-hook
 		  (lambda () (setq truncate-lines nil)))
 (setq org-log-done 'note)
-(define-key org-mode-map (kbd "C-c l") 'org-store-link)
-(define-key org-mode-map (kbd "C-c i") 'org-iswitchb)
-(define-key org-mode-map (kbd "C-j") 'backward-char)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+
+(eval-after-load "org"
+  '(progn
+	 (define-key org-mode-map (kbd "C-c l") 'org-store-link)
+	 (define-key org-mode-map (kbd "C-c i") 'org-iswitchb)
+	 (define-key org-mode-map (kbd "C-j") 'backward-char)))
 
 ;; export options
 (setq org-export-with-toc nil)
@@ -124,7 +125,7 @@
 ;; (require 'color-theme)
 ;; (color-theme-initialize)
 (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
-(load-theme 'tsdh-dark t)
+(load-theme 'zsh t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; jedi

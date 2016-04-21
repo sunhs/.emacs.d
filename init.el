@@ -1,3 +1,15 @@
+;; elpa packages
+(require 'package)
+(dolist (source '(("melpa" . "http://melpa.milkbox.net/packages/")
+				  ("marmalade" . "http://marmalade-repo.org/packages/")
+				  ("elpa" . "http://tromey.com/elpa/")
+				  ))
+  (add-to-list 'package-archives source t))
+(setq package-enable-at-startup nil)
+(package-initialize)
+
+(benchmark-init/activate)
+
 (require 'cl) ;; to ensure that lexical-let works
 
 ;; custom key bindings
@@ -5,8 +17,6 @@
 (global-set-key (kbd "C-j") 'backward-char)
 (global-set-key (kbd "M-l") 'forward-word)
 (global-set-key (kbd "M-j") 'backward-word)
-(global-set-key (kbd "C-s") 'swiper)
-(global-set-key (kbd "C-r") 'swiper)
 (global-set-key (kbd "C-c j") 'windmove-left)
 (global-set-key (kbd "C-c k") 'windmove-right)
 (global-set-key (kbd "C-c C-x m") 'set-mark-command)
@@ -188,15 +198,6 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
-;; elpa packages
-(require 'package)
-(dolist (source '(("melpa" . "http://melpa.milkbox.net/packages/")
-				  ("marmalade" . "http://marmalade-repo.org/packages/")
-				  ("elpa" . "http://tromey.com/elpa/")
-				  ))
-  (add-to-list 'package-archives source t))
-(package-initialize)
-
 (load "utils")
 
 (dolist (p (read-package-list-from-file package-list-file))
@@ -208,6 +209,11 @@
 (add-hook 'kill-emacs-hook 'save-package-list)
 
 (load "local-config-loader")
+
+;; --------------------------------------------------------------------------------------------------------------
+;; swiper
+(global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "C-r") 'swiper)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; indent-guide
@@ -235,27 +241,23 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 (require 'fill-column-indicator)
-(defun my-fci-setup ()
-  (fci-mode 1)
-  (setq fci-rule-column 80)
-  (setq fci-rule-color "#ffffff")
-  (setq fci-rule-use-dashes t))
-(add-hook 'c-mode-hook 'my-fci-setup)
-(add-hook 'c++-mode-hook 'my-fci-setup)
-(add-hook 'python-mode-hook 'my-fci-setup)
+(fci-mode 1)
+(setq fci-rule-column 80)
+(setq fci-rule-color "#ffffff")
+(setq fci-rule-use-dashes t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; smooth-scrollint
 (require 'smooth-scrolling)
 
 ;; --------------------------------------------------------------------------------------------------------------
-;; multiple-cursors
-(require 'multiple-cursors)
+;; ;; multiple-cursors
+;; (require 'multiple-cursors)
 
-;; key bindings
-(global-set-key (kbd "C-c l") 'mc/edit-lines)
-(global-set-key (kbd "C-c w") 'mc/mark-next-word-like-this)
-(global-set-key (kbd "C-c r") 'set-rectangular-region-anchor)
+;; ;; key bindings
+;; (global-set-key (kbd "C-c l") 'mc/edit-lines)
+;; (global-set-key (kbd "C-c w") 'mc/mark-next-word-like-this)
+;; (global-set-key (kbd "C-c r") 'set-rectangular-region-anchor)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; neotree
@@ -264,7 +266,6 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; web-mode
-(require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.\\(php\\|ejs\\|html\\|js\\)$" . web-mode))
 (add-hook 'web-mode-hook (lambda () (setq web-mode-code-indent-offset 2)))
 
