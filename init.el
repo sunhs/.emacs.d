@@ -45,9 +45,19 @@
   (move-end-of-line 1))
 (global-set-key (kbd "C-c C-x l") 'select-line)
 
+(defun move-beginning-of-first-word ()
+  (interactive)
+  (move-beginning-of-line 1)
+  (while (or
+		  (= (char-after) 9)
+		  (= (char-after) 32))
+	(forward-char)))
+(global-set-key (kbd "C-c C-x w") 'move-beginning-of-first-word)
+
 (defun delete-line ()
   (interactive)
   (select-line)
+  (backward-delete-char-untabify 1)
   (backward-delete-char-untabify 1))
 (global-set-key (kbd "C-c C-x x") 'delete-line)
 
