@@ -24,6 +24,8 @@
 (global-set-key (kbd "C-c /") 'uncomment-region)
 (global-set-key (kbd "C-c C-f") 'load-file)
 (global-set-key (kbd "C-c C-x s") 'replace-string)
+(global-set-key (kbd "C-c C-x <up>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-c C-x <down>") 'shrink-window-horizontally)
 ;; (define-key (current-global-map) [remap newline] 'newline-and-indent)
 
 (defun show-file-path ()
@@ -38,13 +40,6 @@
   (message (buffer-name)))
 (global-set-key (kbd "C-c C-x b") 'show-buffer-name)
 
-(defun select-line ()
-  (interactive)
-  (move-beginning-of-line 1)
-  (set-mark-command nil)
-  (move-end-of-line 1))
-(global-set-key (kbd "C-c C-x l") 'select-line)
-
 (defun move-beginning-of-first-word ()
   (interactive)
   (move-beginning-of-line 1)
@@ -53,6 +48,25 @@
 		  (= (char-after) 32))
 	(forward-char)))
 (global-set-key (kbd "C-c C-x w") 'move-beginning-of-first-word)
+
+(defun select-stripped-line ()
+  (interactive)
+  (move-beginning-of-first-word)
+  (set-mark-command nil)
+  (move-end-of-line 1))
+(global-set-key (kbd "C-c C-x l") 'select-stripped-line)
+
+(defun delete-stripped-line ()
+  (interactive)
+  (select-stripped-line)
+  (backward-delete-char-untabify 1))
+(global-set-key (kbd "C-c C-x d") 'delete-stripped-line)
+
+(defun select-line ()
+  (interactive)
+  (move-beginning-of-line 1)
+  (set-mark-command nil)
+  (move-end-of-line 1))
 
 (defun delete-line ()
   (interactive)
