@@ -188,6 +188,9 @@
 ;; disable menu-bar
 (menu-bar-mode -1)
 
+;; disable side-bar
+(scroll-bar-mode -1)
+
 ;; do not show mode line
 (setq-default mode-line-format nil)
 
