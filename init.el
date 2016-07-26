@@ -8,6 +8,25 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+(setq default-directory "~/")
+(defconst elpa-dir "~/.emacs.d/elpa")
+(defconst nonelpa-dir "~/.emacs.d/nonelpa")
+(defconst local-dir "~/.emacs.d/local")
+(defconst package-list-file (concat local-dir "/package-list"))
+(add-to-list 'load-path elpa-dir)
+(add-to-list 'load-path nonelpa-dir)
+(add-to-list 'load-path local-dir)
+
+(load "utils")
+
+(dolist (p (read-package-list-from-file package-list-file))
+  (unless (package-installed-p p)
+	(package-install p)))
+
+(defun save-package-list ()
+  (save-package-list-to-file package-list-file))
+(add-hook 'kill-emacs-hook 'save-package-list)
+
 (benchmark-init/activate)
 
 (require 'cl) ;; to ensure that lexical-let works
@@ -159,15 +178,6 @@
 						   charset
 						   (font-spec :family "Microsoft Yahei" :size 14)))))))
 
-(setq default-directory "~/")
-(defconst elpa-dir "~/.emacs.d/elpa")
-(defconst nonelpa-dir "~/.emacs.d/nonelpa")
-(defconst local-dir "~/.emacs.d/local")
-(defconst package-list-file (concat local-dir "/package-list"))
-(add-to-list 'load-path elpa-dir)
-(add-to-list 'load-path nonelpa-dir)
-(add-to-list 'load-path local-dir)
-
 ;; alias UTF-8 as utf-8
 (define-coding-system-alias 'UTF-8 'utf-8)
 
@@ -224,16 +234,6 @@
 ;; split windows vertically
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
-
-(load "utils")
-
-(dolist (p (read-package-list-from-file package-list-file))
-  (unless (package-installed-p p)
-	(package-install p)))
-
-(defun save-package-list ()
-  (save-package-list-to-file package-list-file))
-(add-hook 'kill-emacs-hook 'save-package-list)
 
 (load "local-config-loader")
 
