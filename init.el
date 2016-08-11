@@ -205,9 +205,9 @@
 (setq-default mode-line-format nil)
 
 ;; display line numbers
-(require 'linum)
-(global-linum-mode t) ;; always show line numbers
-(setq linum-format "%4d| ") ;; linum format
+;; (require 'linum)
+;; (global-linum-mode t) ;; always show line numbers
+;; (setq linum-format "%4d| ") ;; linum format
 
 ;; tab indent
 (setq-default c-basic-offset 4
