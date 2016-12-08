@@ -8,3 +8,4 @@
 /recentf
 /sync-files/*
 /local/local-config-loader.el
+/local/package-list-setter.el

@@ -8,16 +8,19 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+;; define load paths
 (setq default-directory "~/")
 (defconst elpa-dir "~/.emacs.d/elpa")
 (defconst nonelpa-dir "~/.emacs.d/nonelpa")
 (defconst local-dir "~/.emacs.d/local")
-(defconst package-list-file (concat local-dir "/package-list"))
 (add-to-list 'load-path elpa-dir)
 (add-to-list 'load-path nonelpa-dir)
 (add-to-list 'load-path local-dir)
 
+;; package list loading and saving
+(load "package-list-setter")
 (load "utils")
+(defconst package-list-file (concat local-dir "/" package-list-file-name))
 
 (dolist (p (read-package-list-from-file package-list-file))
   (unless (package-installed-p p)
@@ -29,91 +32,18 @@
 
 (benchmark-init/activate)
 
+(load "kdb") ;; key-bindings
+
 (require 'cl) ;; to ensure that lexical-let works
-
-;; custom key bindings
-(global-set-key (kbd "C-l") 'forward-char)
-(global-set-key (kbd "C-j") 'backward-char)
-(global-set-key (kbd "M-l") 'forward-word)
-(global-set-key (kbd "M-j") 'backward-word)
-(global-set-key (kbd "C-c j") 'windmove-left)
-(global-set-key (kbd "C-c k") 'windmove-right)
-(global-set-key (kbd "C-c C-x m") 'set-mark-command)
-(global-set-key (kbd "C-c ;") 'comment-region)
-(global-set-key (kbd "C-c /") 'uncomment-region)
-(global-set-key (kbd "C-c C-f") 'load-file)
-(global-set-key (kbd "C-c C-x s") 'replace-string)
-(global-set-key (kbd "C-c C-x <up>") 'enlarge-window-horizontally)
-(global-set-key (kbd "C-c C-x <down>") 'shrink-window-horizontally)
-;; (define-key (current-global-map) [remap newline] 'newline-and-indent)
-
-(defun show-file-path ()
-  "show the path of file in the current buffer"
-  (interactive)
-  (message (buffer-file-name)))
-(global-set-key (kbd "C-c C-x f") 'show-file-path)
-
-(defun show-buffer-name ()
-  "show the buffer name"
-  (interactive)
-  (message (buffer-name)))
-(global-set-key (kbd "C-c C-x b") 'show-buffer-name)
-
-(defun move-beginning-of-first-word ()
-  (interactive)
-  (move-beginning-of-line 1)
-  (while (or
-		  (= (char-after) 9)
-		  (= (char-after) 32))
-	(forward-char)))
-(global-set-key (kbd "C-c C-x w") 'move-beginning-of-first-word)
-
-(defun select-stripped-line ()
-  (interactive)
-  (move-beginning-of-first-word)
-  (set-mark-command nil)
-  (move-end-of-line 1))
-(global-set-key (kbd "C-c C-x l") 'select-stripped-line)
-
-(defun delete-stripped-line ()
-  (interactive)
-  (select-stripped-line)
-  (backward-delete-char-untabify 1))
-(global-set-key (kbd "C-c C-x d") 'delete-stripped-line)
-
-(defun select-line ()
-  (interactive)
-  (move-beginning-of-line 1)
-  (set-mark-command nil)
-  (move-end-of-line 1))
-
-(defun delete-line ()
-  (interactive)
-  (select-line)
-  (backward-delete-char-untabify 1)
-  (backward-delete-char-untabify 1))
-(global-set-key (kbd "C-c C-x x") 'delete-line)
-
-(defun comment-line ()
-  (interactive)
-  (select-line)
-  (comment-region (mark) (point)))
-(global-set-key (kbd "C-c C-x ;") 'comment-line)
-
-(defun uncomment-line ()
-  (interactive)
-  (select-line)
-  (uncomment-region (mark) (point)))
-(global-set-key (kbd "C-c C-x /") 'uncomment-line)
-
 (defun call-or-add-to-frame-hook (fun)
   "`fun: A function receiving an optional parameter `frame.
    The purpose of `fun is to decide whether the frame is graphic and
    thus turn on graphic features.
    But in daemon mode, this is decided after the client frame is made.
    Thus we call `fun immediately in normal mode while in daemon mode
-   add it to make frame hook. For client frames to work normally, `fun
-   should explicitly turn on or off graphic features."
+   add it to make frame hook.
+   For client frames to work normally, `fun should explicitly
+   turn on or off graphic features."
   (if (daemonp)
 	  (lexical-let ((fun fun))
 		(add-hook 'after-make-frame-functions
@@ -121,62 +51,6 @@
 					(select-frame frame)
 					(funcall fun))))
 	(funcall fun)))
-
-;; specific settings on os x
-(when (eq system-type 'darwin)
-  ;; special settings for emacs mac port
-  (setq mac-option-modifier (quote (:ordinary meta :function alt :mouse alt)))
-  (setq mac-pass-command-to-system nil)
-  (setq mac-system-move-file-to-trash-use-finder t)
-
-  (setq ns-pop-up-frames nil) ;; don't open file in a new frame
-  (setq mac-command-modifier 'control) ;; map command to control
-  ;; display chinese fonts normally in GUI
-  (set-default-font "Monaco 14")
-  (call-or-add-to-frame-hook
-   (lambda ()
-	 (when (display-graphic-p)
-       (dolist (charset '(kana han symbol cjk-misc bopomofo))
-		 (set-fontset-font (frame-parameter nil 'font)
-						   charset
-						   (font-spec :family "Microsoft Yahei" :size 14)))))))
-
-;; specific settings on gnu/linux
-(when (eq system-type 'gnu/linux)
-  (call-or-add-to-frame-hook
-   (lambda ()
-     (when (display-graphic-p)
-	   (set-default-font "Mono 11")
-       (dolist (charset '(kana han symbol cjk-misc bopomofo))
-		 (set-fontset-font (frame-parameter nil 'font)
-						   charset
-						   (font-spec :family "Droid Sans Fallback" :size 15))))))
-  ;; X-clipboard
-  (setq x-select-enable-clipboard t)
-  (unless window-system
-    (when (getenv "DISPLAY")
-      (defun xsel-cut-function (text &optional push)
-		(with-temp-buffer
-		  (insert text)
-		  (call-process-region (point-min) (point-max) "xsel" nil 0 nil "--clipboard" "--input")))
-      (defun xsel-paste-function()
-		(let ((xsel-output (shell-command-to-string "xsel --clipboard --output")))
-		  (unless (string= (car kill-ring) xsel-output)
-			xsel-output)))
-      (setq interprogram-cut-function 'xsel-cut-function)
-      (setq interprogram-paste-function 'xsel-paste-function))))
-
-;; specific settings on windows
-(when (eq system-type 'windows-nt)
-  ;; display chinese fonts normally in GUI
-  (set-default-font "Verdana 12")
-  (call-or-add-to-frame-hook
-   (lambda ()
-     (when (display-graphic-p)
-       (dolist (charset '(kana han symbol cjk-misc bopomofo))
-		 (set-fontset-font (frame-parameter nil 'font)
-						   charset
-						   (font-spec :family "Microsoft Yahei" :size 14)))))))
 
 ;; alias UTF-8 as utf-8
 (define-coding-system-alias 'UTF-8 'utf-8)
