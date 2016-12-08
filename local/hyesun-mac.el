@@ -1,3 +1,20 @@
+;; special settings for emacs mac port
+(setq mac-option-modifier (quote (:ordinary meta :function alt :mouse alt)))
+(setq mac-pass-command-to-system nil)
+(setq mac-system-move-file-to-trash-use-finder t)
+
+(setq ns-pop-up-frames nil) ;; don't open file in a new frame
+(setq mac-command-modifier 'control) ;; map command to control
+;; display chinese fonts normally in GUI
+(set-default-font "Monaco 14")
+(call-or-add-to-frame-hook
+ (lambda ()
+   (when (display-graphic-p)
+	 (dolist (charset '(kana han symbol cjk-misc bopomofo))
+	   (set-fontset-font (frame-parameter nil 'font)
+						 charset
+						 (font-spec :family "Microsoft Yahei" :size 14))))))
+
 ;; to prompt root privileges for non-writable files
 (defadvice find-file (after find-file-sudo activate)
   "Find file as root if necessary."
