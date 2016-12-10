@@ -70,15 +70,19 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; auto-complete
+(require 'auto-complete)
 (require 'auto-complete-config)
 (require 'popup)
-(require 'auto-complete-clang)
-;; run shell command:
-;; echo "" | g++ -v -x c++ -E -
-(setq ac-clang-flags
-      (mapcar (lambda (item)(concat "-I" item))
-              (split-string
-			   "/usr/include/c++/4.8
+
+;; for C
+(defun my-ac-cc-mode-setup ()
+  (require 'auto-complete-clang)
+  ;; run shell command:
+  ;; echo "" | g++ -v -x c++ -E -
+  (setq ac-clang-flags
+		(mapcar (lambda (item)(concat "-I" item))
+				(split-string
+				 "/usr/include/c++/4.8
  /usr/include/x86_64-linux-gnu/c++/4.8
  /usr/include/c++/4.8/backward
  /usr/lib/gcc/x86_64-linux-gnu/4.8/include
@@ -86,14 +90,14 @@
  /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed
  /usr/include/x86_64-linux-gnu
  /usr/include"
-			   )))
-
-(defun my-ac-cc-mode-setup ()
+				 )))
   (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
+
 (defun my-ac-config()
   (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
   (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
   (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+  (add-to-list 'ac-modes 'matlab-mode)
   (global-auto-complete-mode t))
 (my-ac-config)
 

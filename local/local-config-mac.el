@@ -78,31 +78,48 @@
 (setq flycheck-check-syntax-automatically '(save))
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; latex
+(add-to-list 'auto-mode-alist '("\\.\\(tex\\|latex\\|ltx\\)$" . latex-mode))
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; auto-complete
+(require 'auto-complete)
 (require 'auto-complete-config)
 (require 'popup)
-(require 'auto-complete-clang)
-;; run shell command:
-;; echo "" | g++ -v -x c++ -E -
-(setq ac-clang-flags
-      (mapcar (lambda (item)(concat "-I" item))
-              (split-string
-			   "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1
+
+;; for C
+(defun my-ac-cc-mode-setup ()
+  (require 'auto-complete-clang)
+  ;; run shell command:
+  ;; echo "" | g++ -v -x c++ -E -
+  (setq ac-clang-flags
+		(mapcar (lambda (item)(concat "-I" item))
+				(split-string
+				 "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1
  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.0/include
  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include
  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks
  /Users/edward/unpv13e/lib"
-			   )))
-
-(defun my-ac-cc-mode-setup ()
+				 )))
   (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
+
+;; for LaTeX
+(defun my-ac-latex-mode-setup ()
+  (require 'ac-math)
+  (add-to-list 'ac-modes 'latex-mode)
+  (setq ac-sources
+		(append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands) ac-sources))
+  (setq ac-math-unicode-in-math-p t))
+
 (defun my-ac-config()
   (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
   (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
   (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+  (add-hook 'latex-mode-hook 'my-ac-latex-mode-setup)
   (global-auto-complete-mode t))
 (my-ac-config)
+(setq ac-math-unicode-in-math-p t)
 
 ;; display ac menu immediately
 (setq ac-auto-show-menu 0)

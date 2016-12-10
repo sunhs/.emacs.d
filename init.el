@@ -17,22 +17,33 @@
 (add-to-list 'load-path nonelpa-dir)
 (add-to-list 'load-path local-dir)
 
+;; key-bindings independent of packages
+(load "kbd")
+
 ;; package list loading and saving
 (load "package-list-setter")
 (load "utils")
 (defconst package-list-file (concat local-dir "/" package-list-file-name))
 
-(dolist (p (read-package-list-from-file package-list-file))
-  (unless (package-installed-p p)
-	(package-install p)))
+(if (gen-non-activated-package-list-from-file package-list-file)
+	(progn
+	  ;; buffer of non-activated-package-list
+	  (setq naplb (buffer-name (generate-new-buffer "naplb")))
+	  (print (gen-non-activated-package-list-from-file package-list-file)
+			 (get-buffer naplb)))
+  nil)
+
+(defun install-non-activated-packages ()
+  (interactive)
+  (if (gen-non-activated-package-list-from-file package-list-file)
+	  (install-packages (gen-non-activated-package-list-from-file package-list-file))
+	nil))
 
 (defun save-package-list ()
   (save-package-list-to-file package-list-file))
 (add-hook 'kill-emacs-hook 'save-package-list)
 
 (benchmark-init/activate)
-
-(load "kdb") ;; key-bindings
 
 (require 'cl) ;; to ensure that lexical-let works
 (defun call-or-add-to-frame-hook (fun)

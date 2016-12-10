@@ -22,3 +22,17 @@
 	(with-temp-buffer
 	  (insert-file-contents file)
 	  (read (buffer-string)))))
+
+(defun gen-non-activated-package-list-from-file (file)
+  (setq non-activated-package-list ())
+  (setq needed-package-list (read-package-list-from-file file))
+  (dolist (p needed-package-list)
+	(unless (package-installed-p p)
+	  (setq non-activated-package-list
+			(push p non-activated-package-list))))
+  non-activated-package-list)
+
+(defun install-packages (package-list)
+  (dolist (p package-list)
+	(unless (package-installed-p p)
+	  (package-install p))))
