@@ -69,6 +69,12 @@
 (setq flycheck-check-syntax-automatically '(save))
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; matlab
+(defun disable-auto-fill-matlab ()
+  (auto-fill-mode -1))
+(add-hook 'matlab-mode-hook 'disable-auto-fill-matlab)
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; auto-complete
 (require 'auto-complete)
 (require 'auto-complete-config)
@@ -119,16 +125,17 @@
 
 (call-or-add-to-frame-hook
  (lambda ()
-   (when (display-graphic-p)
-     ;; use help
-     (setq ac-use-quick-help t)
-     ;; use pos-tip
-     (require 'pos-tip)
-     (setq ac-quick-help-prefer-pos-tip t)
-     ;; display help after 1s
-     (setq ac-quick-help-delay 1))
-   (unless (display-graphic-p)
-	 (setq ac-use-quick-help nil))))
+   ;; (when (display-graphic-p)
+   ;; use help
+   (setq ac-use-quick-help t)
+   ;; use pos-tip
+   (require 'pos-tip)
+   (setq ac-quick-help-prefer-pos-tip t)
+   ;; display help after 1s
+   (setq ac-quick-help-delay 1))
+ ;; (unless (display-graphic-p)
+ ;; 	 (setq ac-use-quick-help nil))))
+ )
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; themes
