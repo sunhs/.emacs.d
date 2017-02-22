@@ -62,9 +62,9 @@
   (if (daemonp)
 	  (lexical-let ((fun fun))
 		(add-hook 'after-make-frame-functions
-				  (lambda (frame)
-					(select-frame frame)
-					(funcall fun))))
+				  '(lambda (frame)
+					 (select-frame frame)
+					 (funcall fun))))
 	(funcall fun)))
 
 ;; alias UTF-8 as utf-8
@@ -183,7 +183,12 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; web-mode
 (add-to-list 'auto-mode-alist '("\\.\\(php\\|ejs\\|html\\|js\\)$" . web-mode))
-(add-hook 'web-mode-hook (lambda () (setq web-mode-code-indent-offset 2)))
+(add-hook 'web-mode-hook '(lambda () (setq web-mode-code-indent-offset 2)))
+
+;; --------------------------------------------------------------------------------------------------------------
+;; sr-speedbar
+(setq sr-speedbar-right-side nil)
+(global-set-key (kbd "C-c s") 'sr-speedbar-open)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; inertial-scroll
