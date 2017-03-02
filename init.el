@@ -29,18 +29,19 @@
 (load "utils")
 (defconst package-list-file (concat local-dir "/" package-list-file-name))
 
-(if (gen-non-activated-package-list-from-file package-list-file)
+(setq non-activated-package-list
+	  (gen-non-activated-package-list-from-file package-list-file))
+(if non-activated-package-list
 	(progn
 	  ;; buffer of non-activated-package-list
 	  (setq naplb (buffer-name (generate-new-buffer "naplb")))
-	  (print (gen-non-activated-package-list-from-file package-list-file)
-			 (get-buffer naplb)))
+	  (print non-activated-package-list (get-buffer naplb)))
   nil)
 
 (defun install-non-activated-packages ()
   (interactive)
-  (if (gen-non-activated-package-list-from-file package-list-file)
-	  (install-packages (gen-non-activated-package-list-from-file package-list-file))
+  (if non-activated-package-list
+	  (install-packages non-activated-package-list)
 	nil))
 
 (defun save-package-list ()
