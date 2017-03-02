@@ -25,10 +25,8 @@
 (load "kbd")
 
 ;; package list loading and saving
-(load "package-list-setter")
 (load "utils")
-(defconst package-list-file (concat local-dir "/" package-list-file-name))
-
+(defconst package-list-file (concat local-dir "/package-list"))
 (setq non-activated-package-list
 	  (gen-non-activated-package-list-from-file package-list-file))
 (if non-activated-package-list
