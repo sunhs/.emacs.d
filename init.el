@@ -1,16 +1,17 @@
 ;; elpa packages
 (require 'package)
-;; (dolist (source '(("melpa" . "http://melpa.milkbox.net/packages/")
-;; 				  ("marmalade" . "http://marmalade-repo.org/packages/")
-;; 				  ("elpa" . "http://tromey.com/elpa/")
-;; 				  ))
-;;   (add-to-list 'package-archives source t))
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
-						 ("marmalade" . "http://marmalade-repo.org/packages/")
-						 ("elpa" . "http://tromey.com/elpa/")
-						 ))
-(setq package-enable-at-startup nil)
+(dolist (source '(("melpa-stable" . "https://stable.melpa.org/packages/")
+				  ("melpa" . "https://melpa.org/packages/")
+				  ("marmalade" . "https://marmalade-repo.org/packages/")
+				  ("gnu" . "https://elpa.gnu.org/packages/")))
+  (add-to-list 'package-archives source t))
+(setq package-archive-priorities
+      '(("melpa-stable" . 20)
+		("melpa" . 15)
+        ("marmalade" . 10)
+        ("gnu" . 5)))
 (package-initialize)
+(setq package-enable-at-startup nil)
 
 ;; define load paths
 (setq default-directory "~/")

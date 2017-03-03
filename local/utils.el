@@ -6,6 +6,7 @@
   (setq package-list (sort package-list
 						   (lambda (a b)
 							 (string< a b))))
+  (setq package-list (remove-duplicates package-list))
   (with-temp-buffer
 	(dolist (p package-list)
 	  (insert p)
@@ -30,8 +31,7 @@
   (setq needed-package-list (read-package-list-from-file file))
   (dolist (p needed-package-list)
 	(unless (package-installed-p p)
-	  (setq non-activated-package-list
-			(push p non-activated-package-list))))
+	  (push p non-activated-package-list)))
   non-activated-package-list)
 
 (defun install-packages (package-list)
