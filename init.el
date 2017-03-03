@@ -25,51 +25,16 @@
 ;; key-bindings independent of packages
 (load "kbd")
 
-;; package list loading and saving
+;; utils
 (load "utils")
-(defconst package-list-file (concat local-dir "/package-list"))
-(setq non-activated-package-list
-	  (gen-non-activated-package-list-from-file package-list-file))
-(if non-activated-package-list
-	(progn
-	  ;; buffer of non-activated-package-list
-	  (setq naplb (buffer-name (generate-new-buffer "naplb")))
-	  (print non-activated-package-list (get-buffer naplb)))
-  nil)
 
-(defun install-non-activated-packages ()
-  (interactive)
-  (if non-activated-package-list
-	  (install-packages non-activated-package-list)
-	nil))
-
-(defun save-package-list ()
-  (save-package-list-to-file package-list-file))
-(add-hook 'kill-emacs-hook 'save-package-list)
-
+;; benchmark
 (benchmark-init/activate)
-
-(require 'cl) ;; to ensure that lexical-let works
-(defun call-or-add-to-frame-hook (fun)
-  "`fun: A function receiving an optional parameter `frame.
-   The purpose of `fun is to decide whether the frame is graphic and
-   thus turn on graphic features.
-   But in daemon mode, this is decided after the client frame is made.
-   Thus we call `fun immediately in normal mode while in daemon mode
-   add it to make frame hook.
-   For client frames to work normally, `fun should explicitly
-   turn on or off graphic features."
-  (if (daemonp)
-	  (lexical-let ((fun fun))
-		(add-hook 'after-make-frame-functions
-				  '(lambda (frame)
-					 (select-frame frame)
-					 (funcall fun))))
-	(funcall fun)))
 
 ;; alias UTF-8 as utf-8
 (define-coding-system-alias 'UTF-8 'utf-8)
 
+;; make scoll smooth
 (setq scroll-step 1)
 (setq scroll-margin 10)
 (setq scroll-conservatively 10000)
@@ -124,6 +89,7 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
+;; config relating to platforms
 (load "local-config-loader")
 
 ;; --------------------------------------------------------------------------------------------------------------
@@ -200,3 +166,17 @@
 ;; ivy-mode
 (ivy-mode 1)
 (global-set-key (kbd "C-c C-x C-f") 'ivy-recentf)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+	(websocket web-mode undo-tree sr-speedbar smooth-scrolling pos-tip point-undo neotree multiple-cursors matlab-mode markdown-mode lua-mode jedi-direx go-mode geiser flycheck fill-column-indicator csharp-mode counsel color-theme-sanityinc-solarized benchmark-init auto-complete-clang async ac-slime ac-math))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -1,40 +1,17 @@
-(defun save-package-list-to-file (file)
-  (setq tmp-list (copy-list package-activated-list))
-  (setq package-list ())
-  (dolist (p tmp-list)
-	(push (symbol-name p) package-list))
-  (setq package-list (sort package-list
-						   (lambda (a b)
-							 (string< a b))))
-  (setq package-list (remove-duplicates package-list))
-  (with-temp-buffer
-	(dolist (p package-list)
-	  (insert p)
-	  (insert "\n"))
-	(when (file-writable-p file)
-	  (write-region (point-min)
-					(point-max)
-					file))))
-
-(defun read-package-list-from-file (file)
-  (when (file-readable-p file)
-	(with-temp-buffer
-	  (insert-file-contents file)
-	  (setq tmp-list (split-string (buffer-string) "\n" t))))
-  (setq package-list ())
-  (dolist (p tmp-list)
-	(push (make-symbol p) package-list))
-  package-list)
-
-(defun gen-non-activated-package-list-from-file (file)
-  (setq non-activated-package-list ())
-  (setq needed-package-list (read-package-list-from-file file))
-  (dolist (p needed-package-list)
-	(unless (package-installed-p p)
-	  (push p non-activated-package-list)))
-  non-activated-package-list)
-
-(defun install-packages (package-list)
-  (dolist (p package-list)
-	(unless (package-installed-p p)
-	  (package-install p))))
+(require 'cl) ;; to ensure that lexical-let works
+(defun call-or-add-to-frame-hook (fun)
+  "`fun: A function receiving an optional parameter `frame.
+   The purpose of `fun is to decide whether the frame is graphic and
+   thus turn on graphic features.
+   But in daemon mode, this is decided after the client frame is made.
+   Thus we call `fun immediately in normal mode while in daemon mode
+   add it to make frame hook.
+   For client frames to work normally, `fun should explicitly
+   turn on or off graphic features."
+  (if (daemonp)
+	  (lexical-let ((fun fun))
+		(add-hook 'after-make-frame-functions
+				  '(lambda (frame)
+					 (select-frame frame)
+					 (funcall fun))))
+	(funcall fun)))
