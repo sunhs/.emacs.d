@@ -1,3 +1,5 @@
+(load "utils")
+
 ;; special settings for emacs mac port
 (setq mac-option-modifier (quote (:ordinary meta :function alt :mouse alt)))
 (setq mac-pass-command-to-system nil)

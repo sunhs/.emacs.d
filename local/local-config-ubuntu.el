@@ -1,3 +1,5 @@
+(load "utils")
+
 ;; specific settings on gnu/linux
 (call-or-add-to-frame-hook
  (lambda ()

@@ -15,3 +15,11 @@
 					 (select-frame frame)
 					 (funcall fun))))
 	(funcall fun)))
+
+(defun sort-package-list ()
+  (if (boundp 'package-selected-packages)
+	  (setq package-selected-packages
+			(sort package-selected-packages
+				  '(lambda (a b)
+					 (string< (symbol-name a) (symbol-name b)))))
+	nil))

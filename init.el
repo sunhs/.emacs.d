@@ -28,9 +28,6 @@
 ;; utils
 (load "utils")
 
-;; benchmark
-(benchmark-init/activate)
-
 ;; alias UTF-8 as utf-8
 (define-coding-system-alias 'UTF-8 'utf-8)
 
@@ -89,94 +86,14 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
-;; config relating to platforms
-(load "local-config-loader")
+;; load customize variables
+(setq custom-file (concat local-dir "/custom.el"))
+(load custom-file)
 
-;; --------------------------------------------------------------------------------------------------------------
-;; swiper
-(global-set-key (kbd "C-s") 'swiper)
-(global-set-key (kbd "C-r") 'swiper)
+;; sort package-selected-list
+(sort-package-list)
+;; (add-hook 'kill-emacs-hook 'sort-package-list)
 
-;; --------------------------------------------------------------------------------------------------------------
-;; indent-guide
-(require 'indent-guide)
-(indent-guide-global-mode)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; point-undo
-(require 'point-undo)
-(global-set-key (kbd "C-c C-x u") 'point-undo)
-(global-set-key (kbd "C-c C-x r") 'point-redo)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; undo-tree
-(require 'undo-tree)
-(global-undo-tree-mode)
-(global-set-key (kbd "M-.") 'undo-tree-undo)
-(global-set-key (kbd "M-,") 'undo-tree-redo)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; recentf
-(require 'recentf)
-(recentf-mode 1)
-(add-hook 'kill-emacs-hook 'recentf-save-list)
-
-;; --------------------------------------------------------------------------------------------------------------
-(require 'fill-column-indicator)
-(fci-mode 1)
-(setq fci-rule-column 80)
-(setq fci-rule-color "#ffffff")
-(setq fci-rule-use-dashes t)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; smooth-scrollint
-(require 'smooth-scrolling)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; ;; multiple-cursors
-;; (require 'multiple-cursors)
-
-;; ;; key bindings
-;; (global-set-key (kbd "C-c l") 'mc/edit-lines)
-;; (global-set-key (kbd "C-c w") 'mc/mark-next-word-like-this)
-;; (global-set-key (kbd "C-c r") 'set-rectangular-region-anchor)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; neotree
-(require 'neotree)
-(global-set-key (kbd "C-c n") 'neotree-toggle)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; web-mode
-(add-to-list 'auto-mode-alist '("\\.\\(php\\|ejs\\|html\\|js\\)$" . web-mode))
-(add-hook 'web-mode-hook '(lambda () (setq web-mode-code-indent-offset 2)))
-
-;; --------------------------------------------------------------------------------------------------------------
-;; sr-speedbar
-(setq sr-speedbar-right-side nil)
-(global-set-key (kbd "C-c s") 'sr-speedbar-open)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; inertial-scroll
-(require 'inertial-scroll)
-(inertias-global-minor-mode 1)
-(setq inertias-initial-velocity-wheel 1)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; ivy-mode
-(ivy-mode 1)
-(global-set-key (kbd "C-c C-x C-f") 'ivy-recentf)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-	(websocket web-mode undo-tree sr-speedbar smooth-scrolling pos-tip point-undo neotree multiple-cursors matlab-mode markdown-mode lua-mode jedi-direx go-mode geiser flycheck fill-column-indicator csharp-mode counsel color-theme-sanityinc-solarized benchmark-init auto-complete-clang async ac-slime ac-math))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; extra config
+(setq extra-config-file (concat local-dir "/extra-config.el"))
+(load extra-config-file)
