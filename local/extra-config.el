@@ -31,10 +31,12 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 (require 'fill-column-indicator)
-(fci-mode 1)
-(setq fci-rule-column 80)
-(setq fci-rule-color "#ffffff")
-(setq fci-rule-use-dashes t)
+(defun my-fci-conf ()
+  (fci-mode 1)
+  (setq fci-rule-column 80)
+  (setq fci-rule-color "#ffffff")
+  (setq fci-rule-use-dashes t))
+(add-hook 'python-mode-hook 'my-fci-conf)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; smooth-scrollint
@@ -62,7 +64,18 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; sr-speedbar
 (setq sr-speedbar-right-side nil)
-(global-set-key (kbd "C-c s") 'sr-speedbar-open)
+(defun focus-speedbar-window ()
+  (interactive)
+  (lexical-let ((found nil))
+	(dolist (w (window-list))
+	  (if (string= (buffer-name (window-buffer w))
+				   "*SPEEDBAR*")
+		  (progn
+			(select-window w)
+			(setq found t))))
+	(unless found
+	  (sr-speedbar-open))))
+(global-set-key (kbd "C-c s") 'focus-speedbar-window)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; inertial-scroll
