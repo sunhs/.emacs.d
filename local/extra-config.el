@@ -64,6 +64,8 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; sr-speedbar
 (setq sr-speedbar-right-side nil)
+(setq speedbar-show-unknown-files t)
+(setq sr-speedbar-auto-refresh nil)
 (defun focus-speedbar-window ()
   (interactive)
   (lexical-let ((found nil))
