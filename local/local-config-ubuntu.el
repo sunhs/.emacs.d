@@ -66,6 +66,7 @@
 (require 'flycheck)
 (defun my-py-flycheck-config ()
   (flycheck-mode)
+  (setq flycheck-python-pylint-executable "~/anaconda3/bin/pylint")
   (flycheck-select-checker 'python-pylint))
 (add-hook 'python-mode-hook 'my-py-flycheck-config)
 (setq flycheck-check-syntax-automatically '(save))
@@ -149,7 +150,7 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; jedi
 (add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:server-command '("/home/haisheng/anaconda/bin/python" "/home/haisheng/anaconda/lib/python3.6/site-packages/jediepcserver.py"))
+(setq jedi:server-command '("/home/haisheng/anaconda3/bin/python" "/home/haisheng/anaconda3/lib/python3.6/site-packages/jediepcserver.py"))
 (setq jedi:complete-on-dot t)
 (eval-after-load "jedi"
   '(progn
