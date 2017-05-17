@@ -149,6 +149,7 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; jedi
 (add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:server-command '("/home/haisheng/anaconda/bin/python" "/home/haisheng/anaconda/lib/python3.6/site-packages/jediepcserver.py"))
 (setq jedi:complete-on-dot t)
 (eval-after-load "jedi"
   '(progn
