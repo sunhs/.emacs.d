@@ -162,7 +162,7 @@
 ;; (require 'color-theme)
 ;; (color-theme-initialize)
 (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
-(load-theme 'zsh t)
+(load-theme 'solarized t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; jedi
