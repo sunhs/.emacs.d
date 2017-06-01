@@ -47,7 +47,7 @@
 (tool-bar-mode -1)
 
 ;; disable menu-bar
-(menu-bar-mode -1)
+;; (menu-bar-mode -1)
 
 ;; disable side-bar
 (scroll-bar-mode -1)
