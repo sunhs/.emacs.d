@@ -1,7 +1,15 @@
 (load "utils")
 
+(setq exec-path
+	  (append `(,(substitute-in-file-name "$HOME/anaconda/bin") "/usr/local/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin" "/opt/X11/bin")
+			  exec-path))
+
+(setenv "PATH"
+		(concat (substitute-in-file-name "$HOME/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:")
+				(getenv "PATH")))
+
 ;; special settings for emacs mac port
-(setq mac-option-modifier (quote (:ordinary meta :function alt :mouse alt)))
+(setq mac-option-modifier (quote (:ordinary meta :function meta :mouse meta)))
 (setq mac-pass-command-to-system nil)
 (setq mac-system-move-file-to-trash-use-finder t)
 
@@ -9,7 +17,7 @@
 (setq mac-command-modifier 'control) ;; map command to control
 ;; display chinese fonts normally in GUI
 (set-default-font "Monaco 14")
-(call-or-add-to-frame-hook
+(hs-call-or-add-to-frame-hook
  (lambda ()
    (when (display-graphic-p)
 	 (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -24,13 +32,13 @@
                (file-writable-p buffer-file-name))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-(defconst droptox-dir "~/Dropbox")
+(defconst droptox-dir (substitute-in-file-name "$HOME/Dropbox"))
 
 (global-hl-line-mode 1)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; markdown preview mode
-(setq markdown-preview-style "file:///Users/edward/.emacs.d/nonelpa/GitHub.css")
+(setq markdown-preview-style (substitute-in-file-name "file://$HOME/.emacs.d/nonelpa/GitHub.css"))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; org-mode
@@ -63,7 +71,8 @@
 		))
 
 ;; agenda
-(setq org-agenda-files (quote ("~/Dropbox/org/TODO.org" "~/Dropbox/org/MEMO.org" "~/Dropbox/org/READING_NOTE.org")))
+(setq org-agenda-files
+	  `(,(substitute-in-file-name "$HOME/Dropbox/org/TODO.org") ,(substitute-in-file-name "$HOME/Dropbox/org/MEMO.org") ,(substitute-in-file-name "$HOME/Dropbox/org/READING_NOTE.org")))
 (setq org-agenda-include-diary t)
 
 ;; iCalendar
@@ -75,7 +84,8 @@
 (require 'flycheck)
 (defun my-py-flycheck-config ()
   (flycheck-mode)
-  (setq flycheck-python-pylint-executable "~/anaconda/bin/pylint")
+  (setq flycheck-python-pylint-executable
+		(substitute-in-file-name "$HOME/anaconda/bin/pylint"))
   (flycheck-select-checker 'python-pylint))
 (add-hook 'python-mode-hook 'my-py-flycheck-config)
 (setq flycheck-check-syntax-automatically '(save))
@@ -140,7 +150,7 @@
 ;; no help
 (setq ac-use-quick-help nil)
 
-(call-or-add-to-frame-hook
+(hs-call-or-add-to-frame-hook
  (lambda ()
    ;; use help
    (setq ac-use-quick-help t)
@@ -167,8 +177,18 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; jedi
 (add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:server-command '("/Users/edward/anaconda/bin/python" "/Users/edward/anaconda/lib/python3.6/site-packages/jediepcserver.py"))
+(setq jedi:server-command
+	  `(,(substitute-in-file-name "$HOME/anaconda/bin/python") ,(substitute-in-file-name "$HOME/anaconda/lib/python3.6/site-packages/jediepcserver.py")))
 (setq jedi:complete-on-dot t)
 (eval-after-load "jedi"
   '(progn
-     (define-key jedi-mode-map (kbd "C-c C-x <tab>") 'jedi:complete)))
+     (define-key jedi-mode-map (kbd "C-c C-x TAB") 'jedi:complete)))
+
+;; --------------------------------------------------------------------------------------------------------------
+;; autopep8
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(setq py-autopep8-options '("--max-line-length=80"))
+
+
+
+

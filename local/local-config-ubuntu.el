@@ -1,7 +1,7 @@
 (load "utils")
 
 ;; specific settings on gnu/linux
-(call-or-add-to-frame-hook
+(hs-call-or-add-to-frame-hook
  (lambda ()
    (when (display-graphic-p)
 	 (set-default-font "Mono 11")
@@ -31,7 +31,7 @@
                (file-writable-p buffer-file-name))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-(defconst droptox-dir "~/Dropbox")
+(defconst droptox-dir (substitute-in-file-name "$HOME/Dropbox"))
 
 ;; (set-frame-position (selected-frame) 80 40)
 ;; (set-frame-width (selected-frame) 140)
@@ -66,7 +66,8 @@
 (require 'flycheck)
 (defun my-py-flycheck-config ()
   (flycheck-mode)
-  (setq flycheck-python-pylint-executable "~/anaconda3/bin/pylint")
+  (setq flycheck-python-pylint-executable
+		(substitute-in-file-name "$HOME/anaconda3/bin/pylint"))
   (flycheck-select-checker 'python-pylint))
 (add-hook 'python-mode-hook 'my-py-flycheck-config)
 (setq flycheck-check-syntax-automatically '(save))
@@ -126,7 +127,7 @@
 ;; no help
 (setq ac-use-quick-help nil)
 
-(call-or-add-to-frame-hook
+(hs-call-or-add-to-frame-hook
  (lambda ()
    ;; (when (display-graphic-p)
    ;; use help
@@ -150,8 +151,14 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; jedi
 (add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:server-command '("/home/haisheng/anaconda3/bin/python" "/home/haisheng/anaconda3/lib/python3.6/site-packages/jediepcserver.py"))
+(setq jedi:server-command
+	  `(,(substitute-in-file-name "$HOME/anaconda3/bin/python") ,(substitute-in-file-name "$HOME/anaconda3/lib/python3.6/site-packages/jediepcserver.py")))
 (setq jedi:complete-on-dot t)
 (eval-after-load "jedi"
   '(progn
-     (define-key jedi-mode-map (kbd "C-c C-x <tab>") 'jedi:complete)))
+     (define-key jedi-mode-map (kbd "C-c C-x TAB") 'jedi:complete)))
+
+;; --------------------------------------------------------------------------------------------------------------
+;; autopep8
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(setq py-autopep8-options '("--max-line-length=80"))

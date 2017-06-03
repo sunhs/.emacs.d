@@ -14,10 +14,10 @@
 (setq package-enable-at-startup nil)
 
 ;; define load paths
-(setq default-directory "~/")
-(defconst elpa-dir "~/.emacs.d/elpa")
-(defconst nonelpa-dir "~/.emacs.d/nonelpa")
-(defconst local-dir "~/.emacs.d/local")
+(setq default-directory (substitute-in-file-name "$HOME"))
+(defconst elpa-dir (substitute-in-file-name "$HOME/.emacs.d/elpa"))
+(defconst nonelpa-dir (substitute-in-file-name "$HOME/.emacs.d/nonelpa"))
+(defconst local-dir (substitute-in-file-name "$HOME/.emacs.d/local"))
 (add-to-list 'load-path elpa-dir)
 (add-to-list 'load-path nonelpa-dir)
 (add-to-list 'load-path local-dir)
@@ -91,8 +91,8 @@
 (load custom-file)
 
 ;; sort package-selected-list
-(sort-package-list)
-;; (add-hook 'kill-emacs-hook 'sort-package-list)
+(hs-sort-package-list)
+(add-hook 'kill-emacs-hook 'hs-sort-package-list)
 
 ;; extra config
 (setq extra-config-file (concat local-dir "/extra-config.el"))

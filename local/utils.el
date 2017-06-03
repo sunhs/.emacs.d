@@ -1,5 +1,5 @@
 (require 'cl) ;; to ensure that lexical-let works
-(defun call-or-add-to-frame-hook (fun)
+(defun hs-call-or-add-to-frame-hook (fun)
   "`fun: A function receiving an optional parameter `frame.
    The purpose of `fun is to decide whether the frame is graphic and
    thus turn on graphic features.
@@ -17,7 +17,7 @@
 	(funcall fun)))
 
 
-(defun sort-package-list ()
+(defun hs-sort-package-list ()
   (if (boundp 'package-selected-packages)
 	  (setq package-selected-packages
 			(sort package-selected-packages
@@ -26,61 +26,138 @@
 	nil))
 
 
-(defun show-file-path ()
-  "show the path of file in the current buffer"
+(defun hs-show-file-path ()
+  "Show the path of file in the current buffer."
   (interactive)
   (message (buffer-file-name)))
 
 
-(defun show-buffer-name ()
-  "show the buffer name"
+(defun hs-show-buffer-name ()
+  "Show the buffer name."
   (interactive)
   (message (buffer-name)))
 
 
-(defun move-beginning-of-first-word ()
-  (interactive)
-  (move-beginning-of-line 1)
-  (while (or
-		  (= (char-after) 9)
-		  (= (char-after) 32))
-	(forward-char)))
+(defun hs-valid-line-beginning-pos (&optional line)
+  (unless line
+	(setq line (line-number-at-pos)))
+  (let ((valid-point (line-beginning-position (- 1
+												 (- (line-number-at-pos) line)))))
+	(while (or (= (char-after valid-point) 9)
+			   (= (char-after valid-point) 32))
+	  (incf valid-point))
+	(if (or (= (char-after valid-point) 10)
+			(= (char-after valid-point) 13))
+		nil
+	  valid-point)))
 
 
-(defun select-stripped-line ()
+(defun hs-move-beginning-of-first-word ()
+  "Move to the first non-space and non-tab position of the line.
+Behaviors:
+1) Current line contains effective characters:
+   Move to beginning of first word.
+2) Current line contains only spaces:
+   Do nothing.
+3) Current line is empty:
+   Do nothing."
   (interactive)
-  (move-beginning-of-first-word)
-  (set-mark-command nil)
+  (let ((valid-point (hs-valid-line-beginning-pos)))
+	(if valid-point
+	  (goto-char valid-point))))
+
+
+(defun hs-smart-beginning-of-line ()
+  "Jump to beginning of first word or beginning of line.
+Behaviors:
+1) Current line contains effective characters:
+   i.   Point is in between words, jump to beginning of first word.
+   ii.  Point is on beginning of first word, jump to beginning of line.
+   iii. Point is on leading spaces, jump to beginning of line.
+2) Current line contains only spaces:
+   Jump to beginning of line.
+3) Current line is empty:
+   Jump to beginning of line."
+  (interactive)
+  (let ((valid-point (hs-valid-line-beginning-pos)))
+	(if (and valid-point
+			 (> (point) valid-point))
+		(goto-char valid-point)
+	  (beginning-of-line))))
+
+
+(defun hs-select-stripped-line ()
+  "After this, the line two sides of which are non empty are selected.
+Behaviors:
+1) Current line contains effective characters:
+   Select those effective characters.
+2) Current line contains only spaces:
+   Do nothing.
+3) Current line is empty:
+   Do nothing."
+  (interactive)
+  (let ((valid-point (hs-valid-line-beginning-pos)))
+	(if valid-point
+		(progn (goto-char valid-point)
+			   (push-mark)
+			   (activate-mark)
+			   (end-of-line)))))
+
+
+(defun hs-select-line ()
+  (interactive)
+  (beginning-of-line)
+  (push-mark)
+  (activate-mark)
   (move-end-of-line 1))
 
 
-(defun delete-stripped-line ()
+(defun hs-kill-stripped-line ()
   (interactive)
-  (select-stripped-line)
-  (backward-delete-char-untabify 1))
+  (let ((valid-point (hs-valid-line-beginning-pos)))
+	(if valid-point
+		(kill-region valid-point (line-end-position)))))
 
 
-(defun select-line ()
+(defun hs-kill-whole-line ()
   (interactive)
-  (move-beginning-of-line 1)
-  (set-mark-command nil)
-  (move-end-of-line 1))
+  (kill-stripped-line)
+  (backward-delete-char (- (point) (line-beginning-position)))
+  (backward-delete-char 1))
 
 
-(defun delete-line ()
+(defun hs-backward-kill-line ()
+  "Kill from point till start of the line.
+Behaviors:
+1) Current line contains effective characters:
+   i.  Point in between words. Kill from point till start of effective char.
+   ii. Point on first char or on leading spaces. Kill leading spaces.
+2) Current line contains only spaces:
+   Kill whole line.
+3) Current line is empty:
+   Kill whole line."
   (interactive)
-  (select-line)
-  (backward-delete-char-untabify 1)
-  (backward-delete-char-untabify 1))
+  (let ((valid-point (hs-valid-line-beginning-pos))
+		(del-space-p nil))
+	(if valid-point
+		(if (> (point) valid-point)
+			(kill-region valid-point (point))
+		  (progn (setq del-space-p t)
+				 (goto-char valid-point)))
+	  (progn (setq del-space-p t)
+			 (goto-char (line-end-position))))
+	(if del-space-p
+		(progn (backward-delete-char (- (point) (line-beginning-position)))
+			   (backward-delete-char 1)))))
 
 
-(defun comment-line ()
+(defun hs-comment-line ()
   (interactive)
   (select-line)
   (comment-region (mark) (point)))
 
 
-(defun uncomment-line ()
+(defun hs-uncomment-line ()
   (interactive)
   (select-line)
   (uncomment-region (mark) (point)))

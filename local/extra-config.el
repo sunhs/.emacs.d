@@ -34,7 +34,7 @@
 (defun my-fci-conf ()
   (fci-mode 1)
   (setq fci-rule-column 80)
-  (setq fci-rule-color "#ffffff")
+  (setq fci-rule-color "#40e0d0")
   (setq fci-rule-use-dashes t))
 (add-hook 'python-mode-hook 'my-fci-conf)
 

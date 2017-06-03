@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-	(ac-math ac-slime async auto-complete-clang benchmark-init counsel csharp-mode fill-column-indicator flycheck geiser go-mode jedi-direx lua-mode markdown-mode matlab-mode multiple-cursors neotree point-undo pos-tip smooth-scrolling sr-speedbar undo-tree web-mode websocket))))
+	(py-autopep8 ac-math ac-slime async auto-complete-clang benchmark-init counsel csharp-mode fill-column-indicator flycheck geiser go-mode jedi-direx lua-mode markdown-mode matlab-mode multiple-cursors neotree point-undo pos-tip smooth-scrolling sr-speedbar undo-tree web-mode websocket))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
