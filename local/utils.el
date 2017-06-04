@@ -155,11 +155,11 @@ Behaviors:
 
 (defun hs-comment-line ()
   (interactive)
-  (select-line)
+  (hs-select-line)
   (comment-region (mark) (point)))
 
 
 (defun hs-uncomment-line ()
   (interactive)
-  (select-line)
+  (hs-select-line)
   (uncomment-region (mark) (point)))
