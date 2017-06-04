@@ -121,8 +121,9 @@ Behaviors:
 
 (defun hs-kill-whole-line ()
   (interactive)
-  (kill-stripped-line)
-  (backward-delete-char (- (point) (line-beginning-position)))
+  (hs-kill-stripped-line)
+  (while (not (= (point) (line-beginning-position)))
+	(backward-delete-char 1))
   (backward-delete-char 1))
 
 
@@ -147,7 +148,8 @@ Behaviors:
 	  (progn (setq del-space-p t)
 			 (goto-char (line-end-position))))
 	(if del-space-p
-		(progn (backward-delete-char (- (point) (line-beginning-position)))
+		(progn (while (not (= (point) (line-beginning-position)))
+				 (backward-delete-char 1))
 			   (backward-delete-char 1)))))
 
 

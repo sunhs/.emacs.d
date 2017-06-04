@@ -14,7 +14,7 @@
 (setq package-enable-at-startup nil)
 
 ;; define load paths
-(setq default-directory (substitute-in-file-name "$HOME"))
+(setq default-directory (substitute-in-file-name "$HOME/"))
 (defconst elpa-dir (substitute-in-file-name "$HOME/.emacs.d/elpa"))
 (defconst nonelpa-dir (substitute-in-file-name "$HOME/.emacs.d/nonelpa"))
 (defconst local-dir (substitute-in-file-name "$HOME/.emacs.d/local"))
@@ -88,7 +88,10 @@
 
 ;; load customize variables
 (setq custom-file (concat local-dir "/custom.el"))
-(load custom-file)
+(add-hook 'emacs-startup-hook
+		  (lambda ()
+			(load custom-file)
+			(hs-sort-package-list)))
 
 ;; sort package-selected-list
 (hs-sort-package-list)
