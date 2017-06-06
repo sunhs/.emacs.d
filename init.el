@@ -22,14 +22,17 @@
 (add-to-list 'load-path nonelpa-dir)
 (add-to-list 'load-path local-dir)
 
-;; key-bindings independent of packages
 (load "kbd")
-
-;; utils
 (load "utils")
 
-;; alias UTF-8 as utf-8
 (define-coding-system-alias 'UTF-8 'utf-8)
+(setq inhibit-startup-message t)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(setq-default mode-line-format nil)
+(fset 'yes-or-no-p 'y-or-n-p)
+(show-paren-mode 1)
+(global-hl-line-mode 1)
 
 ;; make scoll smooth
 (setq scroll-step 1)
@@ -40,24 +43,8 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-;; disable start-up message
-(setq inhibit-startup-message t)
-
-;; disable tool-bar
-(tool-bar-mode -1)
-
-;; disable menu-bar
-;; (menu-bar-mode -1)
-
-;; disable side-bar
-(scroll-bar-mode -1)
-
-;; do not show mode line
-(setq-default mode-line-format nil)
-
 ;; display line numbers
-;; (require 'linum)
-;; (global-linum-mode t) ;; always show line numbers
+(global-linum-mode t)
 ;; (setq linum-format "%4d| ") ;; linum format
 
 ;; tab indent
@@ -69,18 +56,12 @@
 (add-hook 'c-mode-hook 'my-indent-setup)
 (setq python-indent-offset 4)
 
-;; use y/n to replace yes/no
-(fset 'yes-or-no-p 'y-or-n-p)
-
 ;; no back-up or auto-save files
 (setq make-backup-files nil) ;; no backup files
 (setq auto-save-mode nil) ;; no auto save
 (setq-default make-backup-files nil) ;; no temp file
 (setq backup-inhibited t) ;; no backup
 (setq auto-save-default nil) ;; no #file#
-
-;; show paren match
-(show-paren-mode 1)
 
 ;; split windows vertically
 (setq split-height-threshold nil)

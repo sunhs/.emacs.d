@@ -43,13 +43,13 @@
 (require 'smooth-scrolling)
 
 ;; --------------------------------------------------------------------------------------------------------------
-;; ;; multiple-cursors
-;; (require 'multiple-cursors)
+;; multiple-cursors
+(require 'multiple-cursors)
 
-;; ;; key bindings
-;; (global-set-key (kbd "C-c l") 'mc/edit-lines)
-;; (global-set-key (kbd "C-c w") 'mc/mark-next-word-like-this)
-;; (global-set-key (kbd "C-c r") 'set-rectangular-region-anchor)
+;; key bindings
+(global-set-key (kbd "C-c m") 'mc/edit-lines)
+(global-set-key (kbd "C-c w") 'mc/mark-next-word-like-this)
+(global-set-key (kbd "C-c r") 'set-rectangular-region-anchor)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; neotree
@@ -89,6 +89,16 @@
 ;; ivy-mode
 (ivy-mode 1)
 (global-set-key (kbd "C-c C-x C-f") 'counsel-recentf)
+
+;; --------------------------------------------------------------------------------------------------------------
+;; spaceline
+(require 'spaceline-config)
+(spaceline-spacemacs-theme)
+
+;; --------------------------------------------------------------------------------------------------------------
+;; spaceline-all-the-icons
+;; (require 'spaceline-all-the-icons)
+;; (spaceline-all-the-icons-theme)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; config relating to platforms

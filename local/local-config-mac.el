@@ -12,9 +12,9 @@
 (setq mac-option-modifier (quote (:ordinary meta :function meta :mouse meta)))
 (setq mac-pass-command-to-system nil)
 (setq mac-system-move-file-to-trash-use-finder t)
-
 (setq ns-pop-up-frames nil) ;; don't open file in a new frame
 (setq mac-command-modifier 'control) ;; map command to control
+
 ;; display chinese fonts normally in GUI
 (set-default-font "Monaco 14")
 (hs-call-or-add-to-frame-hook
@@ -32,9 +32,11 @@
                (file-writable-p buffer-file-name))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-(defconst droptox-dir (substitute-in-file-name "$HOME/Dropbox"))
+(set-frame-position (selected-frame) 80 40)
+(set-frame-width (selected-frame) 140)
+(set-frame-height (selected-frame) 60)
 
-(global-hl-line-mode 1)
+(defconst dropbox-dir (substitute-in-file-name "$HOME/Dropbox"))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; markdown preview mode
@@ -59,10 +61,10 @@
 (setq org-export-with-toc nil)
 
 ;; org-capture
-(defconst capture-todo-file (concat droptox-dir "/org/TODO.org"))
-(defconst capture-memo-file (concat droptox-dir "/org/MEMO.org"))
-(defconst capture-note-file (concat droptox-dir "/org/READING_NOTE.org"))
-;; (defconst capture-birthday-file (concat droptox-dir "/org/BIRTHDAY.org"))
+(defconst capture-todo-file (concat dropbox-dir "/org/TODO.org"))
+(defconst capture-memo-file (concat dropbox-dir "/org/MEMO.org"))
+(defconst capture-note-file (concat dropbox-dir "/org/READING_NOTE.org"))
+;; (defconst capture-birthday-file (concat dropbox-dir "/org/BIRTHDAY.org"))
 (setq org-capture-templates
       '(("t" "TODO" entry (file+headline capture-todo-file "TASK") "** TODO %?\n   %i\n")
         ("m" "MEMO" entry (file+headline capture-memo-file "MEMO") "** %?\n   %i\n")
@@ -77,7 +79,7 @@
 
 ;; iCalendar
 (setq org-icalendar-include-todo t)
-(setq org-icalendar-combined-agenda-file (concat droptox-dir "/org/ICSFILE.ics"))
+(setq org-icalendar-combined-agenda-file (concat dropbox-dir "/org/ICSFILE.ics"))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; flycheck
@@ -147,18 +149,11 @@
 ;; menu height
 (setq ac-menu-height 12)
 
-;; no help
-(setq ac-use-quick-help nil)
-
-(hs-call-or-add-to-frame-hook
- (lambda ()
-   ;; use help
-   (setq ac-use-quick-help t)
-   ;; use pos-tip
-   (require 'pos-tip)
-   (setq ac-quick-help-prefer-pos-tip t)
-   ;; display help after 1s
-   (setq ac-quick-help-delay 1)))
+;; help
+(setq ac-use-quick-help t)
+(require 'pos-tip)
+(setq ac-quick-help-prefer-pos-tip t)
+(setq ac-quick-help-delay 1)
 
 ;; --------------------------------------------------------------------------------------------------------------
 (require 'geiser)
@@ -188,7 +183,3 @@
 ;; autopep8
 (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 (setq py-autopep8-options '("--max-line-length=80"))
-
-
-
-

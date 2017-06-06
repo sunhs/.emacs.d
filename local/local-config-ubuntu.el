@@ -31,14 +31,7 @@
                (file-writable-p buffer-file-name))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-(defconst droptox-dir (substitute-in-file-name "$HOME/Dropbox"))
-
-;; (set-frame-position (selected-frame) 80 40)
-;; (set-frame-width (selected-frame) 140)
-;; (set-frame-height (selected-frame) 40)
-
-;; highlight current line
-(global-hl-line-mode 1)
+(defconst dropbox-dir (substitute-in-file-name "$HOME/Dropbox"))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; markdown preview mode
@@ -124,22 +117,11 @@
 ;; menu height
 (setq ac-menu-height 12)
 
-;; no help
-(setq ac-use-quick-help nil)
-
-(hs-call-or-add-to-frame-hook
- (lambda ()
-   ;; (when (display-graphic-p)
-   ;; use help
-   (setq ac-use-quick-help t)
-   ;; use pos-tip
-   (require 'pos-tip)
-   (setq ac-quick-help-prefer-pos-tip t)
-   ;; display help after 1s
-   (setq ac-quick-help-delay 1))
- ;; (unless (display-graphic-p)
- ;; 	 (setq ac-use-quick-help nil))))
- )
+;; help
+(setq ac-use-quick-help t)
+(require 'pos-tip)
+(setq ac-quick-help-prefer-pos-tip t)
+(setq ac-quick-help-delay 1)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; themes
