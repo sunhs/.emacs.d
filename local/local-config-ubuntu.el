@@ -121,7 +121,7 @@
 (setq ac-use-quick-help t)
 (require 'pos-tip)
 (setq ac-quick-help-prefer-pos-tip t)
-(setq ac-quick-help-delay 1)))
+(setq ac-quick-help-delay 1)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; themes
