@@ -1,5 +1,6 @@
 (require 'cl) ;; to ensure that lexical-let works
-(defun hs-call-or-add-to-frame-hook (fun)
+
+(defun hyesun/call-or-add-to-frame-hook (fun)
   "`fun: A function receiving an optional parameter `frame.
    The purpose of `fun is to decide whether the frame is graphic and
    thus turn on graphic features.
@@ -17,7 +18,7 @@
 	(funcall fun)))
 
 
-(defun hs-sort-package-list ()
+(defun hyesun/sort-package-list ()
   (if (boundp 'package-selected-packages)
 	  (setq package-selected-packages
 			(sort package-selected-packages
@@ -26,19 +27,19 @@
 	nil))
 
 
-(defun hs-show-file-path ()
+(defun hyesun/show-file-path ()
   "Show the path of file in the current buffer."
   (interactive)
   (message (buffer-file-name)))
 
 
-(defun hs-show-buffer-name ()
+(defun hyesun/show-buffer-name ()
   "Show the buffer name."
   (interactive)
   (message (buffer-name)))
 
 
-(defun hs-valid-line-beginning-pos (&optional line)
+(defun hyesun//valid-line-beginning-pos (&optional line)
   (unless line
 	(setq line (line-number-at-pos)))
   (let ((valid-point (line-beginning-position (- 1
@@ -52,7 +53,7 @@
 	  valid-point)))
 
 
-(defun hs-move-beginning-of-first-word ()
+(defun hyesun/move-beginning-of-first-word ()
   "Move to the first non-space and non-tab position of the line.
 Behaviors:
 1) Current line contains effective characters:
@@ -62,12 +63,12 @@ Behaviors:
 3) Current line is empty:
    Do nothing."
   (interactive)
-  (let ((valid-point (hs-valid-line-beginning-pos)))
+  (let ((valid-point (hyesun//valid-line-beginning-pos)))
 	(if valid-point
 	  (goto-char valid-point))))
 
 
-(defun hs-smart-beginning-of-line ()
+(defun hyesun/smart-beginning-of-line ()
   "Jump to beginning of first word or beginning of line.
 Behaviors:
 1) Current line contains effective characters:
@@ -79,14 +80,14 @@ Behaviors:
 3) Current line is empty:
    Jump to beginning of line."
   (interactive)
-  (let ((valid-point (hs-valid-line-beginning-pos)))
+  (let ((valid-point (hyesun//valid-line-beginning-pos)))
 	(if (and valid-point
 			 (> (point) valid-point))
 		(goto-char valid-point)
 	  (beginning-of-line))))
 
 
-(defun hs-select-stripped-line ()
+(defun hyesun/select-stripped-line ()
   "After this, the line two sides of which are non empty are selected.
 Behaviors:
 1) Current line contains effective characters:
@@ -96,7 +97,7 @@ Behaviors:
 3) Current line is empty:
    Do nothing."
   (interactive)
-  (let ((valid-point (hs-valid-line-beginning-pos)))
+  (let ((valid-point (hyesun//valid-line-beginning-pos)))
 	(if valid-point
 		(progn (goto-char valid-point)
 			   (push-mark)
@@ -104,7 +105,7 @@ Behaviors:
 			   (end-of-line)))))
 
 
-(defun hs-select-line ()
+(defun hyesun/select-line ()
   (interactive)
   (beginning-of-line)
   (push-mark)
@@ -112,22 +113,22 @@ Behaviors:
   (move-end-of-line 1))
 
 
-(defun hs-kill-stripped-line ()
+(defun hyesun/kill-stripped-line ()
   (interactive)
-  (let ((valid-point (hs-valid-line-beginning-pos)))
+  (let ((valid-point (hyesun//valid-line-beginning-pos)))
 	(if valid-point
 		(kill-region valid-point (line-end-position)))))
 
 
-(defun hs-kill-whole-line ()
+(defun hyesun/kill-whole-line ()
   (interactive)
-  (hs-kill-stripped-line)
+  (hyesun/kill-stripped-line)
   (while (not (= (point) (line-beginning-position)))
 	(backward-delete-char 1))
   (backward-delete-char 1))
 
 
-(defun hs-backward-kill-line ()
+(defun hyesun/backward-kill-line ()
   "Kill from point till start of the line.
 Behaviors:
 1) Current line contains effective characters:
@@ -138,7 +139,7 @@ Behaviors:
 3) Current line is empty:
    Kill whole line."
   (interactive)
-  (let ((valid-point (hs-valid-line-beginning-pos))
+  (let ((valid-point (hyesun//valid-line-beginning-pos))
 		(del-space-p nil))
 	(if valid-point
 		(if (> (point) valid-point)
@@ -153,13 +154,15 @@ Behaviors:
 			   (backward-delete-char 1)))))
 
 
-(defun hs-comment-line ()
+(defun hyesun/comment-line ()
   (interactive)
-  (hs-select-line)
+  (hyesun/select-line)
   (comment-region (mark) (point)))
 
 
-(defun hs-uncomment-line ()
+(defun hyesun/uncomment-line ()
   (interactive)
-  (hs-select-line)
+  (hyesun/select-line)
   (uncomment-region (mark) (point)))
+
+(provide 'utils)
