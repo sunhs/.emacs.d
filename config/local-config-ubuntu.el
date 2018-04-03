@@ -2,7 +2,7 @@
 
 ;; specific settings on gnu/linux
 (set-default-font "Mono 12")
-(hs-call-or-add-to-frame-hook
+(hyesun/call-or-add-to-frame-hook
  (lambda ()
    (when (display-graphic-p)
 	 (dolist (charset '(kana han symbol cjk-misc bopomofo))
