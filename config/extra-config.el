@@ -9,10 +9,11 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; ivy-mode
 (ivy-mode 1)
-(setq ivy-initial-inputs-alist nil)
-(setq ivy-use-virtual-buffers t)
-(setq ivy-count-format "%d/%d")
-(global-set-key (kbd "C-c C-x C-f") 'counsel-recentf)
+(setq ivy-initial-inputs-alist nil
+	  ivy-use-virtual-buffers t
+	  ivy-height 15
+	  ivy-extra-directories nil
+	  ivy-count-format "%d/%d")
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (define-key spc-leader-map (kbd "SPC") 'counsel-M-x)
 
@@ -31,18 +32,12 @@
 (define-key evil-normal-state-map "r" 'undo-tree-redo)
 
 ;; --------------------------------------------------------------------------------------------------------------
-;; recentf
-(require 'recentf)
-(recentf-mode 1)
-(add-hook 'kill-emacs-hook 'recentf-save-list)
-
-;; --------------------------------------------------------------------------------------------------------------
 ;; fill column indicator
 (defun my-fci-conf ()
   (require 'fill-column-indicator)
-  (setq fci-rule-column 80)
-  (setq fci-rule-color "#40e0d0")
-  (setq fci-rule-use-dashes t)
+  (setq fci-rule-column 80
+		fci-rule-color "#40e0d0"
+		fci-rule-use-dashes t)
   (fci-mode 1))
 (add-hook 'python-mode-hook 'my-fci-conf)
 (add-hook 'c-mode-hook 'my-fci-conf)
@@ -69,9 +64,10 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; sr-speedbar
-(setq sr-speedbar-right-side nil)
-(setq speedbar-show-unknown-files t)
-(setq sr-speedbar-auto-refresh nil)
+(setq sr-speedbar-right-side nil
+	  speedbar-show-unknown-files t
+	  sr-speedbar-auto-refresh nil)
+
 (defun focus-speedbar-window ()
   (interactive)
   (lexical-let ((found nil))
@@ -83,6 +79,7 @@
 			(setq found t))))
 	(unless found
 	  (sr-speedbar-open))))
+
 (global-set-key (kbd "C-c s") 'focus-speedbar-window)
 
 ;; --------------------------------------------------------------------------------------------------------------
@@ -93,9 +90,9 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; spaceline
 (require 'spaceline-config)
-(setq powerline-default-separator nil)
+(setq powerline-default-separator nil
+	  spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
 (spaceline-spacemacs-theme)
-(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; company
@@ -156,9 +153,9 @@
 (add-hook 'python-mode-hook
 		  (lambda ()
 			(flycheck-mode t)
-			(setq flycheck-python-pylint-executable "pylint")
-			(flycheck-select-checker 'python-pylint)
-			(setq flycheck-check-syntax-automatically '(save))))
+			(setq flycheck-python-pylint-executable "pylint"
+				  flycheck-check-syntax-automatically '(save))
+			(flycheck-select-checker 'python-pylint)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; yapf

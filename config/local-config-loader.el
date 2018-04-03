@@ -1,1 +1,0 @@
-(load "local-config-mac")

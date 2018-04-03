@@ -10,7 +10,7 @@
 (global-set-key (kbd "C-c C-x m") 'set-mark-command)
 (global-set-key (kbd "C-c ;") 'comment-region)
 (global-set-key (kbd "C-c /") 'uncomment-region)
-;; (global-set-key (kbd "C-c C-f") 'load-file)
+(global-set-key (kbd "C-c C-f") 'load-file)
 (global-set-key (kbd "C-c C-x s") 'replace-string)
 (global-set-key (kbd "C-c C-x <up>") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-c C-x <down>") 'shrink-window-horizontally)

@@ -12,10 +12,10 @@
 
 ;; special settings for emacs mac port
 ;; (setq mac-option-modifier (quote (:ordinary meta :function meta :mouse meta)))
-(setq mac-pass-command-to-system nil)
-(setq mac-system-move-file-to-trash-use-finder t)
-(setq ns-pop-up-frames nil) ;; don't open file in a new frame
-(setq mac-command-modifier 'control) ;; map command to control
+(setq mac-pass-command-to-system nil
+	  mac-system-move-file-to-trash-use-finder t
+	  ns-pop-up-frames nil ;; don't open file in a new frame
+	  mac-command-modifier 'control) ;; map command to control
 
 ;; display chinese fonts normally in GUI
 (set-default-font "Monaco 12")
@@ -72,21 +72,21 @@
 		))
 
 ;; agenda
-(setq org-agenda-files
-	  `(,(concat dropbox-dir "/org/TODO.org") ,(concat dropbox-dir "/org/MEMO.org") ,(concat "/org/READING_NOTE.org")))
-(setq org-agenda-include-diary t)
+(setq
+ org-agenda-files `(,(concat dropbox-dir "/org/TODO.org") ,(concat dropbox-dir "/org/MEMO.org") ,(concat "/org/READING_NOTE.org"))
+ org-agenda-include-diary t)
 
 ;; iCalendar
-(setq org-icalendar-include-todo t)
-(setq org-icalendar-combined-agenda-file (concat dropbox-dir "/org/ICSFILE.ics"))
+(setq org-icalendar-include-todo t
+	  org-icalendar-combined-agenda-file (concat dropbox-dir "/org/ICSFILE.ics"))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; latex
 (with-eval-after-load 'tex
-  (setq my-latex-phase "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error %s.tex")
-  (setq my-bibtex-phase "bibtex %s.aux")
-  (setq my-pdf-phase "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -output-format=pdf %s.tex")
-  (setq my-rm-list (list "*.aux"
+  (setq my-latex-phase "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error %s.tex"
+		my-bibtex-phase "bibtex %s.aux"
+		my-pdf-phase "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -output-format=pdf %s.tex"
+		my-rm-list (list "*.aux"
 						 "*.bbl"
 						 "*.blg"
 						 "*.idx"
@@ -106,17 +106,16 @@
 						 "*.log"
 						 "*.fdb_latexmk"
 						 "*.synctex.gz"
-						 "*.dvi"))
-  (setq my-rm-phase
-		(concat "rm "
-				(string-join my-rm-list "; rm ")
-				"; rm -rf auto"))
+						 "*.dvi")
+		my-rm-phase (concat "rm " (string-join my-rm-list "; rm ") "; rm -rf auto"))
+  
   (setq my-tex-build-chain (list
 							(list "My Build Chain"
 								  (string-join (list my-latex-phase my-bibtex-phase my-latex-phase my-pdf-phase my-rm-phase) " && ")
 								  #'TeX-run-command
 								  nil
 								  '(latex-mode))))
+  
   (setq TeX-command-list (append my-tex-build-chain TeX-command-list)))
 
 ;; --------------------------------------------------------------------------------------------------------------

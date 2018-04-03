@@ -22,8 +22,8 @@
 	  (let ((xsel-output (shell-command-to-string "xsel --clipboard --output")))
 		(unless (string= (car kill-ring) xsel-output)
 		  xsel-output)))
-	(setq interprogram-cut-function 'xsel-cut-function)
-	(setq interprogram-paste-function 'xsel-paste-function)))
+	(setq interprogram-cut-function 'xsel-cut-function
+		  interprogram-paste-function 'xsel-paste-function)))
 
 ;; to prompt root privileges for non-writable files
 (defadvice find-file (after find-file-sudo activate)
@@ -36,5 +36,6 @@
 ;; themes
 ;; (require 'color-theme)
 ;; (color-theme-initialize)
-(add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
-(load-theme 'solarized t)
+;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
+;; (load-theme 'solarized t)
+(load-theme 'spacemacs-dark-theme)

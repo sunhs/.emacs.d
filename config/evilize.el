@@ -13,8 +13,8 @@
 ;; evil-terminal-cursor-changer
 ;; These lines are vital for evil-terminal-cursor-changer to work normally,
 ;; since the default normal-state-cursor is `t`.
-(setq evil-normal-state-cursor '(box))
-(setq evil-emacs-state-cursor '(bar))
+(setq evil-normal-state-cursor '(box)
+	  evil-emacs-state-cursor '(bar))
 
 (unless (display-graphic-p)
   (require 'evil-terminal-cursor-changer)

@@ -41,9 +41,9 @@
 (global-hl-line-mode 1)
 
 ;; make scoll smooth
-(setq scroll-step 1)
-(setq scroll-margin 10)
-(setq scroll-conservatively 10000)
+(setq scroll-step 1
+	  scroll-margin 10
+	  scroll-conservatively 10000)
 
 ;; making buffers with the same name distinguishable
 (require 'uniquify)
@@ -63,15 +63,14 @@
 ;; (setq python-indent-offset 4)
 
 ;; no back-up or auto-save files
-;; (setq make-backup-files nil) ;; no backup files
-(setq-default make-backup-files nil) ;; no backup file
-(setq backup-inhibited t) ;; no backup
-(setq auto-save-mode nil) ;; no auto save
-(setq auto-save-default nil) ;; no #file#
+(setq-default make-backup-files nil ;; no backup file
+			  backup-inhibited t ;; no backup
+			  auto-save-mode nil ;; no auto save
+			  auto-save-default nil) ;; no #file#
 
 ;; split windows vertically
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
+(setq split-height-threshold nil
+	  split-width-threshold 0)
 
 ;; visual lines
 (global-visual-line-mode t)
