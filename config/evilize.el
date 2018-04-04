@@ -48,6 +48,7 @@
 (define-key evil-normal-state-map "$" 'evil-end-of-visual-line)
 (define-key evil-normal-state-map "^" 'hyesun/smart-beginning-of-line)
 (define-key evil-normal-state-map [tab] 'indent-for-tab-command)
+(define-key evil-normal-state-map (kbd "TAB") 'indent-for-tab-command)
 
 ;; emacs state
 (define-key evil-emacs-state-map [escape] 'evil-normal-state)
