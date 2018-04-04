@@ -6,8 +6,19 @@
 (setq-default evil-want-C-u-scroll t)
 (require 'evil)
 (evil-mode t)
-(defalias 'evil-insert-state 'evil-emacs-state)
 (evil-set-initial-state 'package-menu-mode 'motion)
+(defalias 'evil-insert-state 'evil-emacs-state)
+
+;; (defun hyesun//evil-insert-to-emacs-state (evil-insert-state-func &rest args)
+;;   (evil-emacs-state))
+;; (advice-add 'evil-insert-state :around 'hyesun//evil-insert-to-emacs-state)
+
+;; Override stock evil function `evil-emacs-state-p'
+;; Since emacs-state is blocked in evil-mc and evil-esc
+(defun evil-emacs-state-p (&optional state)
+  "Whether the current state is insert."
+  (and evil-local-mode
+       (memq (or state evil-state) '())))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; evil-terminal-cursor-changer
@@ -24,6 +35,7 @@
 ;; evil-escape
 (require 'evil-escape)
 (evil-escape-mode t)
+(setq-default evil-escape-delay 0.2)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; key bindings
@@ -38,7 +50,7 @@
 (define-key evil-normal-state-map [tab] 'indent-for-tab-command)
 
 ;; emacs state
-(define-key evil-emacs-state-map [escape] 'evil-force-normal-state)
+(define-key evil-emacs-state-map [escape] 'evil-normal-state)
 
 ;; motion state
 (define-key evil-motion-state-map (kbd "SPC") spc-leader-map)
