@@ -7,6 +7,15 @@
 (load "evilize")
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; smartparens
+(require 'smartparens)
+(smartparens-global-mode)
+(require 'smartparens-config)
+(sp-local-pair '(emacs-lisp-mode-hook) "'" "'" :actions nil)
+(sp-local-pair '(lisp-mode-hook) "'" "'" :actions nil)
+(sp-local-pair '(lisp-interaction-mode-hook) "'" "'" :actions nil)
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; ivy-mode
 (ivy-mode 1)
 (setq ivy-initial-inputs-alist nil
@@ -15,7 +24,9 @@
 	  ivy-extra-directories nil
 	  ivy-count-format "%d/%d")
 (global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-c C-x y") 'counsel-yank-pop)
 (define-key spc-leader-map (kbd "SPC") 'counsel-M-x)
+(define-key spc-leader-map (kbd "y") 'counsel-M-x)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; swiper

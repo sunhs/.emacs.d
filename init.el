@@ -72,8 +72,8 @@
 (setq split-height-threshold nil
 	  split-width-threshold 0)
 
-;; visual lines
-(global-visual-line-mode t)
+;; wrap word
+(toggle-word-wrap)
 
 ;; remember last position
 (save-place-mode t)

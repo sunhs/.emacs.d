@@ -101,6 +101,7 @@
 (define-key spc-leader-map "bb" 'switch-to-buffer)
 (define-key spc-leader-map "bd" 'kill-this-buffer)
 (define-key spc-leader-map "bs" 'replace-string)
+(define-key spc-leader-map "ba" 'mark-whole-buffer)
 
 ;; window
 (define-key spc-leader-map "wd" 'delete-window)
