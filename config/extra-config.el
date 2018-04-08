@@ -175,5 +175,15 @@
 			(yapf-mode t)))
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; counsel-projectile
+(use-package counsel-projectile
+  :init
+  (add-hook 'python-mode-hook 'counsel-projectile-mode)
+  (add-hook 'c++-mode-hook 'counsel-projectile-mode)
+  (add-hook 'c-mode-hook 'counsel-projectile-mode)
+  :config
+  (define-key spc-leader-map (kbd "p") counsel-projectile-command-map))
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; config relating to platforms
 (load "local-config-loader")
