@@ -26,7 +26,7 @@
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-c C-x y") 'counsel-yank-pop)
 (define-key spc-leader-map (kbd "SPC") 'counsel-M-x)
-(define-key spc-leader-map (kbd "y") 'counsel-M-x)
+(define-key spc-leader-map (kbd "y") 'counsel-yank-pop)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; swiper
