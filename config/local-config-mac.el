@@ -81,6 +81,11 @@
 	  org-icalendar-combined-agenda-file (concat dropbox-dir "/org/ICSFILE.ics"))
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; org-bullets
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; latex
 (with-eval-after-load 'tex
   (setq my-latex-phase "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error %s.tex"

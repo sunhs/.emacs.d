@@ -4,6 +4,7 @@
 ;; evil
 ;; this line should be placed before `(require 'evil)'
 (setq-default evil-want-C-u-scroll t)
+(setq-default evil-want-C-i-jump nil)
 (require 'evil)
 (evil-mode t)
 (evil-set-initial-state 'package-menu-mode 'motion)
@@ -36,6 +37,18 @@
 (require 'evil-escape)
 (evil-escape-mode t)
 (setq-default evil-escape-delay 0.2)
+
+;; --------------------------------------------------------------------------------------------------------------
+;; evil-org
+(use-package evil-org
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; key bindings
@@ -83,6 +96,7 @@
 (define-key spc-leader-map "fl" 'load-file)
 (define-key spc-leader-map "fp" 'hyesun/show-file-path)
 (define-key spc-leader-map "fs" 'save-buffer)
+(define-key spc-leader-map "fw" 'write-file)
 
 ;; line
 (define-key spc-leader-map "ld" 'hyesun/kill-stripped-line)
