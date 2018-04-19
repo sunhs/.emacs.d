@@ -1,3 +1,24 @@
+(setq-default c-basic-offset 4
+              tab-width 4)
+
+(defun hyesun/c-cpp-bracket-newline ()
+  (interactive)
+  (if (= (char-before) 123)
+	  (progn
+		(newline-and-indent)
+		(newline-and-indent)
+		(previous-line)
+		(c-indent-line-or-region))
+	(newline-and-indent)))
+
+(defun hyesun/c-cpp-mode-hook ()
+  (c-set-offset 'arglist-intro '+)
+  (define-key c++-mode-map (kbd "RET") 'hyesun/c-cpp-bracket-newline)
+  (define-key c-mode-map (kbd "RET") 'hyesun/c-cpp-bracket-newline))
+
+(add-hook 'c++-mode-hook 'hyesun/c-cpp-mode-hook)
+(add-hook 'c-mode-hook 'hyesun/c-cpp-mode-hook)
+
 (use-package irony
   :defer t
   

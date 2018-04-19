@@ -54,12 +54,6 @@
 ;; (setq linum-format "%4d| ") ;; linum format
 
 ;; tab indent
-(setq-default c-basic-offset 4
-              tab-width 4)
-(defun my-indent-setup()
-  (c-set-offset 'arglist-intro '+))
-(add-hook 'c++-mode-hook 'my-indent-setup)
-(add-hook 'c-mode-hook 'my-indent-setup)
 ;; (setq python-indent-offset 4)
 
 ;; no back-up or auto-save files

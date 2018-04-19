@@ -54,31 +54,43 @@
 ;; key bindings
 (defvar spc-leader-map (make-sparse-keymap))
 
+;; emacs state
+(define-key evil-emacs-state-map [escape] 'evil-force-normal-state)
+
 ;; normal state
 (define-key evil-normal-state-map (kbd "SPC") spc-leader-map)
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)
 (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
 (define-key evil-normal-state-map "$" 'evil-end-of-visual-line)
-(define-key evil-normal-state-map "^" 'hyesun/smart-beginning-of-line)
+(define-key evil-normal-state-map "^" 'evil-first-non-blank-of-visual-line)
 (define-key evil-normal-state-map [tab] 'indent-for-tab-command)
 (define-key evil-normal-state-map (kbd "TAB") 'indent-for-tab-command)
-
-;; emacs state
-(define-key evil-emacs-state-map [escape] 'evil-normal-state)
+(define-key evil-normal-state-map (kbd "[") 'evil-first-non-blank-of-visual-line)
+(define-key evil-normal-state-map (kbd "]") 'evil-end-of-visual-line)
+(define-key evil-normal-state-map (kbd "-") 'evil-scroll-up)
+(define-key evil-normal-state-map (kbd "=") 'evil-scroll-down)
 
 ;; motion state
 (define-key evil-motion-state-map (kbd "SPC") spc-leader-map)
 (define-key evil-motion-state-map "j" 'evil-next-visual-line)
 (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
 (define-key evil-motion-state-map "$" 'evil-end-of-visual-line)
-(define-key evil-motion-state-map "^" 'hyesun/smart-beginning-of-line)
+(define-key evil-motion-state-map "^" 'evil-first-non-blank-of-visual-line)
+(define-key evil-motion-state-map (kbd "[") 'evil-first-non-blank-of-visual-line)
+(define-key evil-motion-state-map (kbd "]") 'evil-end-of-visual-line)
+(define-key evil-motion-state-map (kbd "-") 'evil-scroll-up)
+(define-key evil-motion-state-map (kbd "=") 'evil-scroll-down)
 
 ;; visual state
 (define-key evil-visual-state-map (kbd "SPC") spc-leader-map)
 (define-key evil-visual-state-map "j" 'evil-next-visual-line)
 (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
 (define-key evil-visual-state-map "$" 'evil-end-of-visual-line)
-(define-key evil-visual-state-map "^" 'hyesun/smart-beginning-of-line)
+(define-key evil-visual-state-map "^" 'evil-first-non-blank-of-visual-line)
+(define-key evil-visual-state-map (kbd "[") 'evil-first-non-blank-of-visual-line)
+(define-key evil-visual-state-map (kbd "]") 'evil-end-of-visual-line)
+(define-key evil-visual-state-map (kbd "-") 'evil-scroll-up)
+(define-key evil-visual-state-map (kbd "=") 'evil-scroll-down)
 
 ;; evil-mc
 (global-evil-mc-mode t)
