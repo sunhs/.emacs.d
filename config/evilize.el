@@ -110,7 +110,6 @@
 (define-key spc-leader-map "cn" 'evil-mc-make-and-goto-next-match)
 
 ;; file
-(define-key spc-leader-map "ff" 'find-file)
 (define-key spc-leader-map "fl" 'load-file)
 (define-key spc-leader-map "fp" 'hyesun/show-file-path)
 (define-key spc-leader-map "fs" 'save-buffer)
