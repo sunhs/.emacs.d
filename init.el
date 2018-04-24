@@ -7,14 +7,14 @@
 
 ;; elpa packages
 (require 'package)
-(dolist (source '(("melpa" . "https://melpa.org/packages/")
-				  ("melpa-stable" . "https://stable.melpa.org/packages/")
-				  ("marmalade" . "https://marmalade-repo.org/packages/")
-				  ("gnu" . "https://elpa.gnu.org/packages/")))
+(dolist (source '(("melpa" . "http://melpa.org/packages/")
+		  ("melpa-stable" . "http://stable.melpa.org/packages/")
+		  ("marmalade" . "http://marmalade-repo.org/packages/")
+		  ("gnu" . "http://elpa.gnu.org/packages/")))
   (add-to-list 'package-archives source t))
 (setq package-archive-priorities
       '(("melpa" . 20)
-		("melpa-stable" . 15)
+	("melpa-stable" . 15)
         ("gnu" . 10)
         ("marmalade" . 5)))
 (package-initialize)
@@ -43,8 +43,8 @@
 
 ;; make scoll smooth
 (setq scroll-step 1
-	  scroll-margin 10
-	  scroll-conservatively 10000)
+      scroll-margin 10
+      scroll-conservatively 10000)
 
 ;; making buffers with the same name distinguishable
 (require 'uniquify)
@@ -59,13 +59,13 @@
 
 ;; no back-up or auto-save files
 (setq-default make-backup-files nil ;; no backup file
-			  backup-inhibited t ;; no backup
-			  auto-save-mode nil ;; no auto save
-			  auto-save-default nil) ;; no #file#
+	      backup-inhibited t ;; no backup
+	      auto-save-mode nil ;; no auto save
+	      auto-save-default nil) ;; no #file#
 
 ;; split windows vertically
 (setq split-height-threshold nil
-	  split-width-threshold 0)
+      split-width-threshold 0)
 
 ;; wrap word
 (toggle-word-wrap)
@@ -79,9 +79,9 @@
 ;; load customize variables
 (setq custom-file (concat local-dir "/custom.el"))
 (add-hook 'emacs-startup-hook
-		  (lambda ()
-			(load custom-file)
-			(hyesun/sort-package-list)))
+	  (lambda ()
+	    (load custom-file)
+	    (hyesun/sort-package-list)))
 
 ;; sort package-selected-list
 (hyesun/sort-package-list)

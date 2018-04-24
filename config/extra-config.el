@@ -19,10 +19,10 @@
 ;; ivy-mode
 (ivy-mode 1)
 (setq ivy-initial-inputs-alist nil
-	  ivy-use-virtual-buffers t
-	  ivy-height 15
-	  ivy-extra-directories nil
-	  ivy-count-format "%d/%d")
+      ivy-use-virtual-buffers t
+      ivy-height 15
+      ivy-extra-directories nil
+      ivy-count-format "%d/%d")
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-c C-x y") 'counsel-yank-pop)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
@@ -49,8 +49,8 @@
 (defun my-fci-conf ()
   (require 'fill-column-indicator)
   (setq fci-rule-column 80
-		fci-rule-color "#40e0d0"
-		fci-rule-use-dashes t)
+	fci-rule-color "#40e0d0"
+	fci-rule-use-dashes t)
   (fci-mode 1))
 (add-hook 'python-mode-hook 'my-fci-conf)
 (add-hook 'c-mode-hook 'my-fci-conf)
@@ -78,20 +78,20 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; sr-speedbar
 (setq sr-speedbar-right-side nil
-	  speedbar-show-unknown-files t
-	  sr-speedbar-auto-refresh nil)
+      speedbar-show-unknown-files t
+      sr-speedbar-auto-refresh nil)
 
 (defun focus-speedbar-window ()
   (interactive)
   (lexical-let ((found nil))
-	(dolist (w (window-list))
-	  (if (string= (buffer-name (window-buffer w))
-				   "*SPEEDBAR*")
-		  (progn
-			(select-window w)
-			(setq found t))))
-	(unless found
-	  (sr-speedbar-open))))
+    (dolist (w (window-list))
+      (if (string= (buffer-name (window-buffer w))
+		   "*SPEEDBAR*")
+	  (progn
+	    (select-window w)
+	    (setq found t))))
+    (unless found
+      (sr-speedbar-open))))
 
 (global-set-key (kbd "C-c s") 'focus-speedbar-window)
 
@@ -104,16 +104,16 @@
 ;; spaceline
 (require 'spaceline-config)
 (setq powerline-default-separator nil
-	  spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+      spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
 (spaceline-spacemacs-theme)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; company
 (global-company-mode t)
 (setq completion-styles '(basic substring partial-completion emacs22)
-	  company-idle-delay 0.2
-	  company-minimum-prefix-length 2
-	  company-require-match nil)
+      company-idle-delay 0.2
+      company-minimum-prefix-length 2
+      company-require-match nil)
 (setq company-search-regexp-function 'company-search-words-in-any-order-regexp)
 
 ;; turn off and on fci-mode during completion to avoid weird behavior
@@ -121,8 +121,8 @@
 
 (defun company-turn-off-fci (&rest ignore)
   (when (boundp 'fci-mode)
-  	(setq company-fci-mode-on-p fci-mode)
-  	(when company-fci-mode-on-p (fci-mode -1))))
+    (setq company-fci-mode-on-p fci-mode)
+    (when company-fci-mode-on-p (fci-mode -1))))
 
 (defun company-maybe-turn-on-fci (&rest ignore)
   (when company-fci-mode-on-p (fci-mode 1)))
@@ -139,14 +139,14 @@
 (company-quickhelp-mode t)
 
 (add-hook 'python-mode-hook
-		  (lambda ()
-			(require 'anaconda-mode)
-			(require 'company-anaconda)
-			(anaconda-mode t)
-			(anaconda-eldoc-mode t)
-			(add-to-list
-			 (make-local-variable 'company-backends)
-			 '(company-anaconda company-capf :with company-yasnippet))))
+	  (lambda ()
+	    (require 'anaconda-mode)
+	    (require 'company-anaconda)
+	    (anaconda-mode t)
+	    (anaconda-eldoc-mode t)
+	    (add-to-list
+	     (make-local-variable 'company-backends)
+	     '(company-anaconda company-capf :with company-yasnippet))))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; yasnippet
@@ -164,17 +164,17 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; flycheck
 (add-hook 'python-mode-hook
-		  (lambda ()
-			(flycheck-mode t)
-			(setq flycheck-python-pylint-executable "pylint"
-				  flycheck-check-syntax-automatically '(save))
-			(flycheck-select-checker 'python-pylint)))
+	  (lambda ()
+	    (flycheck-mode t)
+	    (setq flycheck-python-pylint-executable "pylint"
+		  flycheck-check-syntax-automatically '(save))
+	    (flycheck-select-checker 'python-pylint)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; yapf
 (add-hook 'python-mode-hook
-		  (lambda ()
-			(yapf-mode t)))
+	  (lambda ()
+	    (yapf-mode t)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; counsel-projectile

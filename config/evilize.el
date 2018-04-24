@@ -26,7 +26,7 @@
 ;; These lines are vital for evil-terminal-cursor-changer to work normally,
 ;; since the default normal-state-cursor is `t`.
 (setq evil-normal-state-cursor '(box)
-	  evil-emacs-state-cursor '(bar))
+      evil-emacs-state-cursor '(bar))
 
 (unless (display-graphic-p)
   (require 'evil-terminal-cursor-changer)
@@ -44,9 +44,7 @@
   :after org
   :config
   (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme)))
+  (add-hook 'evil-org-mode-hook 'evil-org-set-key-theme)
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
