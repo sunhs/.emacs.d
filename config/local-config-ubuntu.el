@@ -38,9 +38,7 @@
   :ensure t
   :commands (dired-sidebar-toggle-sidebar)
   :config
-  (if (display-graphic-p)
-      (setq dired-sidebar-theme 'icons)
-    (setq dired-sidebar-theme 'nerd))
+  (setq dired-sidebar-theme 'nerd)
   (setq dired-sidebar-face '(:family "Mono" :size 12))
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t)

@@ -130,9 +130,7 @@
   :commands (dired-sidebar-toggle-sidebar)
   :config
   ;; (setq dired-sidebar-subtree-line-prefix ".")
-  (if (display-graphic-p)
-      (setq dired-sidebar-theme 'icons)
-    (setq dired-sidebar-theme 'nerd))
+  (setq dired-sidebar-theme 'nerd)
   (setq dired-sidebar-face '(:family "Monaco" :size 12))
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t)
