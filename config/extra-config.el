@@ -49,8 +49,8 @@
 (defun my-fci-conf ()
   (require 'fill-column-indicator)
   (setq fci-rule-column 80
-	fci-rule-color "#40e0d0"
-	fci-rule-use-dashes t)
+		fci-rule-color "#40e0d0"
+		fci-rule-use-dashes t)
   (fci-mode 1))
 (add-hook 'python-mode-hook 'my-fci-conf)
 (add-hook 'c-mode-hook 'my-fci-conf)
@@ -86,10 +86,10 @@
   (lexical-let ((found nil))
     (dolist (w (window-list))
       (if (string= (buffer-name (window-buffer w))
-		   "*SPEEDBAR*")
-	  (progn
-	    (select-window w)
-	    (setq found t))))
+				   "*SPEEDBAR*")
+		  (progn
+			(select-window w)
+			(setq found t))))
     (unless found
       (sr-speedbar-open))))
 
@@ -139,14 +139,14 @@
 (company-quickhelp-mode t)
 
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    (require 'anaconda-mode)
-	    (require 'company-anaconda)
-	    (anaconda-mode t)
-	    (anaconda-eldoc-mode t)
-	    (add-to-list
-	     (make-local-variable 'company-backends)
-	     '(company-anaconda company-capf :with company-yasnippet))))
+		  (lambda ()
+			(require 'anaconda-mode)
+			(require 'company-anaconda)
+			(anaconda-mode t)
+			(anaconda-eldoc-mode t)
+			(add-to-list
+			 (make-local-variable 'company-backends)
+			 '(company-anaconda company-capf :with company-yasnippet))))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; yasnippet
@@ -164,17 +164,17 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; flycheck
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    (flycheck-mode t)
-	    (setq flycheck-python-pylint-executable "pylint"
-		  flycheck-check-syntax-automatically '(save))
-	    (flycheck-select-checker 'python-pylint)))
+		  (lambda ()
+			(flycheck-mode t)
+			(setq flycheck-python-pylint-executable "pylint"
+				  flycheck-check-syntax-automatically '(save))
+			(flycheck-select-checker 'python-pylint)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; yapf
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    (yapf-mode t)))
+		  (lambda ()
+			(yapf-mode t)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; counsel-projectile
