@@ -188,5 +188,9 @@
   (define-key spc-leader-map (kbd "p") counsel-projectile-command-map))
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; magit
+(define-key spc-leader-map (kbd "ms") 'magit-status)
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; config relating to platforms
 (load "local-config-loader")

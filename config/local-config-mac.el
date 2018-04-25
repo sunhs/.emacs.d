@@ -28,7 +28,7 @@
 			 (font-spec :family "Microsoft Yahei" :size 14))))))
 
 ;; also setting the height may conflict with some gui features
-;; guess its the spaceline
+;; guess it's the spaceline
 (when (display-graphic-p)
   (set-frame-position (selected-frame) 80 40)
   (set-frame-width (selected-frame) 140))
@@ -122,6 +122,21 @@
 				  '(latex-mode))))
   
   (setq TeX-command-list (append my-tex-build-chain TeX-command-list)))
+  
+;; --------------------------------------------------------------------------------------------------------------
+;; dired-sidebar
+(use-package dired-sidebar
+  :ensure t
+  :commands (dired-sidebar-toggle-sidebar)
+  :config
+  ;; (setq dired-sidebar-subtree-line-prefix ".")
+  (if (display-graphic-p)
+      (setq dired-sidebar-theme 'icons)
+    (setq dired-sidebar-theme 'nerd))
+  (setq dired-sidebar-face '(:family "Monaco" :size 12))
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-use-custom-font t)
+  (define-key dired-mode-map (kbd "SPC") spc-leader-map))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; themes

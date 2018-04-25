@@ -33,6 +33,20 @@
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; dired-sidebar
+(use-package dired-sidebar
+  :ensure t
+  :commands (dired-sidebar-toggle-sidebar)
+  :config
+  (if (display-graphic-p)
+      (setq dired-sidebar-theme 'icons)
+    (setq dired-sidebar-theme 'nerd))
+  (setq dired-sidebar-face '(:family "Mono" :size 12))
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-use-custom-font t)
+  (define-key dired-mode-map (kbd "SPC") spc-leader-map))
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; themes
 ;; (require 'color-theme)
 ;; (color-theme-initialize)
