@@ -23,6 +23,7 @@
       ivy-height 15
       ivy-extra-directories nil
       ivy-count-format "%d/%d")
+(setq ivy-ignore-buffers (append '("*Help*") ivy-ignore-buffers))
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-c C-x y") 'counsel-yank-pop)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)

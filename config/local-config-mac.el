@@ -1,14 +1,13 @@
 (require 'utils)
 
-;; the path to find programs
-(setq exec-path
-      (append `(,(substitute-in-file-name "$HOME/conda/bin") "/usr/local/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin" "/opt/X11/bin")
-			  exec-path))
-
 ;; the path for emacs shell
 (setenv "PATH"
-		(concat (substitute-in-file-name "$HOME/conda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:")
+		(concat (substitute-in-file-name "$HOME/conda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2017/bin/x86_64-darwin:")
 				(getenv "PATH")))
+
+;; the path to find programs
+(setq exec-path
+      (append (split-string (getenv "PATH") ":") exec-path))
 
 ;; special settings for emacs mac port
 ;; (setq mac-option-modifier (quote (:ordinary meta :function meta :mouse meta)))
@@ -116,7 +115,7 @@
   
   (setq my-tex-build-chain (list
 							(list "My Build Chain"
-								  (string-join (list my-latex-phase my-bibtex-phase my-latex-phase my-pdf-phase my-rm-phase) " && ")
+								  (string-join (list my-latex-phase my-bibtex-phase my-latex-phase my-pdf-phase my-rm-phase) " ; ")
 								  #'TeX-run-command
 								  nil
 								  '(latex-mode))))
