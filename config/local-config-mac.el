@@ -110,7 +110,8 @@
 						 "*.log"
 						 "*.fdb_latexmk"
 						 "*.synctex.gz"
-						 "*.dvi")
+						 "*.dvi"
+						 "*.spl")
 		my-rm-phase (concat "rm " (string-join my-rm-list "; rm ") "; rm -rf auto"))
   
   (setq my-tex-build-chain (list
