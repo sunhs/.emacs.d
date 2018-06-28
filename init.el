@@ -7,14 +7,13 @@
 
 ;; elpa packages
 (require 'package)
-(dolist (source '(("melpa" . "http://melpa.org/packages/")
-				  ("melpa-stable" . "http://stable.melpa.org/packages/")
-				  ("marmalade" . "http://marmalade-repo.org/packages/")
-				  ("gnu" . "http://elpa.gnu.org/packages/")))
-  (add-to-list 'package-archives source t))
+(setq package-archives '(("melpa" . "http://elpa.emacs-china.org/melpa/")
+			 ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")
+			 ("marmalade" . "http://elpa.emacs-china.org/marmalade/")
+			 ("gnu" . "http://elpa.emacs-china.org/gnu/")))
 (setq package-archive-priorities
       '(("melpa" . 20)
-		("melpa-stable" . 15)
+	("melpa-stable" . 15)
         ("gnu" . 10)
         ("marmalade" . 5)))
 (package-initialize)
@@ -32,7 +31,6 @@
 (load "kbd")
 (require 'utils)
 
-(define-coding-system-alias 'UTF-8 'utf-8)
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -40,6 +38,12 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (show-paren-mode 1)
 (global-hl-line-mode 1)
+
+;; make utf-8 the default coding system
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 
 ;; make scoll smooth
 (setq scroll-step 1
@@ -59,9 +63,9 @@
 
 ;; no back-up or auto-save files
 (setq-default make-backup-files nil ;; no backup file
-			  backup-inhibited t ;; no backup
-			  auto-save-mode nil ;; no auto save
-			  auto-save-default nil) ;; no #file#
+	      backup-inhibited t ;; no backup
+	      auto-save-mode nil ;; no auto save
+	      auto-save-default nil) ;; no #file#
 
 ;; split windows vertically
 (setq split-height-threshold nil
@@ -79,9 +83,9 @@
 ;; load customize variables
 (setq custom-file (concat local-dir "/custom.el"))
 (add-hook 'emacs-startup-hook
-		  (lambda ()
-			(load custom-file)
-			(hyesun/sort-package-list)))
+	  (lambda ()
+	    (load custom-file)
+	    (hyesun/sort-package-list)))
 
 ;; sort package-selected-list
 (hyesun/sort-package-list)
