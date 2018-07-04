@@ -178,6 +178,13 @@
 	    (yapf-mode t)))
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; sphinx-doc
+(add-hook 'python-mode-hook
+	  (lambda ()
+	    (sphinx-doc-mode t)
+	    (define-key spc-leader-map (kbd "id") 'sphinx-doc)))
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; counsel-projectile
 (use-package counsel-projectile
   :init

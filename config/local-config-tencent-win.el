@@ -1,7 +1,9 @@
 (require 'utils)
 
 ;; specific settings on gnu/linux
-(set-default-font "Consolas 12")
+;; (set-default-font "CamingoCode 12")
+(set-default-font (font-spec :family "Ubuntu Mono"
+			     :size 17))
 (hyesun/call-or-add-to-frame-hook
  (lambda ()
    (when (display-graphic-p)
