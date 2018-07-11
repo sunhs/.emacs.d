@@ -3,7 +3,7 @@
 ;; specific settings on gnu/linux
 ;; (set-default-font "CamingoCode 12")
 (set-default-font (font-spec :family "Ubuntu Mono"
-			     :size 17))
+			     :size 16))
 (hyesun/call-or-add-to-frame-hook
  (lambda ()
    (when (display-graphic-p)
