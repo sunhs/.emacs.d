@@ -51,3 +51,8 @@
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 ;; (load-theme 'solarized t)
 (require 'spacemacs-dark-theme)
+
+;; --------------------------------------------------------------------------------------------------------------
+;; python path for anaconda mode
+(if (file-exists-p "/usr/bin/python3.5")
+    (setq python-shell-interpreter "/usr/bin/python3.5"))
