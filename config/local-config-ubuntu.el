@@ -51,6 +51,7 @@
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 ;; (load-theme 'solarized t)
 (require 'spacemacs-dark-theme)
+;; (load-theme 'atom-one-dark t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; python path for anaconda mode

@@ -5,12 +5,31 @@
 ;; `extra-config` is about system-independent package-specific config.
 ;; `local-config-[OS]` is about system-specific config.
 
+;; define load paths
+(setq default-directory (substitute-in-file-name "$HOME/"))
+(defconst emacs-dir (substitute-in-file-name "$HOME/.emacs.d"))
+(defconst elpa-dir (substitute-in-file-name "$HOME/.emacs.d/elpa"))
+(defconst nonelpa-dir (substitute-in-file-name "$HOME/.emacs.d/nonelpa"))
+(defconst local-dir (substitute-in-file-name "$HOME/.emacs.d/config"))
+(add-to-list 'load-path elpa-dir)
+(add-to-list 'load-path nonelpa-dir)
+(add-to-list 'load-path local-dir)
+
 ;; elpa packages
 (require 'package)
-(setq package-archives '(("melpa" . "http://elpa.emacs-china.org/melpa/")
-			 ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")
-			 ("marmalade" . "http://elpa.emacs-china.org/marmalade/")
-			 ("gnu" . "http://elpa.emacs-china.org/gnu/")))
+(let ((emacs-china-dir
+       (concat emacs-dir "/emacs-china")))
+  (if (file-exists-p emacs-china-dir)
+      (setq package-archives `(("melpa" . ,(concat emacs-china-dir "/melpa"))
+			       ("melpa-stable" . ,(concat emacs-china-dir "/melpa-stable"))
+			       ("marmalade" . ,(concat emacs-china-dir "/marmalade"))
+			       ("gnu" . ,(concat emacs-china-dir "/gnu"))))
+    
+    (setq package-archives '(("melpa" . "http://elpa.emacs-china.org/melpa/")
+			     ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")
+			     ("marmalade" . "http://elpa.emacs-china.org/marmalade/")
+			     ("gnu" . "http://elpa.emacs-china.org/gnu/")))))
+    
 (setq package-archive-priorities
       '(("melpa" . 20)
 	("melpa-stable" . 15)
@@ -18,15 +37,6 @@
         ("marmalade" . 5)))
 (package-initialize)
 (setq package-enable-at-startup nil)
-
-;; define load paths
-(setq default-directory (substitute-in-file-name "$HOME/"))
-(defconst elpa-dir (substitute-in-file-name "$HOME/.emacs.d/elpa"))
-(defconst nonelpa-dir (substitute-in-file-name "$HOME/.emacs.d/nonelpa"))
-(defconst local-dir (substitute-in-file-name "$HOME/.emacs.d/config"))
-(add-to-list 'load-path elpa-dir)
-(add-to-list 'load-path nonelpa-dir)
-(add-to-list 'load-path local-dir)
 
 (load "kbd")
 (require 'utils)
