@@ -66,7 +66,7 @@
 
 ;; line numbers
 (global-linum-mode t)
-;; (setq linum-format "%4d| ") ;; linum format
+(setq linum-format "%4d| ") ;; linum format
 
 ;; tab indent
 ;; (setq python-indent-offset 4)

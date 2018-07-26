@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (protobuf-mode atom-one-dark-theme auctex company-anaconda company-irony company-irony-c-headers company-quickhelp company-statistics counsel counsel-projectile deferred dired-sidebar evil-escape evil-mc evil-org evil-terminal-cursor-changer fill-column-indicator flycheck flycheck-irony irony irony-eldoc magit markdown-mode math-symbol-lists neotree org-bullets rainbow-delimiters smartparens smex smooth-scrolling spaceline spacemacs-theme sphinx-doc sr-speedbar undo-tree use-package web-mode yapfify yasnippet))))
+    (abyss-theme klere-theme nord-theme atom-one-dark-theme auctex company-anaconda company-irony company-irony-c-headers company-quickhelp company-statistics counsel counsel-projectile deferred dired-sidebar evil-escape evil-mc evil-org evil-terminal-cursor-changer fill-column-indicator flycheck flycheck-irony irony irony-eldoc magit markdown-mode math-symbol-lists neotree org-bullets protobuf-mode rainbow-delimiters smartparens smex smooth-scrolling spaceline spacemacs-theme sphinx-doc sr-speedbar undo-tree use-package web-mode yapfify yasnippet))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
