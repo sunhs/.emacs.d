@@ -39,6 +39,16 @@
   (message (buffer-name)))
 
 
+(defun hyesun/kill-user-buffers ()
+  "Kill all buffers created by user.
+These buffer names start with alphanumeric."
+  (interactive)
+  (dolist (b (buffer-list))
+    (if (= ?w
+	   (char-syntax (aref (buffer-name b) 0)))
+	(kill-buffer b))))
+
+
 (defun hyesun//valid-line-beginning-pos (&optional line)
   (unless line
     (setq line (line-number-at-pos)))
