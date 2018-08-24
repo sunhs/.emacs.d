@@ -30,4 +30,4 @@
 ;; (color-theme-initialize)
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 ;; (load-theme 'solarized t)
-(require 'spacemacs-dark-theme)
+(require 'abyss-theme)

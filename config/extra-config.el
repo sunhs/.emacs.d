@@ -193,7 +193,7 @@
   (add-hook 'c-mode-hook 'counsel-projectile-mode)
   (add-hook 'emacs-lisp-mode-hook 'counsel-projectile-mode)
   :config
-  (define-key spc-leader-map (kbd "p") counsel-projectile-command-map))
+  (define-key spc-leader-map (kbd "p") 'counsel-projectile-command-map))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; magit

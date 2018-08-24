@@ -38,6 +38,9 @@
 (package-initialize)
 (setq package-enable-at-startup nil)
 
+(setenv "no_proxy" "127.0.0.1")
+(setenv "NO_PROXY" "127.0.0.1")
+
 (load "kbd")
 (require 'utils)
 
