@@ -2,7 +2,7 @@
 
 ;; the path for emacs shell
 (setenv "PATH"
-	(concat (substitute-in-file-name "$HOME/conda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2017/bin/x86_64-darwin:")
+	(concat (substitute-in-file-name "$HOME/go/bin:$HOME/conda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2017/bin/x86_64-darwin:")
 		(getenv "PATH")))
 
 ;; the path to find programs

@@ -150,6 +150,15 @@
 	     '(company-anaconda company-capf :with company-yasnippet))))
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; go
+(add-hook 'go-mode-hook
+		  (lambda ()
+			(require 'company-go)
+			(set (make-local-variable 'company-backends) '(company-go))
+			(require 'go-eldoc)
+			(go-eldoc-setup)))
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; yasnippet
 (yas-global-mode t)
 (setq yas-snippet-dirs (substitute-in-file-name "$HOME/.emacs.d/snippets"))
