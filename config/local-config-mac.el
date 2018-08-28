@@ -2,8 +2,8 @@
 
 ;; the path for emacs shell
 (setenv "PATH"
-	(concat (substitute-in-file-name "$HOME/go/bin:$HOME/conda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2017/bin/x86_64-darwin:")
-		(getenv "PATH")))
+        (concat (substitute-in-file-name "$HOME/go/bin:$HOME/conda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2017/bin/x86_64-darwin:")
+                (getenv "PATH")))
 
 ;; the path to find programs
 (setq exec-path
@@ -23,8 +23,8 @@
    (when (display-graphic-p)
      (dolist (charset '(kana han symbol cjk-misc bopomofo))
        (set-fontset-font (frame-parameter nil 'font)
-			 charset
-			 (font-spec :family "Microsoft Yahei" :size 14))))))
+                         charset
+                         (font-spec :family "Microsoft Yahei" :size 14))))))
 
 ;; also setting the height may conflict with some gui features
 ;; guess it's the spaceline
@@ -43,7 +43,7 @@
 ;; org-mode
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (add-hook 'org-mode-hook
-	  (lambda () (setq truncate-lines nil)))
+          (lambda () (setq truncate-lines nil)))
 (setq org-log-done 'note)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -68,7 +68,7 @@
         ("m" "MEMO" entry (file+headline capture-memo-file "MEMO") "** %?\n   %i\n")
         ("n" "NOTE" entry (file+headline capture-note-file "NOTE") "** %?\n   %i\n   %a")
         ;; ("b" "BIRTHDAY" entry (file+headline capture-birthday-file "BIRTHDAY") "")
-	))
+        ))
 
 ;; agenda
 (setq
@@ -88,38 +88,38 @@
 ;; latex
 (with-eval-after-load 'tex
   (setq my-latex-phase "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error %s.tex"
-	my-bibtex-phase "bibtex %s.aux"
-	my-pdf-phase "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -output-format=pdf %s.tex"
-	my-rm-list (list "*.aux"
-			 "*.bbl"
-			 "*.blg"
-			 "*.idx"
-			 "*.ind"
-			 "*.lof"
-			 "*.lot"
-			 "*.out"
-			 "*.toc"
-			 "*.acn"
-			 "*.acr"
-			 "*.alg"
-			 "*.glg"
-			 "*.glo"
-			 "*.gls"
-			 "*.ist"
-			 "*.fls"
-			 "*.log"
-			 "*.fdb_latexmk"
-			 "*.synctex.gz"
-			 "*.dvi"
-			 "*.spl")
-	my-rm-phase (concat "rm " (string-join my-rm-list "; rm ") "; rm -rf auto"))
+        my-bibtex-phase "bibtex %s.aux"
+        my-pdf-phase "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -output-format=pdf %s.tex"
+        my-rm-list (list "*.aux"
+                         "*.bbl"
+                         "*.blg"
+                         "*.idx"
+                         "*.ind"
+                         "*.lof"
+                         "*.lot"
+                         "*.out"
+                         "*.toc"
+                         "*.acn"
+                         "*.acr"
+                         "*.alg"
+                         "*.glg"
+                         "*.glo"
+                         "*.gls"
+                         "*.ist"
+                         "*.fls"
+                         "*.log"
+                         "*.fdb_latexmk"
+                         "*.synctex.gz"
+                         "*.dvi"
+                         "*.spl")
+        my-rm-phase (concat "rm " (string-join my-rm-list "; rm ") "; rm -rf auto"))
   
   (setq my-tex-build-chain (list
-			    (list "My Build Chain"
-				  (string-join (list my-latex-phase my-bibtex-phase my-latex-phase my-pdf-phase my-rm-phase) " ; ")
-				  #'TeX-run-command
-				  nil
-				  '(latex-mode))))
+                            (list "My Build Chain"
+                                  (string-join (list my-latex-phase my-bibtex-phase my-latex-phase my-pdf-phase my-rm-phase) " ; ")
+                                  #'TeX-run-command
+                                  nil
+                                  '(latex-mode))))
   
   (setq TeX-command-list (append my-tex-build-chain TeX-command-list)))
 
@@ -145,3 +145,4 @@
 (require 'spacemacs-dark-theme)
 
 (load "cpp")
+(load "python")

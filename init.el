@@ -21,18 +21,18 @@
        (concat emacs-dir "/emacs-china")))
   (if (file-exists-p emacs-china-dir)
       (setq package-archives `(("melpa" . ,(concat emacs-china-dir "/melpa"))
-			       ("melpa-stable" . ,(concat emacs-china-dir "/melpa-stable"))
-			       ("marmalade" . ,(concat emacs-china-dir "/marmalade"))
-			       ("gnu" . ,(concat emacs-china-dir "/gnu"))))
+                               ("melpa-stable" . ,(concat emacs-china-dir "/melpa-stable"))
+                               ("marmalade" . ,(concat emacs-china-dir "/marmalade"))
+                               ("gnu" . ,(concat emacs-china-dir "/gnu"))))
     
     (setq package-archives '(("melpa" . "http://elpa.emacs-china.org/melpa/")
-			     ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")
-			     ("marmalade" . "http://elpa.emacs-china.org/marmalade/")
-			     ("gnu" . "http://elpa.emacs-china.org/gnu/")))))
-    
+                             ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")
+                             ("marmalade" . "http://elpa.emacs-china.org/marmalade/")
+                             ("gnu" . "http://elpa.emacs-china.org/gnu/")))))
+
 (setq package-archive-priorities
       '(("melpa" . 20)
-	("melpa-stable" . 15)
+        ("melpa-stable" . 15)
         ("gnu" . 10)
         ("marmalade" . 5)))
 (package-initialize)
@@ -58,6 +58,9 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 
+;; don't use tab
+(setq-default indent-tabs-mode nil)
+
 ;; make scoll smooth
 (setq scroll-step 1
       scroll-margin 10
@@ -71,14 +74,11 @@
 (global-linum-mode t)
 (setq linum-format "%4d| ") ;; linum format
 
-;; tab indent
-;; (setq python-indent-offset 4)
-
 ;; no back-up or auto-save files
 (setq-default make-backup-files nil ;; no backup file
-	      backup-inhibited t ;; no backup
-	      auto-save-mode nil ;; no auto save
-	      auto-save-default nil) ;; no #file#
+              backup-inhibited t ;; no backup
+              auto-save-mode nil ;; no auto save
+              auto-save-default nil) ;; no #file#
 
 ;; split windows vertically
 (setq split-height-threshold nil
@@ -96,9 +96,9 @@
 ;; load customize variables
 (setq custom-file (concat local-dir "/custom.el"))
 (add-hook 'emacs-startup-hook
-	  (lambda ()
-	    (load custom-file)
-	    (hyesun/sort-package-list)))
+          (lambda ()
+            (load custom-file)
+            (hyesun/sort-package-list)))
 
 ;; sort package-selected-list
 (hyesun/sort-package-list)

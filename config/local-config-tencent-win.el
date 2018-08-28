@@ -3,14 +3,14 @@
 ;; specific settings on gnu/linux
 ;; (set-default-font "CamingoCode 12")
 (set-default-font (font-spec :family "Ubuntu Mono"
-			     :size 16))
+                             :size 16))
 (hyesun/call-or-add-to-frame-hook
  (lambda ()
    (when (display-graphic-p)
      (dolist (charset '(kana han symbol cjk-misc bopomofo))
        (set-fontset-font (frame-parameter nil 'font)
-			 charset
-			 (font-spec :family "Microsoft Yahei" :size 14))))))
+                         charset
+                         (font-spec :family "Microsoft Yahei" :size 14))))))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; dired-sidebar

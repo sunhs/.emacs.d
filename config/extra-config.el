@@ -50,8 +50,8 @@
 (defun my-fci-conf ()
   (require 'fill-column-indicator)
   (setq fci-rule-column 80
-	fci-rule-color "#40e0d0"
-	fci-rule-use-dashes t)
+        fci-rule-color "#40e0d0"
+        fci-rule-use-dashes t)
   (fci-mode 1))
 (add-hook 'python-mode-hook 'my-fci-conf)
 (add-hook 'c-mode-hook 'my-fci-conf)
@@ -87,10 +87,10 @@
   (lexical-let ((found nil))
     (dolist (w (window-list))
       (if (string= (buffer-name (window-buffer w))
-		   "*SPEEDBAR*")
-	  (progn
-	    (select-window w)
-	    (setq found t))))
+                   "*SPEEDBAR*")
+          (progn
+            (select-window w)
+            (setq found t))))
     (unless found
       (sr-speedbar-open))))
 
@@ -139,59 +139,19 @@
 (company-statistics-mode t)
 (company-quickhelp-mode t)
 
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (require 'anaconda-mode)
-	    (require 'company-anaconda)
-	    (anaconda-mode t)
-	    (anaconda-eldoc-mode t)
-	    (add-to-list
-	     (make-local-variable 'company-backends)
-	     '(company-anaconda company-capf :with company-yasnippet))))
-
 ;; --------------------------------------------------------------------------------------------------------------
 ;; go
 (add-hook 'go-mode-hook
-		  (lambda ()
-			(require 'company-go)
-			(set (make-local-variable 'company-backends) '(company-go))
-			(require 'go-eldoc)
-			(go-eldoc-setup)))
+          (lambda ()
+            (require 'company-go)
+            (set (make-local-variable 'company-backends) '(company-go))
+            (require 'go-eldoc)
+            (go-eldoc-setup)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; yasnippet
 (yas-global-mode t)
 (setq yas-snippet-dirs (substitute-in-file-name "$HOME/.emacs.d/snippets"))
-
-;; --------------------------------------------------------------------------------------------------------------
-;; anaconda-mode
-(define-key spc-leader-map (kbd "gd") 'anaconda-mode-find-definitions)
-(define-key spc-leader-map (kbd "ga") 'anaconda-mode-find-assignments)
-(define-key spc-leader-map (kbd "gr") 'anaconda-mode-find-references)
-(define-key spc-leader-map (kbd "gb") 'anaconda-mode-go-back)
-(define-key spc-leader-map (kbd "sd") 'anaconda-mode-show-doc)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; flycheck
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (flycheck-mode t)
-	    (setq flycheck-python-pylint-executable "pylint"
-		  flycheck-check-syntax-automatically '(save))
-	    (flycheck-select-checker 'python-pylint)))
-
-;; --------------------------------------------------------------------------------------------------------------
-;; yapf
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (yapf-mode t)))
-
-;; --------------------------------------------------------------------------------------------------------------
-;; sphinx-doc
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (sphinx-doc-mode t)
-	    (define-key spc-leader-map (kbd "id") 'sphinx-doc)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; counsel-projectile

@@ -7,8 +7,8 @@
    (when (display-graphic-p)
      (dolist (charset '(kana han symbol cjk-misc bopomofo))
        (set-fontset-font (frame-parameter nil 'font)
-			 charset
-			 (font-spec :family "Droid Sans Fallback" :size 15))))))
+                         charset
+                         (font-spec :family "Droid Sans Fallback" :size 15))))))
 
 ;; X-clipboard
 (setq x-select-enable-clipboard t)
@@ -16,14 +16,14 @@
   (when (getenv "DISPLAY")
     (defun xsel-cut-function (text &optional push)
       (with-temp-buffer
-	(insert text)
-	(call-process-region (point-min) (point-max) "xsel" nil 0 nil "--clipboard" "--input")))
+        (insert text)
+        (call-process-region (point-min) (point-max) "xsel" nil 0 nil "--clipboard" "--input")))
     (defun xsel-paste-function()
       (let ((xsel-output (shell-command-to-string "xsel --clipboard --output")))
-	(unless (string= (car kill-ring) xsel-output)
-	  xsel-output)))
+        (unless (string= (car kill-ring) xsel-output)
+          xsel-output)))
     (setq interprogram-cut-function 'xsel-cut-function
-	  interprogram-paste-function 'xsel-paste-function)))
+          interprogram-paste-function 'xsel-paste-function)))
 
 ;; to prompt root privileges for non-writable files
 (defadvice find-file (after find-file-sudo activate)
