@@ -131,6 +131,7 @@
 (define-key spc-leader-map "bd" 'kill-this-buffer)
 (define-key spc-leader-map "bs" 'replace-string)
 (define-key spc-leader-map "ba" 'mark-whole-buffer)
+(define-key spc-leader-map "bD" 'hyesun/kill-user-buffers)
 
 ;; window
 (define-key spc-leader-map "wd" 'delete-window)
