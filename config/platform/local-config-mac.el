@@ -144,5 +144,8 @@
 ;; (load-theme 'solarized t)
 (require 'spacemacs-dark-theme)
 
-(load "cpp")
-(load "python")
+;; --------------------------------------------------------------------------------------------------------------
+;; language specific
+(add-to-list 'load-path (concat config-dir "/lang"))
+(load "lang-cpp")
+(load "lang-python")

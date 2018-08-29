@@ -31,3 +31,8 @@
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 ;; (load-theme 'solarized t)
 (require 'abyss-theme)
+
+;; --------------------------------------------------------------------------------------------------------------
+;; language specific
+(add-to-list 'load-path (concat config-dir "/lang"))
+(load "lang-python")

@@ -21,13 +21,12 @@
         (c-indent-line-or-region))
     (newline-and-indent)))
 
-(defun hyesun/c-cpp-mode-hook ()
-  (c-set-offset 'arglist-intro '+)
+(defun hyesun/c-cpp-ret-kbd ()
   (define-key c++-mode-map (kbd "RET") 'hyesun/c-cpp-bracket-newline)
   (define-key c-mode-map (kbd "RET") 'hyesun/c-cpp-bracket-newline))
 
-(add-hook 'c++-mode-hook 'hyesun/c-cpp-mode-hook)
-(add-hook 'c-mode-hook 'hyesun/c-cpp-mode-hook)
+(add-hook 'c++-mode-hook 'hyesun/c-cpp-ret-kbd)
+(add-hook 'c-mode-hook 'hyesun/c-cpp-ret-kbd)
 
 (use-package irony
   :defer t

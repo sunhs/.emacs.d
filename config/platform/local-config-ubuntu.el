@@ -55,6 +55,11 @@
 (require 'abyss-theme)
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; language specific
+(add-to-list 'load-path (concat config-dir "/lang"))
+(load "lang-cpp")
+(load "lang-python")
+
 ;; python path for anaconda mode
 (if (file-exists-p "/usr/bin/python3.5")
     (setq python-shell-interpreter "/usr/bin/python3.5"))

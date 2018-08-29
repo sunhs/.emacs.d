@@ -16,8 +16,8 @@
   (define-key spc-leader-map (kbd "gr") 'anaconda-mode-find-references)
   (define-key spc-leader-map (kbd "gb") 'anaconda-mode-go-back)
   (define-key spc-leader-map (kbd "sd") 'anaconda-mode-show-doc)
-  
-  (add-hook 'python-mode-hook
+ 
+  (add-hook 'anaconda-mode-hook
             (lambda ()
               (add-to-list
                (make-local-variable 'company-backends)
@@ -32,9 +32,9 @@
   :config
   (add-hook 'python-mode-hook
             (lambda ()
-              (setq flycheck-python-pylint-executable "pylint")
-              flycheck-check-syntax-automatically '(save)
-              (flycheck-select-checker 'python-pylint))))
+              (setq flycheck-python-pylint-executable "pylint"
+                    flycheck-check-syntax-automatically '(save)
+                    flycheck-select-checker 'python-pylint))))
 
 (use-package yapfify
   :defer t
@@ -48,6 +48,4 @@
   (add-hook 'python-mode-hook 'sphinx-doc-mode)
 
   :config
-  (add-hook 'python-mode-hook
-            (lambda
-              (define-key spc-leader-map (kdb "id") 'sphinx-doc))))
+  (define-key spc-leader-map (kbd "id") 'sphinx-doc))

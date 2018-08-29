@@ -140,15 +140,6 @@
 (company-quickhelp-mode t)
 
 ;; --------------------------------------------------------------------------------------------------------------
-;; go
-(add-hook 'go-mode-hook
-          (lambda ()
-            (require 'company-go)
-            (set (make-local-variable 'company-backends) '(company-go))
-            (require 'go-eldoc)
-            (go-eldoc-setup)))
-
-;; --------------------------------------------------------------------------------------------------------------
 ;; yasnippet
 (yas-global-mode t)
 (setq yas-snippet-dirs (substitute-in-file-name "$HOME/.emacs.d/snippets"))
@@ -170,4 +161,5 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; config relating to platforms
+(add-to-list 'load-path (concat config-dir "/platform"))
 (load "local-config-loader")

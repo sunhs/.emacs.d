@@ -8,12 +8,9 @@
 ;; define load paths
 (setq default-directory (substitute-in-file-name "$HOME/"))
 (defconst emacs-dir (substitute-in-file-name "$HOME/.emacs.d"))
-(defconst elpa-dir (substitute-in-file-name "$HOME/.emacs.d/elpa"))
-(defconst nonelpa-dir (substitute-in-file-name "$HOME/.emacs.d/nonelpa"))
-(defconst local-dir (substitute-in-file-name "$HOME/.emacs.d/config"))
-(add-to-list 'load-path elpa-dir)
-(add-to-list 'load-path nonelpa-dir)
-(add-to-list 'load-path local-dir)
+(defconst config-dir (substitute-in-file-name "$HOME/.emacs.d/config"))
+(add-to-list 'load-path config-dir)
+(add-to-list 'load-path (concat emacs-dir "/nonelpa"))
 
 ;; elpa packages
 (require 'package)
@@ -94,7 +91,7 @@
 (setq help-window-select t)
 
 ;; load customize variables
-(setq custom-file (concat local-dir "/custom.el"))
+(setq custom-file (concat config-dir "/custom.el"))
 (add-hook 'emacs-startup-hook
           (lambda ()
             (load custom-file)
@@ -105,4 +102,4 @@
 (add-hook 'kill-emacs-hook 'hyesun/sort-package-list)
 
 ;; extra config
-(load (concat local-dir "/extra-config.el"))
+(load (concat config-dir "/extra-config.el"))
