@@ -97,11 +97,6 @@
 (global-set-key (kbd "C-c s") 'focus-speedbar-window)
 
 ;; --------------------------------------------------------------------------------------------------------------
-;; web-mode
-(add-to-list 'auto-mode-alist '("\\.\\(php\\|ejs\\|html\\|js\\)$" . web-mode))
-(add-hook 'web-mode-hook '(lambda () (setq web-mode-code-indent-offset 2)))
-
-;; --------------------------------------------------------------------------------------------------------------
 ;; spaceline
 (require 'spaceline-config)
 (setq powerline-default-separator nil
