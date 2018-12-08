@@ -9,7 +9,7 @@
 
   :config
   (use-package company-anaconda :defer t)
-  (use-package anaconda-eldoc-mode :defer t)
+  (anaconda-eldoc-mode t)
 
   (define-key spc-leader-map (kbd "gd") 'anaconda-mode-find-definitions)
   (define-key spc-leader-map (kbd "ga") 'anaconda-mode-find-assignments)
