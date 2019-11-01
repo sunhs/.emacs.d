@@ -1,4 +1,5 @@
 /.cache/*
+.lsp-session*
 /.python-environments/*
 /ac-comphist.dat
 /anaconda-mode/*

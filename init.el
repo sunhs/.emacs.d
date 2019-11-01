@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 ;; -*- mode: emacs-lisp -*-
 ;; This is the entry point of init code.
 ;; The code included here is about built-in config.
@@ -7,10 +8,11 @@
 
 ;; define load paths
 (setq default-directory (substitute-in-file-name "$HOME/"))
-(defconst emacs-dir (substitute-in-file-name "$HOME/.emacs.d"))
-(defconst config-dir (substitute-in-file-name "$HOME/.emacs.d/config"))
+(defconst emacs-dir (substitute-in-file-name "$HOME/.config/emacs"))
+(defconst config-dir (concat emacs-dir "/config"))
+(defconst nonelpa-dir (concat emacs-dir "/nonelpa"))
 (add-to-list 'load-path config-dir)
-(add-to-list 'load-path (concat emacs-dir "/nonelpa"))
+(add-to-list 'load-path nonelpa-dir)
 
 ;; elpa packages
 (require 'package)
@@ -35,9 +37,6 @@
 (package-initialize)
 (setq package-enable-at-startup nil)
 
-(setenv "no_proxy" "127.0.0.1")
-(setenv "NO_PROXY" "127.0.0.1")
-
 (load "kbd")
 (require 'utils)
 
@@ -47,7 +46,7 @@
 (scroll-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (show-paren-mode 1)
-(global-hl-line-mode 1)
+;; (global-hl-line-mode 1)
 
 ;; make utf-8 the default coding system
 (prefer-coding-system 'utf-8)
@@ -68,8 +67,7 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;; line numbers
-(global-linum-mode t)
-(setq linum-format "%4d| ") ;; linum format
+(global-display-line-numbers-mode)
 
 ;; no back-up or auto-save files
 (setq-default make-backup-files nil ;; no backup file

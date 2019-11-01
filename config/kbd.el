@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 ;; -*- mode: emacs-lisp -*-
 ;; kbds for built-in functionality.
 ;; Note that if a kbd is package related

@@ -1,4 +1,5 @@
-(require 'cl) ;; to ensure that lexical-let works
+;; -*- lexical-binding: t -*-
+;; -*- mode: emacs-lisp -*-
 
 (defun hyesun/call-or-add-to-frame-hook (fun)
   "`fun: A function receiving an optional parameter `frame.
@@ -10,7 +11,7 @@
    For client frames to work normally, `fun should explicitly
    turn on or off graphic features."
   (if (daemonp)
-      (lexical-let ((fun fun))
+      (let ((fun fun))
         (add-hook 'after-make-frame-functions
                   '(lambda (frame)
                      (select-frame frame)
@@ -46,7 +47,8 @@ These buffer names start with alphanumeric."
   (dolist (b (buffer-list))
     (if (= ?w
            (char-syntax (aref (buffer-name b) 0)))
-        (kill-buffer b))))
+        (kill-buffer b)))
+  (message "Done."))
 
 
 (defun hyesun//valid-line-beginning-pos (&optional line)

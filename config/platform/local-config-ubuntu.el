@@ -1,14 +1,15 @@
 (require 'utils)
 
 ;; specific settings on gnu/linux
-(set-default-font "Mono 12")
-(hyesun/call-or-add-to-frame-hook
- (lambda ()
-   (when (display-graphic-p)
-     (dolist (charset '(kana han symbol cjk-misc bopomofo))
-       (set-fontset-font (frame-parameter nil 'font)
-                         charset
-                         (font-spec :family "Droid Sans Fallback" :size 15))))))
+;; (add-to-list 'default-frame-alist '(font . "Mono 12"))
+;; (set-face-attribute 'default nil :font "Mono")
+;; (hyesun/call-or-add-to-frame-hook
+;;  (lambda ()
+;;    (when (display-graphic-p)
+;;      (dolist (charset '(kana han symbol cjk-misc bopomofo))
+;;        (set-fontset-font (frame-parameter nil 'font)
+;;                          charset
+;;                          (font-spec :family "Droid Sans Fallback" :size 15))))))
 
 ;; X-clipboard
 (setq x-select-enable-clipboard t)
@@ -50,9 +51,10 @@
 ;; (color-theme-initialize)
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 ;; (load-theme 'solarized t)
-;; (require 'spacemacs-dark-theme)
+;; (load-theme 'spacemacs-dark t)
 ;; (load-theme 'atom-one-dark t)
-(require 'abyss-theme)
+;; (require 'abyss-theme)
+(load-theme 'kaolin-bubblegum t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; language specific
@@ -61,5 +63,4 @@
 (load "lang-python")
 
 ;; python path for anaconda mode
-(if (file-exists-p "/usr/bin/python3.5")
-    (setq python-shell-interpreter "/usr/bin/python3.5"))
+;; (setq python-shell-interpreter "/usr/bin/python3.5"))
