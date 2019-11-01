@@ -13,7 +13,8 @@
         lsp-auto-configure t
         lsp-eldoc-render-all t
         lsp-signature-render-all t
-        lsp-enable-xref t))
+        lsp-enable-xref t)
+  (define-key spc-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions))
 
 
 (use-package lsp-ui

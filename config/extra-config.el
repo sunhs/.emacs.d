@@ -62,12 +62,13 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; projectile
-(use-package projectile
-  :config
-  (projectile-mode t))
+;; (use-package projectile
+;;   :config
+;;   (projectile-mode t))
 
 (use-package counsel-projectile
   :config
+  (counsel-projectile-mode t)
   (define-key spc-leader-map "p" 'projectile-command-map)
   (define-key projectile-command-map "f" 'projectile-find-file)
   (define-key projectile-command-map "d" 'projectile-find-dir)
