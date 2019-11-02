@@ -28,3 +28,5 @@
   :hook (python-mode . sphinx-doc-mode)
   :config
   (define-key spc-leader-map (kbd "id") 'sphinx-doc))
+
+(setq python-shell-interpreter (substitute-in-file-name "$HOME/conda/bin/python"))

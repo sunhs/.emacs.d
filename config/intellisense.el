@@ -9,7 +9,6 @@
   :config
   (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")
         lsp-prefer-flymake nil
-        lsp-enable-snippet t
         lsp-auto-configure t
         lsp-eldoc-render-all t
         lsp-signature-render-all t
@@ -48,6 +47,9 @@
 
 
 (use-package flycheck
+  :commands flycheck-mode
+  :hook ((python-mode
+          c++-mode
+          c-mode) . flycheck-mode)
   :config
-  (flycheck-mode t)
   (setq flycheck-check-syntax-automatically '(save)))

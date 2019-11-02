@@ -119,7 +119,8 @@
         company-idle-delay 0.2
         company-minimum-prefix-length 2
         company-require-match nil
-        company-search-regexp-function 'company-search-words-in-any-order-regexp)
+        company-search-regexp-function 'company-search-words-in-any-order-regexp
+        company-selection-wrap-around t)
 
   ;; turn off and on fci-mode during completion to avoid weird behavior
   ;; (defvar-local company-fci-mode-on-p nil)
@@ -136,19 +137,25 @@
   ;; (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
   ;; (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
 
-  (define-key company-active-map (kbd "TAB") 'company-complete)
-  (define-key company-active-map (kbd "<tab>") 'company-complete)
+  ;; (define-key company-active-map (kbd "TAB") 'company-complete)
+  ;; (define-key company-active-map (kbd "<tab>") 'company-complete)
   (define-key company-active-map (kbd "C-s") 'company-filter-candidates)
 
-  (company-statistics-mode t)
-  (company-quickhelp-mode t))
+  (company-statistics-mode t))
+  ;; (company-quickhelp-mode t))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; yasnippet
 (use-package yasnippet
   :config
-  (yas-global-mode t)
+  ;; (yas-global-mode t)
   (setq yas-snippet-dirs (list (concat emacs-dir "/snippets"))))
+
+;; --------------------------------------------------------------------------------------------------------------
+;; blacken
+(use-package blacken
+  :config
+  (setq blacken-line-length 79))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; config relating to platforms

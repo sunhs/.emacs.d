@@ -61,6 +61,3 @@
 (add-to-list 'load-path (concat config-dir "/lang"))
 (load "lang-cpp")
 (load "lang-python")
-
-;; python path for anaconda mode
-;; (setq python-shell-interpreter "/usr/bin/python3.5"))

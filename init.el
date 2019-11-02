@@ -46,7 +46,7 @@
 (scroll-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (show-paren-mode 1)
-;; (global-hl-line-mode 1)
+(global-hl-line-mode 1)
 
 ;; make utf-8 the default coding system
 (prefer-coding-system 'utf-8)
@@ -87,6 +87,9 @@
 
 ;; when opening a help window, focus to it
 (setq help-window-select t)
+
+;; Don't prompt for large file
+(setq large-file-warning-threshold nil)
 
 ;; load customize variables
 (setq custom-file (concat config-dir "/custom.el"))
