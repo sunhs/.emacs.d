@@ -102,6 +102,12 @@
           c-mode) . rainbow-delimiters-mode))
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; indent-guide
+(use-package indent-guide
+  :config
+  (indent-guide-global-mode t))
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; spaceline
 (use-package spaceline
   :config

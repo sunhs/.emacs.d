@@ -10,7 +10,7 @@
   (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")
         lsp-prefer-flymake nil
         lsp-auto-configure t
-        lsp-eldoc-render-all t
+        ;; lsp-eldoc-render-all t
         lsp-signature-render-all t
         lsp-enable-xref t)
   (define-key spc-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions))
@@ -24,9 +24,9 @@
         lsp-ui-doc-use-childframe t
         lsp-ui-doc-position 'top
         lsp-ui-doc-include-signature t
-        lsp-ui-sideline-enable nil
+        lsp-ui-sideline-enable t
         lsp-ui-sideline-ignore-duplicate t
-        lsp-ui-flycheck-enable nil
+        lsp-ui-flycheck-enable t
         lsp-ui-flycheck-list-position 'right
         lsp-ui-flycheck-live-reporting t
         lsp-ui-peek-enable t
