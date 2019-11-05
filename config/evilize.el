@@ -150,4 +150,4 @@
 ;; others
 (define-key spc-leader-map "hdk" 'describe-key)
 (define-key spc-leader-map "hdf" 'describe-function)
-(define-key spc-leader-map "qq" 'hyesun/kill-user-buffers)
+(define-key spc-leader-map "qq" 'save-buffers-kill-terminal)
