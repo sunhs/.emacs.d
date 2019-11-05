@@ -141,9 +141,13 @@
 (define-key spc-leader-map "wD" 'delete-other-windows)
 (define-key spc-leader-map "wh" 'evil-window-left)
 (define-key spc-leader-map "wl" 'evil-window-right)
-(define-key spc-leader-map "w/" 'split-window-right)
+(define-key spc-leader-map "w/"
+  #'(lambda ()
+      (interactive)
+      (split-window-right)
+      (windmove-right)))
 
 ;; others
 (define-key spc-leader-map "hdk" 'describe-key)
 (define-key spc-leader-map "hdf" 'describe-function)
-(define-key spc-leader-map "qq" 'save-buffers-kill-terminal)
+(define-key spc-leader-map "qq" 'hyesun/kill-user-buffers)

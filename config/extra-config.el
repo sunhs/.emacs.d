@@ -77,6 +77,22 @@
   (define-key projectile-command-map "g" 'projectile-ripgrep))
 
 ;; --------------------------------------------------------------------------------------------------------------
+;; treemacs
+(use-package treemacs
+  :commands treemacs
+  :config
+  (setq treemacs-follow-after-init t)
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+  (treemacs-git-mode 'simple))
+
+(use-package treemacs-evil
+  :after treemacs evil)
+
+(use-package treemacs-projectile
+  :after treemacs projectile)
+
+;; --------------------------------------------------------------------------------------------------------------
 ;; undo-tree
 (use-package undo-tree
   :config
