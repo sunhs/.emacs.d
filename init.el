@@ -7,7 +7,7 @@
 ;; `local-config-[OS]` is about system-specific config.
 
 ;; define load paths
-(setq default-directory (substitute-in-file-name "$HOME/"))
+;; (setq default-directory (substitute-in-file-name "$HOME/"))
 (defconst emacs-dir (substitute-in-file-name "$HOME/.config/emacs"))
 (defconst config-dir (concat emacs-dir "/config"))
 (defconst nonelpa-dir (concat emacs-dir "/nonelpa"))
