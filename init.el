@@ -43,7 +43,7 @@
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(scroll-bar-mode -1)
+;;(scroll-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (show-paren-mode 1)
 (global-hl-line-mode 1)
@@ -90,6 +90,9 @@
 
 ;; Don't prompt for large file
 (setq large-file-warning-threshold nil)
+
+;; gc threshold
+(setq gc-cons-threshold 100000000)
 
 ;; load customize variables
 (setq custom-file (concat config-dir "/custom.el"))

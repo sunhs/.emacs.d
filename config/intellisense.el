@@ -12,7 +12,7 @@
         lsp-auto-configure t
         ;; lsp-eldoc-render-all t
         lsp-signature-render-all t
-        lsp-enable-xref t)
+        lsp-enable-xref nil)
   (define-key spc-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions))
 
 
@@ -31,7 +31,8 @@
         lsp-ui-flycheck-live-reporting nil
         lsp-ui-peek-enable t
         lsp-ui-peek-list-width 60
-        lsp-ui-peek-peek-height 25))
+        lsp-ui-peek-peek-height 25)
+  (define-key spc-leader-map (kbd "sd") 'lsp-ui-doc-show))
 
 
 (use-package company-lsp
@@ -43,7 +44,7 @@
   ;; Disable client-side cache because the LSP server does a better job.
   (setq company-transformers nil
         company-lsp-async t
-        company-lsp-cache-candidates nil))
+        company-lsp-cache-candidates 'auto))
 
 
 (use-package flycheck
