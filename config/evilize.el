@@ -4,7 +4,7 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; evil
 ;; this line should be placed before `(require 'evil)'
-(setq-default evil-want-C-u-scroll t)
+(setq-default evil-want-C-u-scroll nil)
 (setq-default evil-want-C-i-jump nil)
 (require 'evil)
 (evil-mode t)
