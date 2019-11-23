@@ -28,7 +28,7 @@
         lsp-ui-sideline-ignore-duplicate t
         lsp-ui-flycheck-enable t
         lsp-ui-flycheck-list-position 'right
-        lsp-ui-flycheck-live-reporting nil
+        lsp-ui-flycheck-live-reporting t
         lsp-ui-peek-enable t
         lsp-ui-peek-list-width 60
         lsp-ui-peek-peek-height 25)
