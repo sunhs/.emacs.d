@@ -32,7 +32,8 @@
         lsp-ui-peek-enable t
         lsp-ui-peek-list-width 60
         lsp-ui-peek-peek-height 25)
-  (define-key spc-leader-map (kbd "sd") 'lsp-ui-doc-show))
+  (define-key spc-leader-map (kbd "sd") 'lsp-ui-doc-show)
+  (define-key spc-leader-map (kbd "hd") 'lsp-ui-doc-hide))
 
 
 (use-package company-lsp
