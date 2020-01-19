@@ -52,9 +52,9 @@
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 ;; (load-theme 'solarized t)
 ;; (load-theme 'spacemacs-dark t)
-;; (load-theme 'atom-one-dark t)
 ;; (require 'abyss-theme)
-(load-theme 'kaolin-bubblegum t)
+;; (load-theme 'kaolin-bubblegum t)
+(load-theme 'atom-one-dark t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; language specific
