@@ -3,7 +3,7 @@
 ;; specific settings on gnu/linux
 ;; (add-to-list 'default-frame-alist '(font . "Mono 12"))
 ;; (set-face-attribute 'default nil :font "Mono")
-;; (hyesun/call-or-add-to-frame-hook
+;; (hs/call-or-add-to-frame-hook
 ;;  (lambda ()
 ;;    (when (display-graphic-p)
 ;;      (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -43,18 +43,14 @@
   (setq dired-sidebar-face '(:family "Mono" :size 12))
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t)
-  (define-key dired-mode-map (kbd "SPC") spc-leader-map))
+  (define-key dired-mode-map (kbd "SPC") hs-leader-map))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; themes
 ;; (require 'color-theme)
 ;; (color-theme-initialize)
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
-;; (load-theme 'solarized t)
-;; (load-theme 'spacemacs-dark t)
-;; (require 'abyss-theme)
-;; (load-theme 'kaolin-bubblegum t)
-(load-theme 'atom-one-dark t)
+(load-theme 'doom-nord t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; language specific

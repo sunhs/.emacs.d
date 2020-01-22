@@ -3,7 +3,7 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; evil
-(load "evilize")
+;; (load "evilize")
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; intellisense
@@ -15,12 +15,12 @@
   :config
   (smartparens-global-mode)
   (require 'smartparens-config)
-  (define-key spc-leader-map (kbd "sph") 'sp-beginning-of-sexp)
-  (define-key spc-leader-map (kbd "spl") 'sp-end-of-sexp)
-  (define-key spc-leader-map (kbd "spbu") 'sp-backward-up-sexp)
-  (define-key spc-leader-map (kbd "spbd") 'sp-backward-down-sexp)
-  (define-key spc-leader-map (kbd "spfu") 'sp-up-sexp)
-  (define-key spc-leader-map (kbd "spfd") 'sp-down-sexp)
+  ;; (define-key hs-leader-map (kbd "sph") 'sp-beginning-of-sexp)
+  ;; (define-key hs-leader-map (kbd "spl") 'sp-end-of-sexp)
+  ;; (define-key hs-leader-map (kbd "spbu") 'sp-backward-up-sexp)
+  ;; (define-key hs-leader-map (kbd "spbd") 'sp-backward-down-sexp)
+  ;; (define-key hs-leader-map (kbd "spfu") 'sp-up-sexp)
+  ;; (define-key hs-leader-map (kbd "spfd") 'sp-down-sexp)
   (sp-pair "\\\\(" nil :unless '(sp-point-before-word-p))
   (sp-pair "\\{" nil :unless '(sp-point-before-word-p))
   (sp-pair "\\(" nil :unless '(sp-point-before-word-p))
@@ -46,9 +46,9 @@
 
 (use-package swiper
   :config
-  (global-set-key (kbd "C-s") 'swiper)
-  (global-set-key (kbd "C-r") 'swiper)
-  (define-key spc-leader-map "ss" 'swiper))
+  (define-key hs-leader-map "s" 'swiper)
+  (global-set-key (kbd "C-r") 'swiper))
+  
 
 (use-package counsel
   :config
@@ -56,9 +56,9 @@
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-c C-x y") 'counsel-yank-pop)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-  (define-key spc-leader-map (kbd "SPC") 'counsel-M-x)
-  (define-key spc-leader-map (kbd "y") 'counsel-yank-pop)
-  (define-key spc-leader-map "ff" 'counsel-find-file))
+  (define-key hs-leader-map (kbd "SPC") 'counsel-M-x)
+  (define-key hs-leader-map (kbd "y") 'counsel-yank-pop)
+  (define-key hs-leader-map "ff" 'counsel-find-file))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; projectile
@@ -69,7 +69,7 @@
 (use-package counsel-projectile
   :config
   (counsel-projectile-mode t)
-  (define-key spc-leader-map "p" 'projectile-command-map)
+  (define-key hs-leader-map "p" 'projectile-command-map)
   (define-key projectile-command-map "f" 'projectile-find-file)
   (define-key projectile-command-map "d" 'projectile-find-dir)
   (define-key projectile-command-map "p" 'projectile-switch-project)
@@ -97,9 +97,9 @@
 (use-package undo-tree
   :config
   (global-undo-tree-mode)
-  (global-set-key (kbd "M-.") 'undo-tree-undo)
-  (global-set-key (kbd "M-,") 'undo-tree-redo)
-  (define-key evil-normal-state-map "r" 'undo-tree-redo))
+  (global-set-key (kbd "M-;") 'undo-tree-undo)
+  (global-set-key (kbd "M-/") 'undo-tree-redo)
+  (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-tree-redo))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; point-undo
@@ -135,6 +135,7 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; company
 (use-package company
+  :diminish
   :config
   (global-company-mode t)
   (setq completion-styles '(basic substring partial-completion emacs22)
@@ -142,7 +143,9 @@
         company-minimum-prefix-length 2
         company-require-match nil
         company-search-regexp-function 'company-search-words-in-any-order-regexp
-        company-selection-wrap-around t)
+        company-selection-wrap-around t
+        company-tooltip-align-annotations t)
+        ;; company-backends '(company-capf))
 
   ;; turn off and on fci-mode during completion to avoid weird behavior
   ;; (defvar-local company-fci-mode-on-p nil)
@@ -162,15 +165,24 @@
   ;; (define-key company-active-map (kbd "TAB") 'company-complete)
   ;; (define-key company-active-map (kbd "<tab>") 'company-complete)
   (define-key company-active-map (kbd "C-s") 'company-filter-candidates)
+  (company-statistics-mode nil))
 
-  (company-statistics-mode t))
-  ;; (company-quickhelp-mode t))
+;; company-prescient
+(use-package company-prescient
+  :commands company-prescient-mode
+  :hook (company-mode . company-prescient-mode))
+
+;; company-quickhelp
+;; (use-package company-quickhelp
+;;   :commands company-quickhelp-mode
+;;   :hook (company-mode . company-quickhelp-mode)
+;;   )
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; yasnippet
 (use-package yasnippet
   :config
-  ;; (yas-global-mode t)
+  (yas-global-mode t)
   (setq yas-snippet-dirs (list (concat emacs-dir "/snippets"))))
 
 ;; --------------------------------------------------------------------------------------------------------------
@@ -237,4 +249,4 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; magit
-;; (define-key spc-leader-map (kbd "ms") 'magit-status)
+;; (define-key hs-leader-map (kbd "ms") 'magit-status)

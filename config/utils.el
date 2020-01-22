@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 ;; -*- mode: emacs-lisp -*-
 
-(defun hyesun/call-or-add-to-frame-hook (fun)
+(defun hs/call-or-add-to-frame-hook (fun)
   "`fun: A function receiving an optional parameter `frame.
    The purpose of `fun is to decide whether the frame is graphic and
    thus turn on graphic features.
@@ -13,34 +13,41 @@
   (if (daemonp)
       (let ((fun fun))
         (add-hook 'after-make-frame-functions
-                  '(lambda (frame)
-                     (select-frame frame)
-                     (funcall fun))))
+                  (lambda (frame)
+                    (select-frame frame)
+                    (funcall fun))))
     (funcall fun)))
 
 
-(defun hyesun/sort-package-list ()
+(defun hs/sort-package-list ()
   (if (boundp 'package-selected-packages)
       (setq package-selected-packages
             (sort package-selected-packages
-                  '(lambda (a b)
-                     (string< (symbol-name a) (symbol-name b)))))
+                  (lambda (a b)
+                    (string< (symbol-name a) (symbol-name b)))))
     nil))
 
 
-(defun hyesun/show-file-path ()
+(defmacro hs/define-key-when-set (set-sym key-map key-seq func)
+  (if (and (boundp set-sym)
+           (symbol-value set-sym))
+      `(define-key ,key-map ,key-seq ,func)
+    nil))
+
+
+(defun hs/show-file-path ()
   "Show the path of file in the current buffer."
   (interactive)
   (message (buffer-file-name)))
 
 
-(defun hyesun/show-buffer-name ()
+(defun hs/show-buffer-name ()
   "Show the buffer name."
   (interactive)
   (message (buffer-name)))
 
 
-(defun hyesun/kill-user-buffers ()
+(defun hs/kill-user-buffers ()
   "Kill all buffers created by user.
 These buffer names start with alphanumeric."
   (interactive)
@@ -51,7 +58,7 @@ These buffer names start with alphanumeric."
   (message "Done."))
 
 
-(defun hyesun//valid-line-beginning-pos (&optional line)
+(defun hs//valid-line-beginning-pos (&optional line)
   (unless line
     (setq line (line-number-at-pos)))
   (let ((valid-point (line-beginning-position (- 1
@@ -65,7 +72,7 @@ These buffer names start with alphanumeric."
       valid-point)))
 
 
-(defun hyesun/move-beginning-of-first-word ()
+(defun hs/move-beginning-of-first-word ()
   "Move to the first non-space and non-tab position of the line.
 Behaviors:
 1) Current line contains effective characters:
@@ -75,12 +82,12 @@ Behaviors:
 3) Current line is empty:
    Do nothing."
   (interactive)
-  (let ((valid-point (hyesun//valid-line-beginning-pos)))
+  (let ((valid-point (hs//valid-line-beginning-pos)))
     (if valid-point
         (goto-char valid-point))))
 
 
-(defun hyesun/smart-beginning-of-line ()
+(defun hs/smart-beginning-of-line ()
   "Jump to beginning of first word or beginning of line.
 Behaviors:
 1) Current line contains effective characters:
@@ -92,14 +99,14 @@ Behaviors:
 3) Current line is empty:
    Jump to beginning of line."
   (interactive)
-  (let ((valid-point (hyesun//valid-line-beginning-pos)))
+  (let ((valid-point (hs//valid-line-beginning-pos)))
     (if (and valid-point
              (> (point) valid-point))
         (goto-char valid-point)
       (beginning-of-line))))
 
 
-(defun hyesun/select-stripped-line ()
+(defun hs/select-stripped-line ()
   "After this, the line two sides of which are non empty are selected.
 Behaviors:
 1) Current line contains effective characters:
@@ -109,7 +116,7 @@ Behaviors:
 3) Current line is empty:
    Do nothing."
   (interactive)
-  (let ((valid-point (hyesun//valid-line-beginning-pos)))
+  (let ((valid-point (hs//valid-line-beginning-pos)))
     (if valid-point
         (progn (goto-char valid-point)
                (push-mark)
@@ -117,7 +124,7 @@ Behaviors:
                (end-of-line)))))
 
 
-(defun hyesun/select-line ()
+(defun hs/select-line ()
   (interactive)
   (beginning-of-line)
   (push-mark)
@@ -125,22 +132,22 @@ Behaviors:
   (move-end-of-line 1))
 
 
-(defun hyesun/kill-stripped-line ()
+(defun hs/kill-stripped-line ()
   (interactive)
-  (let ((valid-point (hyesun//valid-line-beginning-pos)))
+  (let ((valid-point (hs//valid-line-beginning-pos)))
     (if valid-point
         (kill-region valid-point (line-end-position)))))
 
 
-(defun hyesun/kill-whole-line ()
+(defun hs/kill-whole-line ()
   (interactive)
-  (hyesun/kill-stripped-line)
+  (hs/kill-stripped-line)
   (while (not (= (point) (line-beginning-position)))
     (backward-delete-char 1))
   (backward-delete-char 1))
 
 
-(defun hyesun/backward-kill-line ()
+(defun hs/backward-kill-line ()
   "Kill from point till start of the line.
 Behaviors:
 1) Current line contains effective characters:
@@ -151,7 +158,7 @@ Behaviors:
 3) Current line is empty:
    Kill whole line."
   (interactive)
-  (let ((valid-point (hyesun//valid-line-beginning-pos))
+  (let ((valid-point (hs//valid-line-beginning-pos))
         (del-space-p nil))
     (if valid-point
         (if (> (point) valid-point)
@@ -166,15 +173,15 @@ Behaviors:
                (backward-delete-char 1)))))
 
 
-(defun hyesun/comment-line ()
+(defun hs/comment-line ()
   (interactive)
-  (hyesun/select-line)
+  (hs/select-line)
   (comment-region (mark) (point)))
 
 
-(defun hyesun/uncomment-line ()
+(defun hs/uncomment-line ()
   (interactive)
-  (hyesun/select-line)
+  (hs/select-line)
   (uncomment-region (mark) (point)))
 
 (provide 'utils)

@@ -35,7 +35,6 @@
         ("gnu" . 10)
         ("marmalade" . 5)))
 (package-initialize)
-(setq package-enable-at-startup nil)
 
 (load "kbd")
 (require 'utils)
@@ -92,18 +91,18 @@
 (setq large-file-warning-threshold nil)
 
 ;; gc threshold
-(setq gc-cons-threshold 100000000)
+(setq gc-cons-threshold most-positive-fixnum)
 
 ;; load customize variables
 (setq custom-file (concat config-dir "/custom.el"))
 (add-hook 'emacs-startup-hook
           (lambda ()
             (load custom-file)
-            (hyesun/sort-package-list)))
+            (hs/sort-package-list)))
 
 ;; sort package-selected-list
-(hyesun/sort-package-list)
-(add-hook 'kill-emacs-hook 'hyesun/sort-package-list)
+(hs/sort-package-list)
+(add-hook 'kill-emacs-hook 'hs/sort-package-list)
 
 ;; extra config
 (load (concat config-dir "/extra-config.el"))

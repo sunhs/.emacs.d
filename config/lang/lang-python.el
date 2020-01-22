@@ -11,11 +11,11 @@
 ;;   (use-package company-anaconda :defer t)
 ;;   (anaconda-eldoc-mode t)
 
-;;   (define-key spc-leader-map (kbd "gd") 'anaconda-mode-find-definitions)
-;;   (define-key spc-leader-map (kbd "ga") 'anaconda-mode-find-assignments)
-;;   (define-key spc-leader-map (kbd "gr") 'anaconda-mode-find-references)
-;;   (define-key spc-leader-map (kbd "gb") 'anaconda-mode-go-back)
-;;   (define-key spc-leader-map (kbd "sd") 'anaconda-mode-show-doc)
+;;   (define-key hs-leader-map (kbd "gd") 'anaconda-mode-find-definitions)
+;;   (define-key hs-leader-map (kbd "ga") 'anaconda-mode-find-assignments)
+;;   (define-key hs-leader-map (kbd "gr") 'anaconda-mode-find-references)
+;;   (define-key hs-leader-map (kbd "gb") 'anaconda-mode-go-back)
+;;   (define-key hs-leader-map (kbd "sd") 'anaconda-mode-show-doc)
  
 ;;   (add-hook 'anaconda-mode-hook
 ;;             (lambda ()
@@ -27,6 +27,6 @@
   :commands sphinx-doc-mode
   :hook (python-mode . sphinx-doc-mode)
   :config
-  (define-key spc-leader-map (kbd "id") 'sphinx-doc))
+  (define-key hs-leader-map (kbd "id") 'sphinx-doc))
 
 (setq python-shell-interpreter (substitute-in-file-name "$HOME/conda/bin/python"))

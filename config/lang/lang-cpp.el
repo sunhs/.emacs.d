@@ -11,7 +11,7 @@
                 (template-args-cont . +))))
 (setq c-default-style "microsoft")
 
-(defun hyesun/c-cpp-bracket-newline ()
+(defun hs/c-cpp-bracket-newline ()
   (interactive)
   (if (= (char-before) 123)
       (progn
@@ -21,12 +21,12 @@
         (c-indent-line-or-region))
     (newline-and-indent)))
 
-(defun hyesun/c-cpp-ret-kbd ()
-  (define-key c++-mode-map (kbd "RET") 'hyesun/c-cpp-bracket-newline)
-  (define-key c-mode-map (kbd "RET") 'hyesun/c-cpp-bracket-newline))
+(defun hs/c-cpp-ret-kbd ()
+  (define-key c++-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline)
+  (define-key c-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline))
 
-(add-hook 'c++-mode-hook 'hyesun/c-cpp-ret-kbd)
-(add-hook 'c-mode-hook 'hyesun/c-cpp-ret-kbd)
+(add-hook 'c++-mode-hook 'hs/c-cpp-ret-kbd)
+(add-hook 'c-mode-hook 'hs/c-cpp-ret-kbd)
 
 ;; (use-package irony
 ;;   :defer t

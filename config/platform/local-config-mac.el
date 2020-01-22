@@ -18,7 +18,7 @@
 
 ;; display chinese fonts normally in GUI
 (set-default-font "Monaco 12")
-(hyesun/call-or-add-to-frame-hook
+(hs/call-or-add-to-frame-hook
  (lambda ()
    (when (display-graphic-p)
      (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -117,7 +117,7 @@
   (setq my-tex-build-chain (list
                             (list "My Build Chain"
                                   (string-join (list my-latex-phase my-bibtex-phase my-latex-phase my-pdf-phase my-rm-phase) " ; ")
-                                  #'TeX-run-command
+                                  TeX-run-command
                                   nil
                                   '(latex-mode))))
   
@@ -134,7 +134,7 @@
   (setq dired-sidebar-face '(:family "Monaco" :size 12))
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t)
-  (define-key dired-mode-map (kbd "SPC") spc-leader-map))
+  (define-key dired-mode-map (kbd "SPC") hs-leader-map))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; themes
