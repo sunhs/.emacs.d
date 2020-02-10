@@ -74,4 +74,5 @@
           c++-mode
           c-mode) . flycheck-mode)
   :config
-  (setq flycheck-check-syntax-automatically '(save)))
+  (setq flycheck-check-syntax-automatically '(save)
+        flycheck-checker-error-threshold 4096))

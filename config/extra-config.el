@@ -97,16 +97,16 @@
 (use-package undo-tree
   :config
   (global-undo-tree-mode)
-  (global-set-key (kbd "M-;") 'undo-tree-undo)
-  (global-set-key (kbd "M-/") 'undo-tree-redo)
+  (global-set-key (kbd "M-u") 'undo-tree-undo)
+  (global-set-key (kbd "M-r") 'undo-tree-redo)
   (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-tree-redo))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; point-undo
 (use-package point-undo
   :config
-  (global-set-key (kbd "M-u") 'point-undo)
-  (global-set-key (kbd "M-r") 'point-redo))
+  (global-set-key (kbd "M-;") 'point-undo)
+  (global-set-key (kbd "M-/") 'point-redo))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; rainbow-delimiters-mode
