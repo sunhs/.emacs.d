@@ -10,8 +10,9 @@
   (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")
         lsp-prefer-flymake nil
         lsp-auto-configure nil
-        ;; lsp-eldoc-render-all t
+        lsp-eldoc-render-all t
         lsp-signature-render-all t
+        lsp-signature-render-documentation nil
         lsp-enable-xref nil)
   (lsp--set-configuration `(:pyls (:configurationSource ("flake8"))))
   (setq lsp-pyls-plugins-pyflakes-enabled nil)
