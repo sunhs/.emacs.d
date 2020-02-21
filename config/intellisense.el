@@ -14,7 +14,7 @@
         lsp-signature-render-all t  ;; Render full doc.
         lsp-signature-render-documentation nil
         lsp-enable-xref nil)
-  (lsp--set-configuration `(:pyls (:configurationSource ("flake8"))))
+  ;; (lsp--set-configuration `(:pyls (:configurationSource ("flake8"))))
   (setq lsp-pyls-plugins-pyflakes-enabled nil)
   (setq lsp-pyls-plugins-pylint-enabled nil)
   (setq lsp-pyls-plugins-yapf-enabled nil)

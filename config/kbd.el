@@ -35,6 +35,8 @@
 (define-key hs-leader-map "ba" 'mark-whole-buffer)
 (define-key hs-leader-map "bD" 'hs/kill-user-buffers)
 (define-key hs-leader-map "bn" 'hs/show-buffer-name)
+(define-key hs-leader-map "gg" 'beginning-of-buffer)
+(define-key hs-leader-map "G" 'end-of-buffer)
 
 ;; window
 (define-key hs-leader-map "wd" 'delete-window)
