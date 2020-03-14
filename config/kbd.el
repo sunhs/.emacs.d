@@ -8,6 +8,10 @@
 
 (defvar hs-leader-map (make-sparse-keymap))
 (global-set-key (kbd "C-s") hs-leader-map)
+(global-set-key (kbd "M-L") 'downcase-word)
+(global-set-key (kbd "M-U") 'upcase-word)
+(global-unset-key (kbd "M-h"))
+(global-unset-key (kbd "M-l"))
 
 ;; file
 (define-key hs-leader-map "fl" 'load-file)
