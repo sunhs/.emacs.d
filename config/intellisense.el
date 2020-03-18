@@ -13,7 +13,7 @@
         lsp-eldoc-render-all nil  ;; Render doc along with signature in echo area.
         lsp-signature-render-all t  ;; Render full doc.
         lsp-signature-render-documentation nil
-        lsp-enable-xref nil)
+        lsp-enable-xref t)
   ;; (lsp--set-configuration `(:pyls (:configurationSource ("flake8"))))
   (setq lsp-pyls-plugins-pyflakes-enabled nil)
   (setq lsp-pyls-plugins-pylint-enabled nil)
@@ -21,21 +21,9 @@
   (define-key hs-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions)
 
   (require 'lsp-clients)
-  (push '(company-lsp :with company-yasnippet) company-backends))
-
-  ;; (defun force-company-lsp-with-yasnippet ()
-    ;; (let ((backend '(company-lsp :with company-yasnippet)))
-    ;;   (message "fuck1")
-    ;;   (message company-backends)
-    ;;   (if (equal (car company-backends)
-    ;;              backend)
-    ;;       nil
-    ;;     (setq-local company-backends
-    ;;                 (add-to-list 'company-backends backend))))
-    ;; (message "fuck2")
-    ;; (message company-backends))
-
-  ;; (add-hook 'python-mode-hook 'force-company-lsp-with-yasnippet))
+  (require 'lsp-pyls)
+  (push '(company-lsp :with company-yasnippet) company-backends)
+  (lsp-flycheck-enable))
 
 
 (use-package lsp-ui
