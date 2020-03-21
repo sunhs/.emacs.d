@@ -14,17 +14,20 @@
         lsp-signature-render-all t  ;; Render full doc.
         lsp-signature-render-documentation nil
         lsp-enable-xref t)
-  ;; (lsp--set-configuration `(:pyls (:configurationSource ("flake8"))))
-  (setq lsp-pyls-plugins-pyflakes-enabled nil)
-  (setq lsp-pyls-plugins-pylint-enabled nil)
-  (setq lsp-pyls-plugins-yapf-enabled nil)
+  (setq lsp-pyls-plugins-rope-completion-enabled nil) ;; Already enabled jedi.
+  (setq lsp-pyls-plugins-flake8-enabled t)
+  (setq lsp-pyls-plugins-pyflakes-enabled nil) ;; Use flake8.
+  (setq lsp-pyls-plugins-mccabe-enabled t)
+  (setq lsp-pyls-plugins-pycodestyle-enabled t)
+  (setq lsp-pyls-plugins-autopep8-enabled nil) ;; Use black.
+  (setq lsp-pyls-plugins-yapf-enabled nil) ;; Use black.
   (define-key hs-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions)
 
   (require 'lsp-clients)
+  ;; (require 'lsp-python-ms)
   (require 'lsp-pyls)
   (push '(company-lsp :with company-yasnippet) company-backends)
   (lsp-flycheck-enable))
-
 
 (use-package lsp-ui
   :commands lsp-ui-mode

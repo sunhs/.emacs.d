@@ -80,6 +80,8 @@
 ;; treemacs
 (use-package treemacs
   :commands treemacs
+  :init
+  (define-key hs-leader-map "wt" 'treemacs-select-window)
   :config
   (setq treemacs-follow-after-init t)
   (treemacs-follow-mode t)
@@ -125,12 +127,12 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; spaceline
-(use-package spaceline
-  :config
-  (require 'spaceline-config)
-  (setq powerline-default-separator nil
-        spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-  (spaceline-spacemacs-theme))
+;; (use-package spaceline
+;;   :config
+;;   (require 'spaceline-config)
+;;   (setq powerline-default-separator nil
+;;         spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+;;   (spaceline-spacemacs-theme))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; company

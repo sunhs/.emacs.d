@@ -43,6 +43,7 @@
 (define-key hs-leader-map "G" 'end-of-buffer)
 
 ;; window
+(define-key hs-leader-map "wa" 'ace-window)
 (define-key hs-leader-map "wd" 'delete-window)
 (define-key hs-leader-map "wD" 'delete-other-windows)
 (define-key hs-leader-map "wh" 'windmove-left)
