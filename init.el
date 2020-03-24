@@ -90,6 +90,18 @@
 ;; Don't prompt for large file
 (setq large-file-warning-threshold nil)
 
+;; mode-line
+(setq-default mode-line-format
+              (list
+               "  "
+               "%&"
+               mode-line-buffer-identification
+               '(vc-mode vc-mode)
+               "    "
+               mode-line-modes
+               "    "
+               mode-line-misc-info))
+
 ;; gc threshold
 (setq gc-cons-threshold most-positive-fixnum)
 

@@ -27,7 +27,9 @@
   ;; (require 'lsp-python-ms)
   (require 'lsp-pyls)
   (push '(company-lsp :with company-yasnippet) company-backends)
-  (lsp-flycheck-enable))
+  (add-hook 'lsp-mode-hook
+            (lambda ()
+              (lsp-flycheck-enable))))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -66,5 +68,5 @@
           c++-mode
           c-mode) . flycheck-mode)
   :config
-  (setq flycheck-check-syntax-automatically '(save)
+  (setq ;;flycheck-check-syntax-automatically '(idle-change)
         flycheck-checker-error-threshold 4096))
