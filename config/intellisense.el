@@ -18,7 +18,7 @@
   (setq lsp-pyls-plugins-flake8-enabled t)
   (setq lsp-pyls-plugins-pyflakes-enabled nil) ;; Use flake8.
   (setq lsp-pyls-plugins-mccabe-enabled t)
-  (setq lsp-pyls-plugins-pycodestyle-enabled t)
+  (setq lsp-pyls-plugins-pycodestyle-enabled nil)
   (setq lsp-pyls-plugins-autopep8-enabled nil) ;; Use black.
   (setq lsp-pyls-plugins-yapf-enabled nil) ;; Use black.
   (define-key hs-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions)

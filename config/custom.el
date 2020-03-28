@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(company-prescient doom-themes lsp-mode lsp-python-ms lsp-ui multiple-cursors oceanic-theme rainbow-delimiters smartparens smex spaceline spacemacs-theme sphinx-doc treemacs treemacs-evil treemacs-projectile undo-tree use-package yasnippet)))
+   '(yaml-mode company-prescient doom-themes lsp-mode lsp-python-ms lsp-ui multiple-cursors oceanic-theme rainbow-delimiters smartparens smex spaceline spacemacs-theme sphinx-doc treemacs treemacs-evil treemacs-projectile undo-tree use-package yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
