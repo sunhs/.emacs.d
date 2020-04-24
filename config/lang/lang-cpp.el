@@ -25,8 +25,8 @@
   (define-key c++-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline)
   (define-key c-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline))
 
-(add-hook 'c++-mode-hook 'hs/c-cpp-ret-kbd)
-(add-hook 'c-mode-hook 'hs/c-cpp-ret-kbd)
+;; (add-hook 'c++-mode-hook 'hs/c-cpp-ret-kbd)
+;; (add-hook 'c-mode-hook 'hs/c-cpp-ret-kbd)
 
 ;; (use-package irony
 ;;   :defer t
