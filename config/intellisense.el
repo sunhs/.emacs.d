@@ -26,7 +26,7 @@
   (require 'lsp-clients)
   ;; (require 'lsp-python-ms)
   (require 'lsp-pyls)
-  (push '(company-lsp :with company-yasnippet) company-backends)
+  (push '(company-files company-lsp :with company-yasnippet) company-backends)
   (add-hook 'lsp-mode-hook
             (lambda ()
               (lsp-flycheck-enable))))
