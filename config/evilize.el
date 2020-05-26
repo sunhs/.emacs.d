@@ -71,6 +71,8 @@
 (define-key evil-normal-state-map (kbd "L") 'evil-end-of-visual-line)
 (define-key evil-normal-state-map (kbd "[") 'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "]") 'evil-scroll-down)
+(define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
+(define-key evil-normal-state-map (kbd "M-,") 'xref-pop-marker-stack)
 
 ;; motion state
 (define-key evil-motion-state-map (kbd "SPC") hs-leader-map)
