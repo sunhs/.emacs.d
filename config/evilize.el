@@ -52,7 +52,7 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; key bindings
-(defvar hs-leader-map (make-sparse-keymap))
+;; (defvar hs-leader-map (make-sparse-keymap))
 
 ;; emacs state
 (define-key evil-emacs-state-map [escape] 'evil-force-normal-state)
@@ -112,41 +112,46 @@
 (define-key hs-leader-map "cn" 'evil-mc-make-and-goto-next-match)
 
 ;; file
-(define-key hs-leader-map "fl" 'load-file)
-(define-key hs-leader-map "fp" 'hs/show-file-path)
+;; (define-key hs-leader-map "fl" 'load-file)
+;; (define-key hs-leader-map "fp" 'hs/show-file-path)
 (define-key hs-leader-map "fs" 'save-buffer)
 (define-key hs-leader-map "fw" 'write-file)
 
 ;; line
-(define-key hs-leader-map "ld" 'hs/kill-stripped-line)
-(define-key hs-leader-map "lk" 'hs/backward-kill-line)
-(define-key hs-leader-map "ll" 'hs/select-stripped-line)
-(define-key hs-leader-map "lm" 'set-mark-command)
-(define-key hs-leader-map "lw" 'hs/move-beginning-of-first-word)
-(define-key hs-leader-map "l;" 'hs/comment-line)
-(define-key hs-leader-map "l/" 'hs/uncomment-line)
+;; (define-key hs-leader-map "ld" 'hs/kill-stripped-line)
+;; (define-key hs-leader-map "lu" 'hs/backward-kill-line)
+;; (define-key hs-leader-map "ll" 'hs/select-stripped-line)
+;; (define-key hs-leader-map "lm" 'set-mark-command)
+;; (define-key hs-leader-map "lw" 'hs/move-beginning-of-first-word)
+;; (define-key hs-leader-map "lx" 'hs/kill-whole-line)
+;; (define-key hs-leader-map "l;" 'hs/comment-line)
+;; (define-key hs-leader-map "l/" 'hs/uncomment-line)
 
 ;; region
-(define-key hs-leader-map "r;" 'comment-region)
-(define-key hs-leader-map "r/" 'uncomment-region)
+;; (define-key hs-leader-map "r;" 'comment-region)
+;; (define-key hs-leader-map "r/" 'uncomment-region)
 
 ;; buffer
-(define-key hs-leader-map "bb" 'switch-to-buffer)
-(define-key hs-leader-map "bd" 'kill-this-buffer)
-(define-key hs-leader-map "bs" 'replace-string)
-(define-key hs-leader-map "ba" 'mark-whole-buffer)
-(define-key hs-leader-map "bD" 'hs/kill-user-buffers)
+;; (define-key hs-leader-map "bb" 'switch-to-buffer)
+;; (define-key hs-leader-map "bd" 'kill-this-buffer)
+;; (define-key hs-leader-map "bs" 'replace-string)
+;; (define-key hs-leader-map "ba" 'mark-whole-buffer)
+;; (define-key hs-leader-map "bD" 'hs/kill-user-buffers)
+;; (define-key hs-leader-map "bn" 'hs/show-buffer-name)
 
 ;; window
-(define-key hs-leader-map "wd" 'delete-window)
-(define-key hs-leader-map "wD" 'delete-other-windows)
-(define-key hs-leader-map "wh" 'evil-window-left)
-(define-key hs-leader-map "wl" 'evil-window-right)
-(define-key hs-leader-map "w/"
-  (lambda ()
-    (interactive)
-    (split-window-right)
-    (windmove-right)))
+;; (define-key hs-leader-map "wa" 'ace-window)
+;; (define-key hs-leader-map "wd" 'delete-window)
+;; (define-key hs-leader-map "wD" 'delete-other-windows)
+;; (define-key hs-leader-map "wh" 'evil-window-left)
+;; (define-key hs-leader-map "wl" 'evil-window-right)
+;; (define-key hs-leader-map "we" 'enlarge-window-horizontally)
+;; (define-key hs-leader-map "ws" 'shrink-window-horizontally)
+;; (define-key hs-leader-map "w/"
+;;   (lambda ()
+;;     (interactive)
+;;     (split-window-right)
+;;     (windmove-right)))
 
 ;; others
 (define-key hs-leader-map "hdk" 'describe-key)
