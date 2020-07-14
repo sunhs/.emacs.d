@@ -99,8 +99,8 @@
 (define-key evil-visual-state-map (kbd "L") 'evil-end-of-visual-line)
 (define-key evil-visual-state-map (kbd "[") 'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "]") 'evil-scroll-down)
-(define-key evil-visual-state-map ";" 'comment-region)
-(define-key evil-visual-state-map "/" 'uncomment-region)
+;; (define-key evil-visual-state-map ";" 'comment-region)
+;; (define-key evil-visual-state-map "/" 'uncomment-region)
 
 ;; evil-mc
 (global-evil-mc-mode t)
