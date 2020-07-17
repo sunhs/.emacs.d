@@ -1,15 +1,15 @@
 (setq-default c-basic-offset 4
               tab-width 4)
 
-(c-add-style "microsoft"
-             '("stroustrup"
-               (c-offsets-alist
-                (innamespace . -)
-                (inline-open . 0)
-                (inher-cont . c-lineup-multi-inher)
-                (arglist-cont-nonempty . +)
-                (template-args-cont . +))))
-(setq c-default-style "microsoft")
+;; (c-add-style "microsoft"
+;;              '("stroustrup"
+;;                (c-offsets-alist
+;;                 (innamespace . -)
+;;                 (inline-open . 0)
+;;                 (inher-cont . c-lineup-multi-inher)
+;;                 (arglist-cont-nonempty . +)
+;;                 (template-args-cont . +))))
+;; (setq c-default-style "microsoft")
 
 (defun hs/c-cpp-bracket-newline ()
   (interactive)
@@ -25,6 +25,7 @@
   (define-key c++-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline)
   (define-key c-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline))
 
+(setq-default clang-format-style "{BasedOnStyle: llvm, IndentWidth: 4}")
 ;; (add-hook 'c++-mode-hook 'hs/c-cpp-ret-kbd)
 ;; (add-hook 'c-mode-hook 'hs/c-cpp-ret-kbd)
 

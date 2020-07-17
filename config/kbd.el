@@ -17,6 +17,24 @@
 (define-key hs-leader-map "fl" 'load-file)
 (define-key hs-leader-map "fp" 'hs/show-file-path)
 
+;; format
+(define-key hs-leader-map "fb"
+  (lambda ()
+    (interactive)
+    (if (or (eq major-mode 'c-mode)
+            (eq major-mode 'c++-mode))
+        (clang-format-buffer)
+      (lsp-format-buffer))))
+
+(define-key hs-leader-map "fr"
+  (lambda ()
+    (interactive)
+    (if (or (eq major-mode 'c-mode)
+            (eq major-mode 'c++-mode))
+        (clang-format-region (region-beginning) (region-end))
+        ;; (message (number-to-string (region-beginning)))
+      (lsp-format-region (region-beginning) (region-end)))))
+
 ;; line
 (define-key hs-leader-map "ld" 'hs/kill-stripped-line)
 (define-key hs-leader-map "lu" 'hs/backward-kill-line)

@@ -96,12 +96,20 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; undo-tree
-(use-package undo-tree
+;; (use-package undo-tree
+;;   :config
+;;   (global-undo-tree-mode)
+;;   (global-set-key (kbd "M-u") 'undo-tree-undo)
+;;   (global-set-key (kbd "M-r") 'undo-tree-redo)
+;;   (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-tree-redo))
+
+;; --------------------------------------------------------------------------------------------------------------
+;; undo-fu
+(use-package undo-fu
   :config
-  (global-undo-tree-mode)
-  (global-set-key (kbd "M-u") 'undo-tree-undo)
-  (global-set-key (kbd "M-r") 'undo-tree-redo)
-  (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-tree-redo))
+  (global-undo-tree-mode -1)
+  (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "u" 'undo-fu-only-undo)
+  (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-fu-only-redo))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; point-undo
