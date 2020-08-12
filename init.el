@@ -73,6 +73,7 @@
               backup-inhibited t ;; no backup
               auto-save-mode nil ;; no auto save
               auto-save-default nil) ;; no #file#
+(setq auto-save-list-file-prefix nil)
 
 ;; split windows vertically
 (setq split-height-threshold nil
@@ -107,14 +108,11 @@
 
 ;; load customize variables
 (setq custom-file (concat config-dir "/custom.el"))
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (load custom-file)
-            (hs/sort-package-list)))
-
-;; sort package-selected-list
-(hs/sort-package-list)
-(add-hook 'kill-emacs-hook 'hs/sort-package-list)
+(load custom-file)
+;; (add-hook 'kill-emacs-hook
+;;           (lambda ()
+;;             (custom-set-variables `(package-selected-packages ,(hs/sort-package-list)))
+;;             (custom-save-all)))
 
 ;; extra config
 (load (concat config-dir "/extra-config.el"))

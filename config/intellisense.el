@@ -14,13 +14,15 @@
         lsp-signature-render-all t  ;; Render full doc.
         lsp-signature-render-documentation nil
         lsp-enable-xref t)
-  (setq lsp-pyls-plugins-rope-completion-enabled nil) ;; Already enabled jedi.
-  (setq lsp-pyls-plugins-flake8-enabled t)
-  (setq lsp-pyls-plugins-pyflakes-enabled nil) ;; Use flake8.
-  (setq lsp-pyls-plugins-mccabe-enabled t)
-  (setq lsp-pyls-plugins-pycodestyle-enabled nil)
-  (setq lsp-pyls-plugins-autopep8-enabled nil) ;; Use black.
-  (setq lsp-pyls-plugins-yapf-enabled nil) ;; Use black.
+  (setq lsp-pyls-plugins-rope-completion-enabled nil ;; Already enabled jedi.
+        lsp-pyls-plugins-flake8-enabled t
+        lsp-pyls-plugins-pyflakes-enabled nil ;; Use flake8.
+        lsp-pyls-plugins-mccabe-enabled t
+        lsp-pyls-plugins-pycodestyle-enabled nil
+        lsp-pyls-plugins-autopep8-enabled nil ;; Use black.
+        lsp-pyls-plugins-yapf-enabled nil ;; Use black.
+        lsp-pyls-plugins-flake8-ignore "E111,E114,E121,E127,E402,E731"
+        lsp-pyls-plugins-flake8-max-line-length 80)
   (define-key hs-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions)
 
   (require 'lsp-clients)
