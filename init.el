@@ -106,6 +106,9 @@
 ;; gc threshold
 (setq gc-cons-threshold most-positive-fixnum)
 
+;; revert buffer when file changes
+(global-auto-revert-mode)
+
 ;; load customize variables
 (setq custom-file (concat config-dir "/custom.el"))
 (load custom-file)
