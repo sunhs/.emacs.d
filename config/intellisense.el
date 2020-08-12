@@ -9,7 +9,7 @@
   :config
   (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")
         lsp-prefer-flymake nil
-        lsp-auto-configure nil
+        lsp-auto-configure t
         lsp-eldoc-render-all nil  ;; Render doc along with signature in echo area.
         lsp-signature-render-all t  ;; Render full doc.
         lsp-signature-render-documentation nil
@@ -28,10 +28,11 @@
   (require 'lsp-clients)
   ;; (require 'lsp-python-ms)
   (require 'lsp-pyls)
-  (push '(company-files company-lsp :with company-yasnippet) company-backends)
-  (add-hook 'lsp-mode-hook
-            (lambda ()
-              (lsp-flycheck-enable))))
+  (push '(company-files :with company-yasnippet company-capf) company-backends)
+  ;; (add-hook 'lsp-mode-hook
+  ;;           (lambda ()
+  ;;             (lsp-flycheck-enable))))
+  )
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -51,17 +52,6 @@
         lsp-ui-peek-peek-height 25)
   (define-key hs-leader-map (kbd "ds") 'lsp-ui-doc-show)
   (define-key hs-leader-map (kbd "dh") 'lsp-ui-doc-hide))
-
-
-(use-package company-lsp
-  :requires company
-  :commands company-lsp
-  :hook (lsp-mode . company-lsp)
-  :config
-  ;; Disable client-side cache because the LSP server does a better job.
-  (setq company-transformers nil
-        company-lsp-async t
-        company-lsp-cache-candidates 'auto))
 
 
 (use-package flycheck
