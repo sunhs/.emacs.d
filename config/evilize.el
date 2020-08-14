@@ -50,6 +50,11 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
+;; evil-magit
+;; (use-package evil-magit
+;;   :config
+;;   (evil-define-key evil-magit-state magit-mode-map (kbd "SPC") hs-leader-map))
+
 ;; --------------------------------------------------------------------------------------------------------------
 ;; key bindings
 ;; (defvar hs-leader-map (make-sparse-keymap))
@@ -101,10 +106,6 @@
 (define-key evil-visual-state-map (kbd "]") 'evil-scroll-down)
 ;; (define-key evil-visual-state-map ";" 'comment-region)
 ;; (define-key evil-visual-state-map "/" 'uncomment-region)
-
-;; magit state
-(if (boundp 'evil-magit-state)
-    (evil-define-key evil-magit-state magit-mode-map (kbd "SPC") hs-leader-map))
 
 ;; evil-mc
 (global-evil-mc-mode t)
