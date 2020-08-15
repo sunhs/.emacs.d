@@ -9,7 +9,8 @@
   :config
   (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")
         lsp-prefer-flymake nil
-        lsp-auto-configure t)
+        lsp-auto-configure t
+        lsp-signature-render-documentation nil)
   (setq lsp-pyls-plugins-rope-completion-enabled nil ;; Already enabled jedi.
         lsp-pyls-plugins-flake8-enabled t
         lsp-pyls-plugins-pyflakes-enabled nil ;; Use flake8.
