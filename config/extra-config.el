@@ -108,7 +108,7 @@
 ;; undo-fu
 (use-package undo-fu
   :config
-  (global-undo-tree-mode -1)
+  ;; (global-undo-tree-mode -1)
   (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "u" 'undo-fu-only-undo)
   (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-fu-only-redo))
 

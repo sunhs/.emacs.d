@@ -22,7 +22,7 @@
         lsp-pyls-plugins-flake8-max-line-length 80)
   (define-key hs-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions)
 
-  (require 'lsp-clients)
+  ;; (require 'lsp-clients)
   ;; (require 'lsp-python-ms)
   (require 'lsp-pyls)
   (push '(company-files company-capf :with company-yasnippet) company-backends)
