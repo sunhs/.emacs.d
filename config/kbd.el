@@ -66,6 +66,8 @@
 (define-key hs-leader-map "wD" 'delete-other-windows)
 (define-key hs-leader-map "wh" 'windmove-left)
 (define-key hs-leader-map "wl" 'windmove-right)
+(define-key hs-leader-map "wj" 'windmove-down)
+(define-key hs-leader-map "wk" 'windmove-up)
 (define-key hs-leader-map "we" 'enlarge-window-horizontally)
 (define-key hs-leader-map "ws" 'shrink-window-horizontally)
 ;(global-set-key (kbd "C-c C-x <up>") 'enlarge-window-horizontally)
@@ -75,6 +77,11 @@
     (interactive)
     (split-window-right)
     (windmove-right)))
+(define-key hs-leader-map "w-"
+  (lambda ()
+    (interactive)
+    (split-window-below)
+    (windmove-down)))
 
 ;; others
 (global-set-key (kbd "C-j")
