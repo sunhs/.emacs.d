@@ -177,11 +177,25 @@ Behaviors:
   (hs/select-line)
   (comment-region (mark) (point)))
 
-
 (defun hs/uncomment-line ()
   (interactive)
   (hs/select-line)
   (uncomment-region (mark) (point)))
+
+
+(defun hs/jump-up-half ()
+  (interactive)
+  (if (> (line-number-at-pos) 1)
+      (goto-line (/ (line-number-at-pos) 2))))
+
+(defun hs/jump-down-half ()
+  (interactive)
+  (let ((distance-to-bottom (-
+                             (line-number-at-pos (point-max))
+                             (line-number-at-pos))
+                            ))
+    (if (> distance-to-bottom 1)
+        (goto-line (+ (line-number-at-pos) (/ distance-to-bottom 2))))))
 
 
 (provide 'utils)

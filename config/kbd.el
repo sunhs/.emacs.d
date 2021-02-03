@@ -70,8 +70,6 @@
 (define-key hs-leader-map "wk" 'windmove-up)
 (define-key hs-leader-map "we" 'enlarge-window-horizontally)
 (define-key hs-leader-map "ws" 'shrink-window-horizontally)
-;(global-set-key (kbd "C-c C-x <up>") 'enlarge-window-horizontally)
-;(global-set-key (kbd "C-c C-x <down>") 'shrink-window-horizontally)
 (define-key hs-leader-map "w/"
   (lambda ()
     (interactive)

@@ -58,7 +58,6 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; key bindings
-;; (defvar hs-leader-map (make-sparse-keymap))
 
 ;; emacs state
 (define-key evil-emacs-state-map [escape] 'evil-force-normal-state)
@@ -75,8 +74,22 @@
 (define-key evil-normal-state-map (kbd "K") 'evil-goto-first-line)
 (define-key evil-normal-state-map (kbd "H") 'evil-first-non-blank-of-visual-line)
 (define-key evil-normal-state-map (kbd "L") 'evil-end-of-visual-line)
-(define-key evil-normal-state-map (kbd "[") 'evil-scroll-up)
-(define-key evil-normal-state-map (kbd "]") 'evil-scroll-down)
+(define-key evil-normal-state-map (kbd "[")
+  '(lambda ()
+     (interactive)
+     (evil-scroll-up 20)))
+(define-key evil-normal-state-map (kbd "]")
+  '(lambda ()
+     (interactive)
+     (evil-scroll-down 20)))
+(define-key evil-normal-state-map (kbd "{")
+  '(lambda ()
+     (interactive)
+     (hs/jump-up-half)))
+(define-key evil-normal-state-map (kbd "}")
+  '(lambda ()
+     (interactive)
+     (hs/jump-down-half)))
 (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
 (define-key evil-normal-state-map (kbd "M-,") 'xref-pop-marker-stack)
 
@@ -90,8 +103,22 @@
 (define-key evil-motion-state-map (kbd "K") 'evil-goto-first-line)
 (define-key evil-motion-state-map (kbd "H") 'evil-first-non-blank-of-visual-line)
 (define-key evil-motion-state-map (kbd "L") 'evil-end-of-visual-line)
-(define-key evil-motion-state-map (kbd "[") 'evil-scroll-up)
-(define-key evil-motion-state-map (kbd "]") 'evil-scroll-down)
+(define-key evil-normal-state-map (kbd "[")
+  '(lambda ()
+     (interactive)
+     (evil-scroll-up 20)))
+(define-key evil-normal-state-map (kbd "]")
+  '(lambda ()
+     (interactive)
+     (evil-scroll-down 20)))
+(define-key evil-normal-state-map (kbd "{")
+  '(lambda ()
+     (interactive)
+     (hs/jump-up-half)))
+(define-key evil-normal-state-map (kbd "}")
+  '(lambda ()
+     (interactive)
+     (hs/jump-down-half)))
 
 ;; visual state
 (define-key evil-visual-state-map (kbd "SPC") hs-leader-map)
@@ -103,10 +130,22 @@
 (define-key evil-visual-state-map (kbd "K") 'evil-goto-first-line)
 (define-key evil-visual-state-map (kbd "H") 'evil-first-non-blank-of-visual-line)
 (define-key evil-visual-state-map (kbd "L") 'evil-end-of-visual-line)
-(define-key evil-visual-state-map (kbd "[") 'evil-scroll-up)
-(define-key evil-visual-state-map (kbd "]") 'evil-scroll-down)
-;; (define-key evil-visual-state-map ";" 'comment-region)
-;; (define-key evil-visual-state-map "/" 'uncomment-region)
+(define-key evil-normal-state-map (kbd "[")
+  '(lambda ()
+     (interactive)
+     (evil-scroll-up 20)))
+(define-key evil-normal-state-map (kbd "]")
+  '(lambda ()
+     (interactive)
+     (evil-scroll-down 20)))
+(define-key evil-normal-state-map (kbd "{")
+  '(lambda ()
+     (interactive)
+     (hs/jump-up-half)))
+(define-key evil-normal-state-map (kbd "}")
+  '(lambda ()
+     (interactive)
+     (hs/jump-down-half)))
 
 ;; evil-mc
 (global-evil-mc-mode t)
@@ -120,46 +159,8 @@
 (define-key hs-leader-map "cn" 'evil-mc-make-and-goto-next-match)
 
 ;; file
-;; (define-key hs-leader-map "fl" 'load-file)
-;; (define-key hs-leader-map "fp" 'hs/show-file-path)
 (define-key hs-leader-map "fs" 'save-buffer)
 (define-key hs-leader-map "fw" 'write-file)
-
-;; line
-;; (define-key hs-leader-map "ld" 'hs/kill-stripped-line)
-;; (define-key hs-leader-map "lu" 'hs/backward-kill-line)
-;; (define-key hs-leader-map "ll" 'hs/select-stripped-line)
-;; (define-key hs-leader-map "lm" 'set-mark-command)
-;; (define-key hs-leader-map "lw" 'hs/move-beginning-of-first-word)
-;; (define-key hs-leader-map "lx" 'hs/kill-whole-line)
-;; (define-key hs-leader-map "l;" 'hs/comment-line)
-;; (define-key hs-leader-map "l/" 'hs/uncomment-line)
-
-;; region
-;; (define-key hs-leader-map "r;" 'comment-region)
-;; (define-key hs-leader-map "r/" 'uncomment-region)
-
-;; buffer
-;; (define-key hs-leader-map "bb" 'switch-to-buffer)
-;; (define-key hs-leader-map "bd" 'kill-this-buffer)
-;; (define-key hs-leader-map "bs" 'replace-string)
-;; (define-key hs-leader-map "ba" 'mark-whole-buffer)
-;; (define-key hs-leader-map "bD" 'hs/kill-user-buffers)
-;; (define-key hs-leader-map "bn" 'hs/show-buffer-name)
-
-;; window
-;; (define-key hs-leader-map "wa" 'ace-window)
-;; (define-key hs-leader-map "wd" 'delete-window)
-;; (define-key hs-leader-map "wD" 'delete-other-windows)
-;; (define-key hs-leader-map "wh" 'evil-window-left)
-;; (define-key hs-leader-map "wl" 'evil-window-right)
-;; (define-key hs-leader-map "we" 'enlarge-window-horizontally)
-;; (define-key hs-leader-map "ws" 'shrink-window-horizontally)
-;; (define-key hs-leader-map "w/"
-;;   (lambda ()
-;;     (interactive)
-;;     (split-window-right)
-;;     (windmove-right)))
 
 ;; others
 (define-key hs-leader-map "hdk" 'describe-key)
