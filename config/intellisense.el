@@ -24,7 +24,8 @@
 
   ;; (require 'lsp-clients)
   ;; (require 'lsp-python-ms)
-  (require 'lsp-pyls)
+  ;; (require 'lsp-pyls)
+  (require 'lsp-pyright)
   (push '(company-files company-capf :with company-yasnippet) company-backends)
   ;; (add-hook 'lsp-mode-hook
   ;;           (lambda ()
