@@ -56,6 +56,11 @@
 ;;   :config
 ;;   (evil-define-key evil-magit-state magit-mode-map (kbd "SPC") hs-leader-map))
 
+;; evil-surround
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode 1))
+
 ;; --------------------------------------------------------------------------------------------------------------
 ;; key bindings
 
