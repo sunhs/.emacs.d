@@ -189,4 +189,9 @@
 ;; others
 (define-key hs-leader-map "hdk" 'describe-key)
 (define-key hs-leader-map "hdf" 'describe-function)
-(define-key hs-leader-map "qq" 'save-buffers-kill-terminal)
+(define-key hs-leader-map "qq"
+  '(lambda ()
+     (interactive)
+     (if (delete-frame-enabled-p)
+         (delete-frame)
+       (save-buffers-kill-terminal))))
