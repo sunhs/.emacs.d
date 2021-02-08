@@ -17,7 +17,7 @@
       mac-command-modifier 'control) ;; map command to control
 
 ;; display chinese fonts normally in GUI
-(set-default-font "Monaco 12")
+;; (set-default-font "Monaco 12")
 (hs/call-or-add-to-frame-hook
  (lambda ()
    (when (display-graphic-p)
@@ -81,8 +81,8 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; org-bullets
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+;; (require 'org-bullets)
+;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; latex
@@ -142,7 +142,8 @@
 ;; (color-theme-initialize)
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 ;; (load-theme 'solarized t)
-(require 'spacemacs-dark-theme)
+;; (require 'spacemacs-dark-theme)
+(load-theme 'doom-palenight t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; language specific
