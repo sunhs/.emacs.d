@@ -5,7 +5,6 @@
 /anaconda-mode/*
 /auto-save-list/*
 /company-statistics-cache.el
-/config/platform/local-config-loader.el
 /elpa/*
 /eshell/*
 /irony/*
