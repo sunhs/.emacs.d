@@ -12,7 +12,11 @@
   (ivy-read " Killboard History: "
             killboard--history-list
             :action (lambda (content)
-                      (kill-new content))))
+                      (kill-new content)
+                      (if (and (boundp 'evil-state)
+                               (not (eq evil-state 'emacs)))
+                          (evil-paste-after 1)
+                        (yank)))))
 
 
 (defun killboard--save-content-to-history (content)
@@ -35,3 +39,6 @@
 (advice-add 'kill-ring-save :after #'killboard--save-current-kill)
 (advice-add 'kill-word :after #'killboard--save-current-kill)
 (advice-add 'backward-kill-word :after #'killboard--save-current-kill)
+
+
+(define-key hs-leader-map (kbd "y") 'killboard-view-history)

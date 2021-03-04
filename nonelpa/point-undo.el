@@ -82,7 +82,7 @@
 ;; 2006/02/27: initial version
 
 ;;; Code:
-(eval-when-compile (require 'cl))
+(eval-when-compile (require 'cl-lib))
 
 (defvar point-undo-list nil)
 (make-variable-buffer-local 'point-undo-list)

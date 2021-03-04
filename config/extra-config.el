@@ -58,7 +58,7 @@
   (global-set-key (kbd "C-c C-x y") 'counsel-yank-pop)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (define-key hs-leader-map (kbd "SPC") 'counsel-M-x)
-  (define-key hs-leader-map (kbd "y") 'counsel-yank-pop)
+  ;; (define-key hs-leader-map (kbd "y") 'counsel-yank-pop)
   (define-key hs-leader-map "ff" 'counsel-find-file))
 
 ;; --------------------------------------------------------------------------------------------------------------
