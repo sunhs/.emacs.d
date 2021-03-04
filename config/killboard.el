@@ -4,7 +4,7 @@
 
 
 (setq killboard--history-list '())
-(setq killboard--max-num 60)
+(setq killboard--max-num 2)
 
 
 (defun killboard-view-history ()
@@ -26,7 +26,7 @@
       nil)
     (setq killboard--history-list (-insert-at 0 content killboard--history-list)))
   (if (> (length killboard--history-list) killboard--max-num)
-      (setq killboard--history-list (-remove-last killboard--history-list))
+      (setq killboard--history-list (-drop-last 1 killboard--history-list))
     nil))
 
 
