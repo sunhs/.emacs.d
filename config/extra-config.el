@@ -16,22 +16,25 @@
   :config
   (smartparens-global-mode)
   (require 'smartparens-config)
-  ;; (define-key hs-leader-map (kbd "sph") 'sp-beginning-of-sexp)
-  ;; (define-key hs-leader-map (kbd "spl") 'sp-end-of-sexp)
-  ;; (define-key hs-leader-map (kbd "spbu") 'sp-backward-up-sexp)
-  ;; (define-key hs-leader-map (kbd "spbd") 'sp-backward-down-sexp)
-  ;; (define-key hs-leader-map (kbd "spfu") 'sp-up-sexp)
-  ;; (define-key hs-leader-map (kbd "spfd") 'sp-down-sexp)
-  (sp-pair "\\\\(" nil :unless '(sp-point-before-word-p))
-  (sp-pair "\\{" nil :unless '(sp-point-before-word-p))
-  (sp-pair "\\(" nil :unless '(sp-point-before-word-p))
-  (sp-pair "\\\"" nil :unless '(sp-point-before-word-p))
-  (sp-pair "\"" nil :unless '(sp-point-before-word-p))
-  (sp-pair "'" nil :unless '(sp-point-before-word-p))
-  (sp-pair "`" nil :unless '(sp-point-before-word-p))
-  (sp-pair "(" nil :unless '(sp-point-before-word-p))
-  (sp-pair "[" nil :unless '(sp-point-before-word-p))
-  (sp-pair "{" nil :unless '(sp-point-before-word-p)))
+  (define-key hs-leader-map "(h" 'sp-beginning-of-sexp)
+  (define-key hs-leader-map "(l" 'sp-end-of-sexp)
+  (define-key hs-leader-map "(u" 'sp-backward-up-sexp)
+  (define-key hs-leader-map "(d" 'sp-backward-down-sexp)
+  (define-key hs-leader-map "(fu" 'sp-up-sexp)
+  (define-key hs-leader-map "(fd" 'sp-down-sexp)
+  (setq prohibition-sym-list '("\\\\("
+                               "\\{"
+                               "\\("
+                               "\\\""
+                               "\""
+                               "'"
+                               "`"
+                               "("
+                               "["
+                               "{"))
+  (dolist (sym prohibition-sym-list)
+    (sp-pair sym nil :unless '(sp-point-before-word-p
+                               sp-point-before-same-p))))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; ivy / swiper / counsel
