@@ -18,3 +18,5 @@
 /sync-files/*
 /tramp
 /transient
+.dap*
+/.extension
