@@ -16,8 +16,8 @@
   :config
   (smartparens-global-mode)
   (require 'smartparens-config)
-  (define-key hs-leader-map "(h" 'sp-beginning-of-sexp)
-  (define-key hs-leader-map "(l" 'sp-end-of-sexp)
+  (define-key-for-evil-state-maps common-evil-state-maps (kbd "(") 'sp-beginning-of-sexp)
+  (define-key-for-evil-state-maps common-evil-state-maps (kbd ")") 'sp-end-of-sexp)
   (define-key hs-leader-map "(u" 'sp-backward-up-sexp)
   (define-key hs-leader-map "(d" 'sp-backward-down-sexp)
   (define-key hs-leader-map "(fu" 'sp-up-sexp)
