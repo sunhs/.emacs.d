@@ -237,30 +237,5 @@
 ;; (setq inertias-initial-velocity-wheel 1)
 
 ;; --------------------------------------------------------------------------------------------------------------
-;; neotree
-;; (require 'neotree)
-;; (global-set-key (kbd "C-c n") 'neotree-toggle)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; sr-speedbar
-;; (setq sr-speedbar-right-side nil
-;;       speedbar-show-unknown-files t
-;;       sr-speedbar-auto-refresh nil)
-
-;; (defun focus-speedbar-window ()
-;;   (interactive)
-;;   (lexical-let ((found nil))
-;;     (dolist (w (window-list))
-;;       (if (string= (buffer-name (window-buffer w))
-;;                    "*SPEEDBAR*")
-;;           (progn
-;;             (select-window w)
-;;             (setq found t))))
-;;     (unless found
-;;       (sr-speedbar-open))))
-
-;; (global-set-key (kbd "C-c s") 'focus-speedbar-window)
-
-;; --------------------------------------------------------------------------------------------------------------
 ;; magit
 ;; (define-key hs-leader-map (kbd "ms") 'magit-status)
