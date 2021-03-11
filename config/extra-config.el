@@ -153,7 +153,7 @@
   :config
   (global-company-mode t)
   (setq completion-styles '(basic substring partial-completion emacs22)
-        company-idle-delay 0.2
+        company-idle-delay 0.1
         company-minimum-prefix-length 2
         company-require-match nil
         company-search-regexp-function 'company-search-words-in-any-order-regexp
@@ -178,6 +178,8 @@
 
   ;; (define-key company-active-map (kbd "TAB") 'company-complete)
   ;; (define-key company-active-map (kbd "<tab>") 'company-complete)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
   (define-key company-active-map (kbd "C-s") 'company-filter-candidates)
   (company-statistics-mode nil))
 
