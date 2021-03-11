@@ -143,7 +143,7 @@
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 ;; (load-theme 'solarized t)
 ;; (require 'spacemacs-dark-theme)
-(load-theme 'doom-palenight t)
+(load-theme 'doom-city-lights t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; language specific
