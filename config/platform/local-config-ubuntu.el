@@ -50,7 +50,8 @@
 ;; (require 'color-theme)
 ;; (color-theme-initialize)
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
-(load-theme 'doom-palenight t)
+(load-theme 'doom-nord t)
+;; (load-theme 'spacemacs-dark t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; language specific

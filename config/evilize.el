@@ -119,8 +119,8 @@
 (define-key hs-leader-map "fw" 'write-file)
 
 ;; others
-(define-key hs-leader-map "hdk" 'describe-key)
-(define-key hs-leader-map "hdf" 'describe-function)
+(define-key hs-leader-map "hk" 'describe-key)
+(define-key hs-leader-map "hf" 'describe-function)
 (define-key hs-leader-map "qq"
   '(lambda ()
      (interactive)

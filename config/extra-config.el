@@ -50,7 +50,7 @@
 
 (use-package swiper
   :config
-  (define-key hs-leader-map "s" 'swiper)
+  (define-key hs-leader-map (kbd "C-s") 'swiper)
   (global-set-key (kbd "C-r") 'swiper))
   
 
