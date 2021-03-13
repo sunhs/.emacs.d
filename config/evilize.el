@@ -10,6 +10,8 @@
 (require 'evil)
 (evil-mode t)
 (evil-set-initial-state 'package-menu-mode 'motion)
+(dolist (mode '(help-mode))
+  (evil-set-initial-state mode 'emacs))
 (defalias 'evil-insert-state 'evil-emacs-state)
 
 ;; (defun hs//evil-insert-to-emacs-state (evil-insert-state-func &rest args)
@@ -43,13 +45,13 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; evil-org
-(use-package evil-org
-  :after org
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook 'evil-org-set-key-theme)
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
+;; (use-package evil-org
+;;   :after org
+;;   :config
+;;   (add-hook 'org-mode-hook 'evil-org-mode)
+;;   (add-hook 'evil-org-mode-hook 'evil-org-set-key-theme)
+;;   (require 'evil-org-agenda)
+;;   (evil-org-agenda-set-keys))
 
 ;; evil-magit
 ;; (use-package evil-magit

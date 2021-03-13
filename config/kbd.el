@@ -81,6 +81,12 @@
     (split-window-below)
     (windmove-down)))
 
+;; avy
+(define-key hs-leader-map "ac" 'avy-goto-char)
+(define-key hs-leader-map "aa" 'avy-goto-char-2)
+(define-key hs-leader-map "aw" 'avy-goto-word-1)
+(define-key hs-leader-map "al" 'avy-goto-line)
+
 ;; others
 (global-set-key (kbd "C-j")
                 (lambda ()

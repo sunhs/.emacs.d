@@ -4,7 +4,7 @@
 
 
 (setq killboard--history-list '())
-(setq killboard--max-num 2)
+(setq killboard--max-num 64)
 
 
 (defun killboard-view-history ()

@@ -40,46 +40,6 @@
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 ;; --------------------------------------------------------------------------------------------------------------
-;; org-mode
-(add-hook 'org-mode-hook 'turn-on-font-lock)
-(add-hook 'org-mode-hook
-          (lambda () (setq truncate-lines nil)))
-(setq org-log-done 'note)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
-
-(eval-after-load "org"
-  '(progn
-     (define-key org-mode-map (kbd "C-c l") 'org-store-link)
-     (define-key org-mode-map (kbd "C-c i") 'org-iswitchb)
-     (define-key org-mode-map (kbd "C-j") 'backward-char)))
-
-;; export options
-(setq org-export-with-toc nil)
-
-;; org-capture
-(defconst dropbox-dir (substitute-in-file-name "$HOME/Dropbox"))
-(defconst capture-todo-file (concat dropbox-dir "/org/TODO.org"))
-(defconst capture-memo-file (concat dropbox-dir "/org/MEMO.org"))
-(defconst capture-note-file (concat dropbox-dir "/org/READING_NOTE.org"))
-;; (defconst capture-birthday-file (concat dropbox-dir "/org/BIRTHDAY.org"))
-(setq org-capture-templates
-      '(("t" "TODO" entry (file+headline capture-todo-file "TASK") "** TODO %?\n   %i\n")
-        ("m" "MEMO" entry (file+headline capture-memo-file "MEMO") "** %?\n   %i\n")
-        ("n" "NOTE" entry (file+headline capture-note-file "NOTE") "** %?\n   %i\n   %a")
-        ;; ("b" "BIRTHDAY" entry (file+headline capture-birthday-file "BIRTHDAY") "")
-        ))
-
-;; agenda
-(setq
- org-agenda-files `(,(concat dropbox-dir "/org/TODO.org") ,(concat dropbox-dir "/org/MEMO.org") ,(concat "/org/READING_NOTE.org"))
- org-agenda-include-diary t)
-
-;; iCalendar
-(setq org-icalendar-include-todo t
-      org-icalendar-combined-agenda-file (concat dropbox-dir "/org/ICSFILE.ics"))
-
-;; --------------------------------------------------------------------------------------------------------------
 ;; org-bullets
 ;; (require 'org-bullets)
 ;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
