@@ -7,7 +7,7 @@
 (require 'utils)
 
 (defvar hs-leader-map (make-sparse-keymap))
-(global-set-key (kbd "C-s") hs-leader-map)
+(global-set-key (kbd "C-l") hs-leader-map)
 (global-set-key (kbd "M-L") 'downcase-word)
 (global-set-key (kbd "M-U") 'upcase-word)
 (global-unset-key (kbd "M-h"))
