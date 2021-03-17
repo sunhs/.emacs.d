@@ -20,3 +20,4 @@
 /transient
 .dap*
 /.extension
+.mc-lists.el
