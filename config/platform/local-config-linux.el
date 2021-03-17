@@ -58,3 +58,4 @@
 (add-to-list 'load-path (concat config-dir "/lang"))
 (load "lang-cpp")
 (load "lang-python")
+(load "org-config")
