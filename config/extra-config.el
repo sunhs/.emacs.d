@@ -22,6 +22,15 @@
   (define-key hs-leader-map "(d" 'sp-backward-down-sexp)
   (define-key hs-leader-map "(fu" 'sp-up-sexp)
   (define-key hs-leader-map "(fd" 'sp-down-sexp)
+
+  (defvar sp-mode-map (make-sparse-keymap))  
+  (global-set-key (kbd "M-(") sp-mode-map)
+  (define-key sp-mode-map (kbd "a") 'sp-beginning-of-sexp)
+  (define-key sp-mode-map (kbd "e") 'sp-end-of-sexp)
+  (define-key sp-mode-map (kbd "ua") 'sp-backward-up-sexp)
+  (define-key sp-mode-map (kbd "da") 'sp-backward-down-sexp)
+  (define-key sp-mode-map (kbd "ue") 'sp-up-sexp)
+  (define-key sp-mode-map (kbd "de") 'sp-down-sexp)
   (setq prohibition-sym-list '("\\\\("
                                "\\{"
                                "\\("
@@ -112,6 +121,8 @@
 (use-package undo-fu
   :config
   ;; (global-undo-tree-mode -1)
+  (global-set-key (kbd "M-u") 'undo-fu-only-undo)
+  (global-set-key (kbd "M-r") 'undo-fu-only-redo)
   (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "u" 'undo-fu-only-undo)
   (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-fu-only-redo))
 

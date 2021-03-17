@@ -12,10 +12,21 @@
 (global-set-key (kbd "M-U") 'upcase-word)
 (global-unset-key (kbd "M-h"))
 (global-unset-key (kbd "M-l"))
+(global-set-key (kbd "M-n") (lambda ()
+                              (interactive)
+                              (next-line 20)))
+(global-set-key (kbd "M-p") (lambda ()
+                              (interactive)
+                              (previous-line 20)))
+(global-set-key (kbd "M-{") 'indent-rigidly-left-to-tab-stop)
+(global-set-key (kbd "M-}") 'indent-rigidly-right-to-tab-stop)
 
 ;; file
 (define-key hs-leader-map "fl" 'load-file)
 (define-key hs-leader-map "fp" 'hs/show-file-path)
+(define-key hs-leader-map "fs" 'save-buffer)
+(define-key hs-leader-map "fw" 'write-file)
+(define-key hs-leader-map "qq" 'save-buffers-kill-terminal)
 
 ;; format
 (define-key hs-leader-map "fb"
@@ -32,7 +43,7 @@
     (if (or (eq major-mode 'c-mode)
             (eq major-mode 'c++-mode))
         (clang-format-region (region-beginning) (region-end))
-        ;; (message (number-to-string (region-beginning)))
+      ;; (message (number-to-string (region-beginning)))
       (lsp-format-region (region-beginning) (region-end)))))
 
 ;; line

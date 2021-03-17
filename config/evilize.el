@@ -10,7 +10,7 @@
 (require 'evil)
 (evil-mode t)
 (evil-set-initial-state 'package-menu-mode 'motion)
-(dolist (mode '(help-mode))
+(dolist (mode '(org-mode))
   (evil-set-initial-state mode 'emacs))
 (defalias 'evil-insert-state 'evil-emacs-state)
 
@@ -30,12 +30,17 @@
 ;; These lines are vital for evil-terminal-cursor-changer to work normally,
 ;; since the default normal-state-cursor is `t`.
 (setq evil-normal-state-cursor '(box)
-      evil-emacs-state-cursor '(box))
+      evil-emacs-state-cursor '(bar))
       ;; evil-emacs-state-cursor '(bar))
 
 (unless (display-graphic-p)
   (require 'evil-terminal-cursor-changer)
+  ;; (setq etcc-use-color t)
   (evil-terminal-cursor-changer-activate))
+;; (add-hook 'evil-emacs-state-entry-hook #'(lambda ()
+;;                                           (set-face-background 'mode-line "midnightblue")))
+;; (add-hook 'evil-emacs-state-exit-hook #'(lambda ()
+;;                                           (set-face-background 'mode-line nil)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; evil-escape
@@ -84,8 +89,8 @@
 (define-key-for-evil-state-maps common-evil-state-maps (kbd "TAB") 'indent-for-tab-command)
 (define-key-for-evil-state-maps common-evil-state-maps (kbd "H") 'evil-first-non-blank-of-visual-line)
 (define-key-for-evil-state-maps common-evil-state-maps (kbd "L") 'evil-end-of-visual-line)
-(define-key-for-evil-state-maps common-evil-state-maps (kbd "C-k") '(lambda () (interactive) (evil-scroll-up 20)))
-(define-key-for-evil-state-maps common-evil-state-maps (kbd "C-j") '(lambda () (interactive) (evil-scroll-down 20)))
+(define-key-for-evil-state-maps common-evil-state-maps (kbd "M-k") '(lambda () (interactive) (evil-scroll-up 20)))
+(define-key-for-evil-state-maps common-evil-state-maps (kbd "M-j") '(lambda () (interactive) (evil-scroll-down 20)))
 (define-key-for-evil-state-maps common-evil-state-maps (kbd "[") '(lambda () (interactive) (evil-scroll-up 20)))
 (define-key-for-evil-state-maps common-evil-state-maps (kbd "]") '(lambda () (interactive) (evil-scroll-down 20)))
 (define-key-for-evil-state-maps common-evil-state-maps (kbd "{")
