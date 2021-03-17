@@ -66,7 +66,7 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;; line numbers
-(global-display-line-numbers-mode)
+;; (global-display-line-numbers-mode)
 
 ;; no back-up or auto-save files
 (setq-default make-backup-files nil ;; no backup file
