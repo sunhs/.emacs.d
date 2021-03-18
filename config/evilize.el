@@ -85,6 +85,7 @@
 (define-key-for-evil-state-maps common-evil-state-maps "k" 'evil-previous-visual-line)
 (define-key-for-evil-state-maps common-evil-state-maps "$" 'evil-end-of-visual-line)
 (define-key-for-evil-state-maps common-evil-state-maps "^" 'evil-first-non-blank-of-visual-line)
+(define-key-for-evil-state-maps common-evil-state-maps "q" 'delete-window)
 (define-key-for-evil-state-maps common-evil-state-maps [tab] 'indent-for-tab-command)
 (define-key-for-evil-state-maps common-evil-state-maps (kbd "TAB") 'indent-for-tab-command)
 (define-key-for-evil-state-maps common-evil-state-maps (kbd "H") 'evil-first-non-blank-of-visual-line)
@@ -128,6 +129,7 @@
 ;; others
 (define-key hs-leader-map "hk" 'describe-key)
 (define-key hs-leader-map "hf" 'describe-function)
+(define-key hs-leader-map "hv" 'describe-variable)
 (define-key hs-leader-map "qq"
   '(lambda ()
      (interactive)

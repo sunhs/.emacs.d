@@ -25,12 +25,12 @@
 
   ;; (require 'lsp-clients)
   ;; (require 'lsp-python-ms)
-  ;; (require 'lsp-pyls)
-  (require 'lsp-pyright)
+  (require 'lsp-pyls)
+  ;; (require 'lsp-pyright)
   (push '(company-files company-capf :with company-yasnippet) company-backends)
   ;; (add-hook 'lsp-mode-hook
   ;;           (lambda ()
-  ;;             (lsp-flycheck-enable))))
+  ;;             (lsp-flycheck-enable)))
   )
 
 (use-package lsp-ui

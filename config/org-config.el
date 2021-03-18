@@ -32,7 +32,7 @@
 ;; agenda
 (setq
  org-agenda-files `(,capture-todo-file)
- org-agenda-include-diary t)
+ org-agenda-include-diary nil)
 
 ;; iCalendar
 ;; (setq org-icalendar-include-todo t
@@ -62,7 +62,9 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
       '(("d" "Daily agenda and all TODOs"
          (
           (alltodo "" ((org-agenda-overriding-header "todo")))
-          (agenda "" ((org-agenda-overriding-header "agenda")))
+          (agenda "" ((org-agenda-start-day "-7d")
+                      (org-agenda-span 14)
+                      (org-agenda-overriding-header "agenda")))
           )
          ;; ((tags "PRIORITY=\"A\""
          ;;        ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
