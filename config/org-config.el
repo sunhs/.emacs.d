@@ -38,6 +38,13 @@
 ;; (setq org-icalendar-include-todo t
 ;;       org-icalendar-combined-agenda-file (concat org-file-dir "/org/ICSFILE.ics"))
 
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
 ;; ==========================================================================================
 ;; Copied from https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html.
 (defun air-org-skip-subtree-if-priority (priority)
@@ -61,9 +68,11 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (setq org-agenda-custom-commands
       '(("d" "Daily agenda and all TODOs"
          (
-          (alltodo "" ((org-agenda-overriding-header "todo")))
+          (alltodo "" ((org-agenda-overriding-header "todo")
+                       (org-agenda-todo-list-sublevels t)))
           (agenda "" ((org-agenda-start-day "-7d")
                       (org-agenda-span 14)
+                      (org-agenda-show-log t)
                       (org-agenda-overriding-header "agenda")))
           )
          ;; ((tags "PRIORITY=\"A\""
