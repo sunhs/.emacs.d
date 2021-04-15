@@ -1,5 +1,7 @@
 (require 'utils)
 
+(scroll-bar-mode -1)
+
 ;; the path for emacs shell
 (setenv "PATH"
         (concat (substitute-in-file-name "$HOME/go/bin:$HOME/conda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2017/bin/x86_64-darwin:")
@@ -110,3 +112,4 @@
 (add-to-list 'load-path (concat config-dir "/lang"))
 (load "lang-cpp")
 (load "lang-python")
+(load "org-config")
