@@ -3,7 +3,7 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; evil
-;; (load "evilize")
+(load "evilize")
 ;; killboard
 (load "killboard")
 
@@ -156,6 +156,12 @@
 ;;   (setq powerline-default-separator nil
 ;;         spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
 ;;   (spaceline-spacemacs-theme))
+
+;; --------------------------------------------------------------------------------------------------------------
+;; mini-modeline
+(use-package mini-modeline
+  :config
+  (mini-modeline-mode t))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; company
