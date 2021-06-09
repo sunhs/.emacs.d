@@ -44,7 +44,7 @@
 (menu-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (show-paren-mode 1)
-(global-hl-line-mode 1)
+;; (global-hl-line-mode 1)
 
 ;; make utf-8 the default coding system
 (prefer-coding-system 'utf-8)
