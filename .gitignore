@@ -21,3 +21,4 @@
 .dap*
 /.extension
 .mc-lists.el
+/eln-cache
