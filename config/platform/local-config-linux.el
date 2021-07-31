@@ -51,7 +51,8 @@
 ;; (color-theme-initialize)
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 ;; (load-theme 'spacemacs-dark t)
-(load-theme 'doom-one t)
+;; (load-theme 'doom-one t)
+(load-theme 'gruvbox-dark-soft t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; language specific

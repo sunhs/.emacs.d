@@ -110,6 +110,7 @@
 
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 (setq vc-follow-symlinks t)
+(xterm-mouse-mode t)
 
 ;; load customize variables
 (setq custom-file (concat config-dir "/custom.el"))
