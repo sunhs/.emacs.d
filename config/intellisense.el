@@ -7,7 +7,7 @@
           c-mode
           python-mode) . lsp)
   :config
-  (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")
+  (setq lsp-clients-clangd-args '("-j=4" "--background-index" "--log=error" "--compile-commands-dir=build")
         lsp-prefer-flymake nil
         lsp-auto-configure t
         lsp-signature-render-documentation nil
