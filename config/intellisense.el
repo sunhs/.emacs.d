@@ -28,9 +28,9 @@
   ;; (require 'lsp-pyls)
   (require 'lsp-pyright)
   (push '(company-files company-capf :with company-yasnippet) company-backends)
-  ;; (add-hook 'lsp-mode-hook
-  ;;           (lambda ()
-  ;;             (lsp-flycheck-enable)))
+  (add-hook 'lsp-mode-hook
+            (lambda ()
+              (lsp-flycheck-enable)))
   )
 
 (use-package lsp-ui
@@ -44,7 +44,7 @@
         lsp-ui-sideline-enable t
         lsp-ui-sideline-ignore-duplicate t
         lsp-ui-flycheck-enable t
-        lsp-ui-flycheck-list-position 'right
+        lsp-ui-flycheck-list-position 'bottom
         lsp-ui-flycheck-live-reporting t
         lsp-ui-peek-enable t
         lsp-ui-peek-list-width 60
