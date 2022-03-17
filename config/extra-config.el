@@ -224,7 +224,7 @@
 ;; blacken
 (use-package blacken
   :config
-  (setq blacken-line-length 79))
+  (setq blacken-line-length 120))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; config relating to platforms
