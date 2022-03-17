@@ -22,3 +22,4 @@
 /.extension
 .mc-lists.el
 /eln-cache
+/projects
