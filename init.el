@@ -109,6 +109,10 @@
 ;; revert buffer when file changes
 (global-auto-revert-mode)
 
+;; ediff
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq magit-ediff-dwim-show-on-hunks t)
+
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 (setq vc-follow-symlinks t)
 (xterm-mouse-mode t)
