@@ -30,7 +30,7 @@
 ;; These lines are vital for evil-terminal-cursor-changer to work normally,
 ;; since the default normal-state-cursor is `t`.
 (setq evil-normal-state-cursor '(box)
-      evil-emacs-state-cursor '(bar))
+      evil-emacs-state-cursor '(hbar))
       ;; evil-emacs-state-cursor '(bar))
 
 (unless (display-graphic-p)
@@ -127,8 +127,10 @@
 ;; file
 (define-key hs-leader-map "fs" 'save-buffer)
 (define-key hs-leader-map "fw" 'write-file)
+(define-key hs-leader-map "fo" 'ff-find-other-file)
 
 ;; others
+(define-key hs-leader-map "mg" 'magit)
 (define-key hs-leader-map "hk" 'describe-key)
 (define-key hs-leader-map "hf" 'describe-function)
 (define-key hs-leader-map "hv" 'describe-variable)
