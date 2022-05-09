@@ -28,24 +28,22 @@
   ;; (require 'lsp-pyls)
   (require 'lsp-pyright)
   (push '(company-files company-capf :with company-yasnippet) company-backends)
-  (add-hook 'lsp-mode-hook
-            (lambda ()
-              (lsp-flycheck-enable)))
+  ;; (add-hook 'lsp-mode-hook
+  ;;           (lambda ()
+  ;;             (lsp-flycheck-enable)))
   )
 
 (use-package lsp-ui
   :commands lsp-ui-mode
   :hook (lsp-mode . lsp-ui-mode)
   :config
-  (setq lsp-ui-doc-enable nil
+  (setq lsp-ui-doc-enable t
         lsp-ui-doc-use-childframe t
         lsp-ui-doc-position 'top
+        lsp-ui-doc-header t
         lsp-ui-doc-include-signature t
-        lsp-ui-sideline-enable t
+        lsp-ui-sideline-enable nil
         lsp-ui-sideline-ignore-duplicate t
-        lsp-ui-flycheck-enable t
-        lsp-ui-flycheck-list-position 'bottom
-        lsp-ui-flycheck-live-reporting t
         lsp-ui-peek-enable t
         lsp-ui-peek-list-width 60
         lsp-ui-peek-peek-height 25)
@@ -60,4 +58,12 @@
           c-mode) . flycheck-mode)
   :config
   (setq ;;flycheck-check-syntax-automatically '(idle-change)
-        flycheck-checker-error-threshold 4096))
+        flycheck-checker-error-threshold 4096
+        flycheck-display-errors-delay 0.1
+        display-buffer-alist
+        '(("\\*Flycheck errors\\*"
+	       (display-buffer-reuse-window
+	        display-buffer-in-side-window)
+	       (reusable-frames . visible)
+	       (side            . bottom)
+	       (window-height   . 0.33)))))
