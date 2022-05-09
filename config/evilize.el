@@ -13,6 +13,7 @@
 (dolist (mode '(org-mode))
   (evil-set-initial-state mode 'emacs))
 (defalias 'evil-insert-state 'evil-emacs-state)
+;; (defalias 'forward-evil-word 'forward-evil-symbol)
 
 ;; (defun hs//evil-insert-to-emacs-state (evil-insert-state-func &rest args)
 ;;   (evil-emacs-state))
@@ -129,8 +130,12 @@
 (define-key hs-leader-map "fw" 'write-file)
 (define-key hs-leader-map "fo" 'ff-find-other-file)
 
-;; others
+;; magit
 (define-key hs-leader-map "mg" 'magit)
+(define-key hs-leader-map "mba" 'magit-blame-addition)
+(define-key hs-leader-map "mbq" 'magit-blame-quit)
+
+;; others
 (define-key hs-leader-map "hk" 'describe-key)
 (define-key hs-leader-map "hf" 'describe-function)
 (define-key hs-leader-map "hv" 'describe-variable)

@@ -111,7 +111,17 @@
 
 ;; ediff
 (setq ediff-split-window-function 'split-window-horizontally)
+
+;; magit
 (setq magit-ediff-dwim-show-on-hunks t)
+(defun refresh-vc-state (&rest r)
+  ;; (message "refresh vc state for %S" (current-buffer))
+  (vc-refresh-state))
+(advice-add 'magit-checkout-revision :after 'refresh-vc-state '((name . "magit-refresh-on-checkout-revision")))
+(advice-add 'magit-branch-create :after 'refresh-vc-state '((name . "magit-refresh-on-branch-create")))
+(advice-add 'magit-branch-and-checkout :after 'refresh-vc-state '((name . "magit-refresh-on-checkout-and-branch")))
+(advice-add 'magit-branch-or-checkout :after 'refresh-vc-state '((name . "magit-refresh-on-branch-or-checkout")))
+(setq magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
 
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 (setq vc-follow-symlinks t)

@@ -100,6 +100,7 @@
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
   (treemacs-git-mode 'simple))
+  ;; (add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1))))
 
 (use-package treemacs-evil
   :after treemacs evil)
@@ -225,6 +226,12 @@
 (use-package blacken
   :config
   (setq blacken-line-length 120))
+
+;; --------------------------------------------------------------------------------------------------------------
+;; solaire
+(use-package solaire-mode
+  :config
+  (solaire-global-mode t))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; config relating to platforms
