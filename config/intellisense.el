@@ -5,7 +5,8 @@
   :commands lsp
   :hook ((c++-mode
           c-mode
-          python-mode) . lsp)
+          python-mode
+          go-mode) . lsp)
   :config
   (setq lsp-clients-clangd-args '("-j=4" "--background-index" "--log=error" "--compile-commands-dir=build")
         lsp-prefer-flymake nil

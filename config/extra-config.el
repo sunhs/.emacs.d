@@ -7,8 +7,8 @@
 ;; killboard
 (load "killboard")
 
-;; intellisense
-(load "intellisense")
+;; dap
+(load "dap")
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; smartparens
@@ -232,6 +232,9 @@
 (use-package solaire-mode
   :config
   (solaire-global-mode t))
+
+;; intellisense
+(load "intellisense")
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; config relating to platforms
