@@ -10,6 +10,9 @@
 ;; dap
 (load "dap")
 
+;; quelpa-use-package
+(require 'quelpa-use-package)
+
 ;; --------------------------------------------------------------------------------------------------------------
 ;; smartparens
 (use-package smartparens
@@ -151,18 +154,28 @@
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; spaceline
-;; (use-package spaceline
-;;   :config
-;;   (require 'spaceline-config)
-;;   (setq powerline-default-separator nil
-;;         spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-;;   (spaceline-spacemacs-theme))
+(use-package spaceline
+  :config
+  (require 'spaceline-config)
+  (setq powerline-default-separator nil
+        spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+  (spaceline-spacemacs-theme))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; mini-modeline
 ;; (use-package mini-modeline
 ;;   :config
-;;   (mini-modeline-mode t))
+;;   (mini-modeline-mode t)
+;;   (setq mini-modeline-r-format 
+;;         (list
+;;          "  "
+;;          "%&"
+;;          mode-line-buffer-identification
+;;          '(vc-mode vc-mode)
+;;          "    "
+;;          mode-line-modes
+;;          "    "
+;;          mode-line-misc-info)))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; company
@@ -270,3 +283,24 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; magit
 ;; (define-key hs-leader-map (kbd "ms") 'magit-status)
+
+;; --------------------------------------------------------------------------------------------------------------
+;; blamer
+(use-package blamer
+  :quelpa ((blamer :fetcher github :repo "artawower/blamer.el") :upgrade t)
+  :ensure t
+  ;; :bind (("s-i" . blamer-show-commit-info)
+  ;;        ("C-c i" . ("s-i" . blamer-show-posframe-commit-info)))
+  :defer 5
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 70)
+  (blamer-type 'posframe-popup)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                   :background nil
+                   :height 140
+                   :italic t)))
+  ;; :config
+  ;; (global-blamer-mode 1))
+  )
