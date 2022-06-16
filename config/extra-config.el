@@ -12,6 +12,7 @@
 
 ;; quelpa-use-package
 (require 'quelpa-use-package)
+(setq quelpa-update-melpa-p nil)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; smartparens
@@ -161,6 +162,10 @@
         spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
   (spaceline-spacemacs-theme))
 
+;; (use-package spaceline-all-the-icons 
+;;   :after spaceline
+;;   :config (spaceline-all-the-icons-theme))
+
 ;; --------------------------------------------------------------------------------------------------------------
 ;; mini-modeline
 ;; (use-package mini-modeline
@@ -287,7 +292,8 @@
 ;; --------------------------------------------------------------------------------------------------------------
 ;; blamer
 (use-package blamer
-  :quelpa ((blamer :fetcher github :repo "artawower/blamer.el") :upgrade t)
+  ;; :quelpa ((blamer :fetcher github :repo "artawower/blamer.el") :upgrade t)
+  :quelpa ((blamer :fetcher github :repo "artawower/blamer.el"))
   :ensure t
   ;; :bind (("s-i" . blamer-show-commit-info)
   ;;        ("C-c i" . ("s-i" . blamer-show-posframe-commit-info)))
@@ -295,7 +301,7 @@
   :custom
   (blamer-idle-time 0.3)
   (blamer-min-offset 70)
-  (blamer-type 'posframe-popup)
+  ;; (blamer-type 'posframe-popup)
   :custom-face
   (blamer-face ((t :foreground "#7a88cf"
                    :background nil
