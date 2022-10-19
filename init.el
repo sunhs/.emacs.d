@@ -24,10 +24,11 @@
                                ("marmalade" . ,(concat emacs-china-dir "/marmalade"))
                                ("gnu" . ,(concat emacs-china-dir "/gnu"))))
     
-    (setq package-archives '(("melpa" . "http://elpa.emacs-china.org/melpa/")
-                             ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")
-                             ("marmalade" . "http://elpa.emacs-china.org/marmalade/")
-                             ("gnu" . "http://elpa.emacs-china.org/gnu/")))))
+    (setq package-archives
+          '(("melpa" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/melpa/")
+            ("org"   . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/org/")
+            ("gnu"   . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/gnu/")))))
+
 
 (setq package-archive-priorities
       '(("melpa" . 20)
