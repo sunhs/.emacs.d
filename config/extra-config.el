@@ -61,6 +61,10 @@
         ivy-count-format "%d/%d")
   (setq ivy-ignore-buffers (append '("*Help*") ivy-ignore-buffers)))
 
+(use-package ivy-rich
+  :ensure t
+  :init (ivy-rich-mode 1))
+
 (use-package swiper
   :config
   (global-set-key (kbd "C-s") 'swiper)
