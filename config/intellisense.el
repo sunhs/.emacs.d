@@ -8,10 +8,12 @@
           python-mode
           go-mode) . lsp)
   :config
-  (setq lsp-clients-clangd-args '("-j=4" "--background-index" "--log=error" "--compile-commands-dir=build")
+  (setq lsp-clients-clangd-args '("-j=16" "--background-index" "--log=error" "--compile-commands-dir=build")
         lsp-prefer-flymake nil
         lsp-auto-configure t
-        lsp-signature-render-documentation nil
+        lsp-signature-render-documentation t ;; 应该是补全时的 doc
+        lsp-signature-doc-lines 30 ;; Defaults to 20
+        lsp-eldoc-render-all nil ;; Defaults to nul; 在底部渲染 doc
         lsp-file-watch-threshold nil)
   (setq lsp-pyls-plugins-rope-completion-enabled nil ;; Already enabled jedi.
         lsp-pyls-plugins-flake8-enabled t
@@ -43,6 +45,7 @@
         lsp-ui-doc-position 'top
         lsp-ui-doc-header t
         lsp-ui-doc-include-signature t
+        lsp-ui-doc-show-with-cursor t
         lsp-ui-sideline-enable nil
         lsp-ui-sideline-ignore-duplicate t
         lsp-ui-peek-enable t
