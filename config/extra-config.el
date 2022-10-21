@@ -304,8 +304,10 @@
   :defer 5
   :custom
   (blamer-idle-time 0.3)
-  (blamer-min-offset 70)
+  (blamer-min-offset 40)
   ;; (blamer-type 'posframe-popup)
+  (blamer-type 'overlay-popup)
+  (blamer--overlay-popup-position 'smart)
   :custom-face
   (blamer-face ((t :foreground "#7a88cf"
                    :background nil
@@ -314,3 +316,4 @@
   ;; :config
   ;; (global-blamer-mode 1))
   )
+
