@@ -36,6 +36,14 @@
         ("marmalade" . 5)))
 (package-initialize)
 
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
 (require 'kbd)
 (require 'builtin)
 (setq hs/use-evil-p t)

@@ -221,10 +221,9 @@
   (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-fu-only-redo))
 
 ;; ------------------------------------------------- point-undo -------------------------------------------------
-(use-package point-undo
-  :config
-  (global-set-key (kbd "M-;") 'point-undo)
-  (global-set-key (kbd "M-/") 'point-redo))
+(require 'point-undo)
+(global-set-key (kbd "M-;") 'point-undo)
+(global-set-key (kbd "M-/") 'point-redo)
 
 ;; ------------------------------------------ rainbow-delimiters-mode -------------------------------------------
 (use-package rainbow-delimiters
