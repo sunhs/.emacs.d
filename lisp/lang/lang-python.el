@@ -30,3 +30,5 @@
   (define-key hs-leader-map (kbd "id") 'sphinx-doc))
 
 (setq python-shell-interpreter (substitute-in-file-name "$HOME/conda/bin/python"))
+
+(provide 'lang-python)

@@ -1,9 +1,7 @@
 ;; -*- lexical-binding: t -*-
 ;; -*- mode: emacs-lisp -*-
-(setq hs/use-evil-p t)
 
-;; --------------------------------------------------------------------------------------------------------------
-;; evil
+;; ---------------------------------------------------- evil ----------------------------------------------------
 ;; this line should be placed before `(require 'evil)'
 (setq-default evil-want-C-u-scroll nil)
 (setq-default evil-want-C-i-jump nil)
@@ -26,8 +24,7 @@
   (and evil-local-mode
        (memq (or state evil-state) '())))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; evil-terminal-cursor-changer
+;; ---------------------------------------- evil-terminal-cursor-changer ----------------------------------------
 ;; These lines are vital for evil-terminal-cursor-changer to work normally,
 ;; since the default normal-state-cursor is `t`.
 (setq evil-normal-state-cursor '(box))
@@ -43,13 +40,13 @@
 ;; (add-hook 'evil-emacs-state-exit-hook #'(lambda ()
 ;;                                           (set-face-background 'mode-line nil)))
 
-;; --------------------------------------------------------------------------------------------------------------
+;; ------------------------------------------------- evil-escape ------------------------------------------------
 ;; evil-escape
 (require 'evil-escape)
 (evil-escape-mode t)
 (setq-default evil-escape-delay 0.2)
 
-;; --------------------------------------------------------------------------------------------------------------
+;; -------------------------------------------------- evil-org --------------------------------------------------
 ;; evil-org
 ;; (use-package evil-org
 ;;   :after org
@@ -59,18 +56,19 @@
 ;;   (require 'evil-org-agenda)
 ;;   (evil-org-agenda-set-keys))
 
+;; ------------------------------------------------- evil-magit -------------------------------------------------
 ;; evil-magit
 ;; (use-package evil-magit
 ;;   :config
 ;;   (evil-define-key evil-magit-state magit-mode-map (kbd "SPC") hs-leader-map))
 
+;; ----------------------------------------------- evil-surround ------------------------------------------------
 ;; evil-surround
 (use-package evil-surround
   :config
   (global-evil-surround-mode 1))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; key bindings
+;; ------------------------------------------------ key bindings ------------------------------------------------
 
 ;; emacs state
 (define-key evil-emacs-state-map [escape] 'evil-force-normal-state)
@@ -114,7 +112,7 @@
 
 ;; visual state
 
-;; evil-mc
+;; -------------------------------------------------- evil-mc ---------------------------------------------------
 (global-evil-mc-mode t)
 
 (defun hs/evil-mc-make-cursor-here ()
@@ -125,31 +123,12 @@
 (define-key hs-leader-map "cm" 'hs/evil-mc-make-cursor-here)
 (define-key hs-leader-map "cn" 'evil-mc-make-and-goto-next-match)
 
-;; file
-(define-key hs-leader-map "fs" 'save-buffer)
-(define-key hs-leader-map "fw" 'write-file)
-(define-key hs-leader-map "fo" 'ff-find-other-file)
-
-;; magit
-(define-key hs-leader-map "mg" 'magit)
-(define-key hs-leader-map "mba" 'magit-blame-addition)
-(define-key hs-leader-map "mbq" 'magit-blame-quit)
-
-;; others
-(define-key hs-leader-map "hk" 'describe-key)
-(define-key hs-leader-map "hf" 'describe-function)
-(define-key hs-leader-map "hv" 'describe-variable)
-(define-key hs-leader-map "qq"
-  '(lambda ()
-     (interactive)
-     (if (delete-frame-enabled-p)
-         (delete-frame)
-       (save-buffers-kill-terminal))))
-
-;; --------------------------------------------------------------------------------------------------------------
+;; ------------------------------------------------- evil-snipe -------------------------------------------------
 ;; evil-snipe
 (require 'evil-snipe)
 (evil-snipe-mode +1)
 (evil-snipe-override-mode +1)
 (setq evil-snipe-scope 'whole-buffer
       evil-snipe-repeat-scope 'whole-buffer)
+
+(provide 'evilize)

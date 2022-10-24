@@ -18,33 +18,15 @@
 (global-set-key (kbd "M-p") (lambda ()
                               (interactive)
                               (previous-line 20)))
-(global-set-key (kbd "M-{") 'indent-rigidly-left-to-tab-stop)
-(global-set-key (kbd "M-}") 'indent-rigidly-right-to-tab-stop)
+(global-set-key (kbd "M-[") 'indent-rigidly-left-to-tab-stop)
+(global-set-key (kbd "M-]") 'indent-rigidly-right-to-tab-stop)
 
 ;; file
 (define-key hs-leader-map "fl" 'load-file)
 (define-key hs-leader-map "fp" 'hs/show-file-path)
 (define-key hs-leader-map "fs" 'save-buffer)
 (define-key hs-leader-map "fw" 'write-file)
-(define-key hs-leader-map "qq" 'save-buffers-kill-terminal)
-
-;; format
-(define-key hs-leader-map "fb"
-  (lambda ()
-    (interactive)
-    (if (or (eq major-mode 'c-mode)
-            (eq major-mode 'c++-mode))
-        (clang-format-buffer)
-      (lsp-format-buffer))))
-
-(define-key hs-leader-map "fr"
-  (lambda ()
-    (interactive)
-    (if (or (eq major-mode 'c-mode)
-            (eq major-mode 'c++-mode))
-        (clang-format-region (region-beginning) (region-end))
-      ;; (message (number-to-string (region-beginning)))
-      (lsp-format-region (region-beginning) (region-end)))))
+(define-key hs-leader-map "fo" 'ff-find-other-file)
 
 ;; line
 (define-key hs-leader-map "ld" 'hs/kill-stripped-line)
@@ -91,16 +73,38 @@
     (interactive)
     (split-window-below)
     (windmove-down)))
+(define-key hs-leader-map "w="
+(lambda ()
+(interactive)
+(balance-windows)))
 
 ;; avy
 (define-key hs-leader-map "ac" 'avy-goto-char)
 (define-key hs-leader-map "aa" 'avy-goto-char-2)
-(define-key hs-leader-map "aw" 'avy-goto-word-1)
+;; (define-key hs-leader-map "aw" 'avy-goto-word-1)
 (define-key hs-leader-map "al" 'avy-goto-line)
 
+;; magit
+(define-key hs-leader-map "mg" 'magit)
+(define-key hs-leader-map "mba" 'magit-blame-addition)
+(define-key hs-leader-map "mbq" 'magit-blame-quit)
+
+;; help
+(define-key hs-leader-map "hk" 'describe-key)
+(define-key hs-leader-map "hf" 'describe-function)
+(define-key hs-leader-map "hv" 'describe-variable)
+
 ;; others
+(define-key hs-leader-map "qq"
+  '(lambda ()
+     (interactive)
+     (if (delete-frame-enabled-p)
+         (delete-frame)
+       (save-buffers-kill-terminal))))
 (global-set-key (kbd "C-j")
                 (lambda ()
                   (interactive)
                   (move-end-of-line 1)
                   (newline-and-indent)))
+
+(provide 'kbd)

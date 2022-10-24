@@ -86,3 +86,5 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
          ;;           (org-agenda-overriding-header "ALL normal priority tasks:"))))
          ;; ((org-agenda-compact-blocks t))
          )))
+
+(provide 'org-config)

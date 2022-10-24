@@ -42,3 +42,5 @@
 
 
 (define-key hs-leader-map (kbd "y") 'killboard-view-history)
+
+(provide 'killboard)

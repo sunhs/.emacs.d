@@ -71,3 +71,5 @@
 	       (reusable-frames . visible)
 	       (side            . bottom)
 	       (window-height   . 0.33)))))
+
+(provide 'intellisense)

@@ -201,4 +201,41 @@ Behaviors:
   (interactive)
   (term "/bin/zsh"))
 
+
+(defun hs/pad-string (content len pad &optional right-pad)
+  "pad `content' until the string size is `len'
+  `pad' should be a char, and will be repeated and equally placed both on the left and right side of `'content'
+  if `right-pad' is also a char, use `pad' on the left and `right-pad' on the right"
+
+  (let ((pad-len (/
+                  (-
+                   (- len (length content))
+                   2)
+                  2))
+        (cur-len 0)
+        (result ""))
+    (while (< cur-len pad-len)
+      (setq result (concat result pad))
+      (incf cur-len))
+    (setq result (concat result " " content " "))
+    (incf cur-len (+ 2 (length content)))
+    (if (not right-pad)
+        (setq right-pad pad))
+    (while (< cur-len len)
+      (setq result (concat result right-pad))
+      (incf cur-len))
+    result))
+
+(defun hs/insert-package-header ()
+  (interactive)
+  (let ((content (read-from-minibuffer "content: ")))
+    (insert ";; ")
+    (insert (hs/pad-string content 110 "-"))))
+
+(defun hs/insert-collection-header ()
+  (interactive)
+  (let ((content (read-from-minibuffer "content: ")))
+    (insert ";; ")
+    (insert (hs/pad-string content 110 "<" ">"))))
+
 (provide 'utils)

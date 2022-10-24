@@ -89,3 +89,5 @@
 ;;   :init
 ;;   (add-hook 'c++-mode-hook 'irony-eldoc)
 ;;   (add-hook 'c-mode-hook 'irony-eldoc))
+
+(provide 'lang-cpp)

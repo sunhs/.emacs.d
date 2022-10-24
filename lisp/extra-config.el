@@ -1,15 +1,6 @@
 ;; -*- lexical-binding: t -*-
 ;; -*- mode: emacs-lisp -*-
 
-;; ---------------------------------------------------- evil ----------------------------------------------------
-(load "evilize")
-
-;; -------------------------------------------------- killboar --------------------------------------------------
-;; (load "killboard")
-
-;; ---------------------------------------------------- dap -----------------------------------------------------
-(load "dap")
-
 ;; --------------------------------------------- quelpa-use-package ---------------------------------------------
 (require 'quelpa-use-package)
 (setq quelpa-update-melpa-p nil)
@@ -48,8 +39,7 @@
     (sp-pair sym nil :unless '(sp-point-before-word-p
                                sp-point-before-same-p))))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; <<<<<<<<<<<<<<O<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ivy / swiper / counsel >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ivy / swiper / counsel >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;; (use-package ivy
 ;;   :config
 ;;   (ivy-mode 1)
@@ -95,8 +85,8 @@
 ;;   (define-key projectile-command-map "b" 'projectile-switch-to-buffer)
 ;;   (define-key projectile-command-map "g" 'projectile-ripgrep))
 
-;; --------------------------------------------------------------------------------------------------------------
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< vertico / consult / orderless >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;; -------------------------------------------------- vertico ---------------------------------------------------
 (use-package vertico
   :init
   (vertico-mode)
@@ -123,6 +113,7 @@
   :init
   (savehist-mode))
 
+;; -------------------------------------------------- consult ---------------------------------------------------
 (use-package consult
   :init (recentf-mode)
   :config
@@ -136,6 +127,7 @@
   (define-key projectile-command-map "b" 'consult-projectile-switch-to-buffer)
   (define-key projectile-command-map "g" 'consult-ripgrep))
 
+;; ------------------------------------------------- orderless --------------------------------------------------
 (use-package orderless
   :init
   ;; Configure a custom style dispatcher (see the Consult wiki)
@@ -145,11 +137,13 @@
         ;; completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
 
+;; ------------------------------------------------- marginalia -------------------------------------------------
 (use-package marginalia
   :ensure t
   :config
   (marginalia-mode))
 
+;; --------------------------------------------------- embark ---------------------------------------------------
 (use-package embark
   :ensure t
 
@@ -177,8 +171,8 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; treemacs
+;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< treemacs >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;; -------------------------------------------------- treemacs --------------------------------------------------
 (use-package treemacs
   :commands treemacs
   :init
@@ -190,14 +184,26 @@
   (treemacs-git-mode 'simple))
   ;; (add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1))))
 
+;; ----------------------------------------------- treemacs-evil ------------------------------------------------
 (use-package treemacs-evil
   :after treemacs evil)
 
+;; -------------------------------------------- treemacs-projectile ---------------------------------------------
 (use-package treemacs-projectile
   :after treemacs projectile)
 
-;; --------------------------------------------------------------------------------------------------------------
-;; undo-tree
+;; ----------------------------------------------- dired-sidebar ------------------------------------------------
+(use-package dired-sidebar
+  :ensure t
+  :commands (dired-sidebar-toggle-sidebar)
+  :config
+  (setq dired-sidebar-theme 'nerd)
+  (setq dired-sidebar-face '(:family "Mono" :size 12))
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-use-custom-font t)
+  (define-key dired-mode-map (kbd "SPC") hs-leader-map))
+
+;; ------------------------------------------------- undo-tree --------------------------------------------------
 ;; (use-package undo-tree
 ;;   :config
 ;;   (global-undo-tree-mode)
@@ -205,8 +211,7 @@
 ;;   (global-set-key (kbd "M-r") 'undo-tree-redo)
 ;;   (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-tree-redo))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; undo-fu
+;; -------------------------------------------------- undo-fu ---------------------------------------------------
 (use-package undo-fu
   :config
   ;; (global-undo-tree-mode -1)
@@ -215,15 +220,13 @@
   (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "u" 'undo-fu-only-undo)
   (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-fu-only-redo))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; point-undo
+;; ------------------------------------------------- point-undo -------------------------------------------------
 (use-package point-undo
   :config
   (global-set-key (kbd "M-;") 'point-undo)
   (global-set-key (kbd "M-/") 'point-redo))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; rainbow-delimiters-mode
+;; ------------------------------------------ rainbow-delimiters-mode -------------------------------------------
 (use-package rainbow-delimiters
   :commands rainbow-delimiters-mode
   :hook ((emacs-lisp-mode
@@ -231,14 +234,12 @@
           c++-mode
           c-mode) . rainbow-delimiters-mode))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; indent-guide
+;; ------------------------------------------------ indent-guide ------------------------------------------------
 ;; (use-package indent-guide
 ;;   :config
 ;;   (indent-guide-global-mode t))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; spaceline
+;; ------------------------------------------------- spaceline --------------------------------------------------
 ;; (use-package spaceline
 ;;   :config
 ;;   (require 'spaceline-config)
@@ -250,7 +251,7 @@
 ;;   :after spaceline
 ;;   :config (spaceline-all-the-icons-theme))
 
-;; --------------------------------------------------------------------------------------------------------------
+;; ----------------------------------------------- mini-modeline ------------------------------------------------
 ;; mini-modeline
 ;; (use-package mini-modeline
 ;;   :config
@@ -266,8 +267,33 @@
 ;;          "    "
 ;;          mode-line-misc-info)))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; company
+;; --------------------------------------------------- blamer ---------------------------------------------------
+;; blamer
+(use-package blamer
+  ;; :quelpa ((blamer :fetcher github :repo "artawower/blamer.el") :upgrade t)
+  :quelpa ((blamer :fetcher github :repo "artawower/blamer.el"))
+  :ensure t
+  ;; :bind (("s-i" . blamer-show-commit-info)
+  ;;        ("C-c i" . ("s-i" . blamer-show-posframe-commit-info)))
+  :defer 5
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 40)
+  ;; (blamer-type 'posframe-popup)
+  (blamer-type 'overlay-popup)
+  (blamer--overlay-popup-position 'smart)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                   :background nil
+                   :height 140
+                   :italic t)))
+  ;; :config
+  ;; (global-blamer-mode 1))
+  )
+
+
+;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< company >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;; -------------------------------------------------- company ---------------------------------------------------
 (use-package company
   :diminish
   :config
@@ -305,43 +331,33 @@
   (define-key company-search-map (kbd "C-p") 'company-select-previous)
   (company-statistics-mode nil))
 
-;; company-prescient
+;; --------------------------------------------- company-prescient ----------------------------------------------
 (use-package company-prescient
   :commands company-prescient-mode
   :hook (company-mode . company-prescient-mode))
 
-;; company-quickhelp
+;; --------------------------------------------- company-quickhelp ----------------------------------------------
 ;; (use-package company-quickhelp
 ;;   :commands company-quickhelp-mode
 ;;   :hook (company-mode . company-quickhelp-mode)
 ;;   )
 
-;; --------------------------------------------------------------------------------------------------------------
-;; yasnippet
+;; ------------------------------------------------- yasnippet --------------------------------------------------
 (use-package yasnippet
   :config
   (yas-global-mode t)
   (setq yas-snippet-dirs (list (concat emacs-dir "/snippets"))))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; blacken
+;; -------------------------------------------------- blacken ---------------------------------------------------
 (use-package blacken
   :config
   (setq blacken-line-length 120))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; solaire
+;; -------------------------------------------------- solaire ---------------------------------------------------
 (use-package solaire-mode
   :config
   (solaire-global-mode t))
 
-;; intellisense
-(load "intellisense")
-
-;; --------------------------------------------------------------------------------------------------------------
-;; config relating to platforms
-(add-to-list 'load-path (concat config-dir "/platform"))
-(load "local-config-loader")
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; ------------------------------------------------- Deprecated -------------------------------------------------
@@ -373,27 +389,4 @@
 ;; magit
 ;; (define-key hs-leader-map (kbd "ms") 'magit-status)
 
-;; --------------------------------------------------------------------------------------------------------------
-;; blamer
-(use-package blamer
-  ;; :quelpa ((blamer :fetcher github :repo "artawower/blamer.el") :upgrade t)
-  :quelpa ((blamer :fetcher github :repo "artawower/blamer.el"))
-  :ensure t
-  ;; :bind (("s-i" . blamer-show-commit-info)
-  ;;        ("C-c i" . ("s-i" . blamer-show-posframe-commit-info)))
-  :defer 5
-  :custom
-  (blamer-idle-time 0.3)
-  (blamer-min-offset 40)
-  ;; (blamer-type 'posframe-popup)
-  (blamer-type 'overlay-popup)
-  (blamer--overlay-popup-position 'smart)
-  :custom-face
-  (blamer-face ((t :foreground "#7a88cf"
-                   :background nil
-                   :height 140
-                   :italic t)))
-  ;; :config
-  ;; (global-blamer-mode 1))
-  )
-
+(provide 'extra-config)

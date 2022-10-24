@@ -1,16 +1,5 @@
 (require 'utils)
 
-;; specific settings on gnu/linux
-;; (add-to-list 'default-frame-alist '(font . "Mono 12"))
-;; (set-face-attribute 'default nil :font "Mono")
-;; (hs/call-or-add-to-frame-hook
-;;  (lambda ()
-;;    (when (display-graphic-p)
-;;      (dolist (charset '(kana han symbol cjk-misc bopomofo))
-;;        (set-fontset-font (frame-parameter nil 'font)
-;;                          charset
-;;                          (font-spec :family "Droid Sans Fallback" :size 15))))))
-
 ;; X-clipboard
 (setq x-select-enable-clipboard t)
 (unless window-system
@@ -34,18 +23,6 @@
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 ;; --------------------------------------------------------------------------------------------------------------
-;; dired-sidebar
-(use-package dired-sidebar
-  :ensure t
-  :commands (dired-sidebar-toggle-sidebar)
-  :config
-  (setq dired-sidebar-theme 'nerd)
-  (setq dired-sidebar-face '(:family "Mono" :size 12))
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-use-custom-font t)
-  (define-key dired-mode-map (kbd "SPC") hs-leader-map))
-
-;; --------------------------------------------------------------------------------------------------------------
 ;; themes
 ;; (require 'color-theme)
 ;; (color-theme-initialize)
@@ -63,9 +40,4 @@
 ;; (load-theme 'doom-zenburn t)
 (load-theme 'doom-monokai-ristretto t)
 
-;; --------------------------------------------------------------------------------------------------------------
-;; language specific
-(add-to-list 'load-path (concat config-dir "/lang"))
-(load "lang-cpp")
-(load "lang-python")
-(load "org-config")
+(provide 'platform-config-linux)

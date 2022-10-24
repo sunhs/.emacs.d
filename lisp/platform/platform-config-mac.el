@@ -86,19 +86,6 @@
   (setq TeX-command-list (append my-tex-build-chain TeX-command-list)))
 
 ;; --------------------------------------------------------------------------------------------------------------
-;; dired-sidebar
-(use-package dired-sidebar
-  :ensure t
-  :commands (dired-sidebar-toggle-sidebar)
-  :config
-  ;; (setq dired-sidebar-subtree-line-prefix ".")
-  (setq dired-sidebar-theme 'nerd)
-  (setq dired-sidebar-face '(:family "Monaco" :size 12))
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-use-custom-font t)
-  (define-key dired-mode-map (kbd "SPC") hs-leader-map))
-
-;; --------------------------------------------------------------------------------------------------------------
 ;; themes
 ;; (require 'color-theme)
 ;; (color-theme-initialize)
@@ -107,9 +94,4 @@
 ;; (require 'spacemacs-dark-theme)
 (load-theme 'doom-city-lights t)
 
-;; --------------------------------------------------------------------------------------------------------------
-;; language specific
-(add-to-list 'load-path (concat config-dir "/lang"))
-(load "lang-cpp")
-(load "lang-python")
-(load "org-config")
+(provide 'platform-config-mac)
