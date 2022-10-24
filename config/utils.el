@@ -197,5 +197,8 @@ Behaviors:
     (if (> distance-to-bottom 1)
         (goto-line (+ (line-number-at-pos) (/ distance-to-bottom 2))))))
 
+(defun hs/term ()
+  (interactive)
+  (term "/bin/zsh"))
 
 (provide 'utils)

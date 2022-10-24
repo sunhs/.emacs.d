@@ -52,7 +52,16 @@
 ;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
 ;; (load-theme 'spacemacs-dark t)
 ;; (load-theme 'doom-one t)
-(load-theme 'gruvbox-dark-soft t)
+;; (load-theme 'doom-vibrant t)
+;; (load-theme 'gruvbox-dark-soft t)
+;; (load-theme 'gruvbox-dark-medium t)
+;; (load-theme 'doom-monokai-spectrum t)
+;; (load-theme 'doom-monokai-pro t)
+;; (load-theme 'doom-monokai-classic t)
+;; (load-theme 'doom-snazzy t)
+;; (load-theme 'doom-dark+ t)
+;; (load-theme 'doom-zenburn t)
+(load-theme 'doom-monokai-ristretto t)
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; language specific
