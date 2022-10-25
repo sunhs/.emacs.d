@@ -95,7 +95,7 @@
   ;; (setq vertico-scroll-margin 0)
 
   ;; Show more candidates
-  ;; (setq vertico-count 20)
+  (setq vertico-count 18)
 
   ;; Grow and shrink the Vertico minibuffer
   ;; (setq vertico-resize t)
@@ -126,6 +126,13 @@
   (define-key projectile-command-map "p" 'consult-projectile-switch-project)
   (define-key projectile-command-map "b" 'consult-projectile-switch-to-buffer)
   (define-key projectile-command-map "g" 'consult-ripgrep))
+
+(use-package consult-dir
+  :ensure t
+  :bind (("C-x C-d" . consult-dir)
+         :map minibuffer-local-completion-map
+         ("C-x C-d" . consult-dir)
+         ("C-x C-j" . consult-dir-jump-file)))
 
 ;; ------------------------------------------------- orderless --------------------------------------------------
 (use-package orderless
