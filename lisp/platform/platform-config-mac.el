@@ -85,13 +85,4 @@
   
   (setq TeX-command-list (append my-tex-build-chain TeX-command-list)))
 
-;; --------------------------------------------------------------------------------------------------------------
-;; themes
-;; (require 'color-theme)
-;; (color-theme-initialize)
-;; (add-to-list 'custom-theme-load-path (concat nonelpa-dir "/themes"))
-;; (load-theme 'solarized t)
-;; (require 'spacemacs-dark-theme)
-(load-theme 'doom-city-lights t)
-
 (provide 'platform-config-mac)
