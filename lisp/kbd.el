@@ -18,8 +18,8 @@
 (global-set-key (kbd "M-p") (lambda ()
                               (interactive)
                               (previous-line 20)))
-(global-set-key (kbd "M-[") 'indent-rigidly-left-to-tab-stop)
-(global-set-key (kbd "M-]") 'indent-rigidly-right-to-tab-stop)
+(global-set-key (kbd "M-{") 'indent-rigidly-left-to-tab-stop)
+(global-set-key (kbd "M-}") 'indent-rigidly-right-to-tab-stop)
 
 ;; file
 (define-key hs-leader-map "fl" 'load-file)
