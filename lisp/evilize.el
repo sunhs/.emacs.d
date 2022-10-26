@@ -123,6 +123,11 @@
 (define-key hs-leader-map "cm" 'hs/evil-mc-make-cursor-here)
 (define-key hs-leader-map "cn" 'evil-mc-make-and-goto-next-match)
 
+(dolist (hook '(magit-mode-hook magit-log-mode-hook magit-status-mode-hook))
+  (add-hook hook #'(lambda ()
+                     (turn-off-evil-mode nil)
+                     (turn-off-evil-mc-mode))))
+
 ;; ------------------------------------------------- evil-snipe -------------------------------------------------
 ;; evil-snipe
 (require 'evil-snipe)
