@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: class 
+# key: insert-class
+# --
+class ${1:class}${2: : public ${3:ParentClass}} {
+public:
+$0
+private:
+};
