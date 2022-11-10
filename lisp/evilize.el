@@ -8,7 +8,7 @@
 (require 'evil)
 (evil-mode t)
 (evil-set-initial-state 'package-menu-mode 'motion)
-(dolist (mode '(org-mode))
+(dolist (mode '(org-mode lsp-ui-imenu-mode))
   (evil-set-initial-state mode 'emacs))
 (defalias 'evil-insert-state 'evil-emacs-state)
 ;; (defalias 'forward-evil-word 'forward-evil-symbol)
