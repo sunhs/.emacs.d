@@ -39,6 +39,23 @@
     (sp-pair sym nil :unless '(sp-point-before-word-p
                                sp-point-before-same-p))))
 
+;; ---------------------------------------------- grammatical-edit ----------------------------------------------
+;; (require 'grammatical-edit)
+;; (dolist (hook '(prog-mode-hook))
+;;   (add-hook hook '(lambda () (grammatical-edit-mode 1))))
+;; (define-key grammatical-edit-mode-map (kbd "M-\"") 'grammatical-edit-wrap-double-quote)
+;; (define-key grammatical-edit-mode-map (kbd "M-'") 'grammatical-edit-wrap-single-quote)
+;; (define-key grammatical-edit-mode-map (kbd "M-[") 'grammatical-edit-wrap-bracket)
+;; (define-key grammatical-edit-mode-map (kbd "M-{") 'grammatical-edit-wrap-curly)
+;; (define-key grammatical-edit-mode-map (kbd "M-(") 'grammatical-edit-wrap-round)
+;; (define-key grammatical-edit-mode-map (kbd "M-)") 'grammatical-edit-unwrap)
+
+;; (define-key grammatical-edit-mode-map (kbd "M-p") 'grammatical-edit-jump-right)
+;; (define-key grammatical-edit-mode-map (kbd "M-n") 'grammatical-edit-jump-left)
+;; (define-key grammatical-edit-mode-map (kbd "M-:") 'grammatical-edit-jump-out-pair-and-newline)
+
+;; (define-key grammatical-edit-mode-map (kbd "C-j") 'grammatical-edit-jump-up)
+
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ivy / swiper / counsel >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;; (use-package ivy
 ;;   :config
@@ -359,10 +376,35 @@
   :config
   (setq blacken-line-length 120))
 
+;; ------------------------------------------------- git-gutter -------------------------------------------------
+;; https://ianyepan.github.io/posts/emacs-git-gutter/
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :config
+  (setq git-gutter:update-interval 0.02))
+
+;; (use-package git-gutter-fringe
+;;   :config
+;;   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+;;   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+;;   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+
 ;; -------------------------------------------------- solaire ---------------------------------------------------
 (use-package solaire-mode
   :config
   (solaire-global-mode t))
+
+;; -------------------------------------------------- aweshell --------------------------------------------------
+(add-to-list 'load-path (concat nonelpa-dir "/aweshell"))
+(require 'aweshell)
+(define-key hs-leader-map "st" 'aweshell-toggle)
+(define-key hs-leader-map "sn" 'aweshell-next)
+(define-key hs-leader-map "sp" 'aweshell-prev)
+(define-key hs-leader-map "sdt" 'aweshell-dedicated-toggle)
+(define-key eshell-mode-map (kbd "C-r")
+  #'(lambda ()
+      (interactive)
+      (consult-history (aweshell-parse-shell-history))))
 
 
 ;; --------------------------------------------------------------------------------------------------------------
