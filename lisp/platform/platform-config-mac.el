@@ -20,6 +20,7 @@
 
 ;; display chinese fonts normally in GUI
 ;; (set-default-font "Monaco 12")
+(set-frame-font "Monaco 13")
 (hs/call-or-add-to-frame-hook
  (lambda ()
    (when (display-graphic-p)
@@ -32,7 +33,8 @@
 ;; guess it's the spaceline
 (when (display-graphic-p)
   (set-frame-position (selected-frame) 80 40)
-  (set-frame-width (selected-frame) 160))
+  (set-frame-width (selected-frame) 160)
+  (set-frame-height (selected-frame) 45))
 
 ;; to prompt root privileges for non-writable files
 (defadvice find-file (after find-file-sudo activate)

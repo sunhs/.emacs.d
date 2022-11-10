@@ -96,7 +96,7 @@
 
 ;; others
 (define-key hs-leader-map "qq"
-  '(lambda ()
+  #'(lambda ()
      (interactive)
      (if (delete-frame-enabled-p)
          (delete-frame)
