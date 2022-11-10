@@ -8,7 +8,7 @@
           python-mode
           go-mode) . lsp)
   :config
-  (setq lsp-clients-clangd-args '("-j=16" "--background-index" "--log=error" "--compile-commands-dir=build")
+  (setq lsp-clients-clangd-args '("-j=16" "--background-index" "--log=error" "--compile-commands-dir=build" "--clang-tidy")
         lsp-prefer-flymake nil
         lsp-auto-configure t
         lsp-signature-render-documentation t ;; 应该是补全时的 doc
