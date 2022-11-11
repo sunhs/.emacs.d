@@ -397,6 +397,7 @@
 ;; -------------------------------------------------- aweshell --------------------------------------------------
 (add-to-list 'load-path (concat nonelpa-dir "/aweshell"))
 (require 'aweshell)
+(define-key eshell-mode-map (kbd aweshell-clear-buffer-key) nil)
 (define-key hs-leader-map "st" 'aweshell-toggle)
 (define-key hs-leader-map "sn" 'aweshell-next)
 (define-key hs-leader-map "sp" 'aweshell-prev)
