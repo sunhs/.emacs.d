@@ -395,9 +395,14 @@
   (solaire-global-mode t))
 
 ;; -------------------------------------------------- aweshell --------------------------------------------------
+;; By default, `add-hook' places the hook at the front. And there's no absolute way to place it at the end.
+;; So we add our hook first. After requiring `aweshell' it adds other hooks to modify the kbd, which come first.
+;; In this way our hook is able to overwrite theirs.
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (define-key eshell-mode-map (kbd "C-l") hs-leader-map)))
 (add-to-list 'load-path (concat nonelpa-dir "/aweshell"))
 (require 'aweshell)
-(define-key eshell-mode-map (kbd aweshell-clear-buffer-key) nil)
 (define-key hs-leader-map "st" 'aweshell-toggle)
 (define-key hs-leader-map "sn" 'aweshell-next)
 (define-key hs-leader-map "sp" 'aweshell-prev)
