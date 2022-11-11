@@ -411,6 +411,9 @@
   #'(lambda ()
       (interactive)
       (consult-history (aweshell-parse-shell-history))))
+(setq eshell-highlight-prompt nil
+      ;; epe-path-style 'full
+      eshell-prompt-function 'epe-theme-lambda)
 
 
 ;; --------------------------------------------------------------------------------------------------------------
