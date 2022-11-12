@@ -8,10 +8,13 @@
 (require 'evil)
 (evil-mode t)
 (evil-set-initial-state 'package-menu-mode 'motion)
-(dolist (mode '(org-mode lsp-ui-imenu-mode))
+(dolist (mode '(org-mode lsp-ui-imenu-mode xref--xref-buffer-mode))
   (evil-set-initial-state mode 'emacs))
 (defalias 'evil-insert-state 'evil-emacs-state)
 ;; (defalias 'forward-evil-word 'forward-evil-symbol)
+(add-hook 'activate-mark-hook
+          #'(lambda ()
+              (remove-hook 'activate-mark-hook 'evil-visual-activate-hook t)))
 
 ;; (defun hs//evil-insert-to-emacs-state (evil-insert-state-func &rest args)
 ;;   (evil-emacs-state))
