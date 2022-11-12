@@ -401,12 +401,19 @@
 (add-hook 'eshell-mode-hook
           (lambda ()
             (define-key eshell-mode-map (kbd "C-l") hs-leader-map)))
+
 (add-to-list 'load-path (concat nonelpa-dir "/aweshell"))
 (require 'aweshell)
-(define-key hs-leader-map "st" 'aweshell-toggle)
+
+;; add argument to aweshell-toggle to open in current dir
+(define-key hs-leader-map "st"
+  #'(lambda ()
+      (interactive)
+      (aweshell-toggle 4)))
 (define-key hs-leader-map "sn" 'aweshell-next)
 (define-key hs-leader-map "sp" 'aweshell-prev)
 (define-key hs-leader-map "sdt" 'aweshell-dedicated-toggle)
+(define-key hs-leader-map "sbb" 'aweshell-switch-buffer)
 (define-key eshell-mode-map (kbd "C-r")
   #'(lambda ()
       (interactive)
