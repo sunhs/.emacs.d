@@ -412,14 +412,14 @@
       (aweshell-toggle 4)))
 (define-key hs-leader-map "sn" 'aweshell-next)
 (define-key hs-leader-map "sp" 'aweshell-prev)
-(define-key hs-leader-map "sdt" 'aweshell-dedicated-toggle)
-(define-key hs-leader-map "sbb" 'aweshell-switch-buffer)
+(define-key hs-leader-map "sd" 'aweshell-dedicated-toggle)
+(define-key hs-leader-map "sb" 'aweshell-switch-buffer)
 (define-key eshell-mode-map (kbd "C-r")
   #'(lambda ()
       (interactive)
       (consult-history (aweshell-parse-shell-history))))
 (setq eshell-highlight-prompt nil
-      ;; epe-path-style 'full
+      epe-path-style 'full
       eshell-prompt-function 'epe-theme-lambda)
 
 
