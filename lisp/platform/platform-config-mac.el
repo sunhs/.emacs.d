@@ -37,11 +37,11 @@
   (set-frame-height (selected-frame) 45))
 
 ;; to prompt root privileges for non-writable files
-(defadvice find-file (after find-file-sudo activate)
-  "Find file as root if necessary."
-  (unless (and buffer-file-name
-               (file-writable-p buffer-file-name))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+;; (defadvice find-file (after find-file-sudo activate)
+;;   "Find file as root if necessary."
+;;   (unless (and buffer-file-name
+;;                (file-writable-p buffer-file-name))
+;;     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 ;; --------------------------------------------------------------------------------------------------------------
 ;; org-bullets
