@@ -37,7 +37,11 @@
 ;; (setq-default clang-format-style "{BasedOnStyle: llvm, IndentWidth: 4}")
 ;; (add-hook 'c++-mode-hook 'hs/c-cpp-ret-kbd)
 ;; (add-hook 'c-mode-hook 'hs/c-cpp-ret-kbd)
-(require 'dap-gdb-lldb)
+(use-package dap-mode
+  :config
+  (require 'dap-gdb-lldb)
+  (dap-gdb-lldb-setup)
+  )
 
 ;; (use-package irony
 ;;   :defer t
