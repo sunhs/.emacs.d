@@ -22,4 +22,6 @@
 ;;                (file-writable-p buffer-file-name))
 ;;     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
+(setq-default clang-format-executable "clang-format-8")
+
 (provide 'platform-config-linux)

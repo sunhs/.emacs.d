@@ -35,7 +35,6 @@
   (define-key c-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline))
 
 ;; (setq-default clang-format-style "{BasedOnStyle: llvm, IndentWidth: 4}")
-(setq-default clang-format-executable "clang-format-8")
 ;; (add-hook 'c++-mode-hook 'hs/c-cpp-ret-kbd)
 ;; (add-hook 'c-mode-hook 'hs/c-cpp-ret-kbd)
 (require 'dap-gdb-lldb)
