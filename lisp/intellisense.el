@@ -6,7 +6,8 @@
   :hook ((c++-mode
           c-mode
           python-mode
-          go-mode) . lsp)
+          go-mode
+          cmake-mode) . lsp)
   :config
   (setq lsp-prefer-flymake nil
         lsp-auto-configure t
@@ -45,7 +46,9 @@
   :commands flycheck-mode
   :hook ((python-mode
           c++-mode
-          c-mode) . flycheck-mode)
+          c-mode
+          go-mode
+          cmake-mode) . flycheck-mode)
   :config
   ;; (setq flycheck-check-syntax-automatically '(idle-change))
   (setq flycheck-checker-error-threshold 4096
