@@ -37,6 +37,33 @@
 (define-key hs-leader-map "lx" 'hs/kill-whole-line)
 (define-key hs-leader-map "l;" 'hs/comment-line)
 (define-key hs-leader-map "l/" 'hs/uncomment-line)
+;; duplicate line below
+(define-key hs-leader-map "ly"
+  #'(lambda ()
+      (interactive)
+      (beginning-of-line)
+      (push-mark)
+      (activate-mark)
+      (end-of-line)
+      (kill-ring-save (mark) (point))
+      (end-of-line)
+      (newline)
+      (yank)
+      ))
+;; duplicate line above
+(define-key hs-leader-map "lY"
+  #'(lambda ()
+      (interactive)
+      (hs/select-stripped-line)(beginning-of-line)
+      (push-mark)
+      (activate-mark)
+      (end-of-line)
+      (kill-ring-save (mark) (point))
+      (previous-line)
+      (end-of-line)
+      (newline)
+      (yank)
+      ))
 (global-set-key (kbd "C-a") 'hs/smart-beginning-of-line)
 
 ;; region
