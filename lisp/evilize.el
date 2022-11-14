@@ -13,7 +13,8 @@
   (evil-set-initial-state 'package-menu-mode 'motion)
   (dolist (mode '(org-mode lsp-ui-imenu-mode xref--xref-buffer-mode))
     (evil-set-initial-state mode 'emacs))
-  (defalias 'forward-evil-word 'forward-evil-symbol)
+  ;; (defalias 'forward-evil-word 'forward-evil-symbol)
+  ;; (defalias 'evil-word 'evil-symbol)
   (add-hook 'evil-emacs-state-entry-hook
             #'(lambda ()
                 (turn-off-evil-mc-mode)
