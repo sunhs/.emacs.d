@@ -85,7 +85,6 @@
   ;; evil-emacs-state-cursor '(bar))
 
   (unless (display-graphic-p)
-    (require 'evil-terminal-cursor-changer)
     ;; (setq etcc-use-color t)
     (evil-terminal-cursor-changer-activate))
   ;; (add-hook 'evil-emacs-state-entry-hook #'(lambda ()

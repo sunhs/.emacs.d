@@ -181,7 +181,9 @@
     (use-package treemacs-evil
       :after treemacs evil
       :config
-      (setq evil-treemacs-state-cursor '(box))
+      (add-hook 'evil-treemacs-state-entry-hook
+                #'(lambda ()
+                    (setq evil-treemacs-state-cursor '(box))))
       )
   )
 
