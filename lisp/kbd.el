@@ -111,11 +111,6 @@
 ;; (define-key hs-leader-map "aw" 'avy-goto-word-1)
 (define-key hs-leader-map "al" 'avy-goto-line)
 
-;; magit
-(define-key hs-leader-map "mg" 'magit)
-(define-key hs-leader-map "mba" 'magit-blame-addition)
-(define-key hs-leader-map "mbq" 'magit-blame-quit)
-
 ;; help
 (define-key hs-leader-map "hk" 'describe-key)
 (define-key hs-leader-map "hf" 'describe-function)

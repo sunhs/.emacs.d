@@ -29,7 +29,8 @@
   ;; (require 'lsp-clients)
   ;; (require 'lsp-python-ms)
   ;; (require 'lsp-pyls)
-  (require 'lsp-pyright)
+  (use-package lsp-pyright
+    )
   (push '(company-files company-capf :with company-yasnippet) company-backends)
   ;; (add-hook 'lsp-mode-hook
   ;;           (lambda ()
@@ -61,8 +62,8 @@
           c++-mode
           c-mode) . flycheck-mode)
   :config
-  (setq ;;flycheck-check-syntax-automatically '(idle-change)
-        flycheck-checker-error-threshold 4096
+  ;; (setq flycheck-check-syntax-automatically '(idle-change))
+  (setq flycheck-checker-error-threshold 4096
         flycheck-display-errors-delay 0.1
         display-buffer-alist
         '(("\\*Flycheck errors\\*"
