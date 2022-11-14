@@ -90,4 +90,9 @@
 ;;   (add-hook 'c++-mode-hook 'irony-eldoc)
 ;;   (add-hook 'c-mode-hook 'irony-eldoc))
 
+(use-package lsp-mode
+  :config
+  (setq lsp-clients-clangd-args '("-j=16" "--background-index" "--log=error" "--compile-commands-dir=build" "--clang-tidy"))
+  )
+
 (provide 'lang-cpp)

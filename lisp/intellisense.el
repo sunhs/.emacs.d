@@ -8,29 +8,14 @@
           python-mode
           go-mode) . lsp)
   :config
-  (setq lsp-clients-clangd-args '("-j=16" "--background-index" "--log=error" "--compile-commands-dir=build" "--clang-tidy")
-        lsp-prefer-flymake nil
+  (setq lsp-prefer-flymake nil
         lsp-auto-configure t
         lsp-signature-render-documentation t ;; 应该是补全时的 doc
         lsp-signature-doc-lines 30 ;; Defaults to 20
         lsp-eldoc-render-all nil ;; Defaults to nul; 在底部渲染 doc
         lsp-file-watch-threshold nil)
-  (setq lsp-pyls-plugins-rope-completion-enabled nil ;; Already enabled jedi.
-        lsp-pyls-plugins-flake8-enabled t
-        lsp-pyls-plugins-pyflakes-enabled nil ;; Use flake8.
-        lsp-pyls-plugins-mccabe-enabled t
-        lsp-pyls-plugins-pycodestyle-enabled nil
-        lsp-pyls-plugins-autopep8-enabled nil ;; Use black.
-        lsp-pyls-plugins-yapf-enabled nil ;; Use black.
-        lsp-pyls-plugins-flake8-ignore "E111,E114,E121,E127,E402,E731"
-        lsp-pyls-plugins-flake8-max-line-length 80)
   (define-key hs-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions)
 
-  ;; (require 'lsp-clients)
-  ;; (require 'lsp-python-ms)
-  ;; (require 'lsp-pyls)
-  (use-package lsp-pyright
-    )
   (push '(company-files company-capf :with company-yasnippet) company-backends)
   ;; (add-hook 'lsp-mode-hook
   ;;           (lambda ()
