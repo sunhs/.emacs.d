@@ -30,4 +30,6 @@
   (setq lsp-clients-clangd-args '("-j=16" "--background-index" "--log=error" "--compile-commands-dir=build" "--clang-tidy"))
   )
 
+(use-package clang-format+)
+
 (provide 'lang-cpp)
