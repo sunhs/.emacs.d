@@ -91,12 +91,12 @@
 (setq vc-follow-symlinks t)
 ;; (xterm-mouse-mode t)
 
-;; ;; load customize variables
-;; (setq custom-file (concat lisp-dir "/custom.el"))
+;; load customize variables
+(setq custom-file (concat emacs-dir "/custom.el"))
 ;; (load custom-file)
-;; ;; (add-hook 'kill-emacs-hook
-;; ;;           (lambda ()
-;; ;;             (custom-set-variables `(package-selected-packages ,(hs/sort-package-list)))
-;; ;;             (custom-save-all)))
+;; (add-hook 'kill-emacs-hook
+;;           (lambda ()
+;;             (custom-set-variables `(package-selected-packages ,(hs/sort-package-list)))
+;;             (custom-save-all)))
 
 (provide 'builtin)
