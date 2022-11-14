@@ -1,25 +1,6 @@
 (setq-default c-basic-offset 4
               tab-width 4)
 
-;; (c-add-style "microsoft"
-;;              '("stroustrup"
-;;                (c-offsets-alist
-;;                 (innamespace . -)
-;;                 (inline-open . 0)
-;;                 (inher-cont . c-lineup-multi-inher)
-;;                 (arglist-cont-nonempty . +)
-;;                 (template-args-cont . +))))
-;; (setq c-default-style "microsoft")
-(c-add-style "mine"
-             '("stroustrup"
-               (c-offsets-alist
-                (innamespace . 0)
-                (inline-open . 0)
-                (inher-cont . c-lineup-multi-inher)
-                (arglist-cont-nonempty . +)
-                (template-args-cont . +))))
-(setq c-default-style "mine")
-
 (defun hs/c-cpp-bracket-newline ()
   (interactive)
   (if (= (char-before) 123)
