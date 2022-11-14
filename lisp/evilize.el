@@ -17,9 +17,7 @@
   ;; (defalias 'evil-word 'evil-symbol)
   (add-hook 'evil-emacs-state-entry-hook
             #'(lambda ()
-                (turn-off-evil-mc-mode)
                 (remove-hook 'activate-mark-hook 'evil-visual-activate-hook t)))
-  (add-hook 'evil-emacs-state-exit-hook 'turn-on-evil-mc-mode)
 
   ;; (defun hs//evil-insert-to-emacs-state (evil-insert-state-func &rest args)
   ;;   (evil-emacs-state))
@@ -128,11 +126,6 @@
   :config
   (global-evil-mc-mode t)
 
-  (dolist (hook '())
-    (add-hook hook #'(lambda ()
-                       (turn-off-evil-mode nil)
-                       (turn-off-evil-mc-mode))))
-  
   (add-hook 'evil-emacs-state-entry-hook
             #'(lambda ()
                 (turn-off-evil-mc-mode)))
