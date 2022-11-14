@@ -30,6 +30,21 @@
     (and evil-local-mode
          (memq (or state evil-state) '())))
 
+  (setq-default mode-line-format
+                (list
+                 " %&  "
+                 mode-line-buffer-identification
+                 '(vc-mode vc-mode)
+                 "  "
+                 '(:eval (symbol-name evil-state))
+                 "  "
+                 "%l/"
+                 '(:eval (number-to-string (count-lines (point-min) (point-max))))
+                 "  "
+                 mode-line-modes
+                 "  "
+                 mode-line-misc-info))
+
   ;; -------------------- kbd --------------------
 
   ;; common for state maps
