@@ -147,7 +147,7 @@
 (use-package consult-dir
   :ensure t
   :bind (("C-x C-d" . consult-dir)
-         :map minibuffer-local-completion-map
+         :map vertico-map
          ("C-x C-d" . consult-dir)
          ("C-x C-j" . consult-dir-jump-file)))
 
@@ -205,27 +205,28 @@
   (setq treemacs-follow-after-init t)
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
-  (treemacs-git-mode 'simple))
+  (treemacs-git-mode 'simple)
+  (define-key hs-leader-map (kbd "tt") 'treemacs-add-and-display-current-project-exclusively))
   ;; (add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1))))
 
 ;; ----------------------------------------------- treemacs-evil ------------------------------------------------
-(use-package treemacs-evil
-  :after treemacs evil)
+;; (use-package treemacs-evil
+;;   :after treemacs evil)
 
 ;; -------------------------------------------- treemacs-projectile ---------------------------------------------
 (use-package treemacs-projectile
   :after treemacs projectile)
 
 ;; ----------------------------------------------- dired-sidebar ------------------------------------------------
-(use-package dired-sidebar
-  :ensure t
-  :commands (dired-sidebar-toggle-sidebar)
-  :config
-  (setq dired-sidebar-theme 'nerd)
-  (setq dired-sidebar-face '(:family "Mono" :size 12))
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-use-custom-font t)
-  (define-key dired-mode-map (kbd "SPC") hs-leader-map))
+;; (use-package dired-sidebar
+;;   :ensure t
+;;   :commands (dired-sidebar-toggle-sidebar)
+;;   :config
+;;   (setq dired-sidebar-theme 'nerd)
+;;   (setq dired-sidebar-face '(:family "Mono" :size 12))
+;;   (setq dired-sidebar-use-term-integration t)
+;;   (setq dired-sidebar-use-custom-font t)
+;;   (define-key dired-mode-map (kbd "SPC") hs-leader-map))
 
 ;; ------------------------------------------------- undo-tree --------------------------------------------------
 ;; (use-package undo-tree
