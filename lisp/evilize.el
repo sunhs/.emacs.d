@@ -6,15 +6,17 @@
 (setq-default evil-want-C-u-scroll nil)
 (setq-default evil-want-C-i-jump nil)
 (require 'evil)
-(evil-mode t)
-(evil-set-initial-state 'package-menu-mode 'motion)
-(dolist (mode '(org-mode lsp-ui-imenu-mode xref--xref-buffer-mode))
-  (evil-set-initial-state mode 'emacs))
+;; (evil-mode t)
 (defalias 'evil-insert-state 'evil-emacs-state)
+;; (evil-set-initial-state 'package-menu-mode 'motion)
+;; (dolist (mode '(org-mode lsp-ui-imenu-mode xref--xref-buffer-mode))
+;;   (evil-set-initial-state mode 'emacs))
 ;; (defalias 'forward-evil-word 'forward-evil-symbol)
-(add-hook 'activate-mark-hook
+(add-hook 'evil-emacs-state-entry-hook
           #'(lambda ()
+              (turn-off-evil-mc-mode)
               (remove-hook 'activate-mark-hook 'evil-visual-activate-hook t)))
+(add-hook 'evil-emacs-state-exit-hook 'turn-on-evil-mc-mode)
 
 ;; (defun hs//evil-insert-to-emacs-state (evil-insert-state-func &rest args)
 ;;   (evil-emacs-state))
