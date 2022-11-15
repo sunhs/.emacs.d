@@ -56,7 +56,7 @@
 (add-to-list 'load-path (concat lisp-dir "/lang"))
 (require 'lang-cpp)
 (require 'lang-python)
-(require 'lang-cmake)
+(require 'lang-other)
 (add-to-list 'load-path (concat lisp-dir "/platform"))
 (cond ((string= system-type "gnu/linux") (require 'platform-config-linux))
       ((string= system-type "darwin") (require 'platform-config-mac)))
