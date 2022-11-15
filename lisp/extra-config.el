@@ -377,6 +377,7 @@
   #'(lambda ()
       (interactive)
       (aweshell-toggle 4)))
+(define-key hs-leader-map "sc" 'aweshell-new)
 (define-key hs-leader-map "sn" 'aweshell-next)
 (define-key hs-leader-map "sp" 'aweshell-prev)
 (define-key hs-leader-map "sd" 'aweshell-dedicated-toggle)
