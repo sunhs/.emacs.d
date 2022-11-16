@@ -390,12 +390,15 @@
       epe-path-style 'full
       eshell-prompt-function 'epe-theme-lambda)
 
+;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< themes >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 (use-package doom-themes
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   )
+
+(use-package modus-themes)
 
 
 ;; --------------------------------------------------------------------------------------------------------------
