@@ -106,6 +106,11 @@
 (balance-windows)))
 
 ;; avy
+(defvar hs-avy-map (make-sparse-keymap))
+(global-set-key (kbd "M-a") hs-avy-map)
+(define-key hs-avy-map (kbd "f") 'avy-goto-char)
+(define-key hs-avy-map (kbd "s") 'avy-goto-char-2)
+(define-key hs-avy-map (kbd "l") 'avy-goto-line)
 (define-key hs-leader-map "ac" 'avy-goto-char)
 (define-key hs-leader-map "aa" 'avy-goto-char-2)
 ;; (define-key hs-leader-map "aw" 'avy-goto-word-1)
