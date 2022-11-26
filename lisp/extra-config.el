@@ -304,7 +304,8 @@
         company-require-match nil
         company-search-regexp-function 'company-search-words-in-any-order-regexp
         company-selection-wrap-around t
-        company-tooltip-align-annotations t)
+        company-tooltip-align-annotations t
+        company-dabbrev-downcase nil)
         ;; company-backends '(company-capf))
 
   ;; turn off and on fci-mode during completion to avoid weird behavior
