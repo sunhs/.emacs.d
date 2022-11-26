@@ -264,6 +264,7 @@
 (use-package magit
   :bind (:map hs-leader-map
               ("mg" . magit)
+              ("mf" . magit-log-buffer-file)
               ("mba" . magit-blame-addition)
               ("mbq" . magit-blame-quit))
   )
@@ -430,9 +431,5 @@
 ;; (require 'inertial-scroll)
 ;; (inertias-global-minor-mode 1)
 ;; (setq inertias-initial-velocity-wheel 1)
-
-;; --------------------------------------------------------------------------------------------------------------
-;; magit
-;; (define-key hs-leader-map (kbd "ms") 'magit-status)
 
 (provide 'extra-config)
