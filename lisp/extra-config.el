@@ -96,6 +96,10 @@
   (define-key hs-leader-map (kbd "SPC") 'execute-extended-command)
   )
 
+(use-package vertico-prescient
+  :commands vertico-prescient-mode
+  :hook (vertico-mode . vertico-prescient-mode))
+
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
   :init
