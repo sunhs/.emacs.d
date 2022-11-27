@@ -30,6 +30,14 @@
   (setq lsp-clients-clangd-args '("-j=16" "--background-index" "--log=error" "--compile-commands-dir=build" "--clang-tidy"))
   )
 
-(use-package clang-format+)
+(use-package clang-format+
+  :config
+  (add-hook 'before-save-hook
+            #'(lambda ()
+                (dolist (mode '(c++-mode cc-mode c-mode))
+                  (if (eq major-mode mode)
+                      (clang-format-buffer))))
+            )
+  )
 
 (provide 'lang-cpp)
