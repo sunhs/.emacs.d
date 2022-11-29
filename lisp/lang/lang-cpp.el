@@ -1,6 +1,13 @@
 (setq-default c-basic-offset 4
               tab-width 4)
 
+;; don't indent in namespace
+(c-set-offset 'innamespace 0)
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(setq ff-search-directories
+      '("." "../src" "../include" "../../src" "../../include"))
+
 (defun hs/c-cpp-bracket-newline ()
   (interactive)
   (if (= (char-before) 123)
