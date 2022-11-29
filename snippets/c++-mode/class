@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: class 
-# key: insert-class
+# key: insert_class
 # --
 class ${1:class}${2: : public ${3:ParentClass}} {
 public:

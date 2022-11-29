@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: namespace
-# key: insert-ns
+# key: insert_ns
 # --
 namespace ${1:ns} {
 $0
