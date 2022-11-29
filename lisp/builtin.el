@@ -58,13 +58,15 @@
 ;; mode-line
 (setq-default mode-line-format
               (list
-               "  "
-               "%&"
+               " %&  "
                mode-line-buffer-identification
                '(vc-mode vc-mode)
-               "    "
+               "  "
+               "%l/"
+               '(:eval (number-to-string (count-lines (point-min) (point-max))))
+               "  "
                mode-line-modes
-               "    "
+               "  "
                mode-line-misc-info))
 
 ;; gc threshold
