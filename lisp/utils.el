@@ -239,6 +239,7 @@ Behaviors:
     (insert (hs/pad-string content 110 "<" ">"))))
 
 (defun hs/find-other-file-in-project (&optional fpath)
+  (require 'find-file)
   (let* ((fname (if fpath
                     (file-name-nondirectory fpath)
                   (file-name-nondirectory (buffer-file-name))))

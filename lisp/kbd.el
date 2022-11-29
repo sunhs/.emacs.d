@@ -28,7 +28,6 @@
 (define-key hs-leader-map "fp" 'hs/show-file-path)
 (define-key hs-leader-map "fs" 'save-buffer)
 (define-key hs-leader-map "fw" 'write-file)
-(define-key hs-leader-map "fo" 'ff-find-other-file)
 
 ;; line
 (define-key hs-leader-map "ld" 'hs/kill-stripped-line)

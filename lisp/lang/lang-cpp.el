@@ -26,6 +26,12 @@
 ;; (add-hook 'c++-mode-hook 'hs/c-cpp-ret-kbd)
 ;; (add-hook 'c-mode-hook 'hs/c-cpp-ret-kbd)
 
+(defun hs/find-other-file-kbd ()
+  (define-key c++-mode-map (kbd "M-o") 'hs-cmd/find-other-file-in-project)
+  (define-key c-mode-map (kbd "M-o") 'hs-cmd/find-other-file-in-project))
+(add-hook 'c++-mode-hook 'hs/find-other-file-kbd)
+(add-hook 'c-mode-hook 'hs/find-other-file-kbd)
+
 (use-package dap-mode
   :config
   (require 'dap-gdb-lldb)
@@ -45,6 +51,22 @@
                   (if (eq major-mode mode)
                       (clang-format-buffer))))
             )
+  )
+
+(use-package consult
+  :config
+  ;; overwrite this function if consult exists
+  (defun hs-cmd/find-other-file-in-project ()
+    (interactive)
+    (let ((results (hs/find-other-file-in-project)))
+      (cond ((not results))
+            ((length= results 1)
+             (find-file (car results)))
+            (t
+             (consult--read results :prompt "Open file:" :category 'file))
+            )
+      )
+    )
   )
 
 (provide 'lang-cpp)
