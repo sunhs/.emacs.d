@@ -238,4 +238,81 @@ Behaviors:
     (insert ";; ")
     (insert (hs/pad-string content 110 "<" ">"))))
 
+(defun hs/find-other-file-in-project (&optional fpath)
+  (let* ((fname (if fpath
+                    (file-name-nondirectory fpath)
+                  (file-name-nondirectory (buffer-file-name))))
+         (alist (if (symbolp ff-other-file-alist)
+                    (symbol-value ff-other-file-alist)
+                  ff-other-file-alist))
+         (rule (car alist))
+         (pos (ff-string-match (car rule) fname))
+         (stub "")
+         (candidate-fnames nil)
+         (results nil)
+         (nomatch nil)
+         )
+
+    ;; find a rule that matches the buffer filename
+    (while (and rule (if (and pos (>= pos 0)) nil (not pos)))
+      (setq alist (cdr alist))
+      (setq rule (car alist))
+      (setq pos (ff-string-match (car rule) fname)))
+
+    (if (not rule)
+        (setq nomatch t)
+      
+      (setq suffixes (car (cdr rule))
+            action (car (cdr rule)))
+
+      ;; action is a function
+      (if (and (atom action) (fboundp action))
+          (setq candidate-fnames (funcall action (ff-buffer-file-name)))
+
+        ;; get the stub (filename without extension)
+        (setq format (concat "\\(.+\\)" (car rule)))
+        (string-match format fname)
+        (setq stub (match-string 1 fname))
+        ;; concat with new suffixes
+        (setq candidate-fnames
+              (mapcar (lambda (suffix)
+                        (concat stub suffix))
+                      suffixes))
+        )
+      
+      ;; find new filenames
+      (dolist (candfname candidate-fnames)
+        ;; prevent such cases: submodule.cc -> fuck_submodule.cc.o
+        (setq regex (concat "^" candfname "$"))
+        (setq results (append results
+                              (directory-files-recursively (projectile-project-root)
+                                                           regex
+                                                           nil
+                                                           nil
+                                                           t))))
+      )
+
+    (cond ((or nomatch
+               (not results))
+           (message "no match with `fname' %s and `rule' %s" fname rule)
+           nil)
+          (t
+           results
+           )
+          )
+    )
+  )
+
+(defun hs-cmd/find-other-file-in-project ()
+  (interactive)
+  (let ((results (hs/find-other-file-in-project)))
+    (cond ((not results))
+          ((length= results 1)
+           (find-file (car results)))
+          (t
+           (find-file (completing-read "Open file:" results)))
+          )
+    )
+  )
+
 (provide 'utils)
