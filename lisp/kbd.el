@@ -22,7 +22,9 @@
 (global-set-key (kbd "M-}") 'indent-rigidly-right-to-tab-stop)
 
 ;; file
-(define-key hs-leader-map "fl" 'load-file)
+(define-key hs-leader-map "fl" #'(lambda ()
+                                   (interactive)
+                                   (load-file (buffer-file-name))))
 (define-key hs-leader-map "fp" 'hs/show-file-path)
 (define-key hs-leader-map "fs" 'save-buffer)
 (define-key hs-leader-map "fw" 'write-file)
