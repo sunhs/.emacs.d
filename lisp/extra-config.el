@@ -109,6 +109,7 @@
 (use-package consult
   :init (recentf-mode)
   :config
+  (setq recentf-max-saved-items 100)
   (setq consult-project-function #'projectile-project-root)
   (global-set-key (kbd "C-s") 'consult-line)
   (define-key hs-leader-map (kbd "bb") 'consult-buffer)
