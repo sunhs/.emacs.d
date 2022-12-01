@@ -8,6 +8,12 @@
 (setq ff-search-directories
       '("." "../src" "../include" "../../src" "../../include"))
 
+(add-hook 'c++-mode-hook
+          #'(lambda ()
+              (define-key c++-mode-map (kbd "M-e") nil)
+              )
+          )
+
 (defun hs/c-cpp-bracket-newline ()
   (interactive)
   (if (= (char-before) 123)

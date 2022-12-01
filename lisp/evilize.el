@@ -156,5 +156,21 @@
               ("cn" . evil-mc-make-and-goto-next-match))
   )
 
+(global-set-key (kbd "M-e")
+                #'(lambda ()
+                    (interactive)
+                    (if (not evil-mode)
+                        (progn
+                          (message "evil on")
+                          (evil-mode)
+                          (evil-mc-mode)
+                          (evil-snipe-mode)
+                          (evil-surround-mode))
+                      (progn
+                        (message "evil off")
+                        (evil-mode -1)
+                        (evil-mc-mode -1)
+                        (evil-snipe-mode -1)
+                        (evil-surround-mode -1)))))
 
 (provide 'evilize)

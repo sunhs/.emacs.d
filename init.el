@@ -46,7 +46,7 @@
 
 (require 'kbd)
 (require 'builtin)
-(setq hs/use-evil-p t)
+(setq hs/use-evil-p nil)
 (if hs/use-evil-p
     (require 'evilize))
 (require 'org-config)
