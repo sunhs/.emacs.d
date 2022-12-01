@@ -156,21 +156,23 @@
               ("cn" . evil-mc-make-and-goto-next-match))
   )
 
+(defun hs/toggle-evil (toggle)
+  (if (eq toggle -1)
+      (message "evil off")
+    (message "evil on"))
+  
+  (evil-mode toggle)
+  (evil-mc-mode toggle)
+  (evil-snipe-mode toggle)
+  (evil-surround-mode toggle)
+  )
+
+(global-unset-key (kbd "M-e"))
 (global-set-key (kbd "M-e")
                 #'(lambda ()
                     (interactive)
                     (if (not evil-mode)
-                        (progn
-                          (message "evil on")
-                          (evil-mode)
-                          (evil-mc-mode)
-                          (evil-snipe-mode)
-                          (evil-surround-mode))
-                      (progn
-                        (message "evil off")
-                        (evil-mode -1)
-                        (evil-mc-mode -1)
-                        (evil-snipe-mode -1)
-                        (evil-surround-mode -1)))))
+                        (hs/toggle-evil t)
+                      (hs/toggle-evil -1))))
 
 (provide 'evilize)

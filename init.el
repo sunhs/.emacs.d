@@ -46,9 +46,11 @@
 
 (require 'kbd)
 (require 'builtin)
+(require 'evilize)
 (setq hs/use-evil-p nil)
 (if hs/use-evil-p
-    (require 'evilize))
+    (hs/toggle-evil t)
+  (hs/toggle-evil -1))
 (require 'org-config)
 (require 'extra-config)
 (require 'intellisense)
