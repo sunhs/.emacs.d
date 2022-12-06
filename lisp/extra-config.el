@@ -170,6 +170,8 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
+(use-package wgrep)
+
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< treemacs >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 (use-package treemacs
   :init
