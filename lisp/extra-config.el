@@ -378,26 +378,33 @@
           (lambda ()
             (define-key eshell-mode-map (kbd "C-l") hs-leader-map)))
 
-(add-to-list 'load-path (concat nonelpa-dir "/aweshell"))
-(require 'aweshell)
+(use-package aweshell
+  :straight
+  (aweshell
+    ;; :files (:defaults "elisp-autofmt")
+    ;; :host nil
+    :type git
+    :repo "https://github.com/manateelazycat/aweshell")
 
-;; add argument to aweshell-toggle to open in current dir
-(define-key hs-leader-map "st"
-  #'(lambda ()
-      (interactive)
-      (aweshell-toggle 4)))
-(define-key hs-leader-map "sc" 'aweshell-new)
-(define-key hs-leader-map "sn" 'aweshell-next)
-(define-key hs-leader-map "sp" 'aweshell-prev)
-(define-key hs-leader-map "sd" 'aweshell-dedicated-toggle)
-(define-key hs-leader-map "sb" 'aweshell-switch-buffer)
-(define-key eshell-mode-map (kbd "C-r")
-  #'(lambda ()
+  :config
+  ;; add argument to aweshell-toggle to open in current dir
+  (define-key hs-leader-map "st"
+    #'(lambda () (interactive) (aweshell-toggle 4)))
+  (define-key hs-leader-map "sc" 'aweshell-new)
+  (define-key hs-leader-map "sn" 'aweshell-next)
+  (define-key hs-leader-map "sp" 'aweshell-prev)
+  (define-key hs-leader-map "sd" 'aweshell-dedicated-toggle)
+  (define-key hs-leader-map "sb" 'aweshell-switch-buffer)
+  (define-key eshell-mode-map (kbd "C-r")
+    #'
+    (lambda ()
       (interactive)
       (consult-history (aweshell-parse-shell-history))))
-(setq eshell-highlight-prompt nil
-      epe-path-style 'full
-      eshell-prompt-function 'epe-theme-lambda)
+  (setq
+    eshell-highlight-prompt
+    nil
+    epe-path-style 'full
+    eshell-prompt-function 'epe-theme-lambda))
 
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< themes >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 (use-package doom-themes
