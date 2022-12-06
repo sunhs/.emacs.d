@@ -114,7 +114,7 @@
 (define-key hs-avy-map (kbd "a") 'avy-goto-char-2)
 (define-key hs-avy-map (kbd "l") 'avy-goto-end-of-line)
 (define-key hs-avy-map (kbd "w") 'avy-goto-word-1)
-(define-key hs-avy-map (kbd "t") 'avy-goto-char-timer)
+(define-key hs-avy-map (kbd "s") 'avy-goto-char-timer)
 (define-key hs-avy-map (kbd "r") 'avy-resume)
 
 ;; help
