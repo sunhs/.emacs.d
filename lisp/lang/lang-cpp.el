@@ -1,42 +1,43 @@
 (setq-default c-basic-offset 4
               tab-width 4)
 
-;; don't indent in namespace
-(c-set-offset 'innamespace 0)
-
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(setq ff-search-directories
-      '("." "../src" "../include" "../../src" "../../include"))
 
-(add-hook 'c++-mode-hook
-          #'(lambda ()
-              (define-key c++-mode-map (kbd "M-e") nil)
-              )
-          )
+;; (defun hs/c-cpp-bracket-newline ()
+;;   (interactive)
+;;   (if (= (char-before) 123)
+;;       (progn
+;;         (newline-and-indent)
+;;         (newline-and-indent)
+;;         (previous-line)
+;;         (c-indent-line-or-region))
+;;     (newline-and-indent)))
 
-(defun hs/c-cpp-bracket-newline ()
-  (interactive)
-  (if (= (char-before) 123)
-      (progn
-        (newline-and-indent)
-        (newline-and-indent)
-        (previous-line)
-        (c-indent-line-or-region))
-    (newline-and-indent)))
-
-(defun hs/c-cpp-ret-kbd ()
-  (define-key c++-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline)
-  (define-key c-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline))
+;; (defun hs/c-cpp-ret-kbd ()
+;;   (define-key c++-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline)
+;;   (define-key c-mode-map (kbd "RET") 'hs/c-cpp-bracket-newline))
 
 ;; (setq-default clang-format-style "{BasedOnStyle: llvm, IndentWidth: 4}")
 ;; (add-hook 'c++-mode-hook 'hs/c-cpp-ret-kbd)
 ;; (add-hook 'c-mode-hook 'hs/c-cpp-ret-kbd)
 
-(defun hs/find-other-file-kbd ()
-  (define-key c++-mode-map (kbd "M-o") 'hs-cmd/find-other-file-in-project)
-  (define-key c-mode-map (kbd "M-o") 'hs-cmd/find-other-file-in-project))
-(add-hook 'c++-mode-hook 'hs/find-other-file-kbd)
-(add-hook 'c-mode-hook 'hs/find-other-file-kbd)
+(setq cc-hook-map
+      '((c++-mode-hook c++-mode-map)
+        (c-mode-hook c-mode-map))
+      )
+
+(dolist (hook-map cc-hook-map)
+  (lexical-let ((hook (car hook-map))
+                (mmap (car (cdr hook-map))))
+    (add-hook hook
+              #'(lambda ()
+                  (define-key (symbol-value mmap) (kbd "M-o") 'hs-cmd/find-other-file-in-project)
+                  (define-key (symbol-value mmap) (kbd "M-e") nil)
+                  (c-set-offset 'innamespace 0)
+                  )
+              )
+    )
+  )
 
 (use-package dap-mode
   :config
