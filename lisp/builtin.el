@@ -29,8 +29,8 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;; line numbers
-;; (setq display-line-numbers-type 'relative)
-;; (global-display-line-numbers-mode)
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode)
 
 ;; no back-up or auto-save files
 (setq-default make-backup-files nil ;; no backup file
