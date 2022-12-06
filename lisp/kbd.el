@@ -38,6 +38,7 @@
 (define-key hs-leader-map "lx" 'hs/kill-whole-line)
 (define-key hs-leader-map "l;" 'hs/comment-line)
 (define-key hs-leader-map "l/" 'hs/uncomment-line)
+(define-key hs-leader-map "lt" 'hs-cmd/recenter-top)
 ;; duplicate line below
 (define-key hs-leader-map "ly"
   #'(lambda ()
