@@ -109,13 +109,12 @@
 ;; avy
 (defvar hs-avy-map (make-sparse-keymap))
 (global-set-key (kbd "M-a") hs-avy-map)
-(define-key hs-avy-map (kbd "f") 'avy-goto-char)
-(define-key hs-avy-map (kbd "s") 'avy-goto-char-2)
-(define-key hs-avy-map (kbd "l") 'avy-goto-line)
-(define-key hs-leader-map "ac" 'avy-goto-char)
-(define-key hs-leader-map "aa" 'avy-goto-char-2)
-;; (define-key hs-leader-map "aw" 'avy-goto-word-1)
-(define-key hs-leader-map "al" 'avy-goto-line)
+(define-key hs-avy-map (kbd "c") 'avy-goto-char)
+(define-key hs-avy-map (kbd "a") 'avy-goto-char-2)
+(define-key hs-avy-map (kbd "l") 'avy-goto-end-of-line)
+(define-key hs-avy-map (kbd "w") 'avy-goto-word-1)
+(define-key hs-avy-map (kbd "t") 'avy-goto-char-timer)
+(define-key hs-avy-map (kbd "r") 'avy-resume)
 
 ;; help
 (define-key hs-leader-map "hk" 'describe-key)
