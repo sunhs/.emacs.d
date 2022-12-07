@@ -85,7 +85,13 @@
   :config
   ;; define it here rather than evil, to better switch between ivy/counsel/swiper and vertico/consult
   (define-key hs-leader-map "ff" 'find-file)
-  (define-key hs-leader-map (kbd "SPC") 'execute-extended-command))
+  (define-key hs-leader-map (kbd "SPC") 'execute-extended-command)
+
+  :bind
+  (:map
+    vertico-map
+    ("C-v" . (lambda () (interactive) (vertico-next 10)))
+    ("M-v" . (lambda () (interactive) (vertico-previous 10)))))
 
 (use-package vertico-prescient
   :commands vertico-prescient-mode
