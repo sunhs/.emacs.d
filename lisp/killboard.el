@@ -7,26 +7,34 @@
 
 (defun killboard-paste ()
   (interactive)
-  (let* ((prompt " Killboard History: ")
-         (content (cond
-                  ((fboundp 'consult--read)  (consult--read killboard--history-list :prompt prompt :sort nil))
-                  (t  (completing-read prompt killboard--history-list)))))
+  (let*
+    (
+      (prompt " Killboard History: ")
+      (content
+        (cond
+          ((fboundp 'consult--read)
+            (consult--read
+              killboard--history-list
+              :prompt prompt
+              :sort nil))
+          (t
+            (completing-read prompt killboard--history-list)))))
     (kill-new content)
-    (if (and (boundp 'evil-state)
-             (not (eq evil-state 'emacs)))
-        (evil-paste-after 1)
-      (yank))
-    )
-  )
+    (if (and (boundp 'evil-state) (not (eq evil-state 'emacs)))
+      (evil-paste-after 1)
+      (yank))))
 
 (defun killboard--save-content-to-history (content)
   (let* ((content-idx (-elem-index content killboard--history-list)))
     (if content-idx
-        (setq killboard--history-list (-remove-at content-idx killboard--history-list))
+      (setq killboard--history-list
+        (-remove-at content-idx killboard--history-list))
       nil)
-    (setq killboard--history-list (-insert-at 0 content killboard--history-list)))
+    (setq killboard--history-list
+      (-insert-at 0 content killboard--history-list)))
   (if (> (length killboard--history-list) killboard--max-num)
-      (setq killboard--history-list (-drop-last 1 killboard--history-list))
+    (setq killboard--history-list
+      (-drop-last 1 killboard--history-list))
     nil))
 
 
