@@ -6,7 +6,7 @@
   (smartparens-global-mode)
   (require 'smartparens-config)
 
-  (defvar sp-mode-map (make-sparse-keymap))  
+  (defvar sp-mode-map (make-sparse-keymap))
   (global-set-key (kbd "M-(") sp-mode-map)
   (define-key sp-mode-map (kbd "(") 'sp-beginning-of-sexp)
   (define-key sp-mode-map (kbd ")") 'sp-end-of-sexp)
@@ -14,25 +14,18 @@
   (define-key sp-mode-map (kbd ">") 'sp-up-sexp)
   (define-key sp-mode-map (kbd "[") 'sp-backward-down-sexp)
   (define-key sp-mode-map (kbd "]") 'sp-down-sexp)
-  (setq prohibition-sym-list '("\\\\("
-                               "\\{"
-                               "\\("
-                               "\\\""
-                               "\""
-                               "'"
-                               "`"
-                               "("
-                               "["
-                               "{"))
+  (setq prohibition-sym-list
+    '("\\\\(" "\\{" "\\(" "\\\"" "\"" "'" "`" "(" "[" "{"))
   (dolist (sym prohibition-sym-list)
-    (sp-pair sym nil :unless '(sp-point-before-word-p
-                               sp-point-before-same-p))))
+    (sp-pair
+      sym
+      nil
+      :unless '(sp-point-before-word-p sp-point-before-same-p))))
 
 (use-package projectile
   :config
   (projectile-mode t)
-  (define-key hs-leader-map "p" 'projectile-command-map)
-  )
+  (define-key hs-leader-map "p" 'projectile-command-map))
 
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ivy / swiper / counsel >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;; (use-package ivy
@@ -52,7 +45,7 @@
 ;;   :config
 ;;   (global-set-key (kbd "C-s") 'swiper)
 ;;   (global-set-key (kbd "C-r") 'swiper))
-  
+
 ;; (use-package counsel
 ;;   :config
 ;;   (setq ivy-initial-inputs-alist nil)
@@ -76,8 +69,7 @@
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< vertico / consult / orderless >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;; -------------------------------------------------- vertico ---------------------------------------------------
 (use-package vertico
-  :init
-  (vertico-mode)
+  :init (vertico-mode)
 
   ;; Different scroll margin
   ;; (setq vertico-scroll-margin 0)
@@ -93,8 +85,7 @@
   :config
   ;; define it here rather than evil, to better switch between ivy/counsel/swiper and vertico/consult
   (define-key hs-leader-map "ff" 'find-file)
-  (define-key hs-leader-map (kbd "SPC") 'execute-extended-command)
-  )
+  (define-key hs-leader-map (kbd "SPC") 'execute-extended-command))
 
 (use-package vertico-prescient
   :commands vertico-prescient-mode
@@ -102,8 +93,7 @@
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :init
-  (savehist-mode))
+  :init (savehist-mode))
 
 ;; -------------------------------------------------- consult ---------------------------------------------------
 (use-package consult
@@ -113,22 +103,25 @@
   (setq consult-project-function #'projectile-project-root)
   (global-set-key (kbd "C-s") 'consult-line)
   (define-key hs-leader-map (kbd "bb") 'consult-buffer)
-  (define-key projectile-command-map "g" 'consult-ripgrep)
-  )
+  (define-key projectile-command-map "g" 'consult-ripgrep))
 
 (use-package consult-projectile
   :config
-  (define-key projectile-command-map "f" 'consult-projectile-find-file)
+  (define-key projectile-command-map "f"
+    'consult-projectile-find-file)
   (define-key projectile-command-map "d" 'consult-projectile-find-dir)
-  (define-key projectile-command-map "p" 'consult-projectile-switch-project)
-  (define-key projectile-command-map "b" 'consult-projectile-switch-to-buffer)
-  )
+  (define-key projectile-command-map "p"
+    'consult-projectile-switch-project)
+  (define-key projectile-command-map "b"
+    'consult-projectile-switch-to-buffer))
 
 (use-package consult-dir
-  :bind (("C-x C-d" . consult-dir)
-         :map vertico-map
-         ("C-x C-d" . consult-dir)
-         ("C-x C-j" . consult-dir-jump-file)))
+  :bind
+  (("C-x C-d" . consult-dir)
+    :map
+    vertico-map
+    ("C-x C-d" . consult-dir)
+    ("C-x C-j" . consult-dir-jump-file)))
 
 ;; ------------------------------------------------- orderless --------------------------------------------------
 (use-package orderless
@@ -136,21 +129,23 @@
   ;; Configure a custom style dispatcher (see the Consult wiki)
   ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
   ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-  (setq completion-styles '(orderless basic)  ;; overridden in company
-        ;; completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))))
+  (setq
+    completion-styles
+    '(orderless basic) ;; overridden in company
+    ;; completion-category-defaults nil
+    completion-category-overrides
+    '((file (styles partial-completion)))))
 
 ;; ------------------------------------------------- marginalia -------------------------------------------------
 (use-package marginalia
-  :config
-  (marginalia-mode))
+  :config (marginalia-mode))
 
 ;; --------------------------------------------------- embark ---------------------------------------------------
 (use-package embark
   :bind
-  (("M-o" . embark-act)         ;; pick some comfortable binding
-   ;; ("M-d" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  (("M-o" . embark-act) ;; pick some comfortable binding
+    ;; ("M-d" . embark-dwim)        ;; good alternative: M-.
+    ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
 
   :init
 
@@ -161,41 +156,42 @@
 
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
+    '
+    ("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+      nil
+      (window-parameters (mode-line-format . none)))))
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
+  :hook (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package wgrep)
 
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< treemacs >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 (use-package treemacs
-  :init
-  (define-key hs-leader-map "wt" 'treemacs-select-window)
+  :init (define-key hs-leader-map "wt" 'treemacs-select-window)
   :config
   (setq treemacs-follow-after-init t)
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
   (treemacs-git-mode 'simple)
-  (define-key hs-leader-map (kbd "tt") 'treemacs-add-and-display-current-project-exclusively))
-  ;; (add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1))))
+  (define-key hs-leader-map (kbd "tt")
+    'treemacs-add-and-display-current-project-exclusively))
+;; (add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1))))
 
 (if hs/use-evil-p
-    (use-package treemacs-evil
-      :after treemacs evil
-      :config
-      (add-hook 'evil-treemacs-state-entry-hook
-                #'(lambda ()
-                    (setq evil-treemacs-state-cursor '(box))))
-      )
-  )
+  (use-package treemacs-evil
+    :after
+    treemacs
+    evil
+    :config
+    (add-hook 'evil-treemacs-state-entry-hook
+      #'(lambda () (setq evil-treemacs-state-cursor '(box))))))
 
 (use-package treemacs-projectile
-  :after treemacs projectile)
+  :after
+  treemacs
+  projectile)
 
 
 ;; (use-package dired-sidebar
@@ -219,8 +215,16 @@
   ;; (global-undo-tree-mode -1)
   (global-set-key (kbd "M-u") 'undo-fu-only-undo)
   (global-set-key (kbd "M-r") 'undo-fu-only-redo)
-  (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "u" 'undo-fu-only-undo)
-  (hs/define-key-when-set hs/use-evil-p evil-normal-state-map "r" 'undo-fu-only-redo))
+  (hs/define-key-when-set
+    hs/use-evil-p
+    evil-normal-state-map
+    "u"
+    'undo-fu-only-undo)
+  (hs/define-key-when-set
+    hs/use-evil-p
+    evil-normal-state-map
+    "r"
+    'undo-fu-only-redo))
 
 ;; ------------------------------------------------- point-undo -------------------------------------------------
 (require 'point-undo)
@@ -229,10 +233,10 @@
 
 (use-package rainbow-delimiters
   :commands rainbow-delimiters-mode
-  :hook ((emacs-lisp-mode
-          python-mode
-          c++-mode
-          c-mode) . rainbow-delimiters-mode))
+  :hook
+  ((emacs-lisp-mode python-mode c++-mode c-mode)
+    .
+    rainbow-delimiters-mode))
 
 ;; (use-package indent-guide
 ;;   :config
@@ -265,12 +269,13 @@
 ;;          mode-line-misc-info)))
 
 (use-package magit
-  :bind (:map hs-leader-map
-              ("mg" . magit)
-              ("mf" . magit-log-buffer-file)
-              ("mba" . magit-blame-addition)
-              ("mbq" . magit-blame-quit))
-  )
+  :bind
+  (:map
+    hs-leader-map
+    ("mg" . magit)
+    ("mf" . magit-log-buffer-file)
+    ("mba" . magit-blame-addition)
+    ("mbq" . magit-blame-quit)))
 
 (use-package blamer
   :defer 5
@@ -281,10 +286,13 @@
   (blamer-type 'overlay-popup)
   (blamer--overlay-popup-position 'smart)
   :custom-face
-  (blamer-face ((t :foreground "#7a88cf"
-                   :background nil
-                   :height 140
-                   :italic t)))
+  (blamer-face
+    (
+      (t
+        :foreground "#7a88cf"
+        :background nil
+        :height 140
+        :italic t)))
   ;; :config
   ;; (global-blamer-mode 1))
   )
@@ -292,24 +300,31 @@
 
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< company >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 (use-package company-statistics
-  :config
-  (company-statistics-mode)
-  )
+  :config (company-statistics-mode))
 
 ;; -------------------------------------------------- company ---------------------------------------------------
 (use-package company
   :diminish
   :config
   (global-company-mode t)
-  (setq completion-styles '(orderless basic substring partial-completion emacs22)
-        company-idle-delay 0.1
-        company-minimum-prefix-length 2
-        company-require-match nil
-        company-search-regexp-function 'company-search-words-in-any-order-regexp
-        company-selection-wrap-around t
-        company-tooltip-align-annotations t
-        company-dabbrev-downcase nil)
-        ;; company-backends '(company-capf))
+  (setq
+    completion-styles
+    '(orderless basic substring partial-completion emacs22)
+    company-idle-delay
+    0.1
+    company-minimum-prefix-length
+    2
+    company-require-match
+    nil
+    company-search-regexp-function
+    'company-search-words-in-any-order-regexp
+    company-selection-wrap-around
+    t
+    company-tooltip-align-annotations
+    t
+    company-dabbrev-downcase
+    nil)
+  ;; company-backends '(company-capf))
 
   ;; turn off and on fci-mode during completion to avoid weird behavior
   ;; (defvar-local company-fci-mode-on-p nil)
@@ -330,7 +345,8 @@
   ;; (define-key company-active-map (kbd "<tab>") 'company-complete)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (define-key company-active-map (kbd "C-s") 'company-filter-candidates)
+  (define-key company-active-map (kbd "C-s")
+    'company-filter-candidates)
   (define-key company-search-map (kbd "C-n") 'company-select-next)
   (define-key company-search-map (kbd "C-p") 'company-select-previous)
   (company-statistics-mode nil))
@@ -351,14 +367,12 @@
   (setq yas-snippet-dirs (list (concat emacs-dir "/snippets"))))
 
 (use-package blacken
-  :config
-  (setq blacken-line-length 120))
+  :config (setq blacken-line-length 120))
 
 ;; https://ianyepan.github.io/posts/emacs-git-gutter/
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
-  :config
-  (setq git-gutter:update-interval 0.02))
+  :config (setq git-gutter:update-interval 0.02))
 
 ;; (use-package git-gutter-fringe
 ;;   :config
@@ -367,16 +381,14 @@
 ;;   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
 (use-package solaire-mode
-  :config
-  (solaire-global-mode t))
+  :config (solaire-global-mode t))
 
 ;; -------------------------------------------------- aweshell --------------------------------------------------
 ;; By default, `add-hook' places the hook at the front. And there's no absolute way to place it at the end.
 ;; So we add our hook first. After requiring `aweshell' it adds other hooks to modify the kbd, which come first.
 ;; In this way our hook is able to overwrite theirs.
 (add-hook 'eshell-mode-hook
-          (lambda ()
-            (define-key eshell-mode-map (kbd "C-l") hs-leader-map)))
+  (lambda () (define-key eshell-mode-map (kbd "C-l") hs-leader-map)))
 
 (use-package aweshell
   :straight
@@ -410,8 +422,10 @@
 (use-package doom-themes
   :config
   ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (setq
+    doom-themes-enable-bold
+    t ; if nil, bold is universally disabled
+    doom-themes-enable-italic t) ; if nil, italics is universally disabled
   )
 
 (use-package modus-themes)
