@@ -1,23 +1,23 @@
 (require 'dash)
-(require 'evil)
-(require 'ivy)
 
 
 (setq killboard--history-list '())
 (setq killboard--max-num 64)
 
 
-(defun killboard-view-history ()
+(defun killboard-paste ()
   (interactive)
-  (ivy-read " Killboard History: "
-            killboard--history-list
-            :action (lambda (content)
-                      (kill-new content)
-                      (if (and (boundp 'evil-state)
-                               (not (eq evil-state 'emacs)))
-                          (evil-paste-after 1)
-                        (yank)))))
-
+  (let* ((prompt " Killboard History: ")
+         (content (cond
+                  ((fboundp 'consult--read)  (consult--read killboard--history-list :prompt prompt :sort nil))
+                  (t  (completing-read prompt killboard--history-list)))))
+    (kill-new content)
+    (if (and (boundp 'evil-state)
+             (not (eq evil-state 'emacs)))
+        (evil-paste-after 1)
+      (yank))
+    )
+  )
 
 (defun killboard--save-content-to-history (content)
   (let* ((content-idx (-elem-index content killboard--history-list)))
@@ -41,6 +41,6 @@
 (advice-add 'backward-kill-word :after #'killboard--save-current-kill)
 
 
-(define-key hs-leader-map (kbd "y") 'killboard-view-history)
+(define-key hs-leader-map (kbd "kb") 'killboard-paste)
 
 (provide 'killboard)

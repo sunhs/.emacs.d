@@ -64,6 +64,7 @@
 (if hs/use-evil-p
     (hs/toggle-evil t)
   (hs/toggle-evil -1))
+(require 'killboard)
 (require 'org-config)
 (require 'extra-config)
 (require 'intellisense)
