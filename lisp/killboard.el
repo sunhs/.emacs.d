@@ -1,8 +1,8 @@
 (require 'dash)
 
 
-(setq killboard--history-list '())
-(setq killboard--max-num 64)
+(defvar killboard--history-list '())
+(defvar killboard--max-num 64)
 
 
 (defun killboard-paste ()
