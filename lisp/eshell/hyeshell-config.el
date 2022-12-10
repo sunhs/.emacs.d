@@ -11,11 +11,14 @@
 (define-key hs-leader-map (kbd "sc") #'hyeshell/clear-buffer)
 (define-key hs-leader-map (kbd "sb") #'hyeshell/switch-buffer)
 (define-key hs-leader-map (kbd "sd") #'hyeshell/toggle-dedicated)
-(define-key eshell-mode-map (kbd "C-r")
+(add-hook 'eshell-mode-hook
   #'
   (lambda ()
-    (interactive)
-    (consult-history (aweshell-parse-shell-history))))
+    (define-key eshell-mode-map (kbd "C-r")
+      #'
+      (lambda ()
+        (interactive)
+        (consult-history (hyeshell/get-shell-history))))))
 
 (use-package eshell-prompt-extras
   :config
