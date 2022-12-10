@@ -5,17 +5,11 @@
 ;; by Andy Stewart <lazycat.manatee@gmail.com>
 
 (require 'eshell)
-(require 'eshell-up)
 (require 'projectile)
 (require 'consult)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; customize ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defgroup hyeshell nil "Hyesun eshell." :group 'hyeshell)
-
-;; (defcustom hyeshell-complete-selection-key "M-h"
-;;   "The keystroke for complete history auto-suggestions."
-;;   :type 'string
-;;   :group 'hyeshell)
 
 (defcustom hyeshell-valid-command-color "#98C379"
   "The color of valid command by `hyeshell--validate-command-set-color'."
@@ -32,11 +26,8 @@
   :type 'integer
   :group 'hyeshell)
 
-(defcustom hyeshell-auto-suggestion-p t
-  "Whether auto suggestion like fish.
-Default is enable, but sometimes, this feature will insert random indent char.
-
-If this function affects you, disable this option."
+(defcustom hyeshell-auto-complete-p t
+  "Whether to auto complete."
   :type 'boolean
   :group 'hyeshell)
 
@@ -240,12 +231,12 @@ If `window' is nil, get current window."
 
 (add-hook 'kill-buffer-hook #'hyeshell-kill-buffer-hook)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; auto suggestion ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; auto complete ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; First completion candidate is best match that pick from shell history.
 ;; Rest is completion arguments from shell completion.
-(when hyeshell-auto-suggestion-p
-  (defun hyeshell-autosuggest--prefix ()
-    "Get current eshell input.
+(when hyeshell-auto-complete-p
+  (defun hyeshell--auto-complete-get--prefix ()
+    "Get current eshell input.)
 
 If this function return non-nil prefix, hyeshell will popup completion menu in hyeshell buffer.
 This function only return prefix when current point at eshell prompt line, avoid insert unnecessary indent char, such as ghci prompt. (See issue #49)."
@@ -258,66 +249,29 @@ This function only return prefix when current point at eshell prompt line, avoid
           (save-excursion (eshell-bol))
           (line-end-position)))))
 
-  (defun hyeshell-autosuggest-candidates (prefix)
-    "Select the first eshell history candidate and shell completions that starts with PREFIX."
-    (unless
-      (
-        or
-        ;; When the command includes ", *, \ or [ characters, the `pcomplete-completions' command will report an error,
-        ;; So company menu will be disabled when these characters are included.
-        (cl-search "\"" prefix)
-        (cl-search "[" prefix)
-        (cl-search "\*" prefix)
-        (cl-search "\\" prefix))
-      (
-        let*
-        (
-          (most-similar
-            (cl-find-if
-              (lambda (str) (string-prefix-p prefix str))
-              (hyeshell/get-shell-history)))
-          (command-prefix-args
-            (mapconcat
-              'identity (nbutlast (split-string prefix)) " "))
-          (command-last-arg (car (last (split-string prefix))))
-          (completions (ignore-errors (pcomplete-completions)))
-          (shell-completions
-            (if (cl-typep completions 'cons)
-              (cl-remove-if-not
-                (lambda (c) (string-prefix-p command-last-arg c))
-                completions)
-              nil))
-          (suggest-completions
-            (mapcar
-              (lambda (c)
-                (string-trim (concat command-prefix-args " " c)))
-              shell-completions)))
-        ;; Mix best history and complete arguments just when history not exist in completion arguments.
-        (if
-          (and
-            most-similar
-            (not (member most-similar suggest-completions)))
-          (append (list most-similar) suggest-completions)
-          suggest-completions))))
+  (defun hyeshell--auto-complete-prefix (prefix)
+    (cl-remove-if-not
+      #'(lambda (candidate) (string-prefix-p prefix candidate))
+      (hyeshell/get-shell-history)))
 
-  (defun hyeshell-autosuggest (command &optional arg &rest ignored)
-    "`company-mode' backend to provide eshell history suggestion."
+  (defun hyeshell--auto-complete (command &optional arg &rest ignored)
+    "`company-mode' backend."
     (interactive (list 'interactive))
     (cl-case
       command
-      (interactive (company-begin-backend 'hyeshell-autosuggest))
+      (interactive (company-begin-backend 'hyeshell--auto-complete))
       (prefix
         (and
           (derived-mode-p 'eshell-mode)
-          (hyeshell-autosuggest--prefix)))
-      (candidates (hyeshell-autosuggest-candidates arg))
+          (hyeshell--auto-complete-get--prefix)))
+      (candidates (hyeshell--auto-complete-prefix arg))
       (sorted nil)))
 
   (add-hook 'eshell-mode-hook
     (lambda ()
       (company-mode 1)
       (setq-local company-idle-delay 0)
-      (setq-local company-backends '(hyeshell-autosuggest)))))
+      (setq-local company-backends '(hyeshell--auto-complete)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; enhance eshell commands ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Validate command before post to eshell.
