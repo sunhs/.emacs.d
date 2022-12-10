@@ -87,4 +87,8 @@
   
   (setq TeX-command-list (append my-tex-build-chain TeX-command-list)))
 
+(use-package exec-path-from-shell
+  ;; :if (featurep 'cocoa)
+  :config (exec-path-from-shell-initialize))
+
 (provide 'platform-config-mac)
