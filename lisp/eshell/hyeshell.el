@@ -143,10 +143,10 @@ The return value should be `t' meaning a match, otherwise `nil'."
     (
       (or
         (not hyeshell--buffer-list)
-        (= 0 (length hyeshell--buffer-list)))
+        (length= hyeshell--buffer-list 0))
       (hyeshell/toggle)
       (message "No buffer yet, create a new one."))
-    ((= 1 (length hyeshell--buffer-list))
+    ((length= hyeshell--buffer-list 1)
       (switch-to-buffer (nth 0 hyeshell--buffer-list)))
     (t
       (consult--multi '(hyeshell--consult-source-buffer)))))
@@ -192,6 +192,12 @@ If `window' is nil, get current window."
     (select-window hyeshell--dedicated-window)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; hooks ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun hyeshell--remove-killed-buffers ()
+  (setq hyeshell--buffer-list
+    (cl-remove-if
+      #'(lambda (buf) (not (buffer-live-p buf)))
+      hyeshell--buffer-list)))
+
 (defun hyeshell--sync-buffers ()
   "Rename eshell buffer, and add it to `hyeshell-buffer-list', if not exist."
   (when (equal major-mode 'eshell-mode)
@@ -217,7 +223,8 @@ If `window' is nil, get current window."
                 (throw 'foundp t))))))
       (if (not foundp)
         (setq hyeshell--buffer-list
-          (nconc hyeshell--buffer-list (list (current-buffer))))))))
+          (nconc hyeshell--buffer-list (list (current-buffer)))))))
+  (hyeshell--remove-killed-buffers))
 
 (add-hook 'eshell-directory-change-hook #'hyeshell--sync-buffers)
 (add-hook 'eshell-mode-hook #'hyeshell--sync-buffers)
@@ -227,7 +234,8 @@ If `window' is nil, get current window."
   (when (eq major-mode 'eshell-mode)
     (let ((killed-buffer (current-buffer)))
       (setq hyeshell--buffer-list
-        (delq killed-buffer hyeshell--buffer-list)))))
+        (delq killed-buffer hyeshell--buffer-list))))
+  (hyeshell--remove-killed-buffers))
 
 (add-hook 'kill-buffer-hook #'hyeshell-kill-buffer-hook)
 
