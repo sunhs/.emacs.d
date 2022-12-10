@@ -262,12 +262,12 @@ This function only return prefix when current point at eshell prompt line, avoid
       #'(lambda (candidate) (string-prefix-p prefix candidate))
       (hyeshell/get-shell-history)))
 
-  (defun hyeshell--auto-complete (command &optional arg &rest ignored)
+  (defun hyeshell--company-backend (command &optional arg &rest ignored)
     "`company-mode' backend."
     (interactive (list 'interactive))
     (cl-case
       command
-      (interactive (company-begin-backend 'hyeshell--auto-complete))
+      (interactive (company-begin-backend 'hyeshell--company-backend))
       (prefix
         (and
           (derived-mode-p 'eshell-mode)
@@ -279,7 +279,7 @@ This function only return prefix when current point at eshell prompt line, avoid
     (lambda ()
       (company-mode 1)
       (setq-local company-idle-delay 0)
-      (setq-local company-backends '(hyeshell--auto-complete)))))
+      (setq-local company-backends '(hyeshell--company-backend)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; enhance eshell commands ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Validate command before post to eshell.
