@@ -33,7 +33,6 @@
 (define-key hs-leader-map "ld" 'hs/kill-stripped-line)
 (define-key hs-leader-map "lu" 'hs/backward-kill-line)
 (define-key hs-leader-map "ll" 'hs/select-stripped-line)
-(define-key hs-leader-map "lm" 'set-mark-command)
 (define-key hs-leader-map "lw" 'hs/move-beginning-of-first-word)
 (define-key hs-leader-map "lx" 'hs/kill-whole-line)
 (define-key hs-leader-map "l;" 'hs/comment-line)
@@ -123,6 +122,7 @@
 (define-key hs-leader-map "hv" 'describe-variable)
 
 ;; others
+(define-key hs-leader-map "mm" 'set-mark-command)
 (define-key hs-leader-map "qq"
   #'(lambda ()
      (interactive)
