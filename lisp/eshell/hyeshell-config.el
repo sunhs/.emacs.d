@@ -33,15 +33,15 @@
   (defalias 'eshell/up 'eshell-up)
   (defalias 'eshell/up-peek 'eshell-up-peek))
 
-(use-package eshell-did-you-mean
-  :init
-  (add-hook 'eshell-mode-hook
-    (lambda ()
-      (run-with-idle-timer
-        1 nil
-        #'
-        (lambda ()
-          (require 'eshell-did-you-mean)
-          (eshell-did-you-mean-setup))))))
+;; (use-package eshell-did-you-mean
+;;   :init
+;;   (add-hook 'eshell-mode-hook
+;;     (lambda ()
+;;       (run-with-idle-timer
+;;         1 nil
+;;         #'
+;;         (lambda ()
+;;           (require 'eshell-did-you-mean)
+;;           (eshell-did-you-mean-setup))))))
 
 (provide 'hyeshell-config)
