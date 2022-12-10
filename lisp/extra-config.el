@@ -104,10 +104,15 @@
 ;; -------------------------------------------------- consult ---------------------------------------------------
 (use-package consult
   :init (recentf-mode)
+
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+
   :config
   (setq recentf-max-saved-items 500)
   (setq consult-project-function #'projectile-project-root)
   (global-set-key (kbd "C-s") 'consult-line)
+  (define-key minibuffer-mode-map (kbd "C-s") 'consult-history)
+  (global-set-key (kbd "M-s") 'consult-yank-pop)
   (define-key hs-leader-map (kbd "bb") 'consult-buffer)
   (define-key projectile-command-map "g" 'consult-ripgrep))
 
