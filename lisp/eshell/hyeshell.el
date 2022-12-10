@@ -399,6 +399,58 @@ This function only return prefix when current point at eshell prompt line, avoid
 (advice-add 'eshell/cat
   :override #'hyeshell--cat-with-syntax-highlight)
 
+(defun hyeshell/fj (&rest args)
+  (let
+    (
+      (str-args
+        (mapcar
+          #'
+          (lambda (arg)
+            (if (stringp arg)
+              arg
+              (number-to-string arg)))
+          args)))
+
+    (cond
+      ((length= str-args 0)
+        (eshell/cd))
+
+      (
+        (and
+          (length= str-args 1)
+          (string-match "^-.*" (nth 0 str-args)))
+        (let* ((str-arg (nth 0 str-args)))
+          (if
+            (or
+              (string= str-arg "-")
+              (< (string-to-number str-arg) 0))
+            ;; `cd -' or `cd -1', `cd -2', etc
+            (eshell/cd str-arg)
+            ;; maybe illegal use
+            (let
+              (
+                (output
+                  (string-trim
+                    (eshell-command-result
+                      (string-join `("pyfj_cli.py" ,str-arg) " ")))))
+              (eshell/echo output)))))
+
+      (t
+        (let*
+          (
+            (cmd (string-join `("pyfj_cli.py jump" ,@str-args) " "))
+            (code)
+            (output (eshell-command-result cmd 'code))
+            (dir
+              (if (and output (= code 0))
+                (string-trim output)
+                nil)))
+          (if (not dir)
+            (eshell/echo "no match")
+            (eshell/cd dir)))))))
+
+(defalias 'eshell/fj #'hyeshell/fj)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; shell history ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun hyeshell--reload-shell-history ()
   (with-temp-message
