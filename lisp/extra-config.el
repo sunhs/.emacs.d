@@ -389,41 +389,6 @@
 (use-package solaire-mode
   :config (solaire-global-mode t))
 
-;; -------------------------------------------------- aweshell --------------------------------------------------
-;; By default, `add-hook' places the hook at the front. And there's no absolute way to place it at the end.
-;; So we add our hook first. After requiring `aweshell' it adds other hooks to modify the kbd, which come first.
-;; In this way our hook is able to overwrite theirs.
-(add-hook 'eshell-mode-hook
-  (lambda () (define-key eshell-mode-map (kbd "C-l") hs-leader-map)))
-
-(use-package aweshell
-  :straight
-  (aweshell
-    ;; :files (:defaults "elisp-autofmt")
-    ;; :host nil
-    :type git
-    :repo "https://github.com/manateelazycat/aweshell")
-
-  :config
-  ;; add argument to aweshell-toggle to open in current dir
-  (define-key hs-leader-map "st"
-    #'(lambda () (interactive) (aweshell-toggle 4)))
-  (define-key hs-leader-map "sc" 'aweshell-new)
-  (define-key hs-leader-map "sn" 'aweshell-next)
-  (define-key hs-leader-map "sp" 'aweshell-prev)
-  (define-key hs-leader-map "sd" 'aweshell-dedicated-toggle)
-  (define-key hs-leader-map "sb" 'aweshell-switch-buffer)
-  (define-key eshell-mode-map (kbd "C-r")
-    #'
-    (lambda ()
-      (interactive)
-      (consult-history (aweshell-parse-shell-history))))
-  (setq
-    eshell-highlight-prompt
-    nil
-    epe-path-style 'full
-    eshell-prompt-function 'epe-theme-lambda))
-
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< themes >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 (use-package doom-themes
   :config
