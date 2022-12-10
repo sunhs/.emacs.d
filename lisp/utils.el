@@ -238,6 +238,11 @@ Behaviors:
     (insert ";; ")
     (insert (hs/pad-string content 110 "<" ">"))))
 
+(defun hs/insert-comment-header ()
+  (interactive)
+  (let ((content (read-from-minibuffer "content: ")))
+    (insert (hs/pad-string content 110 ";" ";"))))
+
 (defun hs/find-other-file-in-project (&optional fpath)
   (require 'find-file)
   (let* ((fname (if fpath
