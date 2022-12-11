@@ -262,7 +262,8 @@ This function only return prefix when current point at eshell prompt line, avoid
       #'(lambda (candidate) (string-prefix-p prefix candidate))
       (hyeshell/get-shell-history)))
 
-  (defun hyeshell--company-backend (command &optional arg &rest ignored)
+  (defun hyeshell--company-backend
+    (command &optional arg &rest ignored)
     "`company-mode' backend."
     (interactive (list 'interactive))
     (cl-case
@@ -338,15 +339,18 @@ This function only return prefix when current point at eshell prompt line, avoid
   (if (null args)
     ;; If I just ran "emacs", I probably expect to be launching
     ;; Emacs, which is rather silly since I'm already in Emacs.
-    ;; So just pretend to do what I ask.
-    (bury-buffer)
-    ;; We have to expand the file names or else naming a directory in an
-    ;; argument causes later arguments to be looked for in that directory,
-    ;; not the starting directory
-    (mapc
-      #'find-file
-      (mapcar
-        #'expand-file-name (eshell-flatten-list (reverse args))))))
+    ;; ;; So just pretend to do what I ask.
+    ;; (bury-buffer)
+    nil
+    (let ((file-paths (mapcar #'expand-file-name args)))
+      ;; if in dedicated window, switch to another window
+      (if
+        (and
+          hyeshell--dedicated-window
+          (window-live-p hyeshell--dedicated-window)
+          (eq (selected-window) hyeshell--dedicated-window))
+        (other-window 1))
+      (mapc #'find-file file-paths))))
 
 (defalias 'eshell/e 'hyeshell--emacs)
 
