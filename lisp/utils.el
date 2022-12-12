@@ -169,7 +169,8 @@ Behaviors:
     (if del-space-p
         (progn (while (not (= (point) (line-beginning-position)))
                  (backward-delete-char 1))
-               (backward-delete-char 1)))))
+               (backward-delete-char 1)
+               (insert " ")))))
 
 
 (defun hs/comment-line ()
