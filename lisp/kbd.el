@@ -87,8 +87,8 @@
 (define-key hs-leader-map "wD" 'delete-other-windows)
 (define-key hs-leader-map "wh" 'windmove-left)
 (define-key hs-leader-map "wl" 'windmove-right)
-(define-key hs-leader-map "wj" 'windmove-down)
-(define-key hs-leader-map "wk" 'windmove-up)
+(define-key hs-leader-map "wn" 'windmove-down)
+(define-key hs-leader-map "wp" 'windmove-up)
 (define-key hs-leader-map "we" 'enlarge-window-horizontally)
 (define-key hs-leader-map "ws" 'shrink-window-horizontally)
 (define-key hs-leader-map "w/"
