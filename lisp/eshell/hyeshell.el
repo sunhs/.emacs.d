@@ -53,7 +53,7 @@ The return value should be `t' meaning a match, otherwise `nil'."
 
   (cl-block
     block
-    (let* ((curdir (file-truename default-directory)))
+    (let* ((curdir default-directory))
       (if match-dir-funs
         (dolist (match-dir-fun match-dir-funs)
           (dolist (buf hyeshell--buffer-list)
@@ -61,21 +61,25 @@ The return value should be `t' meaning a match, otherwise `nil'."
               (if
                 (funcall
                   match-dir-fun
-                  curdir
+                  (file-truename curdir)
                   (file-truename default-directory))
                 (cl-return-from block buf))))))
 
       (dolist (buf hyeshell--buffer-list)
         (with-current-buffer buf
-          (if (string= curdir (file-truename default-directory))
+          (if
+            (string=
+              (file-truename curdir)
+              (file-truename default-directory))
             (cl-return-from block buf))))
 
       (dolist (buf hyeshell--buffer-list)
         (with-current-buffer buf
           (if
             (string=
-              (projectile-project-root curdir)
-              (projectile-project-root default-directory))
+              (file-truename (projectile-project-root curdir))
+              (file-truename
+                (projectile-project-root default-directory)))
             (cl-return-from block buf)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; commands ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
