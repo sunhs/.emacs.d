@@ -276,11 +276,12 @@ This function only return prefix when current point at eshell prompt line, avoid
       (candidates (hyeshell--auto-complete-prefix arg))
       (sorted nil)))
 
-  (add-hook 'eshell-mode-hook
-    (lambda ()
-      (company-mode 1)
-      (setq-local company-idle-delay 0)
-      (setq-local company-backends '(hyeshell--company-backend)))))
+  (add-hook 'eshell-mode-hook (lambda () (company-mode -1)))
+  ;;   (lambda ()
+  ;;     (company-mode 1)
+  ;;     (setq-local company-idle-delay 0)
+  ;;     (setq-local company-backends '(hyeshell--company-backend))))
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; enhance eshell commands ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Validate command before post to eshell.
