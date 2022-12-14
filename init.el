@@ -59,11 +59,11 @@
 
 (require 'kbd)
 (require 'builtin)
-(require 'evilize)
+;; (require 'evilize)
 (setq hs/use-evil-p nil)
-(if hs/use-evil-p
-    (hs/toggle-evil t)
-  (hs/toggle-evil -1))
+;; (if hs/use-evil-p
+;;     (hs/toggle-evil t)
+;;   (hs/toggle-evil -1))
 (require 'org-config)
 (require 'extra-config)
 (require 'killboard)

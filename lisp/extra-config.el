@@ -10,17 +10,114 @@
   (global-set-key (kbd "M-(") sp-mode-map)
   (define-key sp-mode-map (kbd "(") 'sp-beginning-of-sexp)
   (define-key sp-mode-map (kbd ")") 'sp-end-of-sexp)
-  (define-key sp-mode-map (kbd "<") 'sp-backward-up-sexp)
-  (define-key sp-mode-map (kbd ">") 'sp-up-sexp)
+  (define-key sp-mode-map (kbd "{") 'sp-backward-up-sexp)
+  (define-key sp-mode-map (kbd "}") 'sp-up-sexp)
   (define-key sp-mode-map (kbd "[") 'sp-backward-down-sexp)
   (define-key sp-mode-map (kbd "]") 'sp-down-sexp)
+  (define-key sp-mode-map (kbd "<") 'sp-previous-sexp)
+  (define-key sp-mode-map (kbd ">") 'sp-next-sexp)
   (setq prohibition-sym-list
     '("\\\\(" "\\{" "\\(" "\\\"" "\"" "'" "`" "(" "[" "{"))
   (dolist (sym prohibition-sym-list)
     (sp-pair
       sym
       nil
-      :unless '(sp-point-before-word-p sp-point-before-same-p))))
+      :unless '(sp-point-before-word-p sp-point-before-same-p)))
+
+  (defvar hs/enclosed-region-start-sym-list '("'" "\"" "(" "[" "{"))
+  (defvar hs--equal-pair-sym-list '("'" "\""))
+  (defvar hs/enclosed-region-mode-list '("i" "a"))
+
+  (defun hs--select-enclosed-region (left mode)
+    (let*
+      (
+        (prompt
+          (format
+            "Start symbol (choices: %s): "
+            (string-join hs/enclosed-region-start-sym-list " ")))
+        (init-point (point))
+        (last-point)
+        (start)
+        (end))
+
+      (if
+        (or
+          (not left)
+          (not
+            (cl-find
+              left
+              hs/enclosed-region-start-sym-list
+              :test #'string=))
+          (not mode)
+          (not
+            (cl-find
+              mode
+              hs/enclosed-region-mode-list
+              :test #'string=)))
+        nil
+
+        ;; Already on `left', may need to move forward.
+        ;; Otherwise, `sp-beginning-of-sexp' may move back beyond the desired region.
+        (if (string= (char-to-string (char-after)) left)
+          (let (open)
+            (
+              cond
+              ;; may be " or ', need to determine whether on open or close position
+              (
+                (cl-find left hs--equal-pair-sym-list :test #'string=)
+                ;; try move to beginning of sexp
+                ;; 1) if on open position, after moving, char before point will not be the same symbol
+                ;; 2) if on close position, after moving, char before point will be the same symbol
+                (sp-beginning-of-sexp)
+                (if (string= (char-to-string (char-before)) left)
+                  nil
+                  (setq open t))
+                (goto-char init-point))
+              ;; otherwise, like ( or [, etc, must be on open position
+              (t
+                (setq open t)))
+            (if open
+              (forward-char))))
+
+        (setq last-point (point))
+
+        (sp-beginning-of-sexp)
+        (while
+          (and
+            (not (= (point) last-point)) ;; moved by `sp-beginning-of-sexp'
+            (not (string= (char-to-string (char-before)) left)))
+          (sp-backward-up-sexp)
+          (setq last-point (point))
+          (sp-beginning-of-sexp))
+
+        (if (not (string= (char-to-string (char-before)) left))
+          (goto-char init-point) ;; still not found, go back like nothing happened
+
+          (setq start (point))
+          (sp-end-of-sexp)
+          (setq end (point))
+
+          (when (string= mode "a")
+            (cl-decf start)
+            (cl-incf end))
+
+          (push-mark start)
+          (activate-mark)
+          (goto-char end)))))
+
+  (dolist (sym hs/enclosed-region-start-sym-list)
+    (dolist (mode hs/enclosed-region-mode-list)
+      (define-key sp-mode-map (kbd (concat mode sym))
+        #'
+        (lambda ()
+          (interactive)
+          (hs--select-enclosed-region sym mode)))))
+
+  ;; (define-key sp-mode-map (kbd "i") 'hs/select-in-enclosed-region)
+  ;; (define-key sp-mode-map (kbd "a")
+  ;;   'hs/select-around-enclosed-region)
+  )
+
 
 (use-package projectile
   :config
@@ -112,7 +209,8 @@
   (setq consult-project-function #'projectile-project-root)
   (global-set-key (kbd "C-s") 'consult-line)
   (define-key minibuffer-mode-map (kbd "C-s") 'consult-history)
-  (global-set-key (kbd "M-s") 'consult-yank-pop)
+  (global-set-key (kbd "M-y") 'consult-yank-pop)
+  (global-set-key (kbd "M-g g") 'consult-goto-line)
   (define-key hs-leader-map (kbd "bb") 'consult-buffer)
   (define-key projectile-command-map "g" 'consult-ripgrep))
 
@@ -322,7 +420,7 @@
     completion-styles
     '(orderless basic substring partial-completion emacs22)
     company-idle-delay
-    0.1
+    0
     company-minimum-prefix-length
     2
     company-require-match
