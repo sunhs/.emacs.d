@@ -38,6 +38,9 @@
 (define-key hs-leader-map "l;" 'hs/comment-line)
 (define-key hs-leader-map "l/" 'hs/uncomment-line)
 (define-key hs-leader-map "lt" 'hs-cmd/recenter-top)
+(global-set-key (kbd "ESC <up>") 'hs/move-region-lines-up)
+(global-set-key (kbd "ESC <down>") 'hs/move-region-lines-down)
+
 ;; duplicate line below
 (define-key hs-leader-map "ly"
   #'(lambda ()

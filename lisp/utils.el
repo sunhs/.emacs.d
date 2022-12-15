@@ -347,5 +347,95 @@ Behaviors:
     (next-line scroll-num)
     (recenter-top-bottom 0)))
 
+(defun hs--select-region-lines (start end)
+  "The result `mark' < `point'"
+  (let*
+    (
+      (line-diff
+        (abs
+          (-
+            (line-number-at-pos (mark)) (line-number-at-pos (point)))))
+      (bol-scan
+        (if (>= (point) (mark))
+          ;; +1 because `line-beginning-position' scan through N-1
+          (+ 1 (- line-diff))
+          nil))
+      (eol-scan
+        (if (>= (point) (mark))
+          nil
+          ;; +1 because `line-end-position' scan through N-1
+          (+ 1 line-diff)))
+      (bol-start (line-beginning-position bol-scan))
+      (eol-end (line-end-position eol-scan)))
+    (set-mark bol-start)
+    (goto-char eol-end)))
+
+(defun hs--move-region-lines (start end n)
+  (if (use-region-p)
+    (hs--select-region-lines start end)
+    (hs/select-line))
+  (cond
+    (
+      (and
+        (> n 0)
+        (=
+          (line-number-at-pos end)
+          (line-number-at-pos (buffer-end 1))))
+      (message "Already at the end of buffer."))
+    (
+      (and
+        (< n 0)
+        (=
+          (line-number-at-pos start)
+          (line-number-at-pos (buffer-end -1))))
+      (message "Already at the beginning of buffer."))
+    (t
+      (let
+        (
+          (region-text (delete-and-extract-region (mark) (point)))
+          (tmpn (- (abs n) 1)))
+        ;; delete '\r'
+        (cond
+          ((and (> n 0) (= (char-after) 10))
+            (delete-char 1)
+            (next-line tmpn)
+            (end-of-line)
+            (newline))
+          ((and (< n 0) (= (char-before) 10))
+            (backward-delete-char 1)
+            (previous-line tmpn)
+            (beginning-of-line)
+            (newline)
+            (previous-line)))
+
+        (let ((curpoint (point)))
+          (insert region-text)
+          (setq deactivate-mark nil)
+          (set-mark curpoint))))))
+
+(defun hs--get-region-and-prefix ()
+  ;; copied from https://github.com/emacsfodder/move-text
+  (list
+    (when (use-region-p)
+      (region-beginning)) ;; otherwise nil
+    (when (use-region-p)
+      (region-end))
+    (prefix-numeric-value current-prefix-arg)))
+
+(defun hs/move-region-lines-up (start end n)
+  (interactive (hs--get-region-and-prefix))
+  (hs--move-region-lines
+    start end
+    (if (null n)
+      1
+      (- n))))
+
+(defun hs/move-region-lines-down (start end n)
+  (interactive (hs--get-region-and-prefix))
+  (hs--move-region-lines
+    start end
+    (if (null n)
+      1
+      n)))
 
 (provide 'utils)
