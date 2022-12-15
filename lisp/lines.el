@@ -125,16 +125,6 @@ Behaviors:
         (backward-delete-char 1)
         (insert " ")))))
 
-(defun hs/comment-line ()
-  (interactive)
-  (hs/select-line)
-  (comment-region (mark) (point)))
-
-(defun hs/uncomment-line ()
-  (interactive)
-  (hs/select-line)
-  (uncomment-region (mark) (point)))
-
 (defun hs-cmd/recenter-top ()
   (interactive)
   ;; (let ((old-margin scroll-margin))
@@ -241,5 +231,18 @@ Behaviors:
     (if (null n)
       1
       n)))
+
+(defun hs/comment-uncomment-region (start end n)
+  (interactive (hs--get-region-and-prefix))
+  (if (not (use-region-p))
+    (let ((point (point)))
+      (progn
+        (comment-line nil)
+        (goto-char point)))
+    (hs--select-region-lines start end)
+    ;; (if (derived-mode-p 'emacs-lisp-mode)
+    ;; elisp comment partial region, which is good so far
+    ;; (comment-region (mark) (point))
+    (comment-line nil)))
 
 (provide 'lines)

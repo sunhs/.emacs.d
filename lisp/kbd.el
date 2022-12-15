@@ -35,8 +35,7 @@
 (define-key hs-leader-map "ll" 'hs/select-stripped-line)
 (define-key hs-leader-map "lw" 'hs/move-beginning-of-first-word)
 (define-key hs-leader-map "lx" 'hs/kill-whole-line)
-(define-key hs-leader-map "l;" 'hs/comment-line)
-(define-key hs-leader-map "l/" 'hs/uncomment-line)
+(global-set-key (kbd "C-_") 'hs/comment-uncomment-region) ;; in fact C-/
 (define-key hs-leader-map "lt" 'hs-cmd/recenter-top)
 (global-set-key (kbd "ESC <up>") 'hs/move-region-lines-up)
 (global-set-key (kbd "ESC <down>") 'hs/move-region-lines-down)
