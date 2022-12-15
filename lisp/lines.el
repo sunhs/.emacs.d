@@ -245,4 +245,23 @@ Behaviors:
     ;; (comment-region (mark) (point))
     (comment-line nil)))
 
+(defun hs--new-line (order n)
+  (cond
+    ((< order 0)
+      (beginning-of-line)
+      (newline n)
+      (previous-line n))
+    ((> order 0)
+      (end-of-line)
+      (newline n)
+      (previous-line (- n 1)))))
+
+(defun hs-cmd/new-line-above (&optional n)
+  (interactive "p")
+  (hs--new-line -1 n))
+
+(defun hs-cmd/new-line-bellow (&optional n)
+  (interactive "p")
+  (hs--new-line 1 n))
+
 (provide 'lines)
