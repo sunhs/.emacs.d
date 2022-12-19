@@ -262,7 +262,6 @@ This function only return prefix when current point at eshell prompt line, avoid
           (line-end-position)))))
 
   (defun hyeshell--company-candidates (prefix)
-    (print prefix)
     (let*
       (
         ;; copied from https://github.com/Henry/dot-emacs/blob/master/my-lisp/company-pcomplete.el
@@ -293,8 +292,8 @@ This function only return prefix when current point at eshell prompt line, avoid
             (hyeshell/get-shell-history)))
         (all-candidates
           (cl-remove-duplicates
-            (append pcomplete-candidates)
-            ;; (append history-candidates pcomplete-candidates)
+            ;; (append pcomplete-candidates)
+            (append history-candidates pcomplete-candidates)
             :test #'string=)))
       all-candidates))
 
@@ -312,11 +311,10 @@ This function only return prefix when current point at eshell prompt line, avoid
       (sorted nil)))
 
   (add-hook 'eshell-mode-hook
-    (lambda () (setq-local company-idle-delay nil))))
-;; (lambda ()
-;;   (company-mode 1)
-;;   (setq-local company-idle-delay 0)
-;;   (setq-local company-backends '(hyeshell--company-backend)))))
+    (lambda ()
+      (company-mode 1)
+      (setq-local company-idle-delay nil)
+      (setq-local company-backends '(hyeshell--company-backend)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; enhance eshell commands ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Validate command before post to eshell.
