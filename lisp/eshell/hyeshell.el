@@ -247,7 +247,7 @@ If `window' is nil, get current window."
 ;; First completion candidate is best match that pick from shell history.
 ;; Rest is completion arguments from shell completion.
 (when hyeshell-auto-complete-p
-  (defun hyeshell--auto-complete-get--prefix ()
+  (defun hyeshell--company-prefix ()
     "Get current eshell input.)
 
 If this function return non-nil prefix, hyeshell will popup completion menu in hyeshell buffer.
@@ -261,10 +261,42 @@ This function only return prefix when current point at eshell prompt line, avoid
           (save-excursion (eshell-bol))
           (line-end-position)))))
 
-  (defun hyeshell--auto-complete-prefix (prefix)
-    (cl-remove-if-not
-      #'(lambda (candidate) (string-prefix-p prefix candidate))
-      (hyeshell/get-shell-history)))
+  (defun hyeshell--company-candidates (prefix)
+    (print prefix)
+    (let*
+      (
+        ;; copied from https://github.com/Henry/dot-emacs/blob/master/my-lisp/company-pcomplete.el
+        (pcomplete-stub)
+        (pcomplete-show-list t)
+        pcomplete-seen
+        pcomplete-norm-func
+        pcomplete-args
+        pcomplete-last
+        pcomplete-index
+        (pcomplete-autolist pcomplete-autolist)
+        (pcomplete-suffix-list pcomplete-suffix-list)
+        (candidates (pcomplete-completions))
+        (prefix (buffer-substring (pcomplete-begin) (point)))
+        ;; Collect all possible completions for the current stub
+        (cnds (all-completions pcomplete-stub candidates))
+        (bnds
+          (completion-boundaries pcomplete-stub candidates nil ""))
+        (skip (- (length pcomplete-stub) (car bnds)))
+        ;; Replace the stub at the beginning of each candidate by the prefix
+        (pcomplete-candidates
+          (mapcar
+            #'(lambda (cand) (concat prefix (substring cand skip)))
+            cnds))
+        (history-candidates
+          (cl-remove-if-not
+            #'(lambda (candidate) (string-prefix-p prefix candidate))
+            (hyeshell/get-shell-history)))
+        (all-candidates
+          (cl-remove-duplicates
+            (append pcomplete-candidates)
+            ;; (append history-candidates pcomplete-candidates)
+            :test #'string=)))
+      all-candidates))
 
   (defun hyeshell--company-backend
     (command &optional arg &rest ignored)
@@ -275,17 +307,16 @@ This function only return prefix when current point at eshell prompt line, avoid
       (interactive (company-begin-backend 'hyeshell--company-backend))
       (prefix
         (and
-          (derived-mode-p 'eshell-mode)
-          (hyeshell--auto-complete-get--prefix)))
-      (candidates (hyeshell--auto-complete-prefix arg))
+          (derived-mode-p 'eshell-mode) (hyeshell--company-prefix)))
+      (candidates (hyeshell--company-candidates arg))
       (sorted nil)))
 
-  (add-hook 'eshell-mode-hook (lambda () (company-mode -1)))
-  ;;   (lambda ()
-  ;;     (company-mode 1)
-  ;;     (setq-local company-idle-delay 0)
-  ;;     (setq-local company-backends '(hyeshell--company-backend))))
-  )
+  (add-hook 'eshell-mode-hook
+    (lambda () (setq-local company-idle-delay nil))))
+;; (lambda ()
+;;   (company-mode 1)
+;;   (setq-local company-idle-delay 0)
+;;   (setq-local company-backends '(hyeshell--company-backend)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; enhance eshell commands ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Validate command before post to eshell.

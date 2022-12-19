@@ -18,7 +18,9 @@
       #'
       (lambda ()
         (interactive)
-        (consult-history (hyeshell/get-shell-history))))))
+        (consult-history (hyeshell/get-shell-history))))
+    (define-key eshell-cmpl-mode-map (kbd "TAB")
+      #'(lambda () (interactive) (company-complete)))))
 
 (use-package eshell-prompt-extras
   :config
