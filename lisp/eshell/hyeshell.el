@@ -151,6 +151,7 @@ The return value should be `t' meaning a match, otherwise `nil'."
       (hyeshell/toggle)
       (message "No buffer yet, create a new one."))
     ((length= hyeshell--buffer-list 1)
+      (message "Only one buffer.")
       (switch-to-buffer (nth 0 hyeshell--buffer-list)))
     (t
       (consult--multi '(hyeshell--consult-source-buffer)))))
@@ -274,28 +275,37 @@ This function only return prefix when current point at eshell prompt line, avoid
         pcomplete-index
         (pcomplete-autolist pcomplete-autolist)
         (pcomplete-suffix-list pcomplete-suffix-list)
-        (candidates (pcomplete-completions))
-        (prefix (buffer-substring (pcomplete-begin) (point)))
+        (pcmpl-candidates (pcomplete-completions))
+        (pcmpl-prefix (buffer-substring (pcomplete-begin) (point)))
         ;; Collect all possible completions for the current stub
-        (cnds (all-completions pcomplete-stub candidates))
-        (bnds
-          (completion-boundaries pcomplete-stub candidates nil ""))
-        (skip (- (length pcomplete-stub) (car bnds)))
+        (pcmpl-cnds (all-completions pcomplete-stub pcmpl-candidates))
+        (pcmpl-bnds
+          (completion-boundaries
+            pcomplete-stub
+            pcmpl-candidates
+            nil
+            ""))
+        (skip (- (length pcomplete-stub) (car pcmpl-bnds)))
         ;; Replace the stub at the beginning of each candidate by the prefix
-        (pcomplete-candidates
+        (res-candidates-pcomplete
           (mapcar
             #'(lambda (cand) (concat prefix (substring cand skip)))
-            cnds))
-        (history-candidates
+            pcmpl-cnds))
+        (res-candidates-history
           (cl-remove-if-not
             #'(lambda (candidate) (string-prefix-p prefix candidate))
             (hyeshell/get-shell-history)))
-        (all-candidates
+        (res-candidates
           (cl-remove-duplicates
-            ;; (append pcomplete-candidates)
-            (append history-candidates pcomplete-candidates)
+            (append
+              (mapcar
+                (lambda (cand) (propertize cand 'anno "history"))
+                res-candidates-history)
+              (mapcar
+                (lambda (cand) (propertize cand 'anno "pcomplete"))
+                res-candidates-pcomplete))
             :test #'string=)))
-      all-candidates))
+      res-candidates))
 
   (defun hyeshell--company-backend
     (command &optional arg &rest ignored)
@@ -307,7 +317,10 @@ This function only return prefix when current point at eshell prompt line, avoid
       (prefix
         (and
           (derived-mode-p 'eshell-mode) (hyeshell--company-prefix)))
-      (candidates (hyeshell--company-candidates arg))
+      (candidates
+        (let ((ret (hyeshell--company-candidates arg)))
+          ret))
+      (annotation (get-text-property 0 'anno arg))
       (sorted nil)))
 
   (add-hook 'eshell-mode-hook
