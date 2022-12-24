@@ -7,7 +7,7 @@
   (require 'smartparens-config)
 
   (defvar sp-mode-map (make-sparse-keymap))
-  (global-set-key (kbd "M-(") sp-mode-map)
+  (global-set-key (kbd "M-9") sp-mode-map)
   (define-key sp-mode-map (kbd "(") 'sp-beginning-of-sexp)
   (define-key sp-mode-map (kbd ")") 'sp-end-of-sexp)
   (define-key sp-mode-map (kbd "{") 'sp-backward-up-sexp)
@@ -116,7 +116,13 @@
   ;; (define-key sp-mode-map (kbd "i") 'hs/select-in-enclosed-region)
   ;; (define-key sp-mode-map (kbd "a")
   ;;   'hs/select-around-enclosed-region)
-  )
+  (defun hs-cmd/jump-enclosed-sym ()
+    (interactive)
+    (let ((init-point (point)))
+      (sp-beginning-of-sexp)
+      (if (= (point) init-point)
+        (sp-end-of-sexp))))
+  (global-set-key (kbd "M-0") #'hs-cmd/jump-enclosed-sym))
 
 
 (use-package projectile
