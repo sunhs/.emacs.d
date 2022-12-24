@@ -8,6 +8,7 @@
 
 (defvar hs-leader-map (make-sparse-keymap))
 (global-set-key (kbd "C-l") hs-leader-map)
+;; (global-set-key (kbd "M-SPC") hs-leader-map)
 (global-set-key (kbd "M-L") 'downcase-word)
 (global-set-key (kbd "M-U") 'upcase-word)
 (global-unset-key (kbd "M-h"))
@@ -126,6 +127,7 @@
 
 ;; others
 (define-key hs-leader-map "mm" 'set-mark-command)
+(global-set-key (kbd "M-m") 'set-mark-command)
 (define-key hs-leader-map "qq"
   #'(lambda ()
      (interactive)

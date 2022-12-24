@@ -66,7 +66,7 @@
 ;;   (hs/toggle-evil -1))
 (require 'org-config)
 (require 'extra-config)
-(require 'killboard)
+;; (require 'killboard)
 (add-to-list 'load-path (concat lisp-dir "/eshell"))
 (require 'hyeshell-config)
 (add-to-list 'load-path (concat lisp-dir "/lang"))

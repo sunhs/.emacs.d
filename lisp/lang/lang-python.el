@@ -23,6 +23,10 @@
   )
 
 (use-package lsp-pyright
+  :init
+  (setq lsp-pyright-multi-root nil)
+  :config
+  (setq lsp-pyright-venv-path (substitute-in-file-name "$HOME/conda/envs"))
   )
 
 (provide 'lang-python)
