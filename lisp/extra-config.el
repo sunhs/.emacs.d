@@ -378,6 +378,10 @@
 ;;          mode-line-misc-info)))
 
 (use-package magit
+  :config
+  (setq magit-log-margin
+    '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))
+
   :bind
   (:map
     hs-leader-map
