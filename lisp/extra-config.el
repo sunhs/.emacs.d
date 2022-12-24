@@ -504,9 +504,38 @@
     doom-themes-enable-bold
     t ; if nil, bold is universally disabled
     doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  )
+  ;; from https://github.com/doomemacs/themes/issues/248
+  (set-face-attribute
+    'font-lock-comment-face
+    nil
+    :foreground "#5B6268"
+    :slant 'italic)
+  (set-face-attribute
+    'font-lock-function-name-face
+    nil
+    :foreground "#c678dd"
+    :slant 'italic)
+  (set-face-attribute
+    'font-lock-variable-name-face
+    nil
+    :foreground "#dcaeea"
+    :slant 'italic))
 
-(use-package modus-themes)
+(use-package modus-themes
+  :init
+  ;; Add all your customizations prior to loading the themes
+  (setq
+    modus-themes-italic-constructs
+    t
+    modus-themes-bold-constructs nil
+    modus-themes-region '(bg-only no-extend))
+
+  ;; Load the theme files before enabling a theme
+  (modus-themes-load-themes)
+  :config
+  ;; Load the theme of your choice:
+  ;; (modus-themes-load-vivendi)
+  :bind ("<f5>" . modus-themes-toggle))
 
 
 ;; --------------------------------------------------------------------------------------------------------------
