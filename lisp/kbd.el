@@ -15,10 +15,10 @@
 (global-unset-key (kbd "M-l"))
 (global-set-key (kbd "C-v") (lambda ()
                               (interactive)
-                              (next-line 20)))
+                              (next-line (/ (window-height) 2))))
 (global-set-key (kbd "M-v") (lambda ()
                               (interactive)
-                              (previous-line 20)))
+                              (previous-line (/ (window-height) 2))))
 (global-set-key (kbd "M-{") 'indent-rigidly-left-to-tab-stop)
 (global-set-key (kbd "M-}") 'indent-rigidly-right-to-tab-stop)
 
@@ -86,13 +86,13 @@
 (define-key hs-leader-map "G" 'end-of-buffer)
 
 ;; window
+(global-set-key (kbd "M-S-<up>") 'windmove-up)
+(global-set-key (kbd "M-S-<down>") 'windmove-down)
+(global-set-key (kbd "M-S-<left>") 'windmove-left)
+(global-set-key (kbd "M-S-<right>") 'windmove-right)
 (define-key hs-leader-map "wa" 'ace-window)
 (define-key hs-leader-map "wd" 'delete-window)
 (define-key hs-leader-map "wD" 'delete-other-windows)
-(define-key hs-leader-map "wh" 'windmove-left)
-(define-key hs-leader-map "wl" 'windmove-right)
-(define-key hs-leader-map "wn" 'windmove-down)
-(define-key hs-leader-map "wp" 'windmove-up)
 (define-key hs-leader-map "we" 'enlarge-window-horizontally)
 (define-key hs-leader-map "ws" 'shrink-window-horizontally)
 (define-key hs-leader-map "w/"
