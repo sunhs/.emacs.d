@@ -128,6 +128,8 @@
 (use-package projectile
   :config
   (projectile-mode t)
+  (setq projectile-indexing-method 'hybrid)
+  (setq projectile-sort-order 'recently-active)
   (define-key hs-leader-map "p" 'projectile-command-map))
 
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ivy / swiper / counsel >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -222,6 +224,7 @@
 
 (use-package consult-projectile
   :config
+  (global-set-key (kbd "M-P") 'consult-projectile)
   (define-key projectile-command-map "f"
     'consult-projectile-find-file)
   (define-key projectile-command-map "d" 'consult-projectile-find-dir)
