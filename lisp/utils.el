@@ -46,12 +46,16 @@
 
 
 (defun hs/kill-user-buffers ()
-  "Kill all buffers created by user.
-These buffer names start with alphanumeric."
+  "Kill all buffers created by user."
   (interactive)
   (dolist (b (buffer-list))
-    (if (= ?w (char-syntax (aref (buffer-name b) 0)))
-      (kill-buffer b)))
+    (cond
+      ;; skip eshell buffers
+      ((not (null (string-match "^eshell:.*" (buffer-name b))))
+        nil)
+      ;; buffer names start with alphanumeric
+      ((= ?w (char-syntax (aref (buffer-name b) 0)))
+        (kill-buffer b))))
   (message "Done."))
 
 (defun hs/jump-up-half ()
