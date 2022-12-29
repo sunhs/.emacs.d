@@ -101,4 +101,10 @@
 ;;             (custom-set-variables `(package-selected-packages ,(hs/sort-package-list)))
 ;;             (custom-save-all)))
 
+;; (setq server-use-tcp t)
+;; (setq server-host "0.0.0.0")
+;; (setq server-port 8000)
+
+(setq native-comp-async-report-warnings-errors nil)
+
 (provide 'builtin)
