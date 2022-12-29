@@ -36,7 +36,10 @@
 (define-key hs-leader-map "ll" 'hs/select-stripped-line)
 (define-key hs-leader-map "lw" 'hs/move-beginning-of-first-word)
 (define-key hs-leader-map "lx" 'hs/kill-whole-line)
-(global-set-key (kbd "C-_") 'hs/comment-uncomment-region) ;; in fact C-/
+;; this is for TUI emacs, pressing C-/ sends C-_
+(global-set-key (kbd "C-_") 'hs/comment-uncomment-region)
+;; this is for GUI emacs, pressing C-/ does exactly what I mean
+(global-set-key (kbd "C-/") 'hs/comment-uncomment-region)
 (define-key hs-leader-map "lt" 'hs-cmd/recenter-top)
 (global-set-key (kbd "ESC <up>") 'hs/move-region-lines-up)
 (global-set-key (kbd "ESC <down>") 'hs/move-region-lines-down)
