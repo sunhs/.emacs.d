@@ -89,10 +89,10 @@
 (define-key hs-leader-map "G" 'end-of-buffer)
 
 ;; window
-(global-set-key (kbd "M-S-<up>") 'windmove-up)
-(global-set-key (kbd "M-S-<down>") 'windmove-down)
-(global-set-key (kbd "M-S-<left>") 'windmove-left)
-(global-set-key (kbd "M-S-<right>") 'windmove-right)
+(global-set-key (kbd "M-i") 'windmove-up)
+(global-set-key (kbd "M-k") 'windmove-down)
+(global-set-key (kbd "M-j") 'windmove-left)
+(global-set-key (kbd "M-l") 'windmove-right)
 (define-key hs-leader-map "wa" 'ace-window)
 (define-key hs-leader-map "wd" 'delete-window)
 (define-key hs-leader-map "wD" 'delete-other-windows)
