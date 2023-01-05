@@ -215,6 +215,15 @@
   :config
   (setq recentf-max-saved-items 500)
   (setq consult-project-function #'projectile-project-root)
+  ;; set this to true so `projectile-switch-project-action' will work
+  (setq consult-projectile-use-projectile-switch-project t)
+  (setq projectile-switch-project-action
+    #'
+    (lambda ()
+      (consult-projectile
+        '
+        (consult-projectile--source-projectile-buffer
+          consult-projectile--source-projectile-file))))
   (global-set-key (kbd "C-s") 'consult-line)
   (define-key minibuffer-mode-map (kbd "C-s") 'consult-history)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
