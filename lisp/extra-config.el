@@ -303,7 +303,8 @@
   (treemacs-filewatch-mode t)
   (treemacs-git-mode 'simple)
   (define-key hs-leader-map (kbd "tt")
-    'treemacs-add-and-display-current-project-exclusively))
+    'treemacs-add-and-display-current-project-exclusively)
+  (define-key treemacs-mode-map (kbd "M-l") nil))
 ;; (add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1))))
 
 (if hs/use-evil-p
