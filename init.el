@@ -15,25 +15,35 @@
 
 (require 'package)
 
-(let ((emacs-china-dir
-       (concat emacs-dir "/emacs-china")))
+(let ((emacs-china-dir (concat emacs-dir "/emacs-china")))
   (if (file-exists-p emacs-china-dir)
-      (setq package-archives `(("melpa" . ,(concat emacs-china-dir "/melpa"))
-                               ("melpa-stable" . ,(concat emacs-china-dir "/melpa-stable"))
-                               ("marmalade" . ,(concat emacs-china-dir "/marmalade"))
-                               ("gnu" . ,(concat emacs-china-dir "/gnu"))))
-    
     (setq package-archives
-          '(("melpa" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/melpa/")
-            ("org"   . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/org/")
-            ("gnu"   . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/gnu/")))))
+      `
+      (("melpa" . ,(concat emacs-china-dir "/melpa"))
+        ("melpa-stable" . ,(concat emacs-china-dir "/melpa-stable"))
+        ("marmalade" . ,(concat emacs-china-dir "/marmalade"))
+        ("gnu" . ,(concat emacs-china-dir "/gnu"))))
+
+    (setq package-archives
+      '
+      (
+        ("melpa"
+          .
+          "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/melpa/")
+        ("org"
+          .
+          "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/org/")
+        ("gnu"
+          .
+          "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/gnu/")))))
 
 
 (setq package-archive-priorities
-      '(("melpa" . 20)
-        ("melpa-stable" . 15)
-        ("gnu" . 10)
-        ("marmalade" . 5)))
+  '
+  (("melpa" . 20)
+    ("melpa-stable" . 15)
+    ("gnu" . 10)
+    ("marmalade" . 5)))
 (package-initialize)
 
 (unless package-archive-contents
@@ -45,14 +55,19 @@
 (setq use-package-always-ensure t)
 
 (defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
+(let
+  (
+    (bootstrap-file
+      (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        user-emacs-directory))
+    (bootstrap-version 6))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
+      (url-retrieve-synchronously
+        "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+        'silent
+        'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -77,7 +92,10 @@
 (require 'lang-elisp)
 (require 'lang-other)
 (add-to-list 'load-path (concat lisp-dir "/platform"))
-(cond ((string= system-type "gnu/linux") (require 'platform-config-linux))
-      ((string= system-type "darwin") (require 'platform-config-mac)))
+(cond
+  ((string= system-type "gnu/linux")
+    (require 'platform-config-linux))
+  ((string= system-type "darwin")
+    (require 'platform-config-mac)))
 (if (f-exists? (concat lisp-dir "/theme.el"))
-    (load "theme"))
+  (load "theme"))

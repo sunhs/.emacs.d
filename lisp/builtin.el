@@ -20,9 +20,11 @@
 (setq-default indent-tabs-mode nil)
 
 ;; make scoll smooth
-(setq scroll-step 1
-      scroll-margin 10
-      scroll-conservatively 10000)
+(setq
+  scroll-step
+  1
+  scroll-margin 10
+  scroll-conservatively 10000)
 
 ;; making buffers with the same name distinguishable
 (require 'uniquify)
@@ -33,15 +35,19 @@
 ;; (global-display-line-numbers-mode)
 
 ;; no back-up or auto-save files
-(setq-default make-backup-files nil ;; no backup file
-              backup-inhibited t ;; no backup
-              auto-save-mode nil ;; no auto save
-              auto-save-default nil) ;; no #file#
+(setq-default
+  make-backup-files
+  nil ;; no backup file
+  backup-inhibited t ;; no backup
+  auto-save-mode nil ;; no auto save
+  auto-save-default nil) ;; no #file#
 (setq auto-save-list-file-prefix nil)
 
 ;; split windows vertically
-(setq split-height-threshold nil
-      split-width-threshold 0)
+(setq
+  split-height-threshold
+  nil
+  split-width-threshold 0)
 
 ;; wrap word
 (toggle-word-wrap)
@@ -122,11 +128,24 @@
 (defun refresh-vc-state (&rest r)
   ;; (message "refresh vc state for %S" (current-buffer))
   (vc-refresh-state))
-(advice-add 'magit-checkout-revision :after 'refresh-vc-state '((name . "magit-refresh-on-checkout-revision")))
-(advice-add 'magit-branch-create :after 'refresh-vc-state '((name . "magit-refresh-on-branch-create")))
-(advice-add 'magit-branch-and-checkout :after 'refresh-vc-state '((name . "magit-refresh-on-checkout-and-branch")))
-(advice-add 'magit-branch-or-checkout :after 'refresh-vc-state '((name . "magit-refresh-on-branch-or-checkout")))
-(setq magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
+(advice-add 'magit-checkout-revision
+  :after
+  'refresh-vc-state
+  '((name . "magit-refresh-on-checkout-revision")))
+(advice-add 'magit-branch-create
+  :after
+  'refresh-vc-state
+  '((name . "magit-refresh-on-branch-create")))
+(advice-add 'magit-branch-and-checkout
+  :after
+  'refresh-vc-state
+  '((name . "magit-refresh-on-checkout-and-branch")))
+(advice-add 'magit-branch-or-checkout
+  :after
+  'refresh-vc-state
+  '((name . "magit-refresh-on-branch-or-checkout")))
+(setq magit-display-buffer-function
+  'magit-display-buffer-same-window-except-diff-v1)
 
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 (setq vc-follow-symlinks t)

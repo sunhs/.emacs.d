@@ -16,8 +16,9 @@
   ;; (defalias 'forward-evil-word 'forward-evil-symbol)
   ;; (defalias 'evil-word 'evil-symbol)
   (add-hook 'evil-emacs-state-entry-hook
-            #'(lambda ()
-                (remove-hook 'activate-mark-hook 'evil-visual-activate-hook t)))
+    #'
+    (lambda ()
+      (remove-hook 'activate-mark-hook 'evil-visual-activate-hook t)))
 
   ;; (defun hs//evil-insert-to-emacs-state (evil-insert-state-func &rest args)
   ;;   (evil-emacs-state))
@@ -27,23 +28,24 @@
   ;; Since emacs-state is blocked in evil-mc and evil-esc
   (defun evil-emacs-state-p (&optional state)
     "Whether the current state is insert."
-    (and evil-local-mode
-         (memq (or state evil-state) '())))
+    (and evil-local-mode (memq (or state evil-state) '())))
 
   (setq-default mode-line-format
-                (list
-                 " %&  "
-                 mode-line-buffer-identification
-                 '(vc-mode vc-mode)
-                 "  "
-                 '(:eval (symbol-name evil-state))
-                 "  "
-                 "%l/"
-                 '(:eval (number-to-string (count-lines (point-min) (point-max))))
-                 "  "
-                 mode-line-modes
-                 "  "
-                 mode-line-misc-info))
+    (list
+      " %&  "
+      mode-line-buffer-identification
+      '(vc-mode vc-mode)
+      "  "
+      '(:eval (symbol-name evil-state))
+      "  "
+      "%l/"
+      '
+      (:eval
+        (number-to-string (count-lines (point-min) (point-max))))
+      "  "
+      mode-line-modes
+      "  "
+      mode-line-misc-info))
 
   ;; -------------------- kbd --------------------
 
@@ -52,43 +54,78 @@
     (dolist (state-map list-state-map)
       (define-key (symbol-value state-map) kbd func)))
 
-  (setq common-evil-state-maps '(evil-normal-state-map evil-motion-state-map evil-visual-state-map))
-  (define-key-for-evil-state-maps common-evil-state-maps (kbd "SPC") hs-leader-map)
+  (setq common-evil-state-maps
+    '
+    (evil-normal-state-map
+      evil-motion-state-map
+      evil-visual-state-map))
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    (kbd "SPC")
+    hs-leader-map)
   ;; (define-key-for-evil-state-maps common-evil-state-maps "j" 'evil-next-visual-line)
   ;; (define-key-for-evil-state-maps common-evil-state-maps "k" 'evil-previous-visual-line)
   ;; (define-key-for-evil-state-maps common-evil-state-maps "$" 'evil-end-of-visual-line)
   ;; (define-key-for-evil-state-maps common-evil-state-maps "^" 'evil-first-non-blank-of-visual-line)
-  (define-key-for-evil-state-maps common-evil-state-maps "q" 'delete-window)
-  (define-key-for-evil-state-maps common-evil-state-maps [tab] 'indent-for-tab-command)
-  (define-key-for-evil-state-maps common-evil-state-maps (kbd "TAB") 'indent-for-tab-command)
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    "q"
+    'delete-window)
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    [tab]
+    'indent-for-tab-command)
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    (kbd "TAB")
+    'indent-for-tab-command)
   ;; (define-key-for-evil-state-maps common-evil-state-maps (kbd "H") 'evil-first-non-blank-of-visual-line)
-  (define-key-for-evil-state-maps common-evil-state-maps (kbd "H") 'evil-first-non-blank)
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    (kbd "H")
+    'evil-first-non-blank)
   ;; (define-key-for-evil-state-maps common-evil-state-maps (kbd "L") 'evil-end-of-visual-line)
-  (define-key-for-evil-state-maps common-evil-state-maps (kbd "L") 'evil-end-of-line)
-  (define-key-for-evil-state-maps common-evil-state-maps (kbd "M-k") '(lambda () (interactive) (evil-scroll-up 20)))
-  (define-key-for-evil-state-maps common-evil-state-maps (kbd "M-j") '(lambda () (interactive) (evil-scroll-down 20)))
-  (define-key-for-evil-state-maps common-evil-state-maps (kbd "[") '(lambda () (interactive) (evil-scroll-up 20)))
-  (define-key-for-evil-state-maps common-evil-state-maps (kbd "]") '(lambda () (interactive) (evil-scroll-down 20)))
-  (define-key-for-evil-state-maps common-evil-state-maps (kbd "{")
-    '(lambda ()
-       (interactive)
-       (hs/jump-up-half)))
-  (define-key-for-evil-state-maps common-evil-state-maps (kbd "}")
-    '(lambda ()
-       (interactive)
-       (hs/jump-down-half)))
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    (kbd "L")
+    'evil-end-of-line)
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    (kbd "M-k")
+    '(lambda () (interactive) (evil-scroll-up 20)))
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    (kbd "M-j")
+    '(lambda () (interactive) (evil-scroll-down 20)))
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    (kbd "[")
+    '(lambda () (interactive) (evil-scroll-up 20)))
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    (kbd "]")
+    '(lambda () (interactive) (evil-scroll-down 20)))
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    (kbd "{")
+    '(lambda () (interactive) (hs/jump-up-half)))
+  (define-key-for-evil-state-maps
+    common-evil-state-maps
+    (kbd "}")
+    '(lambda () (interactive) (hs/jump-down-half)))
 
   ;; normal state
-  (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
-  (define-key evil-normal-state-map (kbd "M-,") 'xref-pop-marker-stack)
+  (define-key evil-normal-state-map (kbd "M-.")
+    'xref-find-definitions)
+  (define-key evil-normal-state-map (kbd "M-,")
+    'xref-pop-marker-stack)
 
   ;; motion state
 
   ;; visual state
 
-  :bind (:map evil-emacs-state-map
-              ([escape] . evil-force-normal-state))
-  )
+  :bind
+  (:map evil-emacs-state-map ([escape] . evil-force-normal-state)))
 
 (use-package evil-terminal-cursor-changer
   :config
@@ -110,8 +147,7 @@
 (use-package evil-escape
   :config
   (evil-escape-mode t)
-  (setq-default evil-escape-delay 0.2)
-  )
+  (setq-default evil-escape-delay 0.2))
 
 ;; (use-package evil-org
 ;;   :after org
@@ -126,24 +162,22 @@
 ;;   (evil-define-key evil-magit-state magit-mode-map (kbd "SPC") hs-leader-map))
 
 (use-package evil-surround
-  :config
-  (global-evil-surround-mode 1))
+  :config (global-evil-surround-mode 1))
 
 (use-package evil-snipe
   :config
   (evil-snipe-mode +1)
   (evil-snipe-override-mode +1)
-  (setq evil-snipe-scope 'whole-buffer
-        evil-snipe-repeat-scope 'whole-buffer)
-  )
+  (setq
+    evil-snipe-scope
+    'whole-buffer
+    evil-snipe-repeat-scope 'whole-buffer))
 
 (use-package evil-mc
-  :config
-  (global-evil-mc-mode t)
+  :config (global-evil-mc-mode t)
 
   (add-hook 'evil-emacs-state-entry-hook
-            #'(lambda ()
-                (turn-off-evil-mc-mode)))
+    #'(lambda () (turn-off-evil-mc-mode)))
   (add-hook 'evil-emacs-state-exit-hook 'turn-on-evil-mc-mode)
 
   (defun hs/evil-mc-make-cursor-here ()
@@ -151,28 +185,29 @@
     (evil-mc-make-cursor-here)
     (evil-mc-pause-cursors))
 
-  :bind (:map hs-leader-map
-              ("cm" . hs/evil-mc-make-cursor-here)
-              ("cn" . evil-mc-make-and-goto-next-match))
-  )
+  :bind
+  (:map
+    hs-leader-map
+    ("cm" . hs/evil-mc-make-cursor-here)
+    ("cn" . evil-mc-make-and-goto-next-match)))
 
 (defun hs/toggle-evil (toggle)
   (if (eq toggle -1)
-      (message "evil off")
+    (message "evil off")
     (message "evil on"))
-  
+
   (evil-mode toggle)
   (evil-mc-mode toggle)
   (evil-snipe-mode toggle)
-  (evil-surround-mode toggle)
-  )
+  (evil-surround-mode toggle))
 
 (global-unset-key (kbd "M-e"))
 (global-set-key (kbd "M-e")
-                #'(lambda ()
-                    (interactive)
-                    (if (not evil-mode)
-                        (hs/toggle-evil t)
-                      (hs/toggle-evil -1))))
+  #'
+  (lambda ()
+    (interactive)
+    (if (not evil-mode)
+      (hs/toggle-evil t)
+      (hs/toggle-evil -1))))
 
 (provide 'evilize)
