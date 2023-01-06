@@ -84,7 +84,14 @@
         (sp-beginning-of-sexp)
         (while
           (and
-            (not (= (point) last-point)) ;; moved by `sp-beginning-of-sexp'
+            (or
+              ;; moved by `sp-beginning-of-sexp'
+              (not (= (point) last-point))
+              ;; not moved since `char-before' is another open sym
+              (cl-find
+                (char-to-string (char-before))
+                hs/enclosed-region-start-sym-list
+                :test #'string=))
             (not (string= (char-to-string (char-before)) left)))
           (sp-backward-up-sexp)
           (setq last-point (point))
