@@ -2,6 +2,7 @@
 ;; -*- mode: emacs-lisp -*-
 
 (require 'utils)
+(require 'init-modeline)
 
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
@@ -60,59 +61,6 @@
 
 ;; Don't prompt for large file
 (setq large-file-warning-threshold nil)
-
-;; mode-line
-(defface hs--modeline-project-name-face
-  '((t (:inherit (font-lock-function-name-face bold))))
-  "The face for buffer name on the mode-line of an active window.")
-
-(defface hs--modeline-line-number-face
-  '((t (:inherit (mode-line-inactive) :inverse-video t)))
-  "The face for line number on the mode-line of an active window.")
-
-(setq hs--modeline-rhs '((:eval mode-name) "  "))
-
-(setq-default mode-line-format
-  (let*
-    (
-      (lhs
-        '
-        (" %& "
-          (:propertize
-            (:eval
-              (concat
-                " %l/"
-                (number-to-string
-                  (count-lines (point-min) (point-max)))
-                " "))
-            face hs--modeline-line-number-face)
-          " "
-          (:propertize
-            (:eval
-              (if (derived-mode-p 'eshell-mode)
-                ""
-                (let ((pname (projectile-project-name)))
-                  (if pname
-                    (format "[%s]" pname)
-                    ""))))
-            face hs--modeline-project-name-face)
-          mode-line-buffer-identification (:eval vc-mode)))
-      (blank
-        '
-        (
-          (:eval
-            (propertize
-              " " 'display
-              `
-              (
-                (space
-                  :align-to
-                  (-
-                    (+ right right-fringe right-margin)
-                    ,
-                    (string-width
-                      (format-mode-line hs--modeline-rhs))))))))))
-    `(,@lhs ,@blank ,@hs--modeline-rhs)))
 
 ;; gc threshold
 (setq gc-cons-threshold most-positive-fixnum)
