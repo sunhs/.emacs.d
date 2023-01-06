@@ -4,8 +4,11 @@
 (use-package lsp-mode
   :commands lsp
   :hook ((c++-mode
+          c++-ts-mode
           c-mode
+          c-ts-mode
           python-mode
+          python-ts-mode
           go-mode
           cmake-mode) . lsp)
   :config
@@ -60,5 +63,40 @@
 	       (reusable-frames . visible)
 	       (side            . bottom)
 	       (window-height   . 0.33)))))
+
+;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< treesit >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+(require 'treesit-parser-manager)
+(setq treesit-parser-manager-grammars
+      '(
+        ("https://github.com/tree-sitter/tree-sitter-bash" ("tree-sitter-bash"))
+        ("https://github.com/tree-sitter/tree-sitter-cpp" ("tree-sitter-cpp"))
+        ("https://github.com/theHamsta/tree-sitter-cuda" ("tree-sitter-cuda"))
+        ("https://github.com/Wilfred/tree-sitter-elisp" ("tree-sitter-elisp"))
+        ("https://github.com/tree-sitter/tree-sitter-json" ("tree-sitter-json"))
+        ("https://github.com/alemuller/tree-sitter-make" ("tree-sitter-make"))
+        ("https://github.com/ikatyang/tree-sitter-markdown" ("tree-sitter-markdown"))
+        ("https://github.com/tree-sitter/tree-sitter-python" ("tree-sitter-python"))
+        ("https://github.com/ikatyang/tree-sitter-toml" ("tree-sitter-toml"))
+        ("https://github.com/ikatyang/tree-sitter-yaml" ("tree-sitter-yaml"))
+
+        ;; in development
+        ("https://github.com/camdencheek/tree-sitter-dockerfile" ("tree-sitter-dockerfile"))
+        ("https://github.com/milisims/tree-sitter-org" ("tree-sitter-org"))
+        ("https://github.com/mitchellh/tree-sitter-proto" ("tree-sitter-proto"))
+        ))
+(add-to-list 'treesit-extra-load-path treesit-parser-manager-target-directory)
+(add-hook 'emacs-startup-hook 'treesit-parser-manager-install-grammars)
+
+(when (treesit-available-p)
+  (setq major-mode-remap-alist
+        '(
+          ;; (sh-mode . bash-ts-mode)
+          ;; (c++-mode . c++-ts-mode)
+          ;; (js-json-mode . json-ts-mode)
+          ;; (python-mode . python-ts-mode)
+          ;; (conf-toml-mode . toml-ts-mode)
+          )
+        )
+  )
 
 (provide 'intellisense)
