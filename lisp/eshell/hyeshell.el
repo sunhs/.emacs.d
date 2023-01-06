@@ -501,9 +501,10 @@ This function only return prefix when current point at eshell prompt line, avoid
             (code)
             (output (eshell-command-result cmd 'code))
             (dir
-              (if (and output (= code 0))
-                (string-trim output)
-                nil)))
+              (file-truename
+                (if (and output (= code 0))
+                  (string-trim output)
+                  nil))))
           (if (not dir)
             (eshell/echo "no match")
             (eshell/cd dir)))))))
