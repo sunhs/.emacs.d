@@ -4,8 +4,8 @@
 (add-hook 'org-mode-hook
           (lambda () (setq truncate-lines nil)))
 (setq org-log-done 'note)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
+(define-key hs-leader-map (kbd "oa") 'org-agenda)
+(define-key hs-leader-map (kbd "oc") 'org-capture)
 
 ;; (eval-after-load "org"
 ;;   '(progn
@@ -17,13 +17,12 @@
 (setq org-export-with-toc nil)
 
 ;; org-capture
-(defconst org-file-dir (substitute-in-file-name "$HOME/org"))
-(defconst capture-todo-file (concat org-file-dir "/TODO.org"))
+(setq hs--org-capture-todo-filepath (substitute-in-file-name "$HOME/org/TODO.org"))
 ;; (defconst capture-memo-file (concat org-file-dir "/MEMO.org"))
 ;; (defconst capture-note-file (concat org-file-dir "/READING_NOTE.org"))
 ;; (defconst capture-birthday-file (concat org-file-dir "/org/BIRTHDAY.org"))
 (setq org-capture-templates
-      '(("t" "TODO" entry (file+headline capture-todo-file "TASK") "** TODO %?\n   %i\n")
+      '(("t" "TODO" entry (file+headline hs--org-capture-todo-filepath "TASK") "** TODO %?\n   %i\n")
         ;; ("m" "MEMO" entry (file+headline capture-memo-file "MEMO") "** %?\n   %i\n")
         ;; ("n" "NOTE" entry (file+headline capture-note-file "NOTE") "** %?\n   %i\n   %a")
         ;; ("b" "BIRTHDAY" entry (file+headline capture-birthday-file "BIRTHDAY") "")
@@ -31,7 +30,7 @@
 
 ;; agenda
 (setq
- org-agenda-files `(,capture-todo-file)
+ org-agenda-files `(,hs--org-capture-todo-filepath)
  org-agenda-include-diary nil)
 
 ;; iCalendar
