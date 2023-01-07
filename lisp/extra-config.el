@@ -565,11 +565,7 @@
     modus-themes-bold-constructs nil
     modus-themes-region '(bg-only no-extend))
 
-  ;; Load the theme files before enabling a theme
-  (modus-themes-load-themes)
-  :config
-  ;; Load the theme of your choice:
-  (modus-themes-load-operandi)
+  :config (modus-themes-load-theme 'modus-vivendi)
   :bind ("<f5>" . modus-themes-toggle))
 
 
