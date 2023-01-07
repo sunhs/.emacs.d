@@ -137,7 +137,11 @@
   (projectile-mode t)
   (setq projectile-indexing-method 'hybrid)
   (setq projectile-sort-order 'recently-active)
-  (define-key hs-leader-map "p" 'projectile-command-map))
+  (define-key hs-leader-map "p" 'projectile-command-map)
+  (setq minor-mode-alist
+    (cl-remove-if
+      #'(lambda (e) (eq (car e) 'projectile-mode))
+      minor-mode-alist)))
 
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ivy / swiper / counsel >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;; (use-package ivy
