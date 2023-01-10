@@ -206,6 +206,8 @@
   :bind
   (:map
     vertico-map
+    ("DEL" . vertico-directory-delete-char)
+    ("M-DEL" . vertico-directory-delete-word)
     ("C-v" . (lambda () (interactive) (vertico-next 10)))
     ("M-v" . (lambda () (interactive) (vertico-previous 10)))))
 
@@ -565,7 +567,7 @@
     modus-themes-bold-constructs nil
     modus-themes-region '(bg-only no-extend))
 
-  :config (modus-themes-load-theme 'modus-vivendi)
+  ;; :config (modus-themes-load-theme 'modus-vivendi)
   :bind ("<f5>" . modus-themes-toggle))
 
 
