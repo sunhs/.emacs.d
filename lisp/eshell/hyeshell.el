@@ -75,12 +75,18 @@ The return value should be `t' meaning a match, otherwise `nil'."
 
       (dolist (buf hyeshell--buffer-list)
         (with-current-buffer buf
-          (if
-            (string=
-              (file-truename (projectile-project-root curdir))
-              (file-truename
+          (let*
+            (
+              (cur-proj-dir (projectile-project-root curdir))
+              (default-dir-proj-dir
                 (projectile-project-root default-directory)))
-            (cl-return-from block buf)))))))
+            (if
+              (and
+                cur-proj-dir default-dir-proj-dir
+                (string=
+                  (file-truename cur-proj-dir)
+                  (file-truename default-dir-proj-dir)))
+              (cl-return-from block buf))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; commands ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun hyeshell/toggle ()
