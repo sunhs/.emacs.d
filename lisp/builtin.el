@@ -99,6 +99,9 @@
 (setq vc-follow-symlinks t)
 ;; (xterm-mouse-mode t)
 
+(setq completion-auto-help 'visible)
+(setq completion-auto-select 'second-tab)
+
 ;; load customize variables
 (setq custom-file (concat emacs-dir "/custom.el"))
 ;; (load custom-file)
