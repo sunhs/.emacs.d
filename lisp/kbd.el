@@ -46,8 +46,12 @@
 ;; this is for GUI emacs, pressing C-/ does exactly what I mean
 (global-set-key (kbd "C-/") 'hs/comment-uncomment-region)
 (define-key hs-leader-map "lt" 'hs-cmd/recenter-top)
+;; TUI emacs, Alt sends ESC
 (global-set-key (kbd "ESC <up>") 'hs/move-region-lines-up)
 (global-set-key (kbd "ESC <down>") 'hs/move-region-lines-down)
+;; GUI emacs
+(global-set-key (kbd "M-<up>") 'hs/move-region-lines-up)
+(global-set-key (kbd "M-<down>") 'hs/move-region-lines-down)
 (define-key hs-leader-map "lo" 'hs-cmd/new-line-bellow)
 (define-key hs-leader-map "lO" 'hs-cmd/new-line-above)
 ;; duplicate line below
