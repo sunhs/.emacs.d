@@ -20,6 +20,14 @@
 (global-set-key (kbd "M-{") 'indent-rigidly-left-to-tab-stop)
 (global-set-key (kbd "M-}") 'indent-rigidly-right-to-tab-stop)
 
+;; project
+(define-key hs-leader-map "p" project-prefix-map)
+(define-key project-prefix-map "f" 'project-find-file)
+(define-key project-prefix-map "d" 'project-find-dir)
+(define-key project-prefix-map "p" 'project-switch-project)
+(define-key project-prefix-map "b" 'project-switch-to-buffer)
+(define-key project-prefix-map "g" 'project-find-regexp)
+
 ;; file
 (define-key hs-leader-map "fl"
   #'(lambda () (interactive) (load-file (buffer-file-name))))

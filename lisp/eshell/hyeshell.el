@@ -5,7 +5,6 @@
 ;; by Andy Stewart <lazycat.manatee@gmail.com>
 
 (require 'eshell)
-(require 'projectile)
 (require 'consult)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; customize ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -44,7 +43,7 @@ It's examined as follow:
   1) Apply each function in `match-dir-funs' to all eshell buffer directories
      until the first match is found;
   2) Exactly same directory;
-  3) Same `projectile-project-root';
+  3) Same `project-root';
 
 Arg `match-dir-funs' is a list of functions with two arguments,
 the first of which represents the current buffer's directory, i.e., `default-directory',
@@ -53,7 +52,10 @@ The return value should be `t' meaning a match, otherwise `nil'."
 
   (cl-block
     block
-    (let* ((curdir default-directory))
+    (let*
+      (
+        (curdir default-directory)
+        (curproj (project-current)))
       (if match-dir-funs
         (dolist (match-dir-fun match-dir-funs)
           (dolist (buf hyeshell--buffer-list)
@@ -77,15 +79,21 @@ The return value should be `t' meaning a match, otherwise `nil'."
         (with-current-buffer buf
           (let*
             (
-              (cur-proj-dir (projectile-project-root curdir))
-              (default-dir-proj-dir
-                (projectile-project-root default-directory)))
+              (cur-proj-dir
+                (if curproj
+                  (project-root curproj)
+                  nil))
+              (esh-proj (project-current))
+              (esh-proj-dir
+                (if esh-proj
+                  (project-root esh-proj)
+                  nil)))
             (if
               (and
-                cur-proj-dir default-dir-proj-dir
+                cur-proj-dir esh-proj-dir
                 (string=
                   (file-truename cur-proj-dir)
-                  (file-truename default-dir-proj-dir)))
+                  (file-truename esh-proj-dir)))
               (cl-return-from block buf))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; commands ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -214,14 +222,11 @@ If `window' is nil, get current window."
   (when (equal major-mode 'eshell-mode)
     (let*
       (
-        (possible-proj-name (projectile-project-name))
+        (possible-proj (project-current))
         (proj-name
-          (if
-            (or
-              (not possible-proj-name)
-              (string= possible-proj-name "-"))
+          (if (null possible-proj)
             "/"
-            possible-proj-name))
+            (project-name possible-proj)))
         (dir-name (file-truename default-directory))
         (buf-name (format "eshell: [%s](%s)" proj-name dir-name)))
       (rename-buffer buf-name t))
@@ -675,8 +680,7 @@ This function only return prefix when current point at eshell prompt line, avoid
       (buffer-visible
         (member buffer (mapcar #'window-buffer (window-list)))))
     (unless buffer-visible
-      (message
-        "%s %s"
+      (message "%s %s"
         (propertize
           (format
             "[Hyeshell Alert] %s"

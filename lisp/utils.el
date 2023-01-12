@@ -119,6 +119,8 @@
   (require 'find-file)
   (let*
     (
+      (cur-project (project-current))
+      project-files
       (fname
         (if fpath
           (file-name-nondirectory fpath)
@@ -133,6 +135,9 @@
       (candidate-fnames nil)
       (results nil)
       (nomatch nil))
+
+    (if (null (project-current))
+      (user-error "Not in a project."))
 
     ;; find a rule that matches the buffer filename
     (while
@@ -165,19 +170,15 @@
         (setq candidate-fnames
           (mapcar (lambda (suffix) (concat stub suffix)) suffixes)))
 
+      (setq project-files (project-files cur-project))
+
       ;; find new filenames
       (dolist (candfname candidate-fnames)
         ;; prevent such cases: submodule.cc -> fuck_submodule.cc.o
         (setq regex (concat "^" candfname "$"))
-        (setq results
-          (append
-            results
-            (directory-files-recursively
-              (projectile-project-root)
-              regex
-              nil
-              nil
-              t)))))
+        (dolist (pfile project-files)
+          (if (string-match regex (file-name-nondirectory pfile))
+            (setq results (nconc results (list pfile)))))))
 
     (cond
       ((or nomatch (not results))

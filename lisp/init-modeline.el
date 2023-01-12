@@ -21,9 +21,9 @@
       (:eval
         (if (derived-mode-p 'eshell-mode)
           ""
-          (let ((pname (projectile-project-name)))
-            (if pname
-              (format "[%s]" pname)
+          (let* ((proj (project-current)))
+            (if proj
+              (format "[%s]" (project-name proj))
               ""))))
       face hs--modeline-project-name-face)))
 

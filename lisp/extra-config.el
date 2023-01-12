@@ -131,57 +131,6 @@
         (sp-end-of-sexp))))
   (global-set-key (kbd "M-0") #'hs-cmd/jump-enclosed-sym))
 
-
-(use-package projectile
-  :config
-  (projectile-mode t)
-  (setq projectile-indexing-method 'hybrid)
-  (setq projectile-sort-order 'recently-active)
-  (define-key hs-leader-map "p" 'projectile-command-map)
-  (setq minor-mode-alist
-    (cl-remove-if
-      #'(lambda (e) (eq (car e) 'projectile-mode))
-      minor-mode-alist)))
-
-;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ivy / swiper / counsel >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-;; (use-package ivy
-;;   :config
-;;   (ivy-mode 1)
-;;   (setq ivy-initial-inputs-alist nil
-;;         ivy-use-virtual-buffers t
-;;         ivy-height 15
-;;         ivy-extra-directories nil
-;;         ivy-count-format "%d/%d")
-;;   (setq ivy-ignore-buffers (append '("*Help*") ivy-ignore-buffers)))
-
-;; (use-package ivy-rich
-;;   :init (ivy-rich-mode 1))
-
-;; (use-package swiper
-;;   :config
-;;   (global-set-key (kbd "C-s") 'swiper)
-;;   (global-set-key (kbd "C-r") 'swiper))
-
-;; (use-package counsel
-;;   :config
-;;   (setq ivy-initial-inputs-alist nil)
-;;   (global-set-key (kbd "M-x") 'counsel-M-x)
-;;   (global-set-key (kbd "C-c C-x y") 'counsel-yank-pop)
-;;   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-;;   (define-key hs-leader-map (kbd "SPC") 'counsel-M-x)
-;;   ;; (define-key hs-leader-map (kbd "y") 'counsel-yank-pop)
-;;   (define-key hs-leader-map "ff" 'counsel-find-file))
-
-;; (use-package counsel-projectile
-;;   :config
-;;   (counsel-projectile-mode t)
-;;   (define-key hs-leader-map "p" 'projectile-command-map)
-;;   (define-key projectile-command-map "f" 'projectile-find-file)
-;;   (define-key projectile-command-map "d" 'projectile-find-dir)
-;;   (define-key projectile-command-map "p" 'projectile-switch-project)
-;;   (define-key projectile-command-map "b" 'projectile-switch-to-buffer)
-;;   (define-key projectile-command-map "g" 'projectile-ripgrep))
-
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< vertico / consult / orderless >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;; -------------------------------------------------- vertico ---------------------------------------------------
 (use-package vertico
@@ -225,35 +174,16 @@
 
   :hook (completion-list-mode . consult-preview-at-point-mode)
 
-  :config
-  (setq recentf-max-saved-items 500)
-  (setq consult-project-function #'projectile-project-root)
-  ;; set this to true so `projectile-switch-project-action' will work
-  (setq consult-projectile-use-projectile-switch-project t)
-  (setq projectile-switch-project-action
-    #'
-    (lambda ()
-      (consult-projectile
-        '
-        (consult-projectile--source-projectile-buffer
-          consult-projectile--source-projectile-file))))
+  :config (setq recentf-max-saved-items 500)  
   (global-set-key (kbd "C-s") 'consult-line)
   (define-key minibuffer-mode-map (kbd "C-s") 'consult-history)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
   (global-set-key (kbd "M-g g") 'consult-goto-line)
   (define-key hs-leader-map (kbd "bb") 'consult-buffer)
-  (define-key projectile-command-map "g" 'consult-ripgrep))
+  (define-key project-prefix-map "g" 'consult-ripgrep))
 
-(use-package consult-projectile
-  :config
-  (global-set-key (kbd "M-P") 'consult-projectile)
-  (define-key projectile-command-map "f"
-    'consult-projectile-find-file)
-  (define-key projectile-command-map "d" 'consult-projectile-find-dir)
-  (define-key projectile-command-map "p"
-    'consult-projectile-switch-project)
-  (define-key projectile-command-map "b"
-    'consult-projectile-switch-to-buffer))
+(use-package consult-project-extra
+  :config (setq project-switch-commands 'consult-project-extra-find))
 
 (use-package consult-dir
   :bind
@@ -328,12 +258,6 @@
     :config
     (add-hook 'evil-treemacs-state-entry-hook
       #'(lambda () (setq evil-treemacs-state-cursor '(box))))))
-
-(use-package treemacs-projectile
-  :after
-  treemacs
-  projectile)
-
 
 ;; (use-package dired-sidebar
 ;;   :commands (dired-sidebar-toggle-sidebar)
