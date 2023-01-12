@@ -102,6 +102,33 @@
 (setq completion-auto-help 'visible)
 (setq completion-auto-select 'second-tab)
 
+(setq native-comp-async-report-warnings-errors nil)
+
+(require 'tramp)
+;; (setq tramp-debug-buffer t)
+;; (setq tramp-verbose 3)
+;; (setq tramp-default-method "sshx")
+;; (tramp-change-syntax 'simplified)
+(add-to-list 'tramp-connection-properties
+  `(,(regexp-quote "/sshx:sg:") "remote-shell" "/bin/bash"))
+(setq tramp-remote-path '(tramp-own-remote-path))
+;; (setq vc-ignore-dir-regexp
+;;   (format
+;;     "\\(%s\\)\\|\\(%s\\)"
+;;     vc-ignore-dir-regexp
+;;     tramp-file-name-regexp))
+(setq vc-handled-backends '(Git))
+(remove-hook 'tramp-cleanup-connection-hook #'tramp-recentf-cleanup)
+(remove-hook
+  'tramp-cleanup-all-connections-hook
+  #'tramp-recentf-cleanup-all)
+;; set to nil if you use the ProxyCommand or ProxyJump options
+(setq tramp-use-ssh-controlmaster-options nil)
+(setq remote-file-name-inhibit-cache 86400)
+
+;; project
+(setq project-switch-commands 'project-find-file)
+
 ;; load customize variables
 (setq custom-file (concat emacs-dir "/custom.el"))
 ;; (load custom-file)
@@ -109,11 +136,5 @@
 ;;           (lambda ()
 ;;             (custom-set-variables `(package-selected-packages ,(hs/sort-package-list)))
 ;;             (custom-save-all)))
-
-;; (setq server-use-tcp t)
-;; (setq server-host "0.0.0.0")
-;; (setq server-port 8000)
-
-(setq native-comp-async-report-warnings-errors nil)
 
 (provide 'builtin)
