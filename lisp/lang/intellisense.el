@@ -19,11 +19,13 @@
     lsp-prefer-flymake
     nil
     lsp-auto-configure t
-    lsp-signature-render-documentation t ;; 应该是补全时的 doc
+    lsp-signature-render-documentation t ;; 补全（函数?）时在 minibuffer 显示注释
     lsp-signature-doc-lines 30 ;; Defaults to 20
-    lsp-eldoc-render-all nil ;; Defaults to nul; 在底部渲染 doc
+    ;; Defaults to nil
+    ;; 光标指向时在 minibuffer 显示注释
+    ;; 位置上与 lsp-signature 重叠，功能上与 lsp-ui-doc 重叠
+    lsp-eldoc-render-all nil
     lsp-file-watch-threshold nil)
-  (define-key hs-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions)
 
   (push
     '(company-files company-capf :with company-yasnippet)
@@ -50,6 +52,7 @@
     lsp-ui-peek-enable t
     lsp-ui-peek-list-width 60
     lsp-ui-peek-peek-height 25)
+  (define-key hs-leader-map (kbd "gd") 'lsp-ui-peek-find-definitions)
   (define-key hs-leader-map (kbd "ds") 'lsp-ui-doc-show)
   (define-key hs-leader-map (kbd "dh") 'lsp-ui-doc-hide))
 
