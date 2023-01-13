@@ -2,24 +2,11 @@
 
 (scroll-bar-mode -1)
 
-;; the path for emacs shell
-(setenv
-  "PATH"
-  (concat
-    (substitute-in-file-name
-      "$HOME/go/bin:$HOME/conda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2017/bin/x86_64-darwin:")
-    (getenv "PATH")))
-
-;; the path to find programs
-(setq exec-path (append (split-string (getenv "PATH") ":") exec-path))
-
-;; special settings for emacs mac port
+;; special settings
 ;; (setq mac-option-modifier (quote (:ordinary meta :function meta :mouse meta)))
 (setq
-  mac-pass-command-to-system
-  nil
-  mac-system-move-file-to-trash-use-finder t
-  ns-pop-up-frames nil ;; don't open file in a new frame
+  ns-pop-up-frames
+  nil ;; don't open file in a new frame
   mac-command-modifier 'control) ;; map command to control
 
 ;; display chinese fonts normally in GUI
