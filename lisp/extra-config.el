@@ -425,11 +425,6 @@
   :commands company-prescient-mode
   :hook (company-mode . company-prescient-mode))
 
-;; (use-package company-quickhelp
-;;   :commands company-quickhelp-mode
-;;   :hook (company-mode . company-quickhelp-mode)
-;;   )
-
 
 (use-package yasnippet
   :config

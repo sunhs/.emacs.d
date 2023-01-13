@@ -49,3 +49,11 @@
 
 (use-package blamer
   :custom (blamer-type 'both))
+
+(use-package company-quickhelp
+  :commands company-quickhelp-mode
+  :hook (company-mode . company-quickhelp-mode)
+  :config
+  (company-quickhelp-mode)
+  (setq company-quickhelp-delay 0.2)
+  )
