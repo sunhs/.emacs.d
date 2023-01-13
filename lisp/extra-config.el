@@ -354,13 +354,14 @@
   ;; (blamer-type 'posframe-popup)
   (blamer-type 'overlay-popup)
   (blamer--overlay-popup-position 'smart)
+  (blamer-prettify-time-p nil)
   :custom-face
   (blamer-face
     (
       (t
         :foreground "#7a88cf"
         :background nil
-        :height 140
+        :height 150
         :italic t)))
   ;; :config
   ;; (global-blamer-mode 1))
