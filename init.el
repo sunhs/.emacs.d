@@ -74,6 +74,7 @@
 
 (require 'kbd)
 (require 'builtin)
+(require 'init-project)
 ;; (require 'evilize)
 (setq hs/use-evil-p nil)
 ;; (if hs/use-evil-p

@@ -126,9 +126,6 @@
 (setq tramp-use-ssh-controlmaster-options nil)
 (setq remote-file-name-inhibit-cache 86400)
 
-;; project
-(setq project-switch-commands 'project-find-file)
-
 ;; load customize variables
 (setq custom-file (concat emacs-dir "/custom.el"))
 ;; (load custom-file)
