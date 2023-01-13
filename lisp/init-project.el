@@ -70,6 +70,7 @@
       (equal pr-dir "")
       ;; If the user simply pressed RET, do this again until they don't.
       (setq pr-dir
-        (completing-read "Select project: " choices nil t)))))
+        (completing-read "Select project: " choices nil t)))
+    pr-dir))
 
 (provide 'init-project)
