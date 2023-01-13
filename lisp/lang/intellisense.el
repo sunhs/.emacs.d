@@ -25,6 +25,7 @@
     ;; 光标指向时在 minibuffer 显示注释
     ;; 位置上与 lsp-signature 重叠，功能上与 lsp-ui-doc 重叠
     lsp-eldoc-render-all nil
+    eldoc-idle-delay 0.2
     lsp-file-watch-threshold nil)
 
   (push
@@ -47,6 +48,8 @@
     lsp-ui-doc-header t
     lsp-ui-doc-include-signature t
     lsp-ui-doc-show-with-cursor t
+    lsp-ui-doc-alignment 'window
+    lsp-ui-doc-max-height 50
     lsp-ui-sideline-enable nil
     lsp-ui-sideline-ignore-duplicate t
     lsp-ui-peek-enable t

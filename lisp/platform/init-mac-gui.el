@@ -55,5 +55,4 @@
   :hook (company-mode . company-quickhelp-mode)
   :config
   (company-quickhelp-mode)
-  (setq company-quickhelp-delay 0.2)
-  )
+  (setq company-quickhelp-delay 0.2))
