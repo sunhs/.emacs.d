@@ -174,7 +174,8 @@
 
   :hook (completion-list-mode . consult-preview-at-point-mode)
 
-  :config (setq recentf-max-saved-items 500)  
+  :config
+  (setq recentf-max-saved-items 500)
   (global-set-key (kbd "C-s") 'consult-line)
   (define-key minibuffer-mode-map (kbd "C-s") 'consult-history)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
@@ -489,6 +490,38 @@
 
   ;; :config (modus-themes-load-theme 'modus-vivendi)
   :bind ("<f5>" . modus-themes-toggle))
+
+;; (use-package all-the-icons)
+
+;; (use-package nerd-fonts
+;;   :straight (nerd-fonts :host github :repo "mohkale/nerd-fonts.el"))
+
+;; (use-package all-the-icons-nerd-fonts
+;;   :straight
+;;   (all-the-icons-nerd-fonts
+;;     :host github
+;;     :repo "mohkale/all-the-icons-nerd-fonts")
+;;   :after all-the-icons
+;;   :config (all-the-icons-nerd-fonts-prefer))
+
+;; (use-package treemacs-all-the-icons
+;;   :after all-the-icons-nerd-fonts)
+
+;; (use-package all-the-icons-dired
+;;   :after all-the-icons-nerd-fonts)
+
+;; (use-package all-the-icons-completion)
+
+;; (use-package doom-modeline
+;;   :init
+
+;;   (require 'all-the-icons)
+;;   (doom-modeline-mode 1)
+
+;;   :config
+;;   (defun doom-modeline-icon-displayable-p ()
+;;     "Return non-nil if icons are displayable."
+;;     (and doom-modeline-icon (featurep 'all-the-icons))))
 
 
 ;; --------------------------------------------------------------------------------------------------------------
