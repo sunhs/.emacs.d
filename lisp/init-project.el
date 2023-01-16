@@ -73,4 +73,11 @@
         (completing-read "Select project: " choices nil t)))
     pr-dir))
 
+(add-hook 'find-file-hook
+  #'
+  (lambda ()
+    (let ((project (project-current)))
+      (if project
+        (project-remember-project project)))))
+
 (provide 'init-project)
