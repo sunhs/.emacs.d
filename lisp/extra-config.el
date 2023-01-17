@@ -155,7 +155,14 @@
   :bind
   (:map
     vertico-map
-    ("DEL" . vertico-directory-delete-char)
+    ;; ("DEL" . vertico-directory-delete-char)
+    ("DEL"
+      .
+      (lambda (&optional n)
+        "Delete N directories or chars before point."
+        (interactive "p")
+        (unless (vertico-directory-up n)
+          (backward-delete-char n))))
     ("M-DEL" . vertico-directory-delete-word)
     ("C-v" . (lambda () (interactive) (vertico-next 10)))
     ("M-v" . (lambda () (interactive) (vertico-previous 10)))))
