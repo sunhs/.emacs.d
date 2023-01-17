@@ -88,45 +88,50 @@
           'hs--modeline-project-name-face)
         ""))))
 
-(defun hs--modeline-vc-mode ()
-  (when (and vc-mode buffer-file-name)
-    (let*
-      (
-        (backend (vc-backend buffer-file-name))
-        (state (vc-state buffer-file-name backend))
-        face
-        state-indicator)
-      (cond
-        ((memq state '(edited added))
-          (setq face 'hs--modeline-status-info)
-          (setq state-indicator "✚"))
-        ((eq state 'needs-merge)
-          (setq face 'hs--modeline-status-warning)
-          (setq state-indicator "⟷"))
-        ((eq state 'needs-update)
-          (setq face 'hs--modeline-status-warning)
-          (setq state-indicator "↑"))
-        ((memq state '(removed conflict unregistered))
-          (setq face 'hs--modeline-status-error)
-          (setq state-indicator "✖"))
-        (t
-          (setq face 'hs--modeline-status-normal)
-          (setq state-indicator "✔")))
-      (concat
-        (propertize state-indicator 'face face) " "
-        (propertize
-          (substring
-            vc-mode
-            (+
-              (if (eq backend 'Hg)
-                2
-                3)
-              2))
-          'face face 'mouse-face face)))))
+(defvar-local hs--modeline-vc nil)
+(defun hs--modeline-update-vc ()
+  (setq hs--modeline-vc
+    (when (and vc-mode buffer-file-name)
+      (let*
+        (
+          (backend (vc-backend buffer-file-name))
+          (state (vc-state buffer-file-name backend))
+          face
+          state-indicator)
+        (cond
+          ((memq state '(edited added))
+            (setq face 'hs--modeline-status-info)
+            (setq state-indicator "✚"))
+          ((eq state 'needs-merge)
+            (setq face 'hs--modeline-status-warning)
+            (setq state-indicator "⟷"))
+          ((eq state 'needs-update)
+            (setq face 'hs--modeline-status-warning)
+            (setq state-indicator "↑"))
+          ((memq state '(removed conflict unregistered))
+            (setq face 'hs--modeline-status-error)
+            (setq state-indicator "✖"))
+          (t
+            (setq face 'hs--modeline-status-normal)
+            (setq state-indicator "✔")))
+        (concat
+          (propertize state-indicator 'face face) " "
+          (propertize
+            (substring
+              vc-mode
+              (+
+                (if (eq backend 'Hg)
+                  2
+                  3)
+                2))
+            'face face 'mouse-face face))))))
+(add-hook 'find-file-hook #'hs--modeline-update-vc)
+(add-hook 'after-save-hook #'hs--modeline-update-vc)
+(advice-add #'vc-refresh-state :after #'hs--modeline-update-vc)
 
-(defvar-local hs--modeline-flycheck-text nil)
-(defun hs--modeline-update-flycheck-text (&optional status)
-  (setq hs--modeline-flycheck-text
+(defvar-local hs--modeline-flycheck nil)
+(defun hs--modeline-update-flycheck (&optional status)
+  (setq hs--modeline-flycheck
     (pcase status
       ('finished
         (if flycheck-current-errors
@@ -147,12 +152,43 @@
       ('interrupted
         (propertize "⏸ Paused" 'face 'hs--modeline-status-normal))
       ('no-checker ""))))
+(add-hook 'flycheck-status-changed-functions
+  #'hs--modeline-update-flycheck)
+(add-hook 'flycheck-mode-hook #'hs--modeline-update-flycheck)
 
 (defun hs--modeline-process ()
   (hs--trim (format-mode-line mode-line-process)))
 
 (defun hs--modeline-major-mode ()
   (format-mode-line mode-name 'hs--modeline-major-mode))
+
+(defvar-local hs--modeline-lsp nil)
+(defun hs--modeline-update-lsp (&rest _)
+  (setq hs--modeline-lsp
+    (let*
+      (
+        (workspaces (lsp-workspaces))
+        (face
+          (if workspaces
+            'hs--modeline-status-success
+            'hs--modeline-status-warning))
+        (lsp-text
+          (concat
+            (if workspaces
+              "🚀 "
+              "💔 ")
+            "LSP["
+            (if workspaces
+              (mapconcat #'lsp--workspace-print workspaces "][")
+              "Disconnected")
+            "]")))
+      (propertize lsp-text 'face face))))
+(add-hook 'lsp-before-initialize-hook #'hs--modeline-update-lsp)
+(add-hook 'lsp-after-initialize-hook #'hs--modeline-update-lsp)
+(add-hook 'lsp-after-uninitialized-functions
+  #'hs--modeline-update-lsp)
+(add-hook 'lsp-before-open-hook #'hs--modeline-update-lsp)
+(add-hook 'lsp-after-open-hook #'hs--modeline-update-lsp)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; modeline ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -192,10 +228,8 @@
       (hs--modeline-cur-line)
       "  "
       (hs--modeline-buffer-name)
-      (hs--modeline-project)
-      "  "
-      (hs--modeline-vc-mode))
-    (concat (hs--modeline-major-mode) " ")))
+      (hs--modeline-project))
+    (concat hs--modeline-vc " " (hs--modeline-major-mode) " ")))
 
 (defun hs--modeline-long ()
   (hs--modeline-format-string
@@ -206,13 +240,16 @@
       (hs--modeline-cur-line)
       "  "
       (hs--modeline-buffer-name)
-      (hs--modeline-project)
-      "  "
-      (hs--modeline-vc-mode))
+      (hs--modeline-project))
     (concat
       (hs--modeline-process)
-      hs--modeline-flycheck-text
-      "  "
+      " "
+      hs--modeline-lsp
+      " "
+      hs--modeline-flycheck
+      " "
+      hs--modeline-vc
+      " "
       (hs--modeline-major-mode)
       " ")))
 
@@ -223,10 +260,5 @@
       (if (>= (window-total-width) 80)
         (hs--modeline-long)
         (hs--modeline-short)))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; hooks ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'flycheck-status-changed-functions
-  #'hs--modeline-update-flycheck-text)
-(add-hook 'flycheck-mode-hook #'hs--modeline-update-flycheck-text)
 
 (provide 'init-modeline)
