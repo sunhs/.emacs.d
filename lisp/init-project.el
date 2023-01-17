@@ -20,7 +20,7 @@
           (markers (nth 2 type-be-markers)))
         (dolist (marker markers)
           (when-let ((root (locate-dominating-file dir marker)))
-            (throw 'ret (list type be root))))))))
+            (throw 'ret (list type be (file-truename root)))))))))
 
 (setq project-find-functions
   '(project-try-vc hs--project-find-function))
