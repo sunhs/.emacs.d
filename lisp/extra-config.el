@@ -522,20 +522,14 @@
     t ; if nil, bold is universally disabled
     doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; from https://github.com/doomemacs/themes/issues/248
-  (set-face-attribute
-    'font-lock-comment-face
-    nil
-    :foreground "#5B6268"
-    :slant 'italic)
+  (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
   (set-face-attribute
     'font-lock-function-name-face
     nil
-    :foreground "#c678dd"
     :slant 'italic)
   (set-face-attribute
     'font-lock-variable-name-face
     nil
-    :foreground "#dcaeea"
     :slant 'italic))
 
 (use-package modus-themes
