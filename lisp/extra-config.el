@@ -454,6 +454,58 @@
 (use-package solaire-mode
   :config (solaire-global-mode t))
 
+(use-package hl-todo
+  :hook ((prog-mode yaml-mode) . hl-todo-mode)
+  :config
+  (setq
+    hl-todo-highlight-punctuation
+    ":"
+    hl-todo-keyword-faces
+    '
+    ( ;; For reminders to change or add something at a later date.
+      ("TODO" warning bold)
+      ;; For code (or code paths) that are broken, unimplemented, or slow,
+      ;; and may become bigger problems later.
+      ("FIXME" error bold)
+      ;; For code that needs to be revisited later, either to upstream it,
+      ;; improve it, or address non-critical issues.
+      ("REVIEW" font-lock-keyword-face bold)
+      ;; For code smells where questionable practices are used
+      ;; intentionally, and/or is likely to break in a future update.
+      ("HACK" font-lock-constant-face bold)
+      ;; For sections of code that just gotta go, and will be gone soon.
+      ;; Specifically, this means the code is deprecated, not necessarily
+      ;; the feature it enables.
+      ("DEPRECATED" font-lock-doc-face bold)
+      ;; Extra keywords commonly found in the wild, whose meaning may vary
+      ;; from project to project.
+      ("NOTE" success bold)
+      ("BUG" error bold)
+      ("XXX" font-lock-constant-face bold))))
+
+;; (use-package helpful
+;;   :bind
+;;   (
+;;     ;; Note that the built-in `describe-function' includes both functions
+;;     ;; and macros. `helpful-function' is functions only, so we provide
+;;     ;; `helpful-callable' as a drop-in replacement.
+;;     ("C-h f" . #'helpful-callable)
+;;     ("C-h v" . #'helpful-variable)
+;;     ("C-h k" . #'helpful-key)
+;;     ;; Lookup the current symbol at point. C-c C-d is a common keybinding
+;;     ;; for this in lisp modes.
+;;     ("C-c C-d" . #'helpful-at-point)
+;;     ;; Look up *F*unctions (excludes macros).    
+;;     ;; By default, C-h F is bound to `Info-goto-emacs-command-node'. Helpful
+;;     ;; already links to the manual, if a function is referenced there.
+;;     ("C-h F" . #'helpful-function)
+;;     ;; Look up *C*ommands.    
+;;     ;; By default, C-h C is bound to describe `describe-coding-system'. I
+;;     ;; don't find this very useful, but it's frequently useful to only
+;;     ;; look at interactive functions.
+;;     ("C-h C" . #'helpful-command)))
+
+
 ;; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< themes >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 (use-package doom-themes
   :config
