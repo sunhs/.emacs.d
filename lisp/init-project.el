@@ -25,7 +25,7 @@
 (setq project-find-functions
   '(project-try-vc hs--project-find-function))
 
-(cl-defmethod project-root (project) (nth 3 project))
+(cl-defmethod project-root (project) (nth 2 project))
 
 (setq project-switch-commands 'project-find-file)
 
