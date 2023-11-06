@@ -75,11 +75,11 @@
 (require 'kbd)
 (require 'builtin)
 (require 'init-project)
-;; (require 'evilize)
-(setq hs/use-evil-p nil)
-;; (if hs/use-evil-p
-;;     (hs/toggle-evil t)
-;;   (hs/toggle-evil -1))
+(require 'evilize)
+(setq hs/use-evil-p t)
+(if hs/use-evil-p
+    (hs/toggle-evil t)
+  (hs/toggle-evil -1))
 (require 'org-config)
 (require 'extra-config)
 (add-to-list 'load-path (concat lisp-dir "/eshell"))

@@ -89,14 +89,14 @@
     common-evil-state-maps
     (kbd "L")
     'evil-end-of-line)
-  (define-key-for-evil-state-maps
-    common-evil-state-maps
-    (kbd "M-k")
-    '(lambda () (interactive) (evil-scroll-up 20)))
-  (define-key-for-evil-state-maps
-    common-evil-state-maps
-    (kbd "M-j")
-    '(lambda () (interactive) (evil-scroll-down 20)))
+  ;; (define-key-for-evil-state-maps
+  ;;   common-evil-state-maps
+  ;;   (kbd "M-k")
+  ;;   '(lambda () (interactive) (evil-scroll-up 20)))
+  ;; (define-key-for-evil-state-maps
+  ;;   common-evil-state-maps
+  ;;   (kbd "M-j")
+  ;;   '(lambda () (interactive) (evil-scroll-down 20)))
   (define-key-for-evil-state-maps
     common-evil-state-maps
     (kbd "[")
