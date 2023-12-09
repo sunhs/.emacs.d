@@ -68,6 +68,13 @@
 ;; revert buffer when file changes
 (global-auto-revert-mode)
 
+;; in `file-truename': /home/xxx -> ~
+(advice-add #'file-truename
+  :filter-return
+  #'
+  (lambda (dir)
+    (replace-regexp-in-string (expand-file-name "~") "~" dir)))
+
 ;; ediff
 (setq ediff-split-window-function 'split-window-horizontally)
 

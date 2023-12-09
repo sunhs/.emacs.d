@@ -25,7 +25,7 @@
 (setq project-find-functions
   '(project-try-vc hs--project-find-function))
 
-(cl-defmethod project-root (project) (nth 2 project))
+(cl-defmethod project-root (project) (file-truename (nth 2 project)))
 
 (setq project-switch-commands 'project-find-file)
 
@@ -77,7 +77,9 @@
   #'
   (lambda ()
     (let ((project (project-current)))
-      (if project
-        (project-remember-project project)))))
+      (when project
+        (let ((expected-project-root (file-truename (nth 2 project))))
+          (setcar (cdr (cdr project)) expected-project-root)
+          (project-remember-project project))))))
 
 (provide 'init-project)
