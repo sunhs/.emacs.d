@@ -3,11 +3,11 @@
 (defvar hs--project-markers
   '
   ((raw raw (".project" ".projectile"))
-   (conf cmake ("CMakeFiles.txt"))
-   (conf make ("Makefile"))
-   (conf gomod ("go.mod"))
-   (conf cargo ("Cargo.toml"))
-   (conf package ("package.json"))
+   (conf conf-cpp ("CMakeFiles.txt" "Makefile" "xmake.lua"))
+   (conf conf-go ("go.mod"))
+   (conf conf-rust ("Cargo.toml"))
+   (conf conf-js ("package.json"))
+   (conf conf-py ("setup.lua" "pyproject.toml"))
    (doc readme ("README.org" "README.md"))))
 
 (defun hs--project-find-function (dir)
