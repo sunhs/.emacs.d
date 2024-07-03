@@ -6,7 +6,7 @@
   mac-command-modifier 'control) ;; map command to control
 
 ;; display chinese fonts normally in GUI
-(set-frame-font "JetBrains Mono 18")
+(set-frame-font "JetBrains Mono 15")
 
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font

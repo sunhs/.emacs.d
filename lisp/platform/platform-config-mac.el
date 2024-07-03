@@ -78,44 +78,44 @@
     (when (display-graphic-p)
       (load "init-mac-gui"))))
 
-(lsp-register-client
-  (make-lsp-client
-    :new-connection
-    (lsp-tramp-connection 'lsp-clients--clangd-command)
-    ;; (lsp-tramp-connection "clangd")
-    :remote? t
-    :activation-fn (lsp-activate-on "c" "cpp" "objective-c" "cuda")
-    :priority -1
-    :server-id 'clangd-remote
-    :download-server-fn
-    (lambda (_client callback error-callback _update?)
-      (lsp-package-ensure 'clangd callback error-callback))))
+;; (lsp-register-client
+;;   (make-lsp-client
+;;     :new-connection
+;;     (lsp-tramp-connection 'lsp-clients--clangd-command)
+;;     ;; (lsp-tramp-connection "clangd")
+;;     :remote? t
+;;     :activation-fn (lsp-activate-on "c" "cpp" "objective-c" "cuda")
+;;     :priority -1
+;;     :server-id 'clangd-remote
+;;     :download-server-fn
+;;     (lambda (_client callback error-callback _update?)
+;;       (lsp-package-ensure 'clangd callback error-callback))))
 
-(lsp-register-client
-  (make-lsp-client
-    :new-connection
-    (lsp-tramp-connection
-      (cons "pyright-langserver" lsp-pyright-langserver-command-args))
-    :remote? t
-    :major-modes '(python-mode python-ts-mode)
-    :server-id 'pyright-remote
-    :multi-root lsp-pyright-multi-root
-    :priority 3
-    :initialized-fn
-    (lambda (workspace)
-      (with-lsp-workspace
-        workspace
-        ;; we send empty settings initially, LSP server will ask for the
-        ;; configuration of each workspace folder later separately
-        (lsp--set-configuration (make-hash-table :test 'equal))))
-    :download-server-fn
-    (lambda (_client callback error-callback _update?)
-      (lsp-package-ensure 'pyright callback error-callback))
-    :notification-handlers
-    (lsp-ht
-      ("pyright/beginProgress" 'lsp-pyright--begin-progress-callback)
-      ("pyright/reportProgress"
-        'lsp-pyright--report-progress-callback)
-      ("pyright/endProgress" 'lsp-pyright--end-progress-callback))))
+;; (lsp-register-client
+;;   (make-lsp-client
+;;     :new-connection
+;;     (lsp-tramp-connection
+;;       (cons "pyright-langserver" lsp-pyright-langserver-command-args))
+;;     :remote? t
+;;     :major-modes '(python-mode python-ts-mode)
+;;     :server-id 'pyright-remote
+;;     :multi-root lsp-pyright-multi-root
+;;     :priority 3
+;;     :initialized-fn
+;;     (lambda (workspace)
+;;       (with-lsp-workspace
+;;         workspace
+;;         ;; we send empty settings initially, LSP server will ask for the
+;;         ;; configuration of each workspace folder later separately
+;;         (lsp--set-configuration (make-hash-table :test 'equal))))
+;;     :download-server-fn
+;;     (lambda (_client callback error-callback _update?)
+;;       (lsp-package-ensure 'pyright callback error-callback))
+;;     :notification-handlers
+;;     (lsp-ht
+;;       ("pyright/beginProgress" 'lsp-pyright--begin-progress-callback)
+;;       ("pyright/reportProgress"
+;;         'lsp-pyright--report-progress-callback)
+;;       ("pyright/endProgress" 'lsp-pyright--end-progress-callback))))
 
 (provide 'platform-config-mac)
